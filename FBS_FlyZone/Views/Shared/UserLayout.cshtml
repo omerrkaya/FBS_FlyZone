@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = null;
+}
+
+@{
+	ViewData["Title"] = "Home Page";
+}
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zxx">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title>FlyZone</title>
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="~/yatra/images/logo1.png" />
+	<!-- Bootstrap core CSS -->
+	<link href="~/yatra/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<!--Custom CSS-->
+	<link href="~/yatra/css/style.css" rel="stylesheet" type="text/css" />
+	<!--Flaticons CSS-->
+	<link href="~/yatra/font/flaticon.css" rel="stylesheet" type="text/css" />
+	<!--Plugin CSS-->
+	<link href="~/yatra/css/plugin.css" rel="stylesheet" type="text/css" />
+	<!--Font Awesome-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+	<!--Plugin CSS file with desired skin-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
+
+	<!--jQuery-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<!--Plugin JavaScript file-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+</head>
+<body>
+
+	@await Html.PartialAsync("PartialHeader")
+
+	@RenderBody()
+
+	@await Html.PartialAsync("PartialFooter")
+	
+</body>
+</html>
+
+@RenderBody()
