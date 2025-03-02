@@ -8,5 +8,9 @@ namespace FBS_FlyZone.Controllers
         {
             return View();
         }
+        public IActionResult FlightDetails()
+        {
+            return View();
+        }
     }
 }
