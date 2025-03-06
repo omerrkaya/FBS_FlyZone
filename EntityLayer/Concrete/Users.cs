@@ -15,7 +15,7 @@ namespace EntityLayer.Concrete
         public int UserID { get; set; }
 
         [Required(ErrorMessage = "User Name&Surname is required")]
-        [StringLength(50)]
+        [StringLength(51)]
         public string User_Name_Surname { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
