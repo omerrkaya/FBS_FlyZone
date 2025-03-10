@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "BusinessClass";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+ <section class="swiper-banner">
+        <div class="slider">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                   <div class="swiper-slide" style="background-image: url('@Url.Content("~/yatra/images/slider/slider10.jpg")');">
+
+                        <div class="swiper-content" data-animation="animated fadeInDown">
+                            <h2 class="white">Book a ticket & Just Leave</h2>
+                            <h1><a href="#" class="white">Bir sonraki varış noktanızı arayın</a></h1>
+                            <a href="~/yatra/flight-detail.html" class="btn-blue btn-red">View Our Tour</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="background-image: url('@Url.Content("~/yatra/images/slider/slider9.jpg")');">
+
+                        <div class="swiper-content" data-animation="animated fadeInRight">
+                            <h2 class="white">Book a ticket & Just Leave</h2>
+                            <h1><a href="#" class="white">Bizimle Doğru Yerleri Keşfedin</a></h1>
+                            <a href="~/yatra/flight-detail.html" class="btn-blue btn-red">View Our Tour</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="background-image: url('@Url.Content("~/yatra/images/slider/slider10.jpg")');">
+
+                        <div class="swiper-content" data-animation="animated fadeInUp">
+                            <h2 class="white">Book a ticket & Just Leave</h2>
+                            <h1><a href="#" class="white">Bir sonraki varış noktanızı arayın</a></h1>
+                            <a href="~/yatra/flight-detail.html" class="btn-blue btn-red">View Our Tour</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="overlay"></div>
+        </div>
+    </section>

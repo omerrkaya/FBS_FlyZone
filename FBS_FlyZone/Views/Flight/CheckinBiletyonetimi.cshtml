@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewData["Title"] = "CheckinBiletyonetimi";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+
+<style>
+    /* Arka plan resmi sadece içeriğe uygulanacak */
+    .search-container {
+        background: url('/yatra/images/flight/plane6.jpg') no-repeat center center/cover;
+        width: 100%; /* Sayfanın tam genişliği */
+        height: 500px; /* Yükseklik arttırıldı */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Buton grubu */
+    .top-buttons {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .top-buttons a {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 12px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+    .top-buttons a:hover {
+        background-color: rgba(255, 255, 255, 1);
+    }
+
+    .selected {
+        background-color: red !important;
+        color: white !important;
+    }
+
+    .search-box {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 25px;
+        border-radius: 10px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+
+    input[type="text"], input[type="date"], button {
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    input[type="text"] {
+        width: 220px;
+    }
+
+    input[type="date"] {
+        width: 180px;
+    }
+
+    .search-button {
+        background-color: red;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        padding: 12px 18px;
+        border-radius: 5px;
+        border: none;
+    }
+</style>
+
+<div class="search-container">
+    <!-- Üstteki Butonlar -->
+    <div class="top-buttons">
+        <a asp-controller="Flight" asp-action="Flight" class="button">Uçuş Ara / Bilet Al</a>
+         <a asp-controller="Flight" asp-action="CheckinBiletyonetimi" class="button selected">Check-in / Bilet Yönetimi</a> <!-- Varsayılan olarak seçili -->
+        <a asp-controller="Flight" asp-action="UcusDurumu" class= "button">Uçuş Durumu</a>
+    </div>
+
+    <!-- Arama Kutusu -->
+    <div class="search-box">
+        <input type="text" placeholder="Bilet ya da Rezervasyon Kodu">
+        <input type="text" placeholder="Yolcunun Soyadı">
+
+        <button class="search-button" onclick="window.location.href='/CheckInPage'">></button> <!-- Check-in / Bilet Yönetimi sayfasına yönlendirme -->
+    </div>
+</div>
+
+<script>
+    // Sayfa yüklendiğinde tarih girişine bugünün tarihini koy
+    document.getElementById('flight-date').valueAsDate = new Date();
+</script>
+
+

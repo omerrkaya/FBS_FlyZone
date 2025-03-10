@@ -12,5 +12,27 @@ namespace FBS_FlyZone.Controllers
         {
             return View();
         }
+        public IActionResult Girisyap()
+        {
+            return View();
+        }
+         public IActionResult Kayitol()
+        {
+            return View();
+        }
+       
+        public IActionResult BusinessClass()
+        {
+            return View();
+        }
+        public IActionResult UcusDurumu()
+        {
+            return View();
+        }
+        public IActionResult CheckinBiletyonetimi()
+        {
+            return View();
+        }
+
     }
 }

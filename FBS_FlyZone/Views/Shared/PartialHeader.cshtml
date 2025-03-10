@@ -1,8 +1,4 @@
-﻿<!-- Preloader -->
-<div id="preloader">
-	<div id="status"></div>
-</div>
-<!-- Preloader Ends -->
+﻿
 
 <!-- Header -->
 <header>
@@ -12,10 +8,7 @@
 				<p><i class="flaticon-phone-call"></i> Telefon: +90 (555) 515 1515</p>
 				<p><i class="flaticon-mail"></i> E-Posta: <a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="67130812150913150611020b27130214130a060e0b4904080a">email@gmail.com</a></p>
 			</div>
-			<div class="login-btn pull-right">
-				<a href="~/yatra/login.html"><i class="fa fa-user-plus"></i> Kayıt Ol</a>
-				<a href="~/yatra/login.html"><i class="fa fa-unlock-alt"></i> Giriş Yap</a>
-			</div>
+			
 		</div>
 	</div>
 </header>
@@ -29,131 +22,91 @@
 				<!-- start Navbar (Header) -->
 				<nav class="navbar navbar-default navbar-sticky-function navbar-arrow">
 					<div class="logo pull-left">
-						<a href="~/yatra/index.html"><img alt="Image" style="width:auto ; height:90px;" src="~/yatra/images/FlyZone_Logo.png" /></a>
-					</div>
-					<div id="navbar" class="navbar-nav-wrapper">
+	       <a asp-controller="Flight" asp-action="Flight">
+		   <img alt="Logo" style="width:auto; height:90px;" src="~/yatra/images/FlyZone_Logo.png" />
+	      </a>
+		  </div>
+					<div id="navbar" class="navbar-nav-wrapper ms-auto">
+
 						<ul class="nav navbar-nav" id="responsive-menu">
 							<li class="active">
-								<a href="~/yatra/index.html">Anasayfa <i class="fa fa-angle-down"></i></a>
+								<a asp-controller="Flight" asp-action="Flight">BİLET AL VE YÖNET <i class="fa fa-angle-down"></i></a>
 								<ul>
 									<li>
-										<a href="#">Travel</a>
+										<a href="#">BİLET AL</a>
 										<ul>
-											<li><a href="~/yatra/index.html">Home Slider</a></li>
-											<li><a href="~/yatra/index.html">Merhaba</a></li>
-											<li><a href="~/yatra/index-banner.html">Home Banner</a></li>
-											<li><a href="~/yatra/index-video.html">Home Video</a></li>
-										</ul>
-									</li>
-									<li><a href="~/yatra/index-1.html">Travel Style 2eeeeeeee</a></li>
-									<li><a href="~/yatra/index-1.html">Travel Style denemeeeeeeeee</a></li>
-									<li><a href="yatra/index-2.html">Travel Style 3eeeeeeeeee</a></li>
-									<li><a href="yatra/index-3.html">Travel style 4</a></li>
-									<li><a href="yatra/index-5.html">Travel style 10 <span class="fw-bold pink">(New)</span></a></li>
-									<li><a href="yatra/index-6.html">Travel style 60000000000000000hjhgg <span class="fw-bold pink">(New)</span></a></li>
-									<li><a href="yatra/index-4.html">Travel Search</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">Konular <i class="fa fa-angle-down"></i></a>
-								<ul>
-									<li>
-										<a href="#">Destination</a>
-										<ul>
-											<li>
-												<a href="#">Grid View</a>
-												<ul>
-													<li><a href="~/yatra/destination-2col.html">Grid View 2 Col</a></li>
-													<li><a href="~/yatra/destination-3col.html">Grid View 3 Col</a></li>
-													<li><a href="~/yatra/destination-4col.html">Grid View 4 Col</a></li>
-													<li><a href="~/yatra/destination-sidebar.html">Grid with sidebar</a></li>
-												</ul>
-											</li>
-											<li>
-												<a href="#">List View</a>
-												<ul>
-													<li><a href="wwwroot/yatra/destination-fullwidth.html">List no sidebar</a></li>
-													<li><a href="wwwroot/yatra/destination-list-sidebar.html">List with sidebar</a></li>
-												</ul>
-											</li>
+											<li><a asp-controller="Flight" asp-action="Flight">Uçak Bileti</a></li>
+											
 										</ul>
 									</li>
 									<li>
-										<a href="tour-detail.html">Detail Default</a>
+										<a href="#">BİLET YÖNETİMİ</a>
 										<ul>
-											<li><a href="wwwroot/yatra/tour-detail.html">Detail Default</a></li>
-											<li><a href="wwwroot/yatra/detail-tabs.html">Detail Tabs</a></li>
+											<li><a asp-controller="Flight" asp-action="CheckinBiletyonetimi">Bilet Yönetimi</a></li>
+											<li><a asp-controller="Flight" asp-action="CheckinBiletyonetimi">Check-in</a></li>
+											<li><a asp-controller="Flight" asp-action="UcusDurumu">Uçuş Durumu</a></li>
+											
 										</ul>
 									</li>
 									<li>
-										<a href="wwwroot/yatra/booking.html">Booking & Payment</a>
+										<a href="#">EK HİZMETLER</a>
 										<ul>
-											<li><a href="wwwroot/yatra/booking.html">Booking Page</a></li>
-											<li><a href="wwwroot/yatra/booking-confirmation.html">Booking Confirmation</a></li>
-											<li><a href="wwwroot/yatra/payment.html">Payment Page</a></li>
+											<li><a href="~/yatra/index.html">Koltuk Seçimi</a></li>
+											<li><a href="~/yatra/index.html">Ekstra Bagaj</a></li>
 										</ul>
 									</li>
-									<li><a href="wwwroot/yatra/price-list.html">Price List</a></li>
-									<li><a href="wwwroot/yatra/error.html">Error Page</a></li>
-									<li><a href="wwwroot/yatra/aboutus.html">About Page</a></li>
-									<li><a href="wwwroot/yatra/contactus.html">Contact Us</a></li>
 								</ul>
 							</li>
 							<li>
-								<a href="hotel.html">Oteller <i class="fa fa-angle-down"></i></a>
+								<a href="#">SEYEHAT DENEYİMİ <i class="fa fa-angle-down"></i></a>
 								<ul>
-									<li><a href="wwwroot/yatra/hotel.html">Hotel Homepage</a></li>
-									<li><a href="wwwroot/yatra/grid-view.html">Grid View</a></li>
-									<li><a href="wwwroot/yatra/list-view.html">List View</a></li>
-									<li><a href="wwwroot/yatra/hotel-detail.html">Detail Page</a></li>
+								
+									<li>
+										<a href="wwwroot/yatra/booking.html">KABİN SINIFLARI</a>
+										<ul>
+											<li><a asp-controller="Flight" asp-action="BusinessClass">Business Class</a></li>
+											<li><a href="wwwroot/yatra/booking-confirmation.html">Economy Class</a></li>										</ul>
+									</li>
+									<li>
+										<a href="wwwroot/yatra/booking.html">UÇUŞ DENEYİMİ</a>
+										<ul>
+											<li><a href="wwwroot/yatra/booking.html">Uçak İçi İkram</a></li>
+											<li><a href="wwwroot/yatra/booking-confirmation.html">Uçak İçi Eğlence</a></li>
+											<li><a href="wwwroot/yatra/payment.html">Filo</a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="wwwroot/yatra/booking.html">DAHA FAZLA AYRICALIK</a>
+										<ul>
+											<li><a href="wwwroot/yatra/booking.html">Sıkça Sorulan Sorular</a></li>
+											<li><a href="wwwroot/yatra/booking-confirmation.html">Rehber Videoları</a></li>
+											<li><a href="wwwroot/yatra/payment.html">Ulaşım Bilgileri</a></li>
+											<li><a href="wwwroot/yatra/payment.html">Biniş Kartı Ayrıcalıkları</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							
+							<li>
+								<a href="hotel.html">FIRSATLAR <i class="fa fa-angle-down"></i></a>
+								<ul>
+									<li><a href="wwwroot/yatra/hotel.html">Uçuş Fırsatları</a></li>
+									<li><a href="wwwroot/yatra/grid-view.html"> Kampanyalar</a></li>
+									<li><a href="wwwroot/yatra/list-view.html"> Öğrenci İndirimi</a></li>
 								</ul>
 							</li>
 							<li>
-								<a href="flight.html">Uçuşlar<i class="fa fa-angle-down"></i></a>
+								<a href="flight.html">YARDIM<i class="fa fa-angle-down"></i></a>
 								<ul>
-									<li><a href="wwwroot/yatra/flight.html">Flight Homepage</a></li>
-									<li><a href="wwwroot/yatra/flight-grid-view.html">Grid View</a></li>
-									<li><a href="wwwroot/yatra/flight-list-view.html">List View</a></li>
-									<li><a href="wwwroot/yatra/flight-detail.html">Detail Page</a></li>
-									<li><a href="wwwroot/yatra/flight-booking.html">Booking</a></li>
-									<li><a href="wwwroot/yatra/flight-confirm.html">Thank You</a></li>
+									<li><a href="wwwroot/yatra/flight.html">Yardım Merkezi</a></li>
+									<li><a href="wwwroot/yatra/flight-grid-view.html">Geri Bildirim</a></li>
+									<li><a href="wwwroot/yatra/flight-list-view.html">Bize Ulaşın</a></li>
+									<li><a href="wwwroot/yatra/flight-detail.html">Duyurular</a></li>
+								
 								</ul>
 							</li>
-							<li>
-								<a href="#">Göstergeler <i class="fa fa-angle-down"></i></a>
-								<ul>
-									<li><a href="wwwroot/yatra/dashboard.html">Dashboard</a></li>
-									<li><a href="wwwroot/yatra/dashboard-my-profile.html">Dashboard Profile</a></li>
-									<li><a href="wwwroot/yatra/dashboard-booking.html">Dashboard Bookings</a></li>
-									<li><a href="wwwroot/yatra/dashboard-history.html">Dashboard History</a></li>
-									<li><a href="wwwroot/yatra/dashboard-list.html">Dashboard Listing</a></li>
-									<li><a href="wwwroot/yatra/dashboard-addtour.html">Dashboard Add Tour</a></li>
-									<li><a href="wwwroot/yatra/dashboard-reviews.html">Dashboard Reviews</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">Alışveriş <i class="fa fa-angle-down"></i></a>
-								<ul>
-									<li><a href="wwwroot/yatra/shop.html">Shop List</a></li>
-									<li><a href="wwwroot/yatra/shop-detail.html">Shop Detail</a></li>
-									<li><a href="wwwroot/yatra/cart.html">Cart</a></li>
-									<li><a href="wwwroot/yatra/checkout.html">Checkout</a></li>
-									<li><a href="wwwroot/yatra/login.html">Login Page</a></li>
-									<li><a href="wwwroot/yatra/forgot-password.html">Forgot Password</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">Blog <i class="fa fa-angle-down"></i></a>
-								<ul>
-									<li><a href="wwwroot/yatra/blog-list.html">Blog Right Sidebar</a></li>
-									<li><a href="wwwroot/yatra/blog-list-1.html">Blog Left Sidebar</a></li>
-									<li><a href="wwwroot/yatra/blog-list-2.html">Blog Fullwidth</a></li>
-									<li><a href="wwwroot/yatra/blog-list-3.html">Blog List</a></li>
-									<li><a href="wwwroot/yatra/blog-grid.html">Blog Grid</a></li>
-									<li><a href="wwwroot/yatra/blog-detail.html">Blog Detail Right Sidebar</a></li>
-									<li><a href="wwwroot/yatra/blog-detail-fw.html">Blog Detail Fullwidth</a></li>
-								</ul>
-							</li>
+							<li>	<a asp-controller="Flight" asp-action="Kayitol"><i class="fa fa-user-plus"></i> Kayıt Ol</a></li>
+							<li><a asp-controller="Flight" asp-action="Girisyap"><i class="fa fa-unlock-alt"></i> Giriş Yap</a>
 						</ul>
 					</div>
 					<!--/.nav-collapse -->
