@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class Payments
+    public class Payment
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PaymentID { get; set; }
 
-        [ForeignKey("ReservationID")]
+        [ForeignKey("Reservation")]
         public int ReservationID { get; set; }
+        public Reservation Reservation { get; set; }
 
 
         public DateTime Payment_Date { get; set; }
