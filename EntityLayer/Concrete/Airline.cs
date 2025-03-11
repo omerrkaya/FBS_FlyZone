@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class Airlines
+    public class Airline
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AirlineID { get; set; }
@@ -28,5 +28,8 @@ namespace EntityLayer.Concrete
         public int YearOfEstablishment { get; set; }
 
         public bool Is_It_Active { get; set; }
+
+        public ICollection<Flight> Flights { get; set; }
+
     }
 }

@@ -8,31 +8,41 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class Flights
+    public class Flight
     {
-        [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int FlightID { get; set; }
 
-        [ForeignKey("AirlineID")]
+        // Foreign Key: Airline
+        [ForeignKey("Airline")]
         public int AirlineID { get; set; }
-        
+        public Airline Airline { get; set; }  // Navigasyon özelliği
+
+        // Foreign Key: Departure Airport
         [ForeignKey("Departure_Airport")]
         public int Departure_Airport { get; set; }
-        
+        public Airport DepartureAirport { get; set; }  // Navigasyon özelliği
+
+        // Foreign Key: Arrival Airport
         [ForeignKey("Arrival_Airport")]
         public int Arrival_Airport { get; set; }
-        
+        public Airport ArrivalAirport { get; set; }  // Navigasyon özelliği
+
         [StringLength(10)]
         public string Flight_Code { get; set; }
-        
+
         public DateTime Flight_DateTime { get; set; }
-        
+
         [Column(TypeName = "time")]
         public TimeSpan Estimated_Time { get; set; }
 
-        [ForeignKey("AircraftID")]
+        // Foreign Key: Aircraft
+        [ForeignKey("Aircraft")]
         public int AircraftID { get; set; }
+        public Aircraft Aircraft { get; set; }// Navigasyon özelliği
 
         public decimal Flight_Price { get; set; }
+
+
     }
 }
