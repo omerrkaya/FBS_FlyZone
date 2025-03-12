@@ -6,4 +6,5 @@ namespace FBS_FlyZone.Models
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
+
 }
