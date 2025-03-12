@@ -2,11 +2,8 @@
 {
     public class Class1
     {
-    
+        //burası ipek 
 
     }
-    public class class2
-    {
-       //burası ipek 
-    }
+   
 }
