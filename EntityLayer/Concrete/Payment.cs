@@ -13,19 +13,23 @@ namespace EntityLayer.Concrete
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PaymentID { get; set; }
 
+       
         [ForeignKey("Reservation")]
         public int ReservationID { get; set; }
         public Reservation Reservation { get; set; }
 
-
+                
         public DateTime Payment_Date { get; set; }
 
+        
         [Column(TypeName = "decimal(10,2)")]
         public decimal Payment_Amount { get; set; }
 
+       
         [Required, StringLength(50)]
         public string Payment_Method { get; set; }
 
+        
         [Required, StringLength(20)]
         public string Payment_Status { get; set; }
     }
