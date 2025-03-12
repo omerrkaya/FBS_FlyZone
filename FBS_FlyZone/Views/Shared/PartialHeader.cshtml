@@ -1,6 +1,4 @@
-﻿
-
-<!-- Header -->
+﻿<!-- Header -->
 <header>
 	<div class="upper-head clearfix">
 		<div class="container">
@@ -8,12 +6,14 @@
 				<p><i class="flaticon-phone-call"></i> Telefon: +90 (555) 515 1515</p>
 				<p><i class="flaticon-mail"></i> E-Posta: <a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="67130812150913150611020b27130214130a060e0b4904080a">email@gmail.com</a></p>
 			</div>
-			
+			<div class="login-btn pull-right">
+				<a asp-controller="Flight" asp-action="Kayitol"><i class="fa fa-user-plus"></i> Kayıt Ol </a>
+				<a asp-controller="Flight" asp-action="Girisyap"><i class="fa fa-unlock-alt"></i> Giriş Yap </a>
+			</div>
 		</div>
 	</div>
 </header>
 <!-- Header Ends -->
-
 <!-- Navigation Bar -->
 <div class="navigation" style="margin:0px 0px 0px 0px">
 	<div class="container">
@@ -22,10 +22,10 @@
 				<!-- start Navbar (Header) -->
 				<nav class="navbar navbar-default navbar-sticky-function navbar-arrow">
 					<div class="logo pull-left">
-	       <a asp-controller="Flight" asp-action="Flight">
-		   <img alt="Logo" style="width:auto; height:90px;" src="~/yatra/images/FlyZone_Logo.png" />
-	      </a>
-		  </div>
+						<a asp-controller="Flight" asp-action="Flight">
+							<img alt="Logo" style="width:auto; height:90px;" src="~/yatra/images/FlyZone_Logo.png" />
+						</a>
+					</div>
 					<div id="navbar" class="navbar-nav-wrapper ms-auto">
 
 						<ul class="nav navbar-nav" id="responsive-menu">
@@ -36,7 +36,7 @@
 										<a href="#">BİLET AL</a>
 										<ul>
 											<li><a asp-controller="Flight" asp-action="Flight">Uçak Bileti</a></li>
-											
+
 										</ul>
 									</li>
 									<li>
@@ -45,7 +45,7 @@
 											<li><a asp-controller="Flight" asp-action="CheckinBiletyonetimi">Bilet Yönetimi</a></li>
 											<li><a asp-controller="Flight" asp-action="CheckinBiletyonetimi">Check-in</a></li>
 											<li><a asp-controller="Flight" asp-action="UcusDurumu">Uçuş Durumu</a></li>
-											
+
 										</ul>
 									</li>
 									<li>
@@ -60,12 +60,13 @@
 							<li>
 								<a href="#">SEYEHAT DENEYİMİ <i class="fa fa-angle-down"></i></a>
 								<ul>
-								
+
 									<li>
 										<a href="~/yatra/booking.html">KABİN SINIFLARI</a>
 										<ul>
 											<li><a asp-controller="Flight" asp-action="BusinessClass">Business Class</a></li>
-											<li><a href="~/yatra/booking-confirmation.html">Economy Class</a></li>										</ul>
+											<li><a href="~/yatra/booking-confirmation.html">Economy Class</a></li>
+										</ul>
 									</li>
 									<li>
 										<a href="~/yatra/booking.html">UÇUŞ DENEYİMİ</a>
@@ -86,7 +87,7 @@
 									</li>
 								</ul>
 							</li>
-							
+
 							<li>
 								<a href="hotel.html">FIRSATLAR <i class="fa fa-angle-down"></i></a>
 								<ul>
@@ -102,11 +103,10 @@
 									<li><a href="~/yatra/flight-grid-view.html">Geri Bildirim</a></li>
 									<li><a href="~/yatra/flight-list-view.html">Bize Ulaşın</a></li>
 									<li><a href="~/yatra/flight-detail.html">Duyurular</a></li>
-								
+
 								</ul>
 							</li>
-							<li>	<a asp-controller="Flight" asp-action="Kayitol"><i class="fa fa-user-plus"></i> Kayıt Ol</a></li>
-							<li><a asp-controller="Flight" asp-action="Girisyap"><i class="fa fa-unlock-alt"></i> Giriş Yap</a>
+
 						</ul>
 					</div>
 					<!--/.nav-collapse -->
