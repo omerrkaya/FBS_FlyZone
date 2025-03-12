@@ -13,14 +13,17 @@ namespace EntityLayer.Concrete
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ReservationID { get; set; }
 
+        
         [ForeignKey("Flight")]
         public int FlightID { get; set; }
         public Flight Flight { get; set; }
 
+        
         [ForeignKey("Passenger")]
         public int PassengerID { get; set; }
         public Passenger Passenger { get; set; }
 
+        
         [Required, StringLength(10)]
         public string Seat_Number { get; set; }
        
@@ -29,5 +32,8 @@ namespace EntityLayer.Concrete
         
         
         public string Reservation_Status { get; set; }
+
+
+        public ICollection<Flight> Flights { get; set; }
     }
 }
