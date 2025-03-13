@@ -17,19 +17,19 @@ namespace EntityLayer.Concrete
         // Foreign Key: Airline
         [ForeignKey("Airline")]
         public int AirlineID { get; set; }
-        public Airline Airline { get; set; }  // Navigasyon özelliği
+        public Airline Airline { get; set; }  
 
         
         // Foreign Key: Departure Airport
         [ForeignKey("Departure_Airport")]
         public int Departure_Airport { get; set; }
-        public Airport DepartureAirport { get; set; }  // Navigasyon özelliği
+        public Airport DepartureAirport { get; set; }  
 
         
         // Foreign Key: Arrival Airport
         [ForeignKey("Arrival_Airport")]
         public int Arrival_Airport { get; set; }
-        public Airport ArrivalAirport { get; set; }  // Navigasyon özelliği
+        public Airport ArrivalAirport { get; set; }  
 
         
         [StringLength(10)]
@@ -46,7 +46,7 @@ namespace EntityLayer.Concrete
         // Foreign Key: Aircraft
         [ForeignKey("Aircraft")]
         public int AircraftID { get; set; }
-        public Aircraft Aircraft { get; set; }// Navigasyon özelliği
+        public Aircraft Aircraft { get; set; }
 
 
         public decimal Flight_Price { get; set; }

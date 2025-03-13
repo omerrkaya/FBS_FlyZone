@@ -17,8 +17,7 @@ namespace EntityLayer.Concrete
         [ForeignKey("Flight")]
         public int FlightID { get; set; }
         public Flight Flight { get; set; }
-
-        
+                               
         [ForeignKey("Passenger")]
         public int PassengerID { get; set; }
         public Passenger Passenger { get; set; }

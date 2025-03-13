@@ -661,7 +661,7 @@ label{
   background: #fff;
   z-index: 999999;
 }
-#status{
+#statuss{
   position: fixed;
   content: '';
   display: block;
@@ -671,7 +671,7 @@ label{
   width: 300px;
   height: 300px;
   margin: 0 auto;
-  background: url(../images/komikdans.gif);
+  background: url(../images/loader.gif);
   background-size: cover;
   background-position: center;
   opacity: 1;
@@ -679,6 +679,25 @@ label{
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   z-index: 9999999999;
+}
+#status {
+    position: fixed;
+    content: '';
+    display: block;
+    top: 28%;
+    left: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    background: url(../images/loader.gif);
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    z-index: 9999999999;
 }
 
 .bg-white{background: #fff!important;}
