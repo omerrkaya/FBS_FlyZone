@@ -7,12 +7,8 @@ using EntityLayer.Concrete;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface IUserDal
+    public interface IUserDal:IGenericDal<User>
     {
-        List<User> GetAll();
-        void Add(User user);
-        void Update(User user);
-        void Delete(User user);
-        User GetById(int id);
+        
     }
 }

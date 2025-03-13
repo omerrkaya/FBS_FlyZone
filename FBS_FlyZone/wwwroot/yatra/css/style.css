@@ -1028,7 +1028,7 @@ ul.nav-mini li i{color: #fff; padding-right: 5px;}
     padding-right: 15px;
 }
 .nav.navbar-nav li ul li a:hover{
-  color: #D60D45;
+  color: #D60D44;
 } 
 
 .nav.navbar-nav li ul li ul {
@@ -1212,7 +1212,7 @@ ul.nav-mini li i{color: #fff; padding-right: 5px;}
 
 .transparent-header .navbar-sticky {
     padding:0;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: none /*rgba(0, 0, 0, 0.9)*/;
     margin: 0px;
     border: none;
 }
@@ -7538,7 +7538,7 @@ body.style-tab::after {
   background: #D60D45;
 }
 
-@media(max-width:996px){
+@media(max-width:9na){
   .style-5 .slider-box1 .offer-info, .style-5 .slider-box2 .offer-info{
     width: 50%;
     padding: 100px 30px !important;
@@ -7961,7 +7961,8 @@ height: 50px;
     display: block !important;
   }
 
-  .style-6  .navigation-content{
+  .style-6  .
+  {
     box-shadow: none !important;
   }
 
