@@ -33,7 +33,6 @@ namespace EntityLayer.Concrete
         [Required, StringLength(75)]
         public string AP_Country { get; set; }
 
-        
-        public ICollection<Flight> Flights { get; set; }
+       
     }
 }

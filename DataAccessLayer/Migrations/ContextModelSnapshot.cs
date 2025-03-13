@@ -22,7 +22,7 @@ namespace DataAccessLayer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("EntityLayer.Concrete.Aircrafts", b =>
+            modelBuilder.Entity("EntityLayer.Concrete.Aircraft", b =>
                 {
                     b.Property<int>("AircraftID")
                         .ValueGeneratedOnAdd()
@@ -143,7 +143,13 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("AirlineID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ArrivalAirportAirportID")
+                        .HasColumnType("int");
+
                     b.Property<int>("Arrival_Airport")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DepartureAirportAirportID")
                         .HasColumnType("int");
 
                     b.Property<int>("Departure_Airport")
@@ -162,7 +168,20 @@ namespace DataAccessLayer.Migrations
                     b.Property<decimal>("Flight_Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("ReservationID")
+                        .HasColumnType("int");
+
                     b.HasKey("FlightID");
+
+                    b.HasIndex("AircraftID");
+
+                    b.HasIndex("AirlineID");
+
+                    b.HasIndex("ArrivalAirportAirportID");
+
+                    b.HasIndex("DepartureAirportAirportID");
+
+                    b.HasIndex("ReservationID");
 
                     b.ToTable("Flights");
                 });
@@ -237,6 +256,8 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("PaymentID");
 
+                    b.HasIndex("ReservationID");
+
                     b.ToTable("Payments");
                 });
 
@@ -266,6 +287,10 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.HasKey("ReservationID");
+
+                    b.HasIndex("FlightID");
+
+                    b.HasIndex("PassengerID");
 
                     b.ToTable("Reservations");
                 });
@@ -304,6 +329,86 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("UserID");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Flight", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Aircraft", "Aircraft")
+                        .WithMany("Flights")
+                        .HasForeignKey("AircraftID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.Airline", "Airline")
+                        .WithMany("Flights")
+                        .HasForeignKey("AirlineID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.Airport", "ArrivalAirport")
+                        .WithMany()
+                        .HasForeignKey("ArrivalAirportAirportID");
+
+                    b.HasOne("EntityLayer.Concrete.Airport", "DepartureAirport")
+                        .WithMany()
+                        .HasForeignKey("DepartureAirportAirportID");
+
+                    b.HasOne("EntityLayer.Concrete.Reservation", null)
+                        .WithMany("Flights")
+                        .HasForeignKey("ReservationID");
+
+                    b.Navigation("Aircraft");
+
+                    b.Navigation("Airline");
+
+                    b.Navigation("ArrivalAirport");
+
+                    b.Navigation("DepartureAirport");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Payment", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Reservation", "Reservation")
+                        .WithMany()
+                        .HasForeignKey("ReservationID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reservation");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Reservation", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Flight", "Flight")
+                        .WithMany()
+                        .HasForeignKey("FlightID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.Passenger", "Passenger")
+                        .WithMany()
+                        .HasForeignKey("PassengerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Flight");
+
+                    b.Navigation("Passenger");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Aircraft", b =>
+                {
+                    b.Navigation("Flights");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Airline", b =>
+                {
+                    b.Navigation("Flights");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Reservation", b =>
+                {
+                    b.Navigation("Flights");
                 });
 #pragma warning restore 612, 618
         }
