@@ -7,12 +7,8 @@ using EntityLayer.Concrete;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface IAirportDal
+    public interface IAirportDal:IGenericDal<Airport>
     {
-        List<Airport> GetAll();
-        void Add(Airport airport);
-        void Update(Airport airport);
-        void Delete(Airport airport);
-        Airport GetById(int id);
+       
     }
 }

@@ -7,12 +7,8 @@ using EntityLayer.Concrete;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface IPaymentDal
+    public interface IPaymentDal:IGenericDal<Payment>
     {
-        List<Payment> GetAll();
-        void Add(Payment payment);
-        void Update(Payment payment);
-        void Delete(Payment payment);
-        Payment GetById(int id);
+       
     }
 }

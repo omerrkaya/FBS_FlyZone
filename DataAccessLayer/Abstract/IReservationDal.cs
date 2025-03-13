@@ -7,7 +7,7 @@ using EntityLayer.Concrete;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface IFlightDal:IGenericDal<Flight>
+    public interface IReservationDal:IGenericDal<Reservation>
     {
        
     }
