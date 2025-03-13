@@ -13,10 +13,6 @@ public class BookingController : Controller
         return View();
     }
 
-    public IActionResult Payment(int bookingId)
-    {
-        return View();
-    }
 
     [HttpPost]
     public IActionResult ConfirmPayment(PaymentViewModel model)
@@ -32,4 +28,10 @@ public class BookingController : Controller
     {
         return View();
     }
+
+    public IActionResult Payment(PaymentViewModel model)
+    {
+        return View(model);
+    }
+
 }
