@@ -1,0 +1,222 @@
+﻿
+@{
+    ViewData["Title"] = "StudentDiscount";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+<section class="promo-section" style="background-image: url('/yatra/images/studentt.jpg');">
+    <div class="overlay">
+        <h2>Öğrenci indirimiyle dünyayı avantajlı şekilde keşfedin!</h2>
+        <a href="#" class="btn">Hemen al</a>
+    </div>
+</section>
+
+<!-- Yeni içerik bölümü -->
+<section class="student-benefits">
+    <p>
+        Öğrencilerimizin her anlarında yanlarındayız. Yeni keşiflere, sevdiklerinize ve okulunuza hızlı ve güvenli bir şekilde ulaşın diye, 
+       FlyZone ayrıcalıklarını ihtiyaçlarınıza göre özelleştirdik. Miles&Smiles üyesi olarak eşsiz fırsatlar sunan öğrenci uçak 
+        bileti avantajlarıyla keyifli bir yolculuğun tadını çıkarıp, keşfetmenin ve öğrenmenin sınırlarını genişletebilirsiniz. 
+        Miles&Smiles hesabınızda öğrenci doğrulamanızı yapın ve hem yurt içi hem de yurt dışı uçuşlarında fırsatları yakalayın!
+    </p>
+
+    <div class="benefits-list">
+        <div class="benefit-item">
+            <img src="~/yatra/images/indirimavantaj.jpg" alt="İndirim Avantajları">
+            <strong>İndirim avantajları:</strong> Yurt içi uçuşlarda %20, yurt dışı transit uçuşlarda %15, TR/ECN çıkışlı yurt dışı varışlı 
+            veya yurt dışı çıkışlı TR/ECN varışlı uçuşlarda %10, Türkiye ile KKTC Ercan Havalimanı arasındaki uçuşlarda %20 indirimli fiyatlar.
+        </div>
+        <div class="benefit-item">
+            <img src="~/yatra/images/bagajavantaj.jpg" alt="Bagaj Avantajları">
+            <strong>Bagaj avantajları:</strong> Uluslararası uçuşlarda 40 kg bagaj hakkı (Parça konsepti uygulanan parkurlarda 2x23 kg), 
+            yurt içi uçuşlarda ise avantajlı ekstra bagaj ücretleri.
+        </div>
+        <div class="benefit-item">
+            <img src="~/yatra/images/degisiklik.jpg" alt="Ücretsiz Değişiklik">
+            <strong>Ücretsiz değişiklik:</strong> Uluslararası uçuşlarda bir defaya mahsus olmak üzere ücretsiz bilet değişikliği hakkı 
+            (Bilet sınıfı farkından kaynaklanan ekstra ücretler tahsil edilecektir).
+        </div>
+    </div>
+</section>
+<!-- Öğrenci Bileti Kampanyası Adımları -->
+<section class="student-steps">
+    <h2>Öğrenci uçak bileti kampanyasından yararlanabilmek için gerekli adımlar</h2>
+    <div class="steps-container">
+        <div class="step-item">
+            <img src="~/yatra/images/hesapolustur.jpg" alt="Üyelik Hesabı Oluştur">
+            <h3>Üyelik hesabı oluşturun</h3>
+            <p>Öğrenci uçak bileti avantajları sadece Miles&Smiles üyeleri için geçerli. Yeni ayrıcalıkların kapısını aralamak için Miles&Smiles üyeliği oluşturun.</p>
+           <a asp-controller="Flight" asp-action="Kayitol">Üye ol »</a>
+        </div>
+        <div class="step-item">
+            <img src="~/yatra/images/ogrencidogrulama.jpg" alt="Öğrenci Doğrulama">
+            <h3>Öğrenci doğrulamanızı yapın</h3>
+            <p>Üye olduktan sonra hesabınızda “Kişisel Bilgilerim” alanındaki “İndirim Tipleri” kısmından öğrenci yolcu tipine ilişkin doğrulamanızı gerçekleştirin.</p>
+            <a asp-controller="Flight" asp-action="Girisyap">Giriş yap »</a>
+        </div>
+        <div class="step-item">
+            <img src="~/yatra/images/biletal.jpg" alt="Bilet Al">
+            <h3>Avantajlı biletinizi kolayca alın</h3>
+            <p>Öğrenci bildiriminiz onaylanınca, Miles&Smiles hesabınıza giriş yapın ve bilet alımı sırasında “öğrenci” yolcu tipini seçin.</p>
+           <a asp-controller="Flight" asp-action="Flight">Bilet al »</a>
+        </div>
+    </div>
+</section>
+
+<!-- CSS -->
+<style>
+    /* Kampanya Alanı */
+    .promo-section {
+        position: relative;
+        background: url('@Url.Content("~/Content/images/student.jpg")') center/cover no-repeat;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .overlay {
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .overlay h2 {
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px black;
+    }
+
+    .btn {
+        display: inline-block;
+        margin-top: 10px;
+        background: red;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    /* Yeni İçerik Bölümü */
+    .student-benefits {
+        text-align: center;
+        margin: 50px auto;
+        max-width: 900px;
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+  /* Student Benefits Section - Genişletme ve Stil Düzenlemeleri */
+.student-benefits {
+    text-align: center;
+    margin: 50px auto;
+    max-width: 1100px; /* Genişliği artırdık */
+    font-size: 18px;
+    line-height: 1.6;
+    padding: 30px;
+    background: #f8f8f8; /* Hafif gri arka plan */
+    border-radius: 15px; /* Köşeleri kıvırdık */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hafif gölge verdik */
+}
+
+/* Avantaj Listesi */
+.benefits-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* Avantaj Kalemleri */
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    width: 90%;
+    justify-content: flex-start; /* Sol hizalı tutuyoruz */
+    position: relative;
+}
+
+/* Avantajlar Arasına İnce Çizgi */
+.benefit-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: #ccc;
+}
+
+/* Avantaj İkonları */
+.benefit-item img {
+    width: 40px;
+    height: 40px;
+}
+
+/* Kırmızı Başlıklar */
+.benefit-item strong {
+    color: #d10000;
+}
+
+     .student-steps {
+        text-align: center;
+        padding: 50px 20px;
+        background: #f9f9f9;
+    }
+
+    .student-steps h2 {
+        font-size: 26px;
+        margin-bottom: 30px;
+    }
+
+    .steps-container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+    }
+
+  .step-item {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* İçeriği dikey olarak hizalar */
+    height: 100%; /* Tüm kartları eşit uzunlukta yapar */
+}
+
+
+    .step-item img {
+    display: block;
+    margin: 0 auto; /* Resmi yatay olarak merkeze alır */
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+
+    .step-item h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+  .step-item p {
+    flex-grow: 1; /* Paragrafları eşit hizalar */
+}
+
+   .step-link {
+    display: inline-block;
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: auto; /* Linkleri en altta hizalar */
+}
+</style>

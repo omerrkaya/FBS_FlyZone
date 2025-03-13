@@ -4,9 +4,10 @@
 }
 
 <div class="header-buttons">
-     <a asp-controller="Flight" asp-action="BusinessClass" class="class-btn">Business Class</a>
+    <a asp-controller="Flight" asp-action="BusinessClass" class="class-btn">Business Class</a>
     <a asp-controller="Flight" asp-action="EconomyClass" class="class-btn">Economy Class</a>
 </div>
+
 
 <div class="container-fluid p-0">
     <div class="position-relative">
@@ -14,34 +15,31 @@
 
         <!-- Resmin Üstündeki Yazılar -->
         <div class="text-overlay position-absolute top-50 start-50 translate-middle text-center text-white">
-            <h1 class="display-2 fw-bold border-black">Business Class</h1>
+            <h1 class="display-2 fw-bold border-black">Economy Class</h1>
             <p class="lead text-white">
-                Türk konukseverliğini göklere taşıdık! Business Class’ta ödüllü lezzetler, en güncel uçak içi eğlence sistemleri ve konforlu koltuklarla yolculuğunuzu keyifli bir deneyime dönüştürüyoruz.
+               Türk Hava Yolları ayrıcalıklarını ekonomik fiyatlarla keşfetmeye ne dersiniz? Bütçenize en uygun fiyatlarla yolculuk yapma hedefinizi Economy Class ile bir adım öne taşıyoruz.
             </p>
         </div>
 
         <!-- Özellikler Sabit, Resmin Üzerinde -->
         <div class="features position-absolute bottom-60 w-100 d-flex justify-content-around text-white py-3">
             <div class="feature">
-                <img src="~/yatra/images/seat.jpg" alt="Maksimum Konfor" class="feature-icon">
-                <span>Maksimum konfor</span>
+                <img src="~/yatra/images/seat.jpg" alt="Geniş aralıklı koltuklar" class="feature-icon">
+                <span>Geniş aralıklı koltuklar</span>
             </div>
             <div class="feature">
-                <img src="~/yatra/images/award.jpg" alt="Ödüllü ikramlar" class="feature-icon">
-                <span>Ödüllü ikramlar</span>
+                <img src="~/yatra/images/kit.jpg" alt="Seyahat kiti" class="feature-icon">
+                <span>Seyahat kiti</span>
             </div>
             <div class="feature">
-                <img src="~/yatra/images/lounge.jpg" alt="Lounge Deneyimi" class="feature-icon">
-                <span>Lounge deneyimi</span>
+                <img src="~/yatra/images/eglence.jpg" alt="Uçak içi eğlence" class="feature-icon">
+                <span>Uçak içi eğlence</span>
             </div>
             <div class="feature">
-                <img src="~/yatra/images/check-in.jpg" alt="Ayrıcalıklı Check-in" class="feature-icon">
-                <span>Ayrıcalıklı check-in</span>
+                <img src="~/yatra/images/meall.jpg" alt="Lezzetli ikramlar" class="feature-icon">
+                <span>Lezzetli ikramlar</span>
             </div>
-            <div class="feature">
-                <img src="~/yatra/images/luggage.jpg" alt="Ekstra Bagaj" class="feature-icon">
-                <span>Ekstra bagaj</span>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -94,35 +92,35 @@
         padding: 20px;
         border-radius: 10px;
     }
+/* Özellikler Sabit, Resmin Üzerinde */
+.features {
+    display: flex;
+    justify-content: center; /* Öğeleri yatayda ortalar */
+    align-items: center; /* Öğeleri dikeyde ortalar */
+    position: absolute;
+    bottom: 130px; /* Resmin altına 130px kadar kaydırdım */
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Hafif opak arka plan */
+    padding: 10px 0;
+    z-index: 5;
+}
 
-    /* Özellikler Sabit, Resmin Üzerinde */
-    .features {
-        display: flex;
-        justify-content: space-around;
-        position: absolute; /* Sabit konumda olacak */
-        bottom: 130px; /* Resmin altına 60px kadar kaydırdım */
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Hafif opak arka plan */
-        padding: 10px 0;
-        z-index: 5;
-    }
+.feature {
+    text-align: center;
+    margin: 0 5px; /* Özellikler arasındaki boşluğu 5px'ye düşürdük */
+    color: white;
+}
 
-    .feature {
-        text-align: center;
-        flex: 1;
-        max-width: 200px;
-        color: white;
-    }
+.feature-icon {
+    width: 60px; /* İkon boyutunu sabit tutuyoruz */
+    height: 60px;
+}
 
-    .feature-icon {
-        width: 60px;
-        height: 60px;
-    }
+.feature span {
+    display: block;
+    margin-top: 8px; /* İkon ile yazı arasındaki boşluğu azaltıyoruz */
+    color: white;
+    font-weight: bold;
+}
 
-    .feature span {
-        display: block;
-        margin-top: 10px;
-        color: white;
-        font-weight: bold;
-    }
 </style>

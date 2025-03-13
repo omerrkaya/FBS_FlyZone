@@ -28,6 +28,10 @@ namespace FBS_FlyZone.Controllers
         {
             return View();
         }
+        public IActionResult EconomyClass()
+        {
+            return View();
+        }
 
         public IActionResult UcusDurumu()
         {
@@ -38,7 +42,27 @@ namespace FBS_FlyZone.Controllers
         {
             return View();
         }
+        public IActionResult seatselection()
+        {
+            return View();
+        }
 
+        public IActionResult ExtraBaggage()
+        {
+            return View();
+        }
+        public IActionResult Flightdeals()
+        {
+            return View();
+        }
+        public IActionResult StudentDiscount()
+        {
+            return View();
+        }
+        public IActionResult Offer()
+        {
+            return View();
+        }
         // Giriş sayfası burada yapılıyor.
         public IActionResult Girisyap()
         {
