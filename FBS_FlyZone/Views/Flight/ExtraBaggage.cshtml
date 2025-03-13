@@ -1,0 +1,132 @@
+﻿@{
+    ViewData["Title"] = "ExtraBaggage";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<style>
+    .background-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background: url('@Url.Content("~/yatra/images/ekstrabagaj.jpg")') no-repeat center center/cover;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 50px; /* İçeriğin üst kısmını biraz aşağı çekmek için */
+    }
+
+    .content-overlay {
+        background: rgba(0, 0, 0, 0.5); /* Şeffaf koyu arka plan */
+        color: #FFFFFF !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        text-align: center;
+        width: 60%;
+        border: 1px solid rgba(255, 255, 255, 0.7); /* Beyaz ince çerçeve */
+        margin-bottom: 20px; /* Yazı ile form arasında boşluk */
+    }
+    .content-overlay h2, 
+.content-overlay p {
+    color: #FFFFFF !important; /* Kesin olarak beyaz yap */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Yazıyı daha okunur hale getirmek için gölge ekle */
+}
+
+    .form-container {
+        background: white;
+        padding: 20px;
+        width: 40%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    .radio-group {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 15px;
+    }
+       .info-section {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    margin-bottom: 60px; /* Footer ile mesafe bırakır */
+    flex-wrap: wrap; /* Mobilde alta düşmesini sağlar */
+}
+
+
+    .info-box {
+        flex: 1;
+        max-width: 300px; /* Kart genişliği */
+        text-align: center;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-box img {
+        width: 100%;
+        height: 200px; /* Sabit resim yüksekliği */
+        object-fit: cover; /* Resmi kutuya sığdır */
+    }
+
+    .info-box h3 {
+        font-size: 20px;
+        margin-top: 15px;
+    }
+
+    .info-box p {
+        font-size: 14px;
+        color: #555;
+    }
+</style>
+
+<div class="background-container">
+    <!-- Yazı Alanı -->
+    <div class="content-overlay">
+        <h2>Ekstra bagaj satın al veya Bagajına ağırlık ekle</h2>
+        <p>Ekstra bagaj veya mevcut bagajınıza ağırlık ekleme seçenekleri ile seyahatinizi kolaylaştırın. İç rahatlığıyla seyahat etmek için ekstra bagaj hakkı satın alabilir veya mevcut 23 kg olan bagajınıza en fazla 9 kg'a kadar ağırlık ekleyerek bagaj hakkınızı 32 kg'a kadar artırabilirsiniz.</p>
+    </div>
+
+    <!-- Form Alanı -->
+    <div class="form-container">
+        <div class="radio-group">
+            <label><input type="radio" name="bagajSecenek" checked> Ekstra bagaj</label>
+            <label><input type="radio" name="bagajSecenek"> Bagajına ağırlık ekle</label>
+        </div>
+
+        <form method="post" action="/Bagaj/Sorgula">
+            <div class="mb-3">
+                <label class="form-label">Bilet ya da rezervasyon kodu (PNR)</label>
+                <input type="text" class="form-control" name="pnr" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Yolcunun soyadı</label>
+                <input type="text" class="form-control" name="soyadi" required>
+            </div>
+            <button type="submit" class="btn btn-danger w-100">Ara</button>
+        </form>
+    </div>
+</div>
+<div class="info-section">
+    <div class="info-box">
+        <img src="~/yatra/images/teklicanta.jpg" alt="Ekstra Bagaj">
+        <h3>Ekstra bagaj hakkı</h3>
+        <p>Mevcut bagaj hakkınızdan daha fazla eşyanız varsa ekstra bagaj hakkı satın alabilir, iç rahatlığıyla yola çıkabilirsiniz.</p>
+    </div>
+
+    <div class="info-box">
+        <img src="~/yatra/images/valiz.jpg" alt="Bagaj Ağırlık">
+        <h3>Bagajına ağırlık ekle</h3>
+        <p>Mevcut bagaj hakkınıza kilogram ekleyerek gözünüz arkada kalmadan, dilediğiniz eşyaları yanınıza alabilirsiniz.</p>
+    </div>
+
+    <div class="info-box">
+        <img src="~/yatra/images/laptop.jpg" alt="Online İşlem">
+        <h3>Online işlem kolaylığı</h3>
+        <p>Ekstra bagaj hakkı ve bagaj artırma ile ilgili tüm işlemlerinizi internet sitemiz ve mobil uygulamamız üzerinden gerçekleştirebilirsiniz.</p>
+    </div>
+</div>

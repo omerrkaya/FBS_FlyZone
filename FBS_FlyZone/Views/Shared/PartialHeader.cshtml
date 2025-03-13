@@ -51,8 +51,8 @@
 									<li>
 										<a href="#">EK HİZMETLER</a>
 										<ul>
-											<li><a href="~/yatra/index.html">Koltuk Seçimi</a></li>
-											<li><a href="~/yatra/index.html">Ekstra Bagaj</a></li>
+											<li><a asp-controller="Flight" asp-action="seatselection">Koltuk Seçimi</a></li>
+											<li><a asp-controller="Flight" asp-action="extrabaggage">Ekstra Bagaj</a></li>
 										</ul>
 									</li>
 								</ul>
@@ -62,14 +62,14 @@
 								<ul>
 
 									<li>
-										<a href="~/yatra/booking.html">KABİN SINIFLARI</a>
+										<a href="#">KABİN SINIFLARI</a>
 										<ul>
 											<li><a asp-controller="Flight" asp-action="BusinessClass">Business Class</a></li>
-											<li><a href="~/yatra/booking-confirmation.html">Economy Class</a></li>
+											<li><a asp-controller="Flight" asp-action="EconomyClass">Economy Class</a></li>
 										</ul>
 									</li>
 									<li>
-										<a href="~/yatra/booking.html">UÇUŞ DENEYİMİ</a>
+										<a href="#">UÇUŞ DENEYİMİ</a>
 										<ul>
 											<li><a href="~/yatra/booking.html">Uçak İçi İkram</a></li>
 											<li><a href="~/yatra/booking-confirmation.html">Uçak İçi Eğlence</a></li>
@@ -77,7 +77,7 @@
 										</ul>
 									</li>
 									<li>
-										<a href="wwwroot/yatra/booking.html">DAHA FAZLA AYRICALIK</a>
+										<a href="#">DAHA FAZLA AYRICALIK</a>
 										<ul>
 											<li><a href="~/yatra/booking.html">Sıkça Sorulan Sorular</a></li>
 											<li><a href="~/yatra/booking-confirmation.html">Rehber Videoları</a></li>
@@ -89,15 +89,15 @@
 							</li>
 
 							<li>
-								<a href="hotel.html">FIRSATLAR <i class="fa fa-angle-down"></i></a>
+								<a href="#">FIRSATLAR <i class="fa fa-angle-down"></i></a>
 								<ul>
-									<li><a href="~/yatra/hotel.html">Uçuş Fırsatları</a></li>
-									<li><a href="~/yatra/grid-view.html"> Kampanyalar</a></li>
-									<li><a href="~/yatra/list-view.html"> Öğrenci İndirimi</a></li>
+									<li><a asp-controller="Flight" asp-action="Flightdeals">Uçuş Fırsatları</a></li>
+									<li><a asp-controller="Flight" asp-action="Offer"> Kampanyalar</a></li>
+									<li><a asp-controller="Flight" asp-action="StudentDiscount">Öğrenci İndirimi</a></li>
 								</ul>
 							</li>
 							<li>
-								<a href="flight.html">YARDIM<i class="fa fa-angle-down"></i></a>
+								<a href="#">YARDIM<i class="fa fa-angle-down"></i></a>
 								<ul>
 									<li><a href="~/yatra/flight.html">Yardım Merkezi</a></li>
 									<li><a href="~/yatra/flight-grid-view.html">Geri Bildirim</a></li>
