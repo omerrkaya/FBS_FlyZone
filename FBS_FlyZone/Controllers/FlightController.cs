@@ -64,6 +64,14 @@ namespace FBS_FlyZone.Controllers
         {
             return View();
         }
+        public IActionResult Announcements()
+        {
+            return View();
+        }
+        public IActionResult Feedback()
+        {
+            return View();
+        }
         // Giriş sayfası burada yapılıyor.
         public IActionResult Girisyap()
         {
