@@ -1,0 +1,203 @@
+﻿
+@{
+    ViewData["Title"] = "BoardingPass";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Sayfası</title>
+    <style>
+        /* Genel Sayfa Stili */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        /* Sayfanın en üstündeki tam genişlikte görsel */
+        .full-width-image {
+            width: 100%;
+            height: 10vh;
+            background: url('your-image.jpg') no-repeat center center/cover;
+            margin-bottom: 0; /* Boşluğu tamamen kaldır */
+            padding-bottom: 0;
+        }
+
+        .section {
+            padding-top: 0; /* Başlığın üst boşluğunu sıfırla */
+            margin-top: 0;
+        }
+
+
+
+        /* İki sütunlu düzen */
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .box {
+            width: 45%;
+            padding: 20px;
+            text-align: center;
+        }
+
+            .box img {
+                width: 100%;
+                max-width: 300px;
+                border-radius: 10px;
+            }
+        /* Buton Stili */
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        /* Üçlü görsel bölümü */
+        .three-images {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+            .three-images .item {
+                width: 30%;
+                text-align: center;
+            }
+        /* Tam genişlikte banner */
+        .full-width-banner {
+            width: 100%;
+            min-height: 50vh; /* Yüksekliği biraz küçülttük */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f5f5f5;
+            padding: 0 5%;
+        }
+
+        .banner-image {
+            flex: 1;
+            max-width: 50%; /* Görselin genişliğini sınırladık */
+        }
+
+            .banner-image img {
+                max-width: 90%;
+                height: auto;
+                object-fit: contain;
+            }
+
+        .banner-text {
+            flex: 1;
+            text-align: left;
+            padding-left: 40px; /* Metni biraz sağa kaydırdık */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #d32f2f; /* Butonu kırmızı yaptık */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        /* Liste bölümü */
+        .list-section ul {
+            list-style-type: disc;
+            text-align: left;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sayfanın en üstündeki büyük görsel alanı -->
+    <a href="~/yatra/images/ucakici.jpg">
+        <img src="~/yatra/images/ucakici.jpg" alt="Ust Resim">
+        <div class="full-width-image"></div>
+    </a>
+
+    <!-- Başlık ve Açıklama Bölümü -->
+    <div class="section">
+        <h2>Uçuşunuzu unutulmaz kılın, ayrıcalıkları inişten sonra da yaşayın!</h2>
+        <p>FlyZone biniş kartınızla dünyanın dört bir yanında özel avantajlardan yararlanın. Konaklamadan alışverişe, yeme-içmeden kültür ve sanat etkinliklerine kadar pek çok ayrıcalık sizi bekliyor. Keyifli uçuş deneyiminizi şehirlere taşıyın.</p>
+    </div>
+
+    <!-- Sol ve Sağ Bölümler -->
+    <div class="container">
+        <div class="box">
+            <h3>İstanbul’daki anlaşmalı markalarımız</h3>
+            <a href="~/yatra/images/bucket3.jpg"><img src="~/yatra/images/bucket3.jpg" alt="Sol Resim"></a>
+            <p>İstanbul’da yeme-içme mekânlarından alışveriş mağazalarına, etkinlik salonlarından konaklama merkezlerine birçok noktada fırsatlar Türk Hava Yolları biniş kartı sahiplerini bekliyor.</p>
+            <a href="#" class="btn">Daha Fazla</a>
+        </div>
+        <div class="box">
+            <h3>Dünyadaki anlaşmalı markalarımız</h3>
+            <a href="~/yatra/images/insta2.jpg"><img src="~/yatra/images/insta2.jpg" alt="Sağ Resim"></a>
+            <p>Dünyanın dört bir yanındaki birçok markada yemek, giyim, alışveriş başta olmak üzere indirimler, promosyonlar ve sürpriz hediyeler Türk Hava Yolları biniş kartı sahiplerini bekliyor.</p>
+            <a href="#" class="btn">Daha Fazla</a>
+        </div>
+    </div>
+
+    <!-- Üçlü Görseller Bölümü -->
+    <div class="section">
+        <h2></h2>
+        <div class="three-images">
+            <div class="item">
+                <a href="~/yatra/images/insta6.jpg"><img src="~/yatra/images/insta6.jpg" alt="Resim 1"></a>
+                <p>Biniş kartınızla birlikte yolcularımız için indirim veya avantajın sağlandığı alışveriş, konaklama, eğlence, yemek mekanına ulaşın.</p>
+            </div>
+            <div class="item">
+                <a href="~/yatra/images/insta4.jpg"><img src="~/yatra/images/insta4.jpg" alt="Resim 2"></a>
+                <p>İlgili noktada verilen indirimli/avantajlı ürün veya hizmet için gerekli rezervasyon veya ödeme aşamasında görevlilere biniş kartınızı gösterin.</p>
+            </div>
+            <div class="item">
+                <a href="~/yatra/images/insta1.jpg"><img src="~/yatra/images/insta1.jpg" alt="Resim 3"></a>
+                <p>Türk Hava Yolları yolcusu olmanın ayrıcalığını hissederken, size özel sunulan indirimli ürün veya avantajlı hizmetin keyfini doyasıya yaşayın.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Banner Üzerinde Yazı ve Buton -->
+
+    <div class="full-width-banner">
+        <a href="~/yatra/images/hotel\cta.jpg" class="banner-image">
+            <img src="~/yatra/images/hotel\cta.jpg" alt="Banner Resmi">
+        </a>
+        <div class="banner-text">
+            <h2>Mobil biniş kartı ile zamandan tasarruf edin!</h2>
+            <p>Mobil cihazlarımız vasıtasıyla kullandığımız mobil biniş kartları, bilet kontrollerinden hızlı ve pratik geçiş olanağı sağlıyor ve zaman kazandırıyor.</p>
+            <a href="#" class="btn">Detaylı Bilgi</a>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Liste Bölümü -->
+    <div class="section list-section">
+        <h2>Biniş kartı ayrıcalıkları kurallar ve koşullar</h2>
+        <ul>
+            <li>Her biniş kartı tek bir yolcu için geçerlidir.</li>
+            <li>Biniş kartında yer alan ismin teyidi için kimlik ibraz etmek zorunludur.</li>
+            <li>İndirimler/ayrıcalıklar partner firmanın yer aldığı varış istasyonunda geçerlidir. (İGA Müzesi girişi, İstanbul çıkışlı biniş kartına sahip yolcular için geçerlidir.)</li>
+            <li>İndirimler/ayrıcalıklar İstanbul varışınızdan itibaren 15 gün süreyle geçerlidir.</li>
+            <li>18 yaş altı seyahat eden yolcularımız, ayrıcalıklardan/indirimlerden ebeveyn gözetiminde faydalanabilir.</li>
+        </ul>
+    </div>
+</body>
+</html>
+
+
+
+
