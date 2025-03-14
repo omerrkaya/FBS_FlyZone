@@ -3,6 +3,9 @@
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
+<!-- Mobil uyumluluk için meta viewport etiketi -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <div class="seat-selection-container" style="position: relative; text-align: center; color: white; margin-top: 0px;">
     <!-- Arkaplan Resmi -->
     <div class="background-image-container" style="position: absolute; top: 0; left: 0; width: 100%; height: calc(100% + 120px); z-index: 1; overflow: hidden;">
@@ -10,47 +13,53 @@
     </div>
 
     <!-- İçerik Kapsayıcısı -->
-    <div class="content-overlay" style="position: relative; background-color: rgba(0, 0, 0, 0.4); padding: 20px; border-radius: 10px; width: 60%; margin: 0 auto; z-index: 2;  border: 1px solid rgba(255, 255, 255, 0.7);">
+    <div class="content-overlay" style="position: relative; background-color: rgba(0, 0, 0, 0.4); padding: 20px; border-radius: 10px; width: 90%; max-width: 600px; margin: 0 auto; z-index: 2; border: 1px solid rgba(255, 255, 255, 0.7);">
         <h2 style="color: white !important;">Koltuk Seçimi</h2>
         <p style="color: white !important;">Daha Konforlu Bir Yolculuk! Tercih ettiğiniz koltuğu şimdi satın alın!</p>
     </div>
 
     <!-- Form Alanı -->
-    <div class="form-container" style="position: relative; padding: 20px; border-radius: 10px; width: 60%; margin: 20px auto 0 auto; z-index: 2;">
+    <div class="form-container" style="position: relative; padding: 20px; border-radius: 10px; width: 90%; max-width: 600px; margin: 20px auto 0 auto; z-index: 2;">
         <form method="post">
-            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+            <div class="form-inputs" style="display: flex; flex-direction: column; gap: 10px; justify-content: center; margin-top: 20px;">
                 <input type="text" name="pnr" placeholder="Bilet ya da rezervasyon kodu (PNR)" required class="input-field">
                 <input type="text" name="lastName" placeholder="Yolcunun soyadı" required class="input-field">
-                <button type="submit" class="submit-button">&#10095;</button>
+                <button type="submit" class="submit-button">ARA</button>
             </div>
         </form>
     </div>
 </div>
 
 <!-- Yeni Yapı (Ekstra Diz Mesafeli Koltuklar ve Bebek Puseti) -->
-<div class="extra-content-container" style="margin-top: 60px; display: flex; flex-direction: column; gap: 40px; z-index: 2; position: relative;">
+<div class="extra-content-container">
     <!-- Ekstra Diz Mesafeli Koltuklar Bölümü -->
-    <div style="display: flex; align-items: center; justify-content: space-between; background-color: white; padding: 40px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
-        <img src="@Url.Content("~/yatra/images/mesafelikoltuk.jpg")" alt="Ekstra Diz Mesafeli Koltuklar" style="width: 45%; height: auto; border-radius: 10px;">
-        <div style="width: 45%; text-align: left; color: black;">
+    <div class="feature-box">
+        <div class="feature-image">
+            <img src="@Url.Content("~/yatra/images/mesafelikoltuk.jpg")" alt="Ekstra Diz Mesafeli Koltuklar">
+        </div>
+        <div class="feature-content">
             <h3>Ekstra Diz Mesafeli Koltuklar</h3>
             <p>Daha rahat bir uçuş deneyimi. Uçuş esnasında daha fazla hareket alanı istiyorsanız ekstra diz mesafeli koltuklar tam size göre.</p>
         </div>
     </div>
 
     <!-- Bebek Puseti Bölümü -->
-    <div style="display: flex; align-items: center; justify-content: space-between; background-color: white; padding: 40px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
-        <div style="width: 45%; text-align: left; color: black;">
+    <div class="feature-box">
+        <div class="feature-content">
             <h3>Bebeğinizle Dingin Bir Yolculuk</h3>
             <p>Bebek puseti kullanılabilen koltuklar, bebeğinizle yolculuğun tatlı yükünü hafifletebilir. Bebek pusetli koltuklar için havalimanında ekiplerimizden destek istemeyi unutmayın.</p>
         </div>
-        <img src="@Url.Content("~/yatra/images/bebekyolculuk.jpg")" alt="Bebek Puseti" style="width: 45%; height: auto; border-radius: 10px;">
+        <div class="feature-image">
+            <img src="@Url.Content("~/yatra/images/bebekyolculuk.jpg")" alt="Bebek Puseti">
+        </div>
     </div>
 
     <!-- Üçüncü Bölüm -->
-    <div style="display: flex; align-items: center; justify-content: space-between; background-color: white; padding: 40px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
-        <img src="@Url.Content("~/yatra/images/acilcikis.jpg")" alt="Üçüncü Bölüm" style="width: 45%; height: auto; border-radius: 10px;">
-        <div style="width: 45%; text-align: left; color: black;">
+    <div class="feature-box">
+        <div class="feature-image">
+            <img src="@Url.Content("~/yatra/images/acilcikis.jpg")" alt="Üçüncü Bölüm">
+        </div>
+        <div class="feature-content">
             <h3>Acil çıkış koltukları veya uçağın herhangi bir noktası</h3>
             <p>Ekstra mesafeye ihtiyacınız varsa acil çıkış koltukları size uygun olabilir. Ayrıca uçağın ön ya da arka bölümünde, kanatların üzerinde veya seçtiğiniz diğer koltuklardan birinde seyahat etmek için yalnızca bir dakika ayırmanız yeterli.</p>
         </div>
@@ -58,13 +67,15 @@
 </div>
 
 <!-- Koltuk Özellikleri Bölümü -->
-<div class="seat-features-container" style="margin-top: 80px; background-color: white; padding: 40px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); width: 60%; margin: 0 auto 40px auto;">
-    <div style="display: flex; align-items: center; justify-content: space-between;">
-        <img src="@Url.Content("~/yatra/images/koltukozellik.jpg")" alt="Koltuk Özellikleri" style="width: 45%; height: auto; border-radius: 10px;">
-        <div style="width: 45%; text-align: left; color: black;">
+<div class="seat-features-container">
+    <div class="feature-box">
+        <div class="feature-image">
+            <img src="@Url.Content("~/yatra/images/koltukozellik.jpg")" alt="Koltuk Özellikleri">
+        </div>
+        <div class="feature-content">
             <h3>Koltuk Özellikleri</h3>
             <p>Economy Class koltukların sahip olduğu pek çok özellik size keyifli bir yolculuk sunuyor.</p>
-            <ul style="text-align: left; color: black;">
+            <ul>
                 <li>Daha fazla hareket alanı için 79 cm diz mesafesine sahip, 15 cm yatabilen koltuklar</li>
                 <li>Uzun mesafeli uçuşlarda 46 cm koltuk genişliği</li>
                 <li>Kaldırılabilen kol desteği sayesinde yatağa dönüşebilen orta koltuklar</li>
@@ -74,7 +85,7 @@
                 <li>Koltuk altında yer alan universal prizlerle kişisel cihazları şarj edebilme imkânı</li>
                 <li>Koltuk arkalarında USB girişi</li>
             </ul>
-            <p style="color: black;"><em>*Koltuklarımız hakkında bu sayfada yer alan özellikler uçak tipine göre farklılık gösterebilir.</em></p>
+            <p><em>*Koltuklarımız hakkında bu sayfada yer alan özellikler uçak tipine göre farklılık gösterebilir.</em></p>
         </div>
     </div>
 </div>
@@ -87,20 +98,24 @@
     }
 
     .input-field {
-        padding: 10px;
+        padding: 12px;
         border: none;
         border-radius: 5px;
-        width: 200px;
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 16px;
     }
 
     .submit-button {
         background-color: red;
         color: white;
         border: none;
-        padding: 10px 15px;
+        padding: 12px 15px;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 18px;
+        font-size: 16px;
+        width: 100%;
+        font-weight: bold;
     }
 
     .submit-button:hover {
@@ -124,33 +139,92 @@
         gap: 40px;
         position: relative;
         z-index: 2;
+        padding: 0 15px;
     }
 
-    .extra-content-container > div {
+    .feature-box {
         display: flex;
         align-items: center;
         justify-content: space-between;
         background-color: white;
-        padding: 40px;
+        padding: 30px;
         border-radius: 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        flex-direction: row;
     }
 
-    .extra-content-container img {
+    .feature-image {
         width: 45%;
+    }
+
+    .feature-image img {
+        width: 100%;
         height: auto;
         border-radius: 10px;
+        object-fit: cover;
     }
 
-    .extra-content-container div > div {
-        width: 45%;
+    .feature-content {
+        width: 50%;
         text-align: left;
         color: black;
     }
 
+    .feature-content h3 {
+        margin-bottom: 15px;
+        font-size: 22px;
+    }
+
+    .feature-content p, .feature-content ul {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
     .seat-features-container {
-        margin-top: 80px;
-        background-color: white;
-        padding: 40px;
-        border-radius: 10px;}
+        margin-top: 60px;
+        margin-bottom: 60px;
+        padding: 0 15px;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Mobil Uyumluluk */
+    @@media (max-width: 767px) {
+        .feature-box {
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .feature-box:nth-child(even) {
+            flex-direction: column;
+        }
+        
+        .feature-image, .feature-content {
+            width: 100%;
+        }
+        
+        .feature-image {
+            margin-bottom: 20px;
+        }
+        
+        .feature-content h3 {
+            font-size: 20px;
+        }
+        
+        .feature-content p, .feature-content ul {
+            font-size: 14px;
+        }
+        
+        .content-overlay, .form-container {
+            width: 95%;
+        }
+        
+        .content-overlay h2 {
+            font-size: 24px;
+        }
+        
+        .content-overlay p {
+            font-size: 14px;
+        }
+    }
 </style>

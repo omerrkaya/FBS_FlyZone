@@ -3,7 +3,67 @@
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
+<!-- Mobil uyumluluk için meta viewport etiketi -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+<!-- Mobil uyumluluk için ek stil koyak -->
+<style type="text/css">
+    @@media (max-width: 767px) {
+        .swiper-content h1, .swiper-content h2 {
+            font-size: 24px !important;
+            margin-bottom: 10px !important;
+        }
+        .swiper-content .btn-blue {
+            padding: 8px 15px !important;
+            font-size: 14px !important;
+        }
+        .mt_search .table_item {
+            margin-bottom: 15px;
+        }
+        .destination-item {
+            margin-bottom: 20px;
+        }
+        .price-item {
+            margin-bottom: 20px;
+        }
+        .section-title h2 {
+            font-size: 24px !important;
+        }
+        .tour-cta-main .single-choose-us {
+            padding: 15px !important;
+        }
+        .tour-cta-main .single-choose-us h3 {
+            font-size: 18px !important;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            display: none !important;
+        }
+        .tour-price {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .destination-content h3 {
+            font-size: 18px !important;
+        }
+        .destination-content h6 {
+            font-size: 14px !important;
+        }
+        .top-destination .row, .top-route .row, .top-country .row {
+            margin-left: -10px;
+            margin-right: -10px;
+        }
+        .top-destination .col-lg-4, .top-route .col-lg-4, .top-country .col-lg-4 {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .full-tours .accrodion-title h5 {
+            font-size: 16px !important;
+        }
+        .full-tours .accrodion-content p {
+            font-size: 14px !important;
+        }
+    }
+</style>
 
     <!-- Banner start -->
     <section class="swiper-banner">
@@ -53,10 +113,10 @@
                 </div>
                 <form>
                     <div class="row">
-                        <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                             <div class="table_item">
                                 <div class="form-group">
-                                    <select class="wide">
+                                    <select class="wide form-control">
                                         <option value="0">Nereye Gitmek İstersin?</option>
                                         <option value="1">0</option>
                                         <option value="2">1</option>
@@ -68,10 +128,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                             <div class="table_item">
                                 <div class="form-group">
-                                    <select class="wide">
+                                    <select class="wide form-control">
                                         <option value="0">Yetişkin Sayısı</option>
                                         <option value="1">0</option>
                                         <option value="2">1</option>
@@ -83,10 +143,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                             <div class="table_item">
                                 <div class="form-group">
-                                    <select class="wide">
+                                    <select class="wide form-control">
                                         <option value="0">Çocuk Sayısı</option>
                                         <option value="1">0</option>
                                         <option value="2">1</option>
@@ -98,7 +158,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                             <div class="table_item">
                                 <div class="form-group">
                                     <div class='input-group date' id='datetimepicker1'>
@@ -112,7 +172,7 @@
                             </div>
                         </div>
 
-                         <div class="col-lg-4 col-md-6">
+                         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                             <div class="table_item">
                                 <div class="form-group">
                                     <div class='input-group date' id='datetimepicker2'>
@@ -125,10 +185,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
                             <div class="table_item">
                                 <div class="search">
-                                    <a href= "#" class="btn-blue btn-red btn-style-1">ARA</a>
+                                    <a href= "#" class="btn-blue btn-red btn-style-1 w-100">ARA</a>
                                 </div>
                             </div>
                         </div>
@@ -146,14 +206,14 @@
                 <a href="~/yatra/flight.html">Tüm Öne Çıkan Uçuşları Gör <i class="fa fa-long-arrow-right"></i></a>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/flight/plane1.jpg" alt="Image">
+                            <img src="~/yatra/images/flight/plane1.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                             <h6>TEK YÖN UÇUŞLAR</h6>
-                            <h3><a href="~/yatra/tour-detail.html">UCUZA PARİS'E UÇ</a></h3>
+                            <h3><a href="~/yatra/tour-detail.html">UCUZA SALTA'A UÇ</a></h3>
                             <p class="package-days">Şimdi ayırt ve <span>%30 İndirim Kazan</span></p>
                             <div class="deal-rating">
                                 <span class="fa fa-star checked"></span>
@@ -169,14 +229,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/flight/plane2.jpg" alt="Image">
+                            <img src="~/yatra/images/flight/plane2.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                             <h6>TEK YÖN UÇUŞLAR</h6>
-                            <h3><a href="~/yatra/flight-detail.html">UCUZA MONACO UÇUŞU</a></h3>
+                            <h3><a href="~/yatra/flight-detail.html">SRİ LANKA UÇUŞU</a></h3>
                             <p class="package-days">Şimdi Ayırt ve<span>%30 İndirim kazan</span></p>
                             <div class="deal-rating">
                                 <span class="fa fa-star checked"></span>
@@ -192,14 +252,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/flight/plane3.jpg" alt="Image">
+                            <img src="~/yatra/images/flight/plane3.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                             <h6>TEK YÖN UÇUŞLAR</h6>
-                            <h3><a href="~/yatra/flight-detail.html">LONDON UÇUŞU</a></h3>
+                            <h3><a href="~/yatra/flight-detail.html">NEW YORK UÇUŞU</a></h3>
                                <p class="package-days">Şimdi Ayırt ve<span>%30 İndirim kazan</span></p>
                             <div class="deal-rating">
                                 <span class="fa fa-star checked"></span>
@@ -215,10 +275,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/flight/plane6.jpg" alt="Image">
+                            <img src="~/yatra/images/flight/plane6.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                             <h6>TEK YÖN UÇUŞLAR</h6>
@@ -238,14 +298,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/flight/plane4.jpg" alt="Image">
+                            <img src="~/yatra/images/flight/plane4.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                             <h6>TEK YÖN UÇUŞLAR</h6>
-                            <h3><a href="~/yatra/flight-detail.html">UCUZA MONACO UÇUŞU</a></h3>
+                            <h3><a href="~/yatra/flight-detail.html">MONACO UÇUŞU</a></h3>
                                <p class="package-days">Şimdi Ayırt ve<span>%30 İndirim kazan</span></p>
                             <div class="deal-rating">
                                 <span class="fa fa-star checked"></span>
@@ -261,10 +321,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/flight/plane5.jpg" alt="Image">
+                            <img src="~/yatra/images/flight/plane5.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                              <h6>TEK YÖN UÇUŞLAR</h6>
@@ -420,10 +480,10 @@
                 <a href="~/yatra/flight.html">Tümünü Görüntüle <i class="fa fa-long-arrow-right"></i></a>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-12 col-xs-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/flight/plane1.jpg" alt="Image">
+                            <img src="~/yatra/images/flight/plane1.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                             <h6>TEN YÖN UÇUŞLAR</h6>
@@ -444,10 +504,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/flight/01.jpg" alt="Image">
+                            <img src="~/yatra/images/flight/01.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                             <h6 class="text-uppercase">Su Sporları</h6>
@@ -468,10 +528,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/flight/02.jpg" alt="Image">
+                            <img src="~/yatra/images/flight/02.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                             <h6 class="text-uppercase">Macera</h6>
@@ -493,10 +553,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12 col-xs-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/flight/03.jpg" alt="Image">
+                            <img src="~/yatra/images/flight/03.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                             <h6 class="text-uppercase">Plaj Bölgesi</h6>
@@ -517,10 +577,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/flight/04.jpg" alt="Image">
+                            <img src="~/yatra/images/flight/04.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                             <h6 class="text-uppercase">Dağ İstasyonu</h6>
@@ -540,10 +600,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/flight/05.jpg" alt="Image">
+                            <img src="~/yatra/images/flight/05.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                             <h6 class="text-uppercase">Balayı</h6>
@@ -619,10 +679,10 @@
                 <a href="flight.html"> Tüm Ülkeleri Gör <i class="fa fa-long-arrow-right"></i></a>
             </div>
             <div class="row flight-slider">
-                <div class="col-lg-4 col-md-12 col-xs-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/deal3.jpg" alt="Image">
+                            <img src="~/yatra/images/deal3.jpg" alt="Image" class="img-fluid">
                             <div class="thumbnail-ribbon">
                                 <span>%20 İndirim</span>
                             </div>
@@ -640,10 +700,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/deal4.jpg" alt="Image">
+                            <img src="~/yatra/images/deal4.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                             <h3><a href="~/yatra/flight-detail.html">MILAN</a></h3>
@@ -658,10 +718,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/destination-fw4.jpg" alt="Image">
+                            <img src="~/yatra/images/destination-fw4.jpg" alt="Image" class="img-fluid">
                             <div class="thumbnail-ribbon">
                                 <span>%15 İndirim</span>
                             </div>
@@ -679,10 +739,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12 col-xs-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/destination-fw3.jpg" alt="Image">
+                            <img src="~/yatra/images/destination-fw3.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                             <h3><a href="~/yatra/flight-detail.html">NEW YORK</a></h3>
@@ -697,10 +757,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/destination-fw2.jpg" alt="Image">
+                            <img src="~/yatra/images/destination-fw2.jpg" alt="Image" class="img-fluid">
                             <div class="thumbnail-ribbon">
                                 <span>%25 İndirim</span>
                             </div>
@@ -718,10 +778,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="destination-item box-item">
                         <div class="destination-image">
-                            <img src="~/yatra/images/destination-fw1.jpg" alt="Image">
+                            <img src="~/yatra/images/destination-fw1.jpg" alt="Image" class="img-fluid">
                         </div>
                         <div class="destination-content">
                             <h3><a href="~/yatra/flight-detail.html">LONDON</a></h3>
