@@ -31,6 +31,6 @@ namespace DataAccessLayer.EntityFramework
             throw new NotImplementedException();
         }
     }
-    {
-    }
-}
+    
+ }
+
