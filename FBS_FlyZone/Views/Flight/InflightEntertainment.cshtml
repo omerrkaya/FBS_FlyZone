@@ -1,0 +1,224 @@
+﻿
+@{
+    ViewData["Title"] = "InflightEntertainment";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotoğraf & İçerik Düzeni</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Hero alanı */
+        .hero {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+            .hero a {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .hero img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+        .hero-content {
+            position: absolute;
+            color: white;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3); /* Şeffaf koyu arka plan */
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 600px;
+            color: white;
+        }
+
+        /* Alt içerik bölümleri */
+        .section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-container {
+            width: 50%;
+            height: 250px;
+        }
+
+            .image-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+        .content {
+            width: 50%;
+            padding: 20px;
+            text-align: left;
+        }
+
+            .content h2 {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+
+            .content p {
+                font-size: 16px;
+                margin-bottom: 15px;
+                color: #333;
+            }
+
+        .btn {
+            display: inline-block;
+            background: red;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+            .btn:hover {
+                background: darkred;
+            }
+
+        /* Mobil uyumlu düzen */
+
+
+        {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 200px;
+        }
+
+        .content {
+            width: 100%;
+            padding: 15px;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+        }
+
+        .hero p {
+            font-size: 16px;
+        }
+
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Tam ekran açılış bölümü (Hero) -->
+    <div class="hero">
+        <a href="~/yatra/images/ucakicieglence.jpg">
+            <img src="~/yatra/images/ucakicieglence.jpg" alt="Hero Görseli"> <!-- Buraya kendi görsel yolunu ekle -->
+        </a>
+        <div class="hero-content">
+            <h1>Müziğin Büyülü Dünyası</h1>
+            <p>RUçuşunuz sırasında zamanın nasıl geçtiğini fark edemeyeceksiniz! Uçak içi eğlence sistemimizde yer verdiğimiz en yeni içeriklerle arşivimizi daha da zenginleştirdik. Farklı zevklere hitap eden en eğlenceli filmler, müzikler, oyunlar ve daha birçok yeni içerikle yolculuk keyfiniz katlanarak artacak!</p>
+        </div>
+    </div>
+
+    <!-- Alt içerik bölümleri -->
+    <div class="section">
+        <a href="~/yatra/images/muziginevrenseldili.jpg" class="image-container">
+            <img src="~/yatra/images/muziginevrenseldili.jpg" alt="Müzik">
+        </a>
+        <div class="content">
+            <h2>Müziğin Evrensel Dili</h2>
+            <p>Yeni melodiler keşfetmek, farklı kültürleri deneyimlemenin en keyifli yollarından biridir. Bu yüzden, dünyanın en büyük müzik şirketlerinden biriyle iş birliği yaparak uçak içi eğlence sistemimizde özel bir müzik platformu oluşturduk. My Music World sayesinde, 2000’den fazla sanatçının özenle seçilmiş çalma listeleriyle yolculuğunuzu daha keyifli hale getirebilirsiniz.</p>
+            <a href="https://example.com/1" class="btn">Keşfet</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <a href="~/yatra/images/muziktutkusu.jpg" class="image-container">
+            <img src="~/yatra/images/muziktutkusu.jpg" alt="Gitar">
+        </a>
+        <div class="content">
+            <h2> Müzik Tutkunuzu Büyütüyoruz</h2>
+            <p>
+                Sanatçı yolcularımızın müziğini Türkiye ve dünyanın dört bir yanındaki dinleyicilerle buluşturuyor, enstrümanlarını güvenle taşımalarına destek oluyoruz.
+            </p>
+            <a href="https://example.com/2" class="btn">Keşfet</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <a href="~/yatra/images/minikyoldulareglence.jpg" class="image-container">
+            <img src="~/yatra/images/minikyoldulareglence.jpg" alt="Piyano">
+        </a>
+        <div class="content">
+            <h2>Minik Yolcular İçin Eğlence</h2>
+            <p>
+                Çocuk yolcularımız için özel olarak hazırladığımız arayüz ile seçilmiş filmler, çizgi diziler ve oyunlar uçak içi eğlence sistemimizde! Dünyaca ünlü yapım şirketleriyle yaptığımız işbirlikleri sayesinde minik misafirlerimiz yolculuk boyunca keyifli vakit geçirecek.
+            </p>
+            <a href="https://example.com/3" class="btn">Keşfet</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <a href="~/yatra/images/ucakicieglencealt.jpg" class="image-container">
+            <img src="~/yatra/images/ucakicieglencealt.jpg" alt="Keman">
+        </a>
+        <div class="content">
+
+            <p>Uçuşunuzdan önce Entertainment uygulamamız ile seyahat bilgilerinizi girerek en güncel film, dizi, müzik ve oyun içeriklerini keşfedebilir, favorilerinizi belirleyerek yolculuğunuzu kişiselleştirebilirsiniz. Uçağa bindiğinizde, koltuk arkası ekranındaki buton ile cihazınızı hızlıca eşleştirerek eğlenceye kesintisiz devam edebilirsiniz.</p>
+            <a href="https://example.com/4" class="btn">Keşfet</a>
+        </div>
+    </div>
+
+</body>
+</html>

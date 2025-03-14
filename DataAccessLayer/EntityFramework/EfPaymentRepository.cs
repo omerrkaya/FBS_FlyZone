@@ -29,7 +29,4 @@ namespace DataAccessLayer.EntityFramework
         public void Update(Payment genent)
         {
             throw new NotImplementedException();
-        }
-    }
-   
-}
+        }}}
