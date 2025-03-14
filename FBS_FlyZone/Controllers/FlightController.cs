@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FBS_FlyZone.Models;
+using EntityLayer.Concrete;
 
 namespace FBS_FlyZone.Controllers
 {
@@ -93,6 +94,53 @@ namespace FBS_FlyZone.Controllers
                 // Kayıt işlemleri
             }
             return View(model);
+        }
+
+        public IActionResult Fleet()
+        {
+          
+            return View();
+        }
+        public IActionResult InFlightCatering()
+        {
+
+            return View();
+        }
+        public IActionResult GuideVideos()
+        {
+
+            return View();
+        }
+        public IActionResult InflightEntertainment()
+        {
+
+            return View();
+        }
+        public IActionResult TransportationInformation()
+        {
+
+            return View();
+        }
+        public IActionResult BoardingPass()
+        {
+            
+            return View();
+        }
+        public IActionResult FrequentlyAskedQuestions()
+        {
+
+            return View();
+        }
+        
+        public IActionResult ContactUs()
+        {
+
+            return View();
+        }
+        public IActionResult HelpCenter()
+        {
+
+            return View();
         }
     }
 }

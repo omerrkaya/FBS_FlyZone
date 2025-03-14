@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewData["Title"] = "GuideVideos";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rehber Videolar</title>
+    <style>
+        /* Sayfanın genel stil ayarları */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+
+        /* En üstteki büyük görsel ve buton */
+        .hero {
+            position: relative;
+            text-align: center;
+        }
+
+            .hero img {
+                width: 100%;
+                height: 70vh;
+            }
+
+            .hero a {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(0, 0, 0, 0.7);
+                color: white;
+                padding: 15px 30px;
+                text-decoration: none;
+                font-size: 24px;
+                border-radius: 5px;
+            }
+
+        .content {
+            padding: 20px 0;
+        }
+
+        /* Video bölümlerinin stil ayarları */
+        .video-section {
+            margin-bottom: 40px;
+        }
+
+            .video-section h2 {
+                color: #b00; /* Başlık rengi kırmızı tonunda */
+            }
+
+            .video-section iframe {
+                width: 100%;
+                height: 400px;
+            }
+    </style>
+</head>
+<body>
+
+    <!-- En üstteki büyük görsel ve açıklama -->
+    <div class="hero">
+        <a href="#">Rehber Videolar</a>
+        <img src="~/yatra/images/mercado.png" alt="İstanbul Havalimanı">
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <p>İstanbul Havalimanı'nda harika bir seyahat deneyimi sizi bekliyor. Bu rehber videolar ile havalimanına nasıl ulaşacağınızı ve uçuş işlemlerini nasıl gerçekleştireceğinizi öğrenebilirsiniz.</p>
+        </div>
+
+        <!-- Video Bölümleri -->
+        <div class="video-section">
+            <h2>İstanbul Havalimanı'na Nasıl Ulaşırım?</h2>
+            <p>Havalimanına ulaşım için kullanabileceğiniz seçenekleri burada bulabilirsiniz.</p>
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="video-section">
+            <h2>İstanbul Havalimanı Bana Kaç KM?</h2>
+            <p>Bulunduğunuz konuma göre havalimanına olan mesafeyi öğrenebilirsiniz.</p>
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="video-section">
+            <h2>İç Hat Uçuşumu Nasıl Gerçekleştirebilirim?</h2>
+            <p>İç hat uçuş işlemleriniz için gerekli bilgileri burada bulabilirsiniz.</p>
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="video-section">
+            <h2>İç Hat Geliş Uçuşum Sırasında Ne Yapmalıyım?</h2>
+            <p>İç hat geliş uçuşlarında hangi adımları takip etmeniz gerektiğini burada öğrenebilirsiniz.</p>
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID_4" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="video-section">
+            <h2>İç Hatlardan Dış Hatlara Transfer İşlemlerimi Nasıl Yapabilirim?</h2>
+            <p>İç hatlardan dış hatlara geçiş sürecinde dikkat edilmesi gerekenler.</p>
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID_5" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="video-section">
+            <h2>İstanbul Havalimanı İç Hat Lounge</h2>
+            <p>İç hat yolcuları için sunulan lounge hizmetleri hakkında bilgi.</p>
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID_6" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="video-section">
+            <h2>Dış Hat Uçuşumu Nasıl Gerçekleştirebilirim?</h2>
+            <p>Dış hat uçuş işlemleri için bilmeniz gerekenler.</p>
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID_7" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+

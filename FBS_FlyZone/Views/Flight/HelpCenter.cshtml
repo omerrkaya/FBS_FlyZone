@@ -1,0 +1,235 @@
+﻿@{
+    ViewData["Title"] = "HelpCenter";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Sayfa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .hero {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+            }
+
+        .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+            .overlay h1 {
+                font-size: 3rem;
+                margin: 0;
+            }
+
+            .overlay p {
+                font-size: 1.5rem;
+                margin-top: 10px;
+            }
+
+        .content-section {
+            text-align: center;
+            padding: 50px;
+        }
+
+            .content-section h2 {
+                font-size: 2rem;
+                color: #333;
+            }
+
+            .content-section p {
+                font-size: 1.2rem;
+                color: #555;
+                max-width: 800px;
+                margin: auto;
+            }
+
+        .categories-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .categories {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .category {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            background: lightgray;
+            transition: background 0.3s;
+            border-radius: 5px;
+        }
+
+            .category.active {
+                background: darkgray;
+                color: white;
+            }
+
+        .content-box {
+            width: 70%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .category-content {
+            display: none;
+        }
+
+            .category-content.active {
+                display: block;
+            }
+
+            .category-content ul {
+                padding-left: 20px;
+            }
+
+                .category-content ul li {
+                    margin: 5px 0;
+                }
+
+                    .category-content ul li a {
+                        text-decoration: none;
+                        color: blue;
+                    }
+
+                        .category-content ul li a:hover {
+                            text-decoration: underline;
+                        }
+
+        /* Fotoğraf bölümü stilleri */
+        .photo-section {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .photo-box {
+            width: 45%;
+            text-align: center;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background: #f9f9f9;
+            padding: 10px;
+        }
+
+            .photo-box img {
+                width: 100%;
+                height: auto;
+                border-radius: 10px;
+            }
+
+            .photo-box h3 {
+                margin-top: 10px;
+                font-size: 1.5rem;
+                color: #333;
+            }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <img src="~/yatra/images/package2.jpg" alt="Hero Resmi">
+        <div class="overlay">
+            <h1>Yardım Merkezi</h1>
+            <p>Seyahatinizle ilgili merak ettiğiniz her şeyi öğrenmek için en doğru yerdesiniz.</p>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2>Yeni Başlık</h2>
+        <p>Bu bölümde açıklama metni olacak. İçeriğe göre bu kısmı güncelleyebilirsiniz.</p>
+    </div>
+
+    <div class="categories-container">
+        <div class="categories">
+            <button class="category active" onclick="showCategory(0)">Sıkça Sorulan Sorular</button>
+            <button class="category" onclick="showCategory(1)">Bagaj</button>
+            <button class="category" onclick="showCategory(2)">Miles&Smiles</button>
+            <button class="category" onclick="showCategory(3)">Online İşlemler</button>
+            <button class="category" onclick="showCategory(4)">Ek Hizmetler</button>
+            <button class="category" onclick="showCategory(5)">Keşfet</button>
+            <button class="category" onclick="showCategory(6)">Bizimle İletişime Geçin</button>
+        </div>
+
+        <div class="content-box">
+            <div id="category-contents">
+                <div class="category-content active">
+                    <h2>Sıkça Sorulan Sorular</h2>
+                    <p>Bu bölümde sıkça sorulan sorular yer alacaktır.</p>
+                    <ul>
+                        <li><a href="#">Madde 1</a></li>
+                        <li><a href="#">Madde 2</a></li>
+                        <li><a href="#">Madde 3</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fotoğraf Bölümü -->
+    <div class="photo-section">
+        
+        <div class="photo-box">
+            <img src="~/yatra/images/ft4.jpg" alt="Fotoğraf 1">
+            <h3>Başlık 1</h3>
+        </div>
+        <div class="photo-box">
+            <img src="~/yatra/images/ft5.jpg" alt="Fotoğraf 2">
+            <h3>Başlık 2</h3>
+        </div>
+    </div>
+
+    <script>
+        function showCategory(index) {
+            let buttons = document.querySelectorAll('.category');
+            let contents = document.querySelectorAll('.category-content');
+
+            buttons.forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+                contents[i].classList.toggle('active', i === index);
+            });
+        }
+    </script>
+</body>
+</html>
