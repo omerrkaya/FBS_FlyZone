@@ -3,800 +3,140 @@
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
-<!-- Mobil uyumluluk için meta viewport etiketi -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<!-- Mobil uyumluluk için ek stil koyak -->
-<style type="text/css">
-    @@media (max-width: 767px) {
-        .swiper-content h1, .swiper-content h2 {
-            font-size: 24px !important;
-            margin-bottom: 10px !important;
-        }
-        .swiper-content .btn-blue {
-            padding: 8px 15px !important;
-            font-size: 14px !important;
-        }
-        .mt_search .table_item {
-            margin-bottom: 15px;
-        }
-        .destination-item {
-            margin-bottom: 20px;
-        }
-        .price-item {
-            margin-bottom: 20px;
-        }
-        .section-title h2 {
-            font-size: 24px !important;
-        }
-        .tour-cta-main .single-choose-us {
-            padding: 15px !important;
-        }
-        .tour-cta-main .single-choose-us h3 {
-            font-size: 18px !important;
-        }
-        .swiper-button-next, .swiper-button-prev {
-            display: none !important;
-        }
-        .tour-price {
-            text-align: center;
-            margin-top: 10px;
-        }
-        .destination-content h3 {
-            font-size: 18px !important;
-        }
-        .destination-content h6 {
-            font-size: 14px !important;
-        }
-        .top-destination .row, .top-route .row, .top-country .row {
-            margin-left: -10px;
-            margin-right: -10px;
-        }
-        .top-destination .col-lg-4, .top-route .col-lg-4, .top-country .col-lg-4 {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-        .full-tours .accrodion-title h5 {
-            font-size: 16px !important;
-        }
-        .full-tours .accrodion-content p {
-            font-size: 14px !important;
-        }
-    }
-</style>
-
-    <!-- Banner start -->
-    <section class="swiper-banner">
-        <div class="slider">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                   <div class="swiper-slide" style="background-image: url('@Url.Content("~/yatra/images/slider/slider10.jpg")');">
-
-                        <div class="swiper-content" data-animation="animated fadeInDown">
-                            <h2 class="white">Biletini Al ve Yola Çık</h2>
-                            <h1><a href="#" class="white">NEREYİ KEŞFETMEK İSTERSİN ?</a></h1>
-                        <a asp-controller="Flight" asp-action="FlightDetails" class="btn-blue btn-red">Turlara Göz At</a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide" style="background-image: url('@Url.Content("~/yatra/images/slider/slider9.jpg")');">
-                        <div class="swiper-content" data-animation="animated fadeInRight">
-                            <h2 class="white">Biletini Al ve Yola Çık</h2>
-                            <h1><a href="#" class="white">NEREYİ KEŞFETMEK İSTERSİN ?</a></h1>
-                            <a asp-controller="Flight" asp-action="FlightDetails" class="btn-blue btn-red">Turlara Göz At</a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide" style="background-image: url('@Url.Content("~/yatra/images/slider/slider8.jpg")');">
-
-                        <div class="swiper-content" data-animation="animated fadeInUp">
-                            <h2 class="white">Biletini Al ve Yola Çık</h2>
-                            <h1><a href="#" class="white">NEREYİ KEŞFETMEK İSTERSİN ?</a></h1>
-                        <a asp-controller="Flight" asp-action="FlightDetails" class="btn-blue btn-red">Turlara Göz At</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Add Arrows -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="overlay"></div>
-        </div>
-    </section>
-    <!-- Banner Ends -->
-
-
-    <section class="mt_search">
-        <div class="container">
-            <div class="search-content-slider">
-                <div class="section-title text-center">
-                    <h2>En Uygun Uçuşu Ara</h2>
-                   
-                </div>
-                <form>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                            <div class="table_item">
-                                <div class="form-group">
-                                    <select class="wide form-control">
-                                        <option value="0">Nereye Gitmek İstersin?</option>
-                                        <option value="1">0</option>
-                                        <option value="2">1</option>
-                                        <option value="3">2</option>
-                                        <option value="4">3</option>
-                                        <option value="5">4</option>
-                                    </select>
-                                    <i class="flaticon-maps-and-flags"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                            <div class="table_item">
-                                <div class="form-group">
-                                    <select class="wide form-control">
-                                        <option value="0">Yetişkin Sayısı</option>
-                                        <option value="1">0</option>
-                                        <option value="2">1</option>
-                                        <option value="3">2</option>
-                                        <option value="4">3</option>
-                                        <option value="5">4</option>
-                                    </select>
-                                    <i class="flaticon-box"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                            <div class="table_item">
-                                <div class="form-group">
-                                    <select class="wide form-control">
-                                        <option value="0">Çocuk Sayısı</option>
-                                        <option value="1">0</option>
-                                        <option value="2">1</option>
-                                        <option value="3">2</option>
-                                        <option value="4">3</option>
-                                        <option value="5">4</option>
-                                    </select>
-                                    <i class="flaticon-box"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                            <div class="table_item">
-                                <div class="form-group">
-                                    <div class='input-group date' id='datetimepicker1'>
-                                        <input type='text' class="form-control" value="Gidiş Tarihi" />
-                                        <i class="flaticon-calendar"></i>
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                            <div class="table_item">
-                                <div class="form-group">
-                                    <div class='input-group date' id='datetimepicker2'>
-                                        <input type='text' class="form-control" value="Dönüş Tarihi" />
-                                        <i class="flaticon-calendar"></i>
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
-                            <div class="table_item">
-                                <div class="search">
-                                    <a href= "#" class="btn-blue btn-red btn-style-1 w-100">ARA</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form> 
-            </div>
-        </div>
-    </section>
-
-    <!-- Top Destinations -->
-    <section class="top-destination">
-        <div class="container">
-            <div class="section-title text-center">
-                <h2>Öne Çıkan Uçuş Fırsatları</h2>
-                <a href="~/yatra/flight.html">Tüm Öne Çıkan Uçuşları Gör <i class="fa fa-long-arrow-right"></i></a>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/flight/plane1.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                            <h6>TEK YÖN UÇUŞLAR</h6>
-                            <h3><a href="~/yatra/tour-detail.html">UCUZA SALTA'A UÇ</a></h3>
-                            <p class="package-days">Şimdi ayırt ve <span>%30 İndirim Kazan</span></p>
-                            <div class="deal-rating">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                            <div class="tour-price">
-                                <span class="tour-tail">$1,200</span>
-                                <span class="tour-head">Kişi Başı</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/flight/plane2.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                            <h6>TEK YÖN UÇUŞLAR</h6>
-                            <h3><a href="~/yatra/flight-detail.html">SRİ LANKA UÇUŞU</a></h3>
-                            <p class="package-days">Şimdi Ayırt ve<span>%30 İndirim kazan</span></p>
-                            <div class="deal-rating">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                            <div class="tour-price">
-                                <span class="tour-tail">$800</span>
-                                <span class="tour-head">Kişi Başı</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/flight/plane3.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                            <h6>TEK YÖN UÇUŞLAR</h6>
-                            <h3><a href="~/yatra/flight-detail.html">NEW YORK UÇUŞU</a></h3>
-                               <p class="package-days">Şimdi Ayırt ve<span>%30 İndirim kazan</span></p>
-                            <div class="deal-rating">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                            <div class="tour-price">
-                                <span class="tour-tail">$1,500</span>
-                                <span class="tour-head">Kişi Başı</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/flight/plane6.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                            <h6>TEK YÖN UÇUŞLAR</h6>
-                            <h3><a href="~/yatra/flight-detail.html">PARİS'E UÇ </a></h3>
-                            <p class="package-days">ŞİMDİ AYIRT VE <span>%30 İNDİRİM KAZAN</span></p>
-                            <div class="deal-rating">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                            <div class="tour-price">
-                                <span class="tour-tail">$1,200</span>
-                                <span class="tour-head">Kişi Başı</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/flight/plane4.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                            <h6>TEK YÖN UÇUŞLAR</h6>
-                            <h3><a href="~/yatra/flight-detail.html">MONACO UÇUŞU</a></h3>
-                               <p class="package-days">Şimdi Ayırt ve<span>%30 İndirim kazan</span></p>
-                            <div class="deal-rating">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                            <div class="tour-price">
-                                <span class="tour-tail">$800</span>
-                                 <span class="tour-head">Kişi Başı</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/flight/plane5.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                             <h6>TEK YÖN UÇUŞLAR</h6>
-                            <h3><a href="~/yatra/flight-detail.html">LONDON</a></h3>
-                              <p class="package-days">Şimdi Ayırt ve<span>%30 İndirim kazan</span></p>
-                            <div class="deal-rating">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                            <div class="tour-price">
-                                <span class="tour-tail">$700</span>
-                                <span class="tour-head">Kişi Başı</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Top Destination Ends -->
-<!-- Full Tours -->
-<section class="full-tours">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-5 col-md-12">
-                <!-- section title -->
-                <div class="section_heading">
-                    <h2 class="section_title">
-                        <span>Uçuş Öncesi Bilgiler</span>
-                    </h2>
-                    <p class="heading_txt">Uçuşunuzdan önce bilmeniz gereken önemli detaylar! Bagaj kurallarından özel yemek taleplerine, uçuş durumunu kontrol etmekten rezervasyon yönetimine kadar ihtiyacınız olan tüm bilgiler burada.</p>
-                </div>
-
-                <div class="accrodion-grp faq-accrodion" data-grp-name="faq-accrodion">
-                    <div class="accrodion active">
-                        <div class="accrodion-title">
-                            <h5>Bagajınızı Önceden Ayırtın</h5>
-                        </div>
-                        <div class="accrodion-content" style="display: block;">
-                            <div class="inner">
-                                <p>Ekstra bagaj hakkı satın almak mı istiyorsunuz? Online rezervasyon yaparak ek bagaj ücretlerinden tasarruf edebilir, havalimanında zaman kazanabilirsiniz.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accrodion">
-                        <div class="accrodion-title">
-                            <h5>Özel Yemek Talepleri</h5>
-                        </div>
-                        <div class="accrodion-content" style="display: none;">
-                            <div class="inner">
-                                <p>Özel bir beslenme düzeniniz mi var? Vegan, vejetaryen, glütensiz veya dini gerekliliklere uygun yemek seçenekleri için uçuşunuzdan 24 saat önce özel yemek talebinde bulunun.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accrodion">
-                        <div class="accrodion-title">
-                            <h5>Uçuş Durumunuzu Kontrol Edin</h5>
-                        </div>
-                        <div class="accrodion-content" style="display: none;">
-                            <div class="inner">
-                                <p>Uçağınızın kalkış veya varış saatini anlık olarak takip edin. Havalimanına gitmeden önce uçuş durumunuzu kontrol ederek zamanınızı daha iyi planlayabilirsiniz.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accrodion">
-                        <div class="accrodion-title">
-                            <h5>Özel Yolcu Hizmetleri</h5>
-                        </div>
-                        <div class="accrodion-content" style="display: none;">
-                            <div class="inner">
-                                <p>Bebekli yolcular, yaşlı yolcular veya hareket kabiliyeti kısıtlı yolcular için özel hizmetler sunuyoruz. Size en uygun yardımı alabilmek için önceden talepte bulunabilirsiniz.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-7 col-md-12">
-                <!-- price -->
-                <div class="price-list">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-xs-12">
-                            <div class="price-item">
-                                <div class="price-table-head text-center">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                    <h3>Bireysel Plan</h3>
-                                    <small class="text-uppercase">Tek Yolcular İçin</small>
-                                </div>
-                                <div class="price-table-price text-center">
-                                    <span>$ 150 / Kişi</span>
-                                </div>
-                                <div class="price-des">
-                                    <p>Kişisel rezervasyonlarınız için en uygun uçuş fırsatları.</p>
-                                </div>
-                                <div class="price-table-content">
-                                    <ul>
-                                        <li><i class="fa fa-angle-right" aria-hidden="true"></i> Online Rezervasyon</li>
-                                        <li><i class="fa fa-angle-right" aria-hidden="true"></i> Kişisel Profil Oluşturma</li>
-                                        <li><i class="fa fa-angle-right" aria-hidden="true"></i> Rezervasyon Yönetimi</li>
-                                        <li><i class="fa fa-angle-right" aria-hidden="true"></i> Uçuş Takibi</li>
-                                    </ul>
-                                </div>
-                                <div class="price-btn text-center">
-                                    <a href="~/yatra/flight-detail.html" class="btn-blue btn-red">Detayları Gör</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 col-md-6 col-xs-12">
-                            <div class="price-item price-mar">
-                                <div class="price-table-head text-center">
-                                    <i class="fa fa-users" aria-hidden="true"></i>
-                                    <h3>Grup Planı</h3>
-                                    <small class="text-uppercase">Gruplar İçin</small>
-                                </div>
-                                <div class="price-table-price text-center">
-                                    <span>$ 120 / Kişi</span>
-                                </div>
-                                <div class="price-des">
-                                    <p>Toplu rezervasyon avantajları ile grup uçuşları daha ekonomik.</p>
-                                </div>
-                                <div class="price-table-content">
-                                    <ul>
-                                        <li><i class="fa fa-angle-right" aria-hidden="true"></i> Toplu Rezervasyon Avantajları</li>
-                                        <li><i class="fa fa-angle-right" aria-hidden="true"></i> Grup İndirimleri</li>
-                                        <li><i class="fa fa-angle-right" aria-hidden="true"></i> Ortak Seyahat Planlama</li>
-                                        <li><i class="fa fa-angle-right" aria-hidden="true"></i> Öncelikli Destek</li>
-                                    </ul>
-                                </div>
-                                <div class="price-btn text-center">
-                                    <a href="~/yatra/flight-detail.html" class="btn-blue btn-red">Detayları Gör</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- price Ends -->
-            </div>
-        </div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Start Banner
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<section class="banner-section">
+    <div class="banner-element" data-aos="fade-left" data-aos-duration="1200">
+        <img src="~/flynext/assets/images/element/element-21.png" alt="element">
     </div>
-</section>
-<!-- Full Tour Ends -->
-
-
-    <!-- Top Route -->
-    <section class="top-route">
-        <div class="container">
-            <div class="section-title text-center">
-                <h2>Dünyanın En İYİ Rotaları</h2>
-                <a href="~/yatra/flight.html">Tümünü Görüntüle <i class="fa fa-long-arrow-right"></i></a>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/flight/plane1.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                            <h6>TEN YÖN UÇUŞLAR</h6>
-                            <h3><a href="~/yatra/flight-detail.html">PARİS'E UCUZ UÇUŞ</a></h3>
-                              <p class="package-days">Şimdi Ayırt ve<span>%30 İndirim kazan</span></p>
-                            <div class="deal-rating">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                            <div class="tour-price">
-                                
-                                <span class="tour-tail">$1,200</span>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/flight/01.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                            <h6 class="text-uppercase">Su Sporları</h6>
-                            <h3><a href="~/yatra/flight-detail.html">MONACO UÇUŞLARI</a></h3>
-                            <p class="package-days">Şimdi Ayırt ve<span>%30 İndirim kazan</span></p>
-                            <div class="deal-rating">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                            <div class="tour-price">
-                               
-                                <span class="tour-tail">$800</span>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/flight/02.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                            <h6 class="text-uppercase">Macera</h6>
-                            <h3><a href="~/yatra/flight-detail.html">LONDON GEZİSİ</a></h3>
-                           <p class="package-days">Şimdi Ayırt ve<span>%30 İndirim kazan</span></p>
-                            <div class="deal-rating">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                            <div class="tour-price">
-                               
-
-                                <span class="tour-tail">$1,500</span>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/flight/03.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                            <h6 class="text-uppercase">Plaj Bölgesi</h6>
-                            <h3><a href="~/yatra/flight-detail.html">PARİS TURLARI</a></h3>
-                           <p class="package-days">Şimdi Ayırt ve<span>%30 İndirim kazan</span></p>
-                            <div class="deal-rating">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                            <div class="tour-price">
-                               
-                                <span class="tour-tail">$1,200</span>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/flight/04.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                            <h6 class="text-uppercase">Dağ İstasyonu</h6>
-                            <h3><a href="~/yatra/flight-detail.html">MANOCA TURLARI</a></h3>
-                            <p class="package-days">Şimdi Ayırt ve<span>%30 İndirim kazan</span></p>
-                            <div class="deal-rating">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                            <div class="tour-price">
-                             
-                                <span class="tour-tail">$800</span>   
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/flight/05.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                            <h6 class="text-uppercase">Balayı</h6>
-                            <h3><a href="~/yatra/flight-detail.html">LONDON GEZİSİ</a></h3>
-                           <p class="package-days">Şimdi Ayırt ve<span>%30 İndirim kazan</span></p>
-                            <div class="deal-rating">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                            <div class="tour-price">
-                                
-                                <span class="tour-tail">$1,500</span>
-
-                            </div>
-                        </div>
+    <div class="banner-element-two">
+        <img src="~/flynext/assets/images/element/element-3.png" alt="element">
+    </div>
+    <div class="banner-element-three">
+        <img src="~/flynext/assets/images/element/element-4.png" alt="element">
+    </div>
+    <div class="banner-element-four">
+        <img src="~/flynext/assets/images/element/element-5.png" alt="element">
+    </div>
+    <div class="banner-social-area">
+        <ul class="banner-social">
+            <li><a href="#0"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="#0" class="active"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#0"><i class="fab fa-youtube"></i></a></li>
+            <li><a href="#0"><i class="fab fa-instagram"></i></a></li>
+        </ul>
+    </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center mb-30-none">
+            <div class="col-xxl-5 col-xl-6 col-lg-12 mb-30">
+                <div class="banner-content" data-aos="fade-right" data-aos-duration="1800">
+                    <span class="sub-title"><span>Fly</span>Zone</span>
+                    <h1 class="title">Book a private jet instantly</h1>
+                    <p>
+                        Curly Airline proudly raises the bar and exceeds the standard for luxury and corporate
+                        private jet charter services. We pride ourselves on offering a professional service.
+                    </p>
+                    <div class="banner-btn">
+                        <a href="package-details.html" class="btn--base">
+                            <i class="fas fa-chevron-right mr-2"></i> Make Your Trip
+                        </a>
+                        <a href="contact.html" class="btn--base active">
+                            Request Quote <i class="icon-Group-2361 ml-2"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- Top Route Ends -->
-
-   <!-- cta -->
-<section class="tour-cta">
-    <div class="container">
-        <div class="section-title text-center">
-            <h2>Neden Bizi Seçmelisiniz?</h2>
-            <p class="heading_txt">Müşteri memnuniyetini ön planda tutarak güvenli, konforlu ve avantajlı uçuş deneyimleri sunuyoruz.</p>
-        </div>
-        <div class="tour-cta-main">
-            <div class="row">
-                <div class="col-lg-6 col-md-12">
-                    <div class="choose-us-wrapper">
-                        <!-- single-choose us start -->
-                        <div class="single-choose-us">
-                            <h3 class="">UZMAN VE DENEYİMLİ KADRO</h3>
-                            <p>Alanında uzman ekibimizle, uçuş öncesinden varış anınıza kadar her adımda size en iyi hizmeti sunuyoruz. Güvenli ve konforlu bir yolculuk için buradayız.</p>
-                        </div>
-                        <!-- single-choose us start -->
-                        <!-- single-choose us start -->
-                        <div class="single-choose-us">
-                            <h3 class="text-uppercase">En İyi Hizmet Garantisi</h3>
-                            <p>Uygun fiyatlar, esnek rezervasyon seçenekleri ve 7/24 müşteri desteği ile size kusursuz bir seyahat deneyimi sunuyoruz.</p>
-                        </div>
-                        <!-- single-choose us start -->
-                        <!-- single-choose us start -->
-                        <div class="single-choose-us">
-                            <h3 class="text-uppercase">Güvenilir ve Hızlı</h3>
-                            <p>Gelişmiş güvenlik önlemleri ve kullanıcı dostu rezervasyon sistemimiz sayesinde biletinizi güvenle alabilir, uçuşunuzu kolayca yönetebilirsiniz.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                    <div class="image-content">
-                        <img src="~/yatra/images/flight/plane4.jpg" alt="Uçak Görseli">
-                    </div>
+            <div class="col-xxl-7 col-xl-6 col-lg-6 mb-30">
+                <div class="banner-thumb">
+                    <img src="~/flynext/assets/images/element/element-2.png" alt="element">
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- End Cta -->
-
-
-    <!-- Top Country -->
-    <section class="top-country">
-        <div class="container">
-            <div class="section-title text-center">
-                <h2>ZİYARET EDİLECEK EN İYİ ÜLKELER</h2>
-                <a href="flight.html"> Tüm Ülkeleri Gör <i class="fa fa-long-arrow-right"></i></a>
-            </div>
-            <div class="row flight-slider">
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/deal3.jpg" alt="Image" class="img-fluid">
-                            <div class="thumbnail-ribbon">
-                                <span>%20 İndirim</span>
-                            </div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    End Banner
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Start Scroll-To-Top
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<a href="#" class="scrollToTop">
+    <i class="las la-dot-circle"></i>
+    <span>Top</span>
+</a>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    End Scroll-To-Top
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Start Call-widget
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div class="call-widget-wrapper">
+    <button type="button" class="call-widget-btn">
+        <span class="num">
+            <i class="icon-call-icon"></i> +1 814 929
+            4263
+        </span> <span class="arrow"></span>
+    </button>
+    <div class="call-widget-form-area">
+        <form class="book-form">
+            <div class="row justify-content-center mb-20-none">
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+                    <div class="book-select">
+                        <label>From</label>
+                        <div class="book-form-icon">
+                            <i class="icon-from-airplane"></i>
                         </div>
-                        <div class="destination-content">
-                            <h3><a href="~/yatra/flight-detail.html">PARIS</a></h3>
-                            <p class="package-review pull-left"><a href="#"><i class="fa fa-comment-o"></i> 52 Değerlendirme</a></p>
-                            <div class="deal-rating pull-right">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
+                        <select class="book-select form--control">
+                            <option value="dhaka" selected>Dhaka</option>
+                            <option value="london">London</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+                    <div class="book-select">
+                        <label>To</label>
+                        <div class="book-form-icon">
+                            <i class="icon-to-airplane"></i>
+                        </div>
+                        <select class="book-select form--control">
+                            <option value="london" selected>London</option>
+                            <option value="dhaka">Dhaka</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+                    <div class="book-select">
+                        <label>Date</label>
+                        <div class="book-form-icon">
+                            <i class="icon-schedule-icon"></i>
+                        </div>
+                        <select class="book-select form--control">
+                            <option value="25/12/2021" selected>25/12/2021</option>
+                            <option value="30/12/2021">30/12/2021</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 form-group">
+                    <label>Passenger</label>
+                    <div class="book-quantity">
+                        <div class="book-plus-minus">
+                            <div class="dec qtybutton">-</div>
+                            <input class="book-plus-minus-box qty" type="text" name="qty" value="1" readonly>
+                            <div class="inc qtybutton">+</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/deal4.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                            <h3><a href="~/yatra/flight-detail.html">MILAN</a></h3>
-                            <p class="package-review pull-left"><a href="#"><i class="fa fa-comment-o"></i> 54 Değerlendirme</a></p>
-                            <div class="deal-rating pull-right">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/destination-fw4.jpg" alt="Image" class="img-fluid">
-                            <div class="thumbnail-ribbon">
-                                <span>%15 İndirim</span>
-                            </div>
-                        </div>
-                        <div class="destination-content">
-                            <h3><a href="~/yatra/flight-detail.html">BARCELONA</a></h3>
-                            <p class="package-review pull-left"><a href="#"><i class="fa fa-comment-o"></i> 68 Değerlendirme</a></p>
-                            <div class="deal-rating pull-right">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/destination-fw3.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                            <h3><a href="~/yatra/flight-detail.html">NEW YORK</a></h3>
-                            <p class="package-review pull-left"><a href="#"><i class="fa fa-comment-o"></i> 71 Değerlendirme</a></p>
-                            <div class="deal-rating pull-right">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/destination-fw2.jpg" alt="Image" class="img-fluid">
-                            <div class="thumbnail-ribbon">
-                                <span>%25 İndirim</span>
-                            </div>
-                        </div>
-                        <div class="destination-content">
-                            <h3><a href="~/yatra/flight-detail.html">MONACO</a></h3>
-                            <p class="package-review pull-left"><a href="#"><i class="fa fa-comment-o"></i> 35 Değerlendirme</a></p>
-                            <div class="deal-rating pull-right">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="destination-item box-item">
-                        <div class="destination-image">
-                            <img src="~/yatra/images/destination-fw1.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <div class="destination-content">
-                            <h3><a href="~/yatra/flight-detail.html">LONDON</a></h3>
-                            <p class="package-review pull-left"><a href="#"><i class="fa fa-comment-o"></i> 80 Değerlendirme</a></p>
-                            <div class="deal-rating pull-right">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-xl-12 form-group">
+                    <button type="submit" class="btn--base w-100 mt-10">
+                        <i class="icon-btn-icon"></i> Book
+                        Now
+                    </button>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- Top Country Ends -->
+        </form>
+    </div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    End Call-widget
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
