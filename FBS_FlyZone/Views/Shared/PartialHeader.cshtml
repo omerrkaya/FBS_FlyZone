@@ -71,17 +71,17 @@
 									<li>
 										<a href="#">UÇUŞ DENEYİMİ</a>
 										<ul>
-											<li><a href="~/yatra/booking.html">Uçak İçi İkram</a></li>
-											<li><a href="~/yatra/booking-confirmation.html">Uçak İçi Eğlence</a></li>
-											<li><a href="~/yatra/payment.html">Filo</a></li>
+											<li><a asp-controller="Flight" asp-action="InFlightCatering">Uçak İçi İkram</a></li>
+											<li><a asp-controller="Flight" asp-action="InFlightEntertainment">Uçak İçi Eğlence</a></li>
+											<li><a asp-controller="Flight" asp-action="Fleet">Filo</a></li>
 										</ul>
 									</li>
 									<li>
 										<a href="#">DAHA FAZLA AYRICALIK</a>
 										<ul>
 											<li><a asp-controller="Flight" asp-action="FrequentlyAskedQuestions">Sıkça Sorulan Sorular</a></li>
-											<li><a href="~/yatra/booking-confirmation.html">Rehber Videoları</a></li>
-											<li><a href="~/yatra/payment.html">Ulaşım Bilgileri</a></li>
+											<li><a asp-controller="Flight" asp-action="GuideVideos" >Rehber Videoları</a></li>
+											<li><a asp-controller="Flight" asp-action="TransportationInformation">Ulaşım Bilgileri</a></li>
 											<li><a asp-controller="Flight" asp-action="BoardingPass">Biniş Kartı Ayrıcalıkları</a></li>
 										</ul>
 									</li>
@@ -98,9 +98,9 @@
 							<li>
 								<a href="#">YARDIM<i class="fa fa-angle-down"></i></a>
 								<ul>
-									<li><a href="~/yatra/flight.html">Yardım Merkezi</a></li>
+									<li><a asp-controller="Flight" asp-action="HelpCenter">Yardım Merkezi</a></li>
 									<li><a asp-controller="Flight" asp-action="Feedback">Geri Bildirim</a></li>
-									<li><a href="~/yatra/flight-list-view.html">Bize Ulaşın</a></li>
+									<li><a asp-controller="Flight" asp-action="ContactUs">Bize Ulaşın</a></li>
 									<li><a asp-controller="Flight" asp-action="Announcements">Duyurular</a></li>
 
 								</ul>
