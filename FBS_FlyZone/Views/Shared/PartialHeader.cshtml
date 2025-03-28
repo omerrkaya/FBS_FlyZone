@@ -1,117 +1,96 @@
-﻿<!-- Header -->
-<header>
-	<div class="upper-head clearfix">
-		<div class="container">
-			<div class="contact-info">
-				<p><i class="flaticon-phone-call"></i> Telefon: +90 (555) 515 1515</p>
-				<p><i class="flaticon-mail"></i> E-Posta: <a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="67130812150913150611020b27130214130a060e0b4904080a">email@gmail.com</a></p>
-			</div>
-			<div class="login-btn pull-right">
-				<a asp-controller="Flight" asp-action="Kayitol"><i class="fa fa-user-plus"></i> Kayıt Ol </a>
-				<a asp-controller="Flight" asp-action="Girisyap"><i class="fa fa-unlock-alt"></i> Giriş Yap </a>
-			</div>
-		</div>
-	</div>
+﻿<div class="page-wrapper dark">
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   Start Header
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<header class="header-section header-section-one">
+    <div class="header">
+        <div class="header-bottom-area">
+            <div class="container-fluid">
+                <div class="header-menu-content">
+                    <nav class="navbar navbar-expand-lg p-0">
+                        <a class="site-logo site-title" href="index.html">
+                            <img src="~/flynext/assets/images/logo.png"
+                                 alt="site-logo">
+                        </a>
+                        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="fas fa-bars"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav main-menu ml-auto">
+                                <li class="menu_has_children">
+                                    <a href="#0">Home</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="index.html">Home One</a></li>
+                                        <li><a href="index-two.html">Home Two</a></li>
+                                        <li><a href="index-dark.html">Home Dark</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="about.html">About Us</a></li>
+                                <li class="menu_has_children">
+                                    <a href="#0">Pages</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="service.html">Service</a></li>
+                                        <li><a href="service-details.html">Service Details</a></li>
+                                        <li><a href="deals.html">Deals</a></li>
+                                        <li><a href="deals-details.html">Deals Details</a></li>
+                                        <li><a href="package.html">Package</a></li>
+                                        <li><a href="package-details.html">Package Details</a></li>
+                                        <li><a href="course.html">Our Course</a></li>
+                                        <li><a href="course-details.html">Course Details</a></li>
+                                        <li><a href="team.html">Our Team</a></li>
+                                        <li><a href="team-details.html">Team Details</a></li>
+                                        <li><a href="faq.html">FAQ</a></li>
+                                        <li><a href="register.html">Sign Up</a></li>
+                                        <li><a href="login.html">Sign In</a></li>
+                                        <li><a href="404.html">404 Page</a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu_has_children">
+                                    <a href="#0">Blog</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="blog.html">Blog</a></li>
+                                        <li><a href="blog-classic.html">Blog Classic</a></li>
+                                        <li><a href="blog-details.html">Blog Details</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="faq.html">Faq</a></li>
+                                <li><a href="contact.html">Contact Us</a></li>
+                            </ul>
+                            <div class="header-right">
+                                <div class="search-bar d-none d-lg-block">
+                                    <a href="#0"><i class="fas fa-search"></i></a>
+                                    <div class="header-top-search-area">
+                                        <form class="header-search-form"
+                                              action="https://gamblingscript.com/search" method="GET">
+                                            <input type="search" name="keyword" id="header_search"
+                                                   placeholder="Search Product...">
+                                            <button class="header-search-btn">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="header-action-area">
+                                    <a href="service-details.html" class="action-btn two">
+                                        <i class="icon-btn-icon"></i>
+                                    </a>
+                                    <div class="header-action">
+                                        <a href="service-details.html" class="btn--base">
+                                            <i class="icon-btn-icon"></i> Book Now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
-<!-- Header Ends -->
-<!-- Navigation Bar -->
-<div class="navigation" style="margin:0px 0px 0px 0px; height:auto;">
-	<div class="container">
-		<div class="navigation-content" style="margin:0px 0px 0px 0px; height:80px;">
-			<div class="header_menu">
-				<!-- start Navbar (Header) -->
-				<nav class="navbar navbar-default navbar-sticky-function navbar-arrow" style="flex-wrap:nowrap; height:80px" >
-					<div class="logo pull-left">
-						<a asp-controller="Flight" asp-action="Flight">
-							<img alt="Logo" style="width:auto; height:80px;" src="~/yatra/images/FlyZone_Logo.png" />
-						</a>
-					</div>
-					<div id="navbar" class="navbar-nav-wrapper ms-auto">
-
-						<ul class="nav navbar-nav" id="responsive-menu">
-							<li class="active">
-								<a asp-controller="Flight" asp-action="Flight">BİLET AL VE YÖNET <i class="fa fa-angle-down"></i></a>
-								<ul>
-									<li>
-										<a href="#">BİLET AL</a>
-										<ul>
-											<li><a asp-controller="Flight" asp-action="Flight">Uçak Bileti</a></li>
-
-										</ul>
-									</li>
-									<li>
-										<a href="#">BİLET YÖNETİMİ</a>
-										<ul>
-											<li><a asp-controller="Flight" asp-action="CheckinBiletyonetimi">Bilet Yönetimi</a></li>
-											<li><a asp-controller="Flight" asp-action="CheckinBiletyonetimi">Check-in</a></li>
-											<li><a asp-controller="Flight" asp-action="UcusDurumu">Uçuş Durumu</a></li>
-
-										</ul>
-									</li>
-									<li>
-										<a href="#">EK HİZMETLER</a>
-										<ul>
-											<li><a asp-controller="Flight" asp-action="seatselection">Koltuk Seçimi</a></li>
-											<li><a asp-controller="Flight" asp-action="extrabaggage">Ekstra Bagaj</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">SEYAHAT DENEYİMİ <i class="fa fa-angle-down"></i></a>
-								<ul>
-
-									<li>
-										<a href="#">KABİN SINIFLARI</a>
-										<ul>
-											<li><a asp-controller="Flight" asp-action="BusinessClass">Business Class</a></li>
-											<li><a asp-controller="Flight" asp-action="EconomyClass">Economy Class</a></li>
-										</ul>
-									</li>
-									<li>
-										<a href="#">UÇUŞ DENEYİMİ</a>
-										<ul>
-											<li><a href="~/yatra/booking.html">Uçak İçi İkram</a></li>
-											<li><a href="~/yatra/booking-confirmation.html">Uçak İçi Eğlence</a></li>
-											<li><a href="~/yatra/payment.html">Filo</a></li>
-										</ul>
-									</li>
-									<li>
-										<a href="#">DAHA FAZLA AYRICALIK</a>
-										<ul>
-											<li><a asp-controller="Flight" asp-action="FrequentlyAskedQuestions">Sıkça Sorulan Sorular</a></li>
-											<li><a href="~/yatra/booking-confirmation.html">Rehber Videoları</a></li>
-											<li><a href="~/yatra/payment.html">Ulaşım Bilgileri</a></li>
-											<li><a asp-controller="Flight" asp-action="BoardingPass">Biniş Kartı Ayrıcalıkları</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">FIRSATLAR <i class="fa fa-angle-down"></i></a>
-								<ul>
-									<li><a asp-controller="Flight" asp-action="Flightdeals">Uçuş Fırsatları</a></li>
-									<li><a asp-controller="Flight" asp-action="Offer"> Kampanyalar</a></li>
-									<li><a asp-controller="Flight" asp-action="StudentDiscount">Öğrenci İndirimi</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">YARDIM<i class="fa fa-angle-down"></i></a>
-								<ul>
-									<li><a href="~/yatra/flight.html">Yardım Merkezi</a></li>
-									<li><a asp-controller="Flight" asp-action="Feedback">Geri Bildirim</a></li>
-									<li><a href="~/yatra/flight-list-view.html">Bize Ulaşın</a></li>
-									<li><a asp-controller="Flight" asp-action="Announcements">Duyurular</a></li>
-
-								</ul>
-							</li>
-						</ul>
-					</div>
-					<!--/.nav-collapse -->
-					<div id="slicknav-mobile"></div>
-				</nav>
-			</div>
-		</div>
-	</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    End Header
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 </div>
-<!-- Navigation Bar Ends -->
