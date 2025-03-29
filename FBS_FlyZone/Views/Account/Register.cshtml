@@ -1,0 +1,107 @@
+@model FBS_FlyZone.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Kayıt Ol";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Start Banner
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<section class="banner-section inner-banner-section bg-overlay-black bg_img"
+         data-background="~/flynext/assets/images/bg/inner-bg.png">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-xl-12 text-center">
+                <div class="banner-content">
+                    <h1 class="title">Kayıt Ol</h1>
+                    <div class="breadcrumb-area">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Ana Sayfa</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Kayıt Ol</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+End Banner
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Start Account
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<section class="account-section bg--gray ptb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-12 text-center">
+                <div class="section-header" data-aos="fade-up" data-aos-duration="1200">
+                    <span class="sub-title"><span>Kayıt Ol</span></span>
+                    <h2 class="section-title">Yeni hesap oluştur</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6">
+                <div class="account-form-area" data-aos="fade-up" data-aos-duration="1200">
+                    <form class="account-form" asp-action="Register" asp-controller="Account" method="post">
+                        <div class="row mb-10-none">
+                            <div class="col-xl-12 form-group">
+                                <label class="icon"><i class="las la-envelope"></i></label>
+                                <input type="email" class="form--control" asp-for="Email" placeholder="Email" required>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="col-xl-12 form-group">
+                                <label class="icon"><i class="icon-name_icone"></i></label>
+                                <input type="text" class="form--control" asp-for="FullName" placeholder="Ad Soyad" required>
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+                            <div class="col-xl-12 form-group">
+                                <label class="icon"><i class="icon-Create_Password_icone"></i></label>
+                                <input type="password" class="form--control" asp-for="Password" placeholder="Şifre" required>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="col-xl-12 form-group">
+                                <label class="icon"><i class="icon-Create_Password_icone"></i></label>
+                                <input type="password" class="form--control" asp-for="ConfirmPassword" placeholder="Şifre Tekrar" required>
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-12 form-group text-center">
+                                <p>Kayıt olarak <span>Gizlilik</span> ve <span>Kullanım</span> şartlarını kabul etmiş olursunuz</p>
+                            </div>
+                            <div class="col-lg-12 form-group text-center">
+                                <button type="submit" class="btn--base w-100">Kayıt Ol</button>
+                            </div>
+                            <div class="col-lg-12 text-center">
+                                <div class="or mt-10">
+                                    <label>veya</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 form-group google-submit text-center">
+                                <button type="button" class="btn--base w-100">
+                                    <span class="mr-2"><img src="~/flynext/assets/images/google.png" alt="google"></span>
+                                    Google ile Devam Et
+                                </button>
+                            </div>
+                            <div class="col-lg-12 text-center">
+                                <div class="account-item mt-10">
+                                    <label>Zaten hesabınız var mı? <a href="@Url.Action("Login", "Account")" class="text--base">Giriş Yap</a></label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+End Account
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

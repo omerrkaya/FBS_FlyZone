@@ -15,6 +15,7 @@ namespace FBS_FlyZone.Controllers
 
         public IActionResult Index()
         {
+            // Anasayfayı UserLayout ile gösterelim
             return View();
         }
 

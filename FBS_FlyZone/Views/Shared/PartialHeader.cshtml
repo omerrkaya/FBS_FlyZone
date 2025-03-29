@@ -19,59 +19,46 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav main-menu ml-auto">
+
                                 <li class="menu_has_children">
                                     <a asp-controller="Flight" asp-action="Flight">Anasayfa</a>
-
                                 </li>
-                               <li class="menu_has_children">
-                                    <a href="#0">Bilet Al ve Yönet</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="index-dark.html">Uçak Bileti</a></li>
-                                        <li><a href="index.html">Bilet Yönetimi</a></li>
-                                        <li><a href="index-two.html">Check-in</a></li>
-                                        <li><a href="index-dark.html">Uçuş Durumu</a></li>
-                                        <li><a href="index.html">Koltuk Seçimi</a></li>
-                                        <li><a href="index-two.html">Ekstra Bagaj</a></li>
-                                        
-                                    </ul>
+                                <li>
+                                    <a href="@Url.Action("Flight", "Flight")">Uçuşlar</a>
                                 </li>
-                                 <li class="menu_has_children">
-                                    <a href="#0">Seyehat Deneyimi</a>
+                                <li class="menu_has_children">
+                                    <a href="#0">Hizmetler</a>
                                     <ul class="sub-menu">
-                                        <li><a href="index-dark.html">Business Class</a></li>
-                                        <li><a href="index.html">Economy Class</a></li>
-                                        <li><a href="index-two.html">Uçak İçi Eğlence</a></li>
-                                        <li><a href="index-dark.html">Uçak İçi İkram</a></li>                 
+                                        <li><a href="@Url.Action("BusinessClass", "Flight")">Business Class</a></li>
+                                        <li><a href="@Url.Action("EconomyClass", "Flight")">Economy Class</a></li>
+                                        <li><a href="@Url.Action("CheckinBiletyonetimi", "Flight")">Checkin ve Bilet</a></li>
+                                        <li><a href="@Url.Action("seatselection", "Flight")">Koltuk Seçimi</a></li>
+                                        <li><a href="@Url.Action("ExtraBaggage", "Flight")">Ekstra Bagaj</a></li>
+                                        <li><a href="@Url.Action("InFlightCatering", "Flight")">Uçuş İçi İkram</a></li>
+                                        <li><a href="@Url.Action("InflightEntertainment", "Flight")">Uçuş İçi Eğlence</a></li>
                                     </ul>
                                 </li>
                                 <li class="menu_has_children">
-                                    <a href="#0">Fırsatlar</a>
+                                    <a href="#0">Bilgi</a>
                                     <ul class="sub-menu">
-                                        <li><a href="blog.html">Uçuş Fırsatları</a></li>
-                                        <li><a href="blog-classic.html">Kampanyalar</a></li>
-                                        <li><a href="blog-details.html">Öğrenci İndirimi</a></li>
+                                        <li><a href="@Url.Action("UcusDurumu", "Flight")">Uçuş Durumu</a></li>
+                                        <li><a href="@Url.Action("Flightdeals", "Flight")">Uçuş Fırsatları</a></li>
+                                        <li><a href="@Url.Action("StudentDiscount", "Flight")">Öğrenci İndirimi</a></li>
+                                        <li><a href="@Url.Action("Offer", "Flight")">Kampanyalar</a></li>
+                                        <li><a href="@Url.Action("FrequentlyAskedQuestions", "Flight")">SSS</a></li>
+                                        <li><a href="@Url.Action("HelpCenter", "Flight")">Yardım Merkezi</a></li>
                                     </ul>
                                 </li>
-                                 <li class="menu_has_children">
-                                    <a href="#0">Yardım</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog.html">Yardım Merkezi</a></li>
-                                        <li><a href="blog-classic.html">Geri Bildirim</a></li>
-                                        <li><a asp-controller="Flight" asp-action="ContactUs">Bize Ulaşın</a></li>
-                                        <li><a href="blog-details.html">Duyurular</a></li>
-                                        <li><a href="blog-details.html">Sıkça Sorulan Sorular</a></li>
-                                    </ul>
-                                </li>
-                                <li><<a asp-controller="Flight" asp-action="Kayitol" >Kayıt Ol</a></li>
+                                <li><a href="@Url.Action("ContactUs", "Flight")">İletişim</a></li>
+
                             </ul>
                             <div class="header-right">
                                 <div class="search-bar d-none d-lg-block">
                                     <a href="#0"><i class="fas fa-search"></i></a>
                                     <div class="header-top-search-area">
-                                        <form class="header-search-form"
-                                              action="https://gamblingscript.com/search" method="GET">
+                                        <form class="header-search-form" action="#" method="GET">
                                             <input type="search" name="keyword" id="header_search"
-                                                   placeholder="Search Product...">
+                                                   placeholder="Ara...">
                                             <button class="header-search-btn">
                                                 <i class="fas fa-search"></i>
                                             </button>
@@ -79,12 +66,14 @@
                                     </div>
                                 </div>
                                 <div class="header-action-area">
-                                    <a href="service-details.html" class="action-btn two">
-                                        <i class="icon-btn-icon"></i>
-                                    </a>
                                     <div class="header-action">
-                                      <a asp-controller="Flight" asp-action="Girisyap" class="btn--base">
-                                            <i class="icon-btn-icon"></i> Giriş Yap
+                                        <a href="@Url.Action("Login", "Account")" class="btn--base">
+                                            <i class="fas fa-user"></i> Giriş Yap
+                                        </a>
+                                    </div>
+                                    <div class="header-action ml-2">
+                                        <a href="@Url.Action("Register", "Account")" class="btn--base">
+                                            <i class="fas fa-user-plus"></i> Kayıt Ol
                                         </a>
                                     </div>
                                 </div>

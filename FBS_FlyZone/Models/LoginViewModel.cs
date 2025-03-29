@@ -4,8 +4,9 @@ namespace FBS_FlyZone.Models
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Kullanıcı adı zorunludur")]
-        public string? Username { get; set; }
+        [Required(ErrorMessage = "Email alanı zorunludur")]
+        [EmailAddress(ErrorMessage = "Geçerli bir email adresi giriniz")]
+        public string? Email { get; set; }
 
         [Required(ErrorMessage = "Şifre zorunludur")]
         public string? Password { get; set; }
