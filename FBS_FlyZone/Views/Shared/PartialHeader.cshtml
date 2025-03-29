@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="header-menu-content">
                     <nav class="navbar navbar-expand-lg p-0">
-                        <a class="site-logo site-title" href="index.html">
+                        <a class="site-logo site-title" asp-controller="Flight" asp-action="Flight">
                             <img src="~/flynext/assets/images/logo.png"
                                  alt="site-logo">
                         </a>
@@ -20,7 +20,7 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav main-menu ml-auto">
                                 <li class="menu_has_children">
-                                    <a href="#0">Anasayfa</a>
+                                    <a asp-controller="Flight" asp-action="Flight">Anasayfa</a>
 
                                 </li>
                                <li class="menu_has_children">
@@ -57,11 +57,12 @@
                                     <ul class="sub-menu">
                                         <li><a href="blog.html">Yardım Merkezi</a></li>
                                         <li><a href="blog-classic.html">Geri Bildirim</a></li>
+                                        <li><a asp-controller="Flight" asp-action="ContactUs">Bize Ulaşın</a></li>
                                         <li><a href="blog-details.html">Duyurular</a></li>
                                         <li><a href="blog-details.html">Sıkça Sorulan Sorular</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">Kayıt Ol</a></li>
+                                <li><<a asp-controller="Flight" asp-action="Kayitol" >Kayıt Ol</a></li>
                             </ul>
                             <div class="header-right">
                                 <div class="search-bar d-none d-lg-block">
