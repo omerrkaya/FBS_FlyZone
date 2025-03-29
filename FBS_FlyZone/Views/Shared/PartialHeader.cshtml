@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="header-menu-content">
                     <nav class="navbar navbar-expand-lg p-0">
-                        <a class="site-logo site-title" href="@Url.Action("Index", "Home")">
+                        <a class="site-logo site-title" asp-controller="Flight" asp-action="Flight">
                             <img src="~/flynext/assets/images/logo.png"
                                  alt="site-logo">
                         </a>
@@ -19,8 +19,9 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav main-menu ml-auto">
-                                <li>
-                                    <a href="@Url.Action("Index", "Home")">Ana Sayfa</a>
+
+                                <li class="menu_has_children">
+                                    <a asp-controller="Flight" asp-action="Flight">Anasayfa</a>
                                 </li>
                                 <li>
                                     <a href="@Url.Action("Flight", "Flight")">Uçuşlar</a>
@@ -49,6 +50,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="@Url.Action("ContactUs", "Flight")">İletişim</a></li>
+
                             </ul>
                             <div class="header-right">
                                 <div class="search-bar d-none d-lg-block">

@@ -215,6 +215,174 @@
         </form>
     </div>
 </div>
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    End Call-widget
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<section class="book-form-section ptb-120">
+    <div class="container">
+        <div class="book-form-area bg-overlay-black bg_img" data-background="assets/images/bg/bg-3.png" style="background-image: url('assets/images/bg/bg-3.png');">
+            <div class="row justify-content-center">
+                <div class="col-xl-12 text-center">
+                    <div class="section-header white">
+                        <span class="sub-title text-white"><span>Flynext</span> Rezervasyon</span>
+                        <h2 class="section-title">Kişisel Uçuş Rezervasyonu Yap</h2>
+                    </div>
+                    <form class="book-form">
+                        <div class="row justify-content-center mb-20-none">
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+                                <label>Nereden</label>
+                                <select class="book-select form--control">
+                                    <option value="istanbul">İstanbul</option>
+                                    <option value="ankara">Ankara</option>
+                                    <option value="izmir">İzmir</option>
+                                    <option value="antalya">Antalya</option>
+                                    <option value="london">Londra</option>
+                                    <option value="newyork">New York</option>
+                                    <option value="berlin">Berlin</option>
+                                    <option value="paris">Paris</option>
+                                </select>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+                                <label>Nereye</label>
+                                <select class="book-select form--control">
+                                    <option value="istanbul">İstanbul</option>
+                                    <option value="ankara">Ankara</option>
+                                    <option value="izmir">İzmir</option>
+                                    <option value="antalya">Antalya</option>
+                                    <option value="london">Londra</option>
+                                    <option value="newyork">New York</option>
+                                    <option value="berlin">Berlin</option>
+                                    <option value="paris">Paris</option>
+                                </select>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+                                <label>Tarih</label>
+                                <input type="date" class="form--control" id="flight-date">
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group position-relative">
+                                <label>Yolcu ve Kabin</label>
+                                <div class="form--control" id="passenger-class-select">1 Yetişkin, Economy</div>
+                                <div class="passenger-class-dropdown">
+                                    <div class="class-options">
+                                        <label class="class-frame">
+                                            <input type="radio" name="class" value="economy" checked> Economy Class
+                                        </label>
+                                        <label class="class-frame">
+                                            <input type="radio" name="class" value="business"> Business Class
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label>Yetişkin</label>
+                                        <button type="button" class="qty-btn dec" data-type="adult">-</button>
+                                        <input type="text" value="1" id="adult-count" readonly>
+                                        <button type="button" class="qty-btn inc" data-type="adult">+</button>
+                                    </div>
+                                    <div>
+                                        <label>Çocuk</label>
+                                        <button type="button" class="qty-btn dec" data-type="child">-</button>
+                                        <input type="text" value="0" id="child-count" readonly>
+                                        <button type="button" class="qty-btn inc" data-type="child">+</button>
+                                    </div>
+                                    <div>
+                                        <label>Bebek</label>
+                                        <button type="button" class="qty-btn dec" data-type="infant">-</button>
+                                        <input type="text" value="0" id="infant-count" readonly>
+                                        <button type="button" class="qty-btn inc" data-type="infant">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 form-group">
+                                <button type="submit" class="btn--base ml-auto mr-auto mt-30">Şimdi Rezervasyon Yap</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .passenger-class-dropdown {
+        display: none;
+        position: absolute;
+        background: white;
+        padding: 15px;
+        border: 1px solid #ccc;
+        z-index: 10;
+        width: 100%; /* Ensures it fits within the main section */
+        box-sizing: border-box;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-height: 300px; /* Prevents overflow */
+        overflow-y: auto; /* Adds scrolling for overflow content */
+    }
+
+    .passenger-class-dropdown.show {
+        display: block;
+    }
+
+    .class-options {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px; /* Adds spacing below the row */
+    }
+
+    .class-frame {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+    }
+
+    .class-frame:hover {
+        background-color: #e6e6e6;
+        border-color: #007bff; /* Highlighted border */
+    }
+
+    .qty-btn {
+        margin: 0 5px;
+        cursor: pointer;
+        border: none;
+        background: #007bff;
+        color: #fff;
+        border-radius: 3px;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        line-height: 30px;
+    }
+
+    .qty-btn:hover {
+        background: #0056b3;
+    }
+</style>
+
+<script>
+    document.getElementById('flight-date').valueAsDate = new Date();
+
+    document.getElementById('passenger-class-select').addEventListener('click', function() {
+        document.querySelector('.passenger-class-dropdown').classList.toggle('show');
+    });
+
+    const updateCount = (type, increment) => {
+        const countInput = document.getElementById(`${type}-count`);
+        let currentCount = parseInt(countInput.value, 10);
+        currentCount = increment ? currentCount + 1 : currentCount - 1;
+        if (currentCount < 0) currentCount = 0;
+        countInput.value = currentCount;
+    };
+
+    document.querySelectorAll('.qty-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const type = this.getAttribute('data-type');
+            const increment = this.classList.contains('inc');
+            updateCount(type, increment);
+        });
+    });
+</script>
