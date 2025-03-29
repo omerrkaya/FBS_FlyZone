@@ -1,45 +1,58 @@
 using Microsoft.AspNetCore.Mvc;
 using FBS_FlyZone.Models;
 
-public class AccountController : Controller
+namespace FBS_FlyZone.Controllers
 {
-    public IActionResult Login()
+    public class AccountController : Controller
     {
-        return View();
-    }
-
-    [HttpPost]
-    public IActionResult Login(LoginViewModel model)
-    {
-        if (ModelState.IsValid)
+        // GET: Login
+        public IActionResult Login()
         {
-            // Login işlemlerini burada yapıyoruz
+            return View();
         }
-        return View(model);
-    }
 
-    public IActionResult Register()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public IActionResult Register(RegisterViewModel model)
-    {
-        if (ModelState.IsValid)
+        // POST: Login
+        [HttpPost]
+        public IActionResult Login(LoginViewModel model)
         {
-            // Kayıt işlemlerini burada yapıyoruz
+            if (ModelState.IsValid)
+            {
+                // Burada gerçek giriş işlemleri yapılacak
+                // Şimdilik kullanıcı adı ve şifre kontrolü yapmadan ana sayfaya yönlendiriyoruz
+                return RedirectToAction("Index", "Home");
+            }
+            return View(model);
         }
-        return View(model);
-    }
 
-    public IActionResult ForgotPassword()
-    {
-        return View();
-    }
+        // GET: Register
+        public IActionResult Register()
+        {
+            return View();
+        }
 
-    public IActionResult Profile()
-    {
-        return View();
+        // POST: Register
+        [HttpPost]
+        public IActionResult Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Burada gerçek kayıt işlemleri yapılacak
+                // Şimdilik kullanıcı kaydı yapmadan giriş sayfasına yönlendiriyoruz
+                return RedirectToAction("Login", "Account");
+            }
+            return View(model);
+        }
+
+        // Şifre sıfırlama sayfası
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        // Profil sayfası
+        public IActionResult Profile()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,118 @@
+@{
+    ViewData["Title"] = "Ana Sayfa";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Start Banner
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<section class="banner-section">
+    <div class="banner-element" data-aos="fade-left" data-aos-duration="1200">
+        <img src="~/flynext/assets/images/element/element-1.png" alt="element">
+    </div>
+    <div class="banner-element-two">
+        <img src="~/flynext/assets/images/element/element-3.png" alt="element">
+    </div>
+    <div class="banner-element-three">
+        <img src="~/flynext/assets/images/element/element-4.png" alt="element">
+    </div>
+    <div class="banner-element-four">
+        <img src="~/flynext/assets/images/element/element-5.png" alt="element">
+    </div>
+    <div class="banner-social-area">
+        <ul class="banner-social">
+            <li><a href="#0"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="#0" class="active"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#0"><i class="fab fa-youtube"></i></a></li>
+            <li><a href="#0"><i class="fab fa-instagram"></i></a></li>
+        </ul>
+    </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center mb-30-none">
+            <div class="col-xxl-5 col-xl-6 col-lg-12 mb-30">
+                <div class="banner-content" data-aos="fade-right" data-aos-duration="1800">
+                    <span class="sub-title"><span>Fly</span>Zone</span>
+                    <h1 class="title">Özel jetinizi hemen rezerve edin</h1>
+                    <p>FlyZone Airlines lüks ve kurumsal özel jet charter hizmetleri için standartları aşıyor ve yükseltiyor. Profesyonel bir hizmet sunmaktan gurur duyuyoruz.</p>
+                    <div class="banner-btn">
+                        <a href="@Url.Action("Flight", "Flight")" class="btn--base"><i class="fas fa-chevron-right mr-2"></i> Seyahatinizi Planlayın</a>
+                        <a href="@Url.Action("ContactUs", "Flight")" class="btn--base active">Teklif İsteyin <i class="icon-Group-2361 ml-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-7 col-xl-6 col-lg-6 mb-30">
+                <div class="banner-thumb">
+                    <img src="~/flynext/assets/images/element/element-2.png" alt="element">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+End Banner
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Start Search
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div class="search-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-12">
+                <div class="search-wrapper">
+                    <form class="search-form">
+                        <div class="row justify-content-center mb-25-none">
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-25">
+                                <div class="search-location">
+                                    <h4 class="title">Nereden</h4>
+                                    <div class="input-daterange">
+                                        <input type="text" class="form--control" name="from" placeholder="İstanbul, Türkiye">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-25">
+                                <div class="search-location">
+                                    <h4 class="title">Nereye</h4>
+                                    <div class="input-daterange">
+                                        <input type="text" class="form--control" name="to" placeholder="Londra, İngiltere">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 mb-25">
+                                <div class="search-location">
+                                    <h4 class="title">Tarih</h4>
+                                    <div class="input-daterange">
+                                        <input type="text" class="form--control datepicker-here" name="date" placeholder="MM/DD/YYYY">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 mb-25">
+                                <div class="search-location">
+                                    <h4 class="title">Yolcu</h4>
+                                    <div class="input-daterange">
+                                        <select class="form--control">
+                                            <option value="1" selected>1 Yolcu</option>
+                                            <option value="2">2 Yolcu</option>
+                                            <option value="3">3 Yolcu</option>
+                                            <option value="4">4 Yolcu</option>
+                                            <option value="5">5 Yolcu</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 mb-25">
+                                <div class="search-btn">
+                                    <button type="submit" class="btn--base"><i class="fas fa-search"></i> Ara</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+End Search
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->

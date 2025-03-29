@@ -32,17 +32,16 @@
             <div class="col-xxl-5 col-xl-6 col-lg-12 mb-30">
                 <div class="banner-content" data-aos="fade-right" data-aos-duration="1800">
                     <span class="sub-title"><span>Fly</span>Zone</span>
-                    <h1 class="title">Book a private jet instantly</h1>
+                    <h1 class="title">Uçuşunuzu Hemen Rezerve Edin</h1>
                     <p>
-                        Curly Airline proudly raises the bar and exceeds the standard for luxury and corporate
-                        private jet charter services. We pride ourselves on offering a professional service.
+                        FlyZone Airlines, lüks ve kurumsal özel jet charter hizmetleri için standartları aşıyor ve yeni bir seviyeye taşıyor. Profesyonel bir hizmet sunmaktan gurur duyuyoruz.
                     </p>
                     <div class="banner-btn">
-                        <a href="package-details.html" class="btn--base">
-                            <i class="fas fa-chevron-right mr-2"></i> Make Your Trip
+                        <a href="@Url.Action("Flight", "Flight")" class="btn--base">
+                            <i class="fas fa-chevron-right mr-2"></i> Uçuşunuzu Planlayın
                         </a>
-                        <a href="contact.html" class="btn--base active">
-                            Request Quote <i class="icon-Group-2361 ml-2"></i>
+                        <a href="@Url.Action("ContactUs", "Flight")" class="btn--base active">
+                            Teklif İsteyin <i class="icon-Group-2361 ml-2"></i>
                         </a>
                     </div>
                 </div>
@@ -63,7 +62,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <a href="#" class="scrollToTop">
     <i class="las la-dot-circle"></i>
-    <span>Top</span>
+    <span>Üst</span>
 </a>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     End Scroll-To-Top
@@ -74,8 +73,8 @@
 <div class="call-widget-wrapper">
     <button type="button" class="call-widget-btn">
         <span class="num">
-            <i class="icon-call-icon"></i> +1 814 929
-            4263
+            <i class="icon-call-icon"></i> +90 (212) 123
+            4567
         </span> <span class="arrow"></span>
     </button>
     <div class="call-widget-form-area">
@@ -83,42 +82,48 @@
             <div class="row justify-content-center mb-20-none">
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
                     <div class="book-select">
-                        <label>From</label>
+                        <label>Nereden</label>
                         <div class="book-form-icon">
                             <i class="icon-from-airplane"></i>
                         </div>
                         <select class="book-select form--control">
-                            <option value="dhaka" selected>Dhaka</option>
-                            <option value="london">London</option>
+                            <option value="istanbul" selected>İstanbul</option>
+                            <option value="ankara">Ankara</option>
+                            <option value="izmir">İzmir</option>
+                            <option value="antalya">Antalya</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
                     <div class="book-select">
-                        <label>To</label>
+                        <label>Nereye</label>
                         <div class="book-form-icon">
                             <i class="icon-to-airplane"></i>
                         </div>
                         <select class="book-select form--control">
-                            <option value="london" selected>London</option>
-                            <option value="dhaka">Dhaka</option>
+                            <option value="london" selected>Londra</option>
+                            <option value="paris">Paris</option>
+                            <option value="newyork">New York</option>
+                            <option value="tokyo">Tokyo</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
                     <div class="book-select">
-                        <label>Date</label>
+                        <label>Tarih</label>
                         <div class="book-form-icon">
                             <i class="icon-schedule-icon"></i>
                         </div>
                         <select class="book-select form--control">
-                            <option value="25/12/2021" selected>25/12/2021</option>
-                            <option value="30/12/2021">30/12/2021</option>
+                            <option value="25/12/2023" selected>25/12/2023</option>
+                            <option value="30/12/2023">30/12/2023</option>
+                            <option value="05/01/2024">05/01/2024</option>
+                            <option value="10/01/2024">10/01/2024</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 form-group">
-                    <label>Passenger</label>
+                    <label>Yolcu</label>
                     <div class="book-quantity">
                         <div class="book-plus-minus">
                             <div class="dec qtybutton">-</div>
@@ -129,8 +134,8 @@
                 </div>
                 <div class="col-xl-12 form-group">
                     <button type="submit" class="btn--base w-100 mt-10">
-                        <i class="icon-btn-icon"></i> Book
-                        Now
+                        <i class="icon-btn-icon"></i> Şimdi
+                        Rezervasyon Yap
                     </button>
                 </div>
             </div>
