@@ -2,5 +2,82 @@
     ViewData["Title"] = "BusinessClass";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
+<section class="interior-section pt-120">
+    <div class="interior-element bg-overlay-black bg_img" 
+     data-background="@Url.Content("~/flynext/assets/images/siteicerik/businessback.jpg")" 
+     style="background-image: url('@Url.Content("~/flynext/assets/images/siteicerik/businessback.jpg")');">
+</div>
 
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-5 text-center">
+                <div class="section-header white">
+                    <span class="sub-title"><span>BUSINESS CLASS</span></span>
+                    <h2 class="section-title">Lüks Olanaklara Sahip Kabinimiz</h2>
+                    <p>Türk konukseverliğini göklere taşıdık! Business Class’ta ödüllü lezzetler, en güncel uçak içi eğlence sistemleri ve konforlu koltuklarla yolculuğunuzu keyifli bir deneyime dönüştürüyoruz. Siz de Business Class’ı tercih ederek kendinizi gökyüzünde de ayrıcalıklı hissedebilir,keyifli yolculuklar yapabilirsiniz.</p>
+                </div>
+            </div>
+        </div>
+        <div class="interior-wrapper">
+            <div class="interior-area">
+                <div class="interior-content text-center">
+                    <div class="interior-icon">
+                        <i class="icon-Cabin_Comfort"></i>
+                    </div>
+                    <h2 class="title">Maksimum Rahatlık</h2>
+                    <p>TBusiness Class koltuklar, yolcularımızın konforunu en üst seviyeye taşımak için özel olarak tasarlandı. Rahatça uyuyabileceğiniz, okuma lambası ile elektrik bağlantısı bulunan ve özel alan yaratabileceğiniz paravan imkanı sunan koltuklarla yolculuktan aldığınız keyfi artırmayı amaçlıyoruz.</p>
+                </div>
+                <div class="interior-thumb">
+                    <img src="@Url.Content("~/flynext/assets/images/interior/interior-1.png")"  alt="iç mekan">
+                </div>
+            </div>
+            <div class="interior-area flex-row-reverse">
+                <div class="interior-content text-center">
+                    <div class="interior-icon">
+                        <i class="icon-wifi"></i>
+                    </div>
+                    <h2 class="title">Uçuş İçi Wifi</h2>
+                    <p>XO sadece bir özel jet servisi değildir. İster iş ister tatil amaçlı seyahat ediyor olun,
+                        XO Üyeliği, benzersiz deneyimlere, özel olanaklara ve ayrıcalıklı hizmetlere erişim sağlar.</p>
+                </div>
+                <div class="interior-thumb">
+                    <img src="@Url.Content("~/flynext/assets/images/interior/interior-2.png")"  alt="iç mekan">
+                </div>
+            </div>
+            <div class="interior-wrapper">
+            <div class="interior-area">
+                <div class="interior-content text-center">
+                    <div class="interior-icon">
+                         <img src="@Url.Content("~/flynext/assets/images/interior/uyku.png")" />
+                    </div>
+                    <h2 class="title">Konforlu Uyku</h2>
+                    <p>Business Class koltukları yolcularımızın konforunu en üst seviyeye taşımak için özel olarak tasarlandı. Okuma lambası barındıran, kendinize özel görünmez bir alan yaratabileceğiniz ve rahatça uyuyabileceğiniz koltuklarımızda yolculuktan aldığınız keyfi ikiye katlıyoruz.</p>
+                </div>
+                <div class="interior-thumb">
+                     <img src="@Url.Content("~/flynext/assets/images/interior/uykukoltuk.png")"  alt="iç mekan">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
+<style>
+    .interior-area {
+    max-width: 80%; /* Genişliği küçült */
+    margin: 20px auto; /* Daha küçük boşluk bırak */
+    padding: 20px; /* İç boşluğu azalt */
+}
+
+.interior-thumb img {
+    max-width: 80%; /* Görsellerin boyutunu küçült */
+}
+
+.interior-content {
+    font-size: 14px; /* Yazı boyutlarını küçült */
+    padding: 15px;
+}
+
+.interior-icon i {
+    font-size: 40px; /* İkonların boyutunu küçült */
+}
+</style>

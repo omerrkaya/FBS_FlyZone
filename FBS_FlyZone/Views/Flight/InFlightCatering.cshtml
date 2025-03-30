@@ -3,8 +3,342 @@
     ViewData["Title"] = "InFlightCatering";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
+<section class="banner-section" style="background-image: url('@Url.Content("~/flynext/assets/images/siteicerik/ucakiciikram.png")'); background-size: 100% auto; background-position: center; position: relative; padding: 150px 0;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7);"></div>
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-xl-10 text-center" style="position: relative; z-index: 2; color: white;">
+                <h1 class="title" style="font-size: 36px; font-weight: bold; margin-bottom: 20px; color: white;">Uçak içi ikram</h1>
+                <p style="font-size: 18px; line-height: 1.6; color: white;">Bulutların üstünde dünyanın en iyi lezzetlerini Türk Hava Yolları farkıyla keşfetmeye ne dersiniz? Türk konukseverliğini, uçan şeflerimiz tarafından hazırlanan dünya ve Türk mutfağından özel tatlarla birleştiriyor, yolcularımıza eşsiz bir uçuş deneyimi sunuyoruz.</p>
+                <div class="features" style="margin-top: 30px; display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                    <div class="features position-absolute bottom-60 w-100 d-flex justify-content-around text-white py-3">
+            <div class="feature">
+                <img src="@Url.Content("~/flynext/assets/images/siteicerik/odul.jpg")" alt="Ödüllü Lezzetler" class="feature-icon">
+                <span>Geniş aralıklı koltuklar</span>
+            </div>
+            <div class="feature">
+                 <img src="@Url.Content("~/flynext/assets/images/siteicerik/chef.jpg")" alt="Uçan Şefler" class="feature-icon">
+                <span>Seyahat kiti</span>
+            </div>
+            <div class="feature">
+                <img src="@Url.Content("~/flynext/assets/images/siteicerik/ozelservis.jpg")" alt="Özel Yemek Servisi" class="feature-icon">
+                <span>Uçak içi eğlence</span>
+            </div>
+            <div class="feature">
+                 <img src="@Url.Content("~/flynext/assets/images/siteicerik/dunya.jpg")" alt="Türk ve Dünya Mutfağı" class="feature-icon">
+                <span>Lezzetli ikramlar</span>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <section class="history-section bg--gray ptb-100" style="margin-top: -30px;">
+
+      <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-12 text-center">
+                <div class="section-header" data-aos="fade-up" data-aos-duration="1200">
+                    <h2 class="section-title">İKRAM SERVİSİ</h2>
+                 </div>
+             </div>
+         </div>
+         <div class="history-area">
+             <div class="history-item" style= "">
+                 <div class="history-thumb" data-aos="fade-right" data-aos-duration="1200">
+                    <img src="@Url.Content("~/flynext/assets/images/siteicerik/daimalezzet.jpg")" alt="history">
+
+                 </div>
+                 <div class="history-content" data-aos="fade-left" data-aos-duration="1200">
+                     <h2 class="year">Daima Taze</h2>
+                     <p>Mevsim koşullarına göre değişen menülerimizde bulunan daima en taze malzemelerle ve özenle hazırladığımız 
+                         ikramlarımızı tattığınızda siz de kendinizi çok özel hissedeceksiniz!</p>
+                 </div>
+             </div>
+             <div class="history-item">
+                 <div class="history-thumb" data-aos="fade-left" data-aos-duration="1200">
+                    <img src="@Url.Content("~/flynext/assets/images/siteicerik/yeteneklisef.jpg")" alt="history">
+
+                 </div>
+                 <div class="history-content" data-aos="fade-right" data-aos-duration="1200">
+                     <h2 class="year">Yetenekli Şeflerimiz</h2>
+                     <p>Belirli uçuşlarımızda ikramlarımız, konusunda uzman uçan şeflerimizin gökyüzündeki mutfaklarında hazırlanıp, lüks restoranların konfor ve servis kalitesiyle sizlere ulaştırılıyor.</p>
+                 </div>
+             </div>
+             <div class="history-item">
+                 <div class="history-thumb" data-aos="fade-right" data-aos-duration="1200">
+                     <img src="@Url.Content("~/flynext/assets/images/siteicerik/ikram.jpg")" alt="history">
+
+                 </div>
+                 <div class="history-content" data-aos="fade-left" data-aos-duration="1200">
+                     <h2 class="year">İhtiyacınız Olan Her Şey</h2>
+                     <p>Sağlık durumu ya da inancı sebebiyle özel bir beslenme alışkanlığına sahip olan yolcularımıza uygun menüler hazırlıyoruz.</p>
+                 </div>
+             </div>
+             <div class="history-item">
+                 <div class="history-thumb" data-aos="fade-left" data-aos-duration="1200">
+                    <img src="@Url.Content("~/flynext/assets/images/siteicerik/odullulezzetler.jpg")" alt="history">
+
+                 </div>
+                 <div class="history-content" data-aos="fade-right" data-aos-duration="1200">
+                     <h2 class="year">Ödüllü Lezzetler</h2>
+                     <p>Birçok ödüle layık görülen eşsiz lezzetlerimizi tatmaya hazırlanın! Yolcularımızın FlyZone ile tekrar seyahat etmek istemelerinin en büyük nedenlerinden biri uçuşlarımızda sunduğumuz özel lezzetler.</p>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </section>
+
+    <!-- Uçuş Sınıfına Göre İkram Bilgileri (Alt Alta) -->
+    <div class="info-section">
+        <h2 class="section-title">UÇUŞ SINIFINA GÖRE İKRAM BİLGİLERİ</h2>
+        <div class="buttons">
+            <button onclick="showContent('business')">Business Class</button>
+            <button onclick="showContent('economy')">Economy Class</button>
+        </div>
+
+        <div id="business" class="content active">
+            <div class="category">
+                <div class="box">
+                    <div class="image-pair">
+                         <img src="@Url.Content("~/flynext/assets/images/siteicerik/ichat.jpg")" alt="Business İç Hatlar">
+                        <img src="@Url.Content("~/flynext/assets/images/siteicerik/ichat2.jpg")" alt="Business İç Hatlar 2">
+                    </div>
+                    <h2>İç Hat Uçuşlar</h2>
+                    <p>
+                        Uçuşunuzda en taze ürünlerle, titizlikle hazırladığımız seçkin tatları şık bir sunum eşliğinde sizlerle buluşturuyoruz. İkramlarımıza; ev yapımı omlet gibi farklı yumurta seçenekleri, Türkiye’nin değişik bölgelerinden birçok meze türü, mangal ateşinde pişmiş Adana kebap gibi ızgara çeşitleri eklenen yeni lezzetler arasında yer alıyor. Öte yandan ekmek çeşitlerimizi, ekşi mayalı, susamlı pide, patatesli focacio ekmeği gibi birçok yeni ürün ile zenginleştirdik. Tüm bu lezzetlere eşlikçi olarak sunduğumuz sıcak ve soğuk içecek servisimizle de yemeğinizden aldığınız keyfi artırabilirsiniz.
+
+                    </p>
+                </div>
+
+                <div class="box">
+                    <div class="image-pair">
+                         <img src="@Url.Content("~/flynext/assets/images/siteicerik/dic.png")"  alt="Business Dış Hatlar">
+                         <img src="@Url.Content("~/flynext/assets/images/siteicerik/dis2.png")" alt="Business Dış Hatlar 2">
 
 
+                    </div>
+                    <h2>Dış Hat Uçuşlar</h2>
+                    <p>
+                        Uzman aşçılarımız tarafından günlük, en taze ürünlerle, butik olarak üretilen ikramlarımız sağlıklı beslenme trendleri takip edilerek, protein, sebze, meyve ağırlıklı ve daha az karbonhidratlı olacak şekilde hizmetinize sunulmaktadır.
 
+                        Business Class ikram servisimiz, dış hat seferlerimizin uçuş saatine ve süresine göre farklılık göstermektedir. Haftalık olarak değişen menülerimiz size özel hazırlanmakta, daima taze ve kaliteli ürünlerden oluşmaktadır. Sıcak/soğuk kahvaltı ve sıcak/soğuk yemeğin yanı sıra bazı uçuşlarımızda sunduğumuz snack (atıştırmalık) servisimizin tadını çıkarabilirsiniz.
+                    </p>
+                </div>
+                <div class="box">
+                    <div class="image-pair">
+                        <img src="@Url.Content("~/flynext/assets/images/siteicerik/kita.png")" alt="Kıtalar Arası Uçuşlar">
+                         <img src="@Url.Content("~/flynext/assets/images/siteicerik/kita2.png")" alt="Kıtalar Arası Uçuşlar 2">
+                    </div>
+                    <h2>Kıtalar Arası Uçuşlar</h2>
+                    <p>
+                        Yolcularımızı lezzetli menülerle buluşturmadan önce “hoş geldiniz içeceği” ile karşılıyoruz.
 
+                        Kıtalar arası uçuşlarımızda üç ana yemek seçeneği ve buna ek olarak bazı uçuşlarımızda atıştırmalık servisi sunuyoruz. Yenilenen menülerimiz ile birlikte ikram servisimize ev yapımı makarna ve mantı seçeneklerinin yanında zırhla çekilerek kömür ateşinde pişirilmiş kebap çeşitleri, ızgara balık gibi ana yemek seçenekleri ve birçok farklı yöresel meze çeşitleri eklenmiştir. Kahvaltı servisinde üç farklı ana yemek seçeneğinin yanı sıra pancake, krep gibi tatlı seçenekleri yer almakta ve daha sağlıklı içeriklerden oluşan kahvaltılık ürünler hazırlanmaktadır.
 
+                        Lezzetli yemeklerimizin tadını çıkardıktan sonra zengin sıcak içecek menümüzü inceleyerek tercihinizi yapabilir ya da lokum ve Türk kahvesi keyfiyle lezzet yolculuğunuza devam edebilirsiniz. İstanbul çıkışlı/varışlı kıtalar arası gece seferlerimizde Dine on Demand seçeneği ile arzu ettiğiniz vakit yemek servisinizi talep edebilir, lezzetin keyfini dilediğiniz zaman çıkarabilirsiniz. Detaylı bilgi için Dine on Demand sayfamızı ziyaret edebilirsiniz. Ayrıca yeni menülerimiz ile birlikte farklı ev yapımı mocktail (alkolsüz koktail) çeşitleri ve sağlıklı içeriklerden oluşan ev yapımı detoks içecek çeşitlerimiz de sizler için sunulmaya başlanmıştır.
+
+                        Geleneksel Türk mutfağından ve dünya mutfaklarından oluşan, yerli ve mevsimine uygun ürünler tercih edilerek sizler için hazırlanan ikramlarımız gökyüzünde sizlere eşlik ediyor.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="economy" class="content">
+            <div class="category">
+                <div class="box">
+                    <div class="image-pair">
+                        <img src="@Url.Content("~/flynext/assets/images/siteicerik/dise.png")" alt="Economy İç Hatlar">
+                        <img src="@Url.Content("~/flynext/assets/images/siteicerik/dise2.png")" alt="Economy İç Hatlar 2">
+                    </div>
+                    <h2>İç Hat Uçuşlar</h2>
+                    <p>İç hatlarda Economy Class yolcularımıza tereyağı ile lezzetlendirdiğimiz sıcak gurme sandviçler ikram ediyoruz. Patatesli ekşi mayalı ekmekten, susamlı pideye ve ekşi mayalı Trabzon ekmeğine kadar zengin ekmek çeşitleri içinde; pesto soslu, Girit ezmeli, külbastı tavuklu, beyaz peynirli ve daha farklı malzemelerle doyurucu sıcak sandviçler hazırlıyoruz. Ayrıca vejetaryen yolcularımızın tercihlerine uygun şekilde hazırladığımız özel sandviçlerimiz de uçuşlarımızda sizlere eşlik ediyor.</p>
+                </div>
+
+                <div class="box">
+                    <div class="image-pair">
+                        <img src="@Url.Content("~/flynext/assets/images/siteicerik/ice.png")" alt="Economy Dış Hatlar">
+                        <img src="@Url.Content("~/flynext/assets/images/siteicerik/ice2.png")" alt="Economy Dış Hatlar 2">
+                    </div>
+                    <h2>Dış Hat Uçuşlar</h2>
+                    <p>
+                        Türk ve dünya mutfaklarından en kaliteli ürünlerle hazırlanan eşsiz menülerimiz, gökyüzünde siz değerli yolcularımızla buluşuyor. Kişisel tercihlerinize uygun, mevsiminde yetişen taze ürünler ile özenli bir sunum eşliğinde hazırlanan menülerimizi ve çok daha fazlasını Economy Class dış hat ve kıtalar arası uçuşlarımızda keşfedebilirsiniz. Uçuşların süresine ve kalkış saatine göre değişiklik gösteren menülerimizde sıcak/soğuk kahvaltı veya sıcak/soğuk yemek ikramımız bulunuyor. Kahvaltı servisi için yumurtalı seçenekler, ev yapımı müsli ve peynir alternatifleri sunulurken yemek saati için yöresel mezeler ile makarna çeşitleri ve ızgara seçenekleri siz değerli yolcularımızı bekliyor.
+
+                        Ayrıca, iç hatlar hariç tüm seferlerimizde ihtiyaç ve tercihlerinize göre uçuşlarınızdan en geç 24 saat öncesine kadar özel yemek talebinde bulunabilirsiniz. Talep etmeniz durumunda sizin için özel tıbbi, diyet ve dini gereksinimlerinize uygun menüler hazırlıyoruz. Detaylı bilgi için özel yemek servisi sayfamızı ziyaret edebilirsiniz.
+
+                        Geleneksel Türk mutfağından ve dünya mutfaklarından oluşan, yerli ve mevsimine uygun ürünler tercih edilerek hazırlanan ikramlarımız gökyüzünde sizlere eşlik etmeyi bekliyor.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- İçerik Gösterme Fonksiyonu -->
+    <script>
+        function showContent(category) {
+            document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+            document.getElementById(category).classList.add('active');
+        }
+    </script>
+<style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+
+        .hero {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+            .hero a {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .hero img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+        .hero-content {
+            position: absolute;
+            color: white;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3); /* Şeffaf koyu arka plan */
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 600px;
+            color: white;
+        }
+
+        /* İkram Servisi Kartları - Yan Yana */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            max-width: 1200px;
+            margin: 10px auto;
+            gap: 20px; /* Kartlar arası boşluk */
+        }
+
+        .card {
+            width: 30%;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .card img {
+                width: 100%;
+                border-radius: 10px;
+            }
+
+            .card h2 {
+                margin: 15px 0;
+                font-size: 22px;
+            }
+
+            .card p {
+                font-size: 16px;
+                color: #555;
+            }
+
+        /* Uçuş Sınıfına Göre İkram Bilgileri - Alt Alta */
+        .info-section {
+            max-width: 12000px;
+            margin: 50px auto;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+            .buttons button {
+                padding: 10px 20px;
+                margin: 10px;
+                border: none;
+                background-color: #e3cba5;
+                color: white;
+                cursor: pointer;
+                font-size: 16px;
+                border-radius: 5px;
+            }
+
+                .buttons button:hover {
+                    background-color: #28333d;
+                }
+
+        .content {
+            display: none; /* Başlangıçta gizli */
+            margin-top: 20px;
+        }
+
+            .content.active {
+                display: block; /* Butonla seçildiğinde gösterilecek */
+            }
+
+        .category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+            .category .box {
+                width: 50%;
+                padding: 20px;
+                text-align: center;
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+
+        .image-pair {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+            .image-pair img {
+                width: 48%;
+                border-radius: 10px;
+            }
+            .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+</style>

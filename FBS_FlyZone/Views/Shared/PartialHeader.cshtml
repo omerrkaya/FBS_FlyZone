@@ -26,40 +26,40 @@
                                <li class="menu_has_children">
                                     <a href="#0">Bilet Al ve Yönet</a>
                                     <ul class="sub-menu">
-                                        <li><a href="index-dark.html">Uçak Bileti</a></li>
-                                        <li><a href="index.html">Bilet Yönetimi</a></li>
-                                        <li><a href="index-two.html">Check-in</a></li>
-                                        <li><a href="index-dark.html">Uçuş Durumu</a></li>
-                                        <li><a href="index.html">Koltuk Seçimi</a></li>
-                                        <li><a href="index-two.html">Ekstra Bagaj</a></li>
+                                        <li><a asp-controller="Flight" asp-action="Flight">Uçak Bileti</a></li>
+                                        <li><a asp-controller="Flight" asp-action="CheckinBiletyonetimi">Bilet Yönetimi</a></li>
+                                        <li><a asp-controller="Flight" asp-action="CheckinBiletyonetimi">Check-in</a></li>
+                                        <li><a asp-controller="Flight" asp-action="BusinessClass">Uçuş Durumu</a></li>
+                                        <li><a asp-controller="Flight" asp-action="seatselection">Koltuk Seçimi</a></li>
+                                        <li><a asp-controller="Flight" asp-action="ExtraBaggage">Ekstra Bagaj</a></li>
 
                                     </ul>
                                 </li>
                                  <li class="menu_has_children">
                                     <a href="#0">Seyehat Deneyimi</a>
                                     <ul class="sub-menu">
-                                        <li><a href="index-dark.html">Business Class</a></li>
-                                        <li><a href="index.html">Economy Class</a></li>
-                                        <li><a href="index-two.html">Uçak İçi Eğlence</a></li>
-                                        <li><a href="index-dark.html">Uçak İçi İkram</a></li>                 
+                                        <li> <a asp-controller="Flight" asp-action="BusinessClass">Business Class</a></li>
+                                        <li><a asp-controller="Flight" asp-action="EconomyClass">Economy Class</a></li>
+                                        <li> <a asp-controller="Flight" asp-action="InflightEntertainment">Uçak İçi Eğlence</a></li>
+                                        <li><a asp-controller="Flight" asp-action="InFlightCatering">Uçak İçi İkram</a></li>                 
                                     </ul>
                                 </li>
                                 <li class="menu_has_children">
                                     <a href="#0">Fırsatlar</a>
                                     <ul class="sub-menu">
-                                        <li><a href="blog.html">Uçuş Fırsatları</a></li>
-                                        <li><a href="blog-classic.html">Kampanyalar</a></li>
-                                        <li><a href="blog-details.html">Öğrenci İndirimi</a></li>
+                                        <li><a asp-controller="Flight" asp-action="FlightDetails">Uçuş Fırsatları</a></li>
+                                        <li><a asp-controller="Flight" asp-action="BusinessClass">Kampanyalar</a></li>
+                                        <li><a asp-controller="Flight" asp-action="StudentDiscount">Öğrenci İndirimi</a></li>
                                     </ul>
                                 </li>
                                  <li class="menu_has_children">
                                     <a href="#0">Yardım</a>
                                     <ul class="sub-menu">
-                                        <li><a href="blog.html">Yardım Merkezi</a></li>
-                                        <li><a href="blog-classic.html">Geri Bildirim</a></li>
+                                        <li><a asp-controller="Flight" asp-action="HelpCenter">Yardım Merkezi</a></li>
+                                        <li><a asp-controller="Flight" asp-action="Feedback">Geri Bildirim</a></li>
                                         <li><a asp-controller="Flight" asp-action="ContactUs">Bize Ulaşın</a></li>
-                                        <li><a href="blog-details.html">Duyurular</a></li>
-                                        <li><a href="blog-details.html">Sıkça Sorulan Sorular</a></li>
+                                        <li><a asp-controller="Flight" asp-action="Announcements">Duyurular</a></li>
+                                        <li><a asp-controller="Flight" asp-action="FrequentlyAskedQuestions">Sıkça Sorulan Sorular</a></li>
                                     </ul>
                                 </li>
                                 <li><<a asp-controller="Flight" asp-action="Kayitol" >Kayıt Ol</a></li>
