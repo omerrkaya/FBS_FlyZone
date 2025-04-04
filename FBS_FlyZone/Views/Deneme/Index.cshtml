@@ -22,17 +22,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach (var flight in Model)
+					@foreach (var item in Model)
 					{
 						<tr>
-							<td>@flight.FlightID</td>
-							<td>@flight.AirlineID</td>
-							<td>@flight.Departure_Airport</td>
-							<td>@flight.Arrival_Airport</td>
-							<td>@flight.Flight_Price</td>
+							<td>@item.FlightID</td>
+							<td>@item.Airline.Airlines_Name</td>
+							<td>@item.DepartureAirport.Airport_Name</td>
+							<td>@item.ArrivalAirport.Airport_Name</td>
+							<td>@item.Flight_Price</td>
 						</tr>
+					
 					}
+						
+					
 				</tbody>
 			</table>
 		</div>
 	</div>
+</div>

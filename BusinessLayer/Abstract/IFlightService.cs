@@ -15,6 +15,7 @@ namespace BusinessLayer.Abstract
         void DeleteFlight(Flight flight);
         Flight GetFlightById(int id);
         List<Flight> GetListAll();
+        List<Flight> GetFlightListWithAirport();
     }
 
 }
