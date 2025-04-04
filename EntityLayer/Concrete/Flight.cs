@@ -20,15 +20,15 @@ namespace EntityLayer.Concrete
         public Airline Airline { get; set; }  
 
         
-        // Foreign Key: Departure Airport
-        [ForeignKey("Departure_Airport")]
-        public int Departure_Airport { get; set; }
+        //// Foreign Key: Departure Airport
+        //[ForeignKey("Departure_Airport")]
+        //public int Departure_Airport { get; set; }
         public Airport DepartureAirport { get; set; }  
 
         
-        // Foreign Key: Arrival Airport
-        [ForeignKey("Arrival_Airport")]
-        public int Arrival_Airport { get; set; }
+        //// Foreign Key: Arrival Airport
+        //[ForeignKey("Arrival_Airport")]
+        //public int Arrival_Airport { get; set; }
         public Airport ArrivalAirport { get; set; }  
 
         

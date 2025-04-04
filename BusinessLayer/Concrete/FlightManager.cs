@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
@@ -14,21 +15,21 @@ namespace BusinessLayer.Concrete
     public class FlightManager : IFlightService
     {
 
-        EfFlightRepository efFlightRepository;
+        IFlightDal _flightDal;
 
-        public FlightManager(EfFlightRepository efFlightRepository)
+        public FlightManager(IFlightDal flightDal)
         {
-            efFlightRepository = new EfFlightRepository();
+            _flightDal = flightDal;
         }
 
         public void AddFlight(Flight flight)
         {
-            efFlightRepository.Insert(flight);
+            _flightDal.Insert(flight);
         }
 
         public void DeleteFlight(Flight flight)
         {
-            efFlightRepository.Delete(flight);
+            _flightDal.Delete(flight);
         }
 
         public List<Flight> GetListAll()
@@ -44,13 +45,17 @@ namespace BusinessLayer.Concrete
 
         public Flight GetFlightById(int id)
         {
-            return efFlightRepository.GetById(id);
+            return _flightDal.GetById(id);
         }
 
         public void UpdateFlight(Flight flight)
         {
-            efFlightRepository.Update(flight);
+            _flightDal.Update(flight);
         }
 
+        public List<Flight> GetFlightListWithAirport()
+        {
+            return _flightDal.GetFlightListWithAirport();
+        }
     }
 }

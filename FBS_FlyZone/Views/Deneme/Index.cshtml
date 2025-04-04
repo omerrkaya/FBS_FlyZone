@@ -1,4 +1,5 @@
-﻿
+﻿@using EntityLayer.Concrete
+@model List<Flight>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/UserLayout.cshtml";
@@ -6,3 +7,36 @@
 
 <h1>Index</h1>
 
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Flight List</h2>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Flight ID</th>
+						<th>Flight Name</th>
+						<th>Departure</th>
+						<th>Arrival</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>@item.FlightID</td>
+							<td>@item.Airline.Airlines_Name</td>
+							<td>@item.DepartureAirport.Airport_Name</td>
+							<td>@item.ArrivalAirport.Airport_Name</td>
+							<td>@item.Flight_Price</td>
+						</tr>
+					
+					}
+						
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
