@@ -151,7 +151,12 @@ namespace FBS_FlyZone.Controllers
             return View();
         }
        
-      
+        // Arama işlemi
+        public IActionResult Search(string keyword)
+        {
+            ViewBag.SearchKeyword = keyword;
+            return View();
+        }
         
     }
 }

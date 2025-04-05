@@ -68,12 +68,10 @@
                                     <a href="#0"><i class="fas fa-search"></i></a>
                                     <div class="header-top-search-area">
                                         <form class="header-search-form"
-                                              action="https://gamblingscript.com/search" method="GET">
+                                              asp-controller="Flight" asp-action="Search" method="GET">
                                             <input type="search" name="keyword" id="header_search"
-                                                   placeholder="Search Product...">
-                                            <button class="header-search-btn">
-                                                <i class="fas fa-search"></i>
-                                            </button>
+                                                   placeholder="Uçuş, Destinasyon veya Hizmet Ara...">
+                                           
                                         </form>
                                     </div>
                                 </div>
@@ -99,3 +97,118 @@
     End Header
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 </div>
+
+<script>
+    // Arama butonu tıklandığında arama alanını göster/gizle
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchBtn = document.querySelector('.search-bar a');
+        const searchArea = document.querySelector('.header-top-search-area');
+        
+        if (searchBtn && searchArea) {
+            // Sayfa yüklendiğinde gizli durumda başlat
+            searchArea.style.display = 'none';
+            
+            searchBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Toggle arama alanı görünürlüğü
+                if (searchArea.style.display === 'none' || !searchArea.style.display) {
+                    searchArea.style.display = 'block';
+                    // Arama alanına odaklan
+                    document.getElementById('header_search').focus();
+                } else {
+                    searchArea.style.display = 'none';
+                }
+            });
+            
+            // Sayfa herhangi bir yerine tıklandığında arama alanını gizle
+            document.addEventListener('click', function(e) {
+                // Eğer tıklanan öğe arama butonu veya arama alanının içi değilse
+                if (!e.target.closest('.search-bar') && searchArea.style.display === 'block') {
+                    searchArea.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>
+
+<style>
+    /* Arama buton stilini geliştir */
+    .search-bar a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .search-bar a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+    }
+    
+    .search-bar a i {
+        font-size: 18px;
+    }
+    
+    /* Arama alanı stilini düzenle */
+    .header-top-search-area {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        margin-top: 10px;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        width: 300px;
+        z-index: 1000;
+        animation: fadeInDown 0.4s ease;
+    }
+    
+    @@keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .header-search-form {
+        display: flex;
+        position: relative;
+    }
+    
+    .header-search-form input[type="search"] {
+        border: 1px solid #e5e5e5;
+        padding: 10px 15px;
+        border-radius: 5px;
+        flex-grow: 1;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+    
+    .header-search-form input[type="search"]:focus {
+        border-color: #007bff;
+    }
+    
+    .header-search-btn {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        color: #6c757d;
+        cursor: pointer;
+    }
+    
+    .header-search-btn:hover {
+        color: #007bff;
+    }
+</style>
