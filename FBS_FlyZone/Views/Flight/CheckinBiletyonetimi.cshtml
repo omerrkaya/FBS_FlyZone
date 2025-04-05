@@ -1,6 +1,379 @@
 ﻿@{
-    ViewData["Title"] = "CheckinBiletyonetimi";
+    ViewData["Title"] = "PNR Sorgulama";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
+<!-- Banner (Sayfa üstü) -->
+<section class="banner-section">
+    <div class="banner-overlay"></div>
+    <div class="container banner-content">
+        <h1 class="title">Online check-in ile zamandan tasarruf edin!</h1>
+        <p>İnternet sitemiz veya mobil uygulamamızdan kolayca gerçekleştirebileceğiniz online check-in işlemiyle havalimanında vakit kaybetmeden koltuğunuzu seçebilir, dilerseniz mobil biniş kartınızı oluşturarak bagaj durumunuza göre doğrudan biniş kapısına gidebilirsiniz.</p>
+    </div>
+</section>
 
+
+<!-- Form -->
+<div class="form-container mt-4">
+    <div class="form-header">Bilet Yönetimi / Check-in</div>
+
+    <form method="post" action="/Rezervasyon/Sorgula">
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <input type="text" name="pnrKodu" class="form-control input-custom" placeholder="Bilet ya da Rezervasyon Kodu (PNR)">
+            <input type="text" name="soyadi" class="form-control input-custom" placeholder="Yolcunun Soyadı">
+        </div>
+
+        <div class="d-flex justify-content-center mt-3">
+            <button type="submit" class="btn btn-danger px-5 py-2">
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Bilgilendirme Kartları -->
+<div class="info-boxes-container mt-5 d-flex justify-content-between flex-wrap">
+    <div class="info-box fade-in-box">
+        <img src="/flynext/assets/images/gallery/gallery-4.png" alt="Bilet Bilgisi" class="info-image">
+        <div class="info-text">Bilet bilgisi</div>
+        <a href="javascript:void(0);" class="read-more text-warning mt-2 d-block">Devamını okuyunuz</a>
+        <div class="extra-info">
+            <p>mobil uygulamasını kullanarak çok daha rahat ve güvenli bir seyahat deneyimi yaşamaya ne dersiniz? Tatilinizin bilet alma, mobil biniş kartı oluşturma ya da check-in gibi süreçlerini tek bir kanal üzerinden en hızlı şekilde tamamlayabilir, güncel kampanyalarımıza, ek hizmetlerimize ve duyurularımıza rahatlıkla ulaşabilirsiniz. </p>
+        </div>
+    </div>
+
+    <div class="info-box fade-in-box">
+        <img src="/flynext/assets/images/gallery/gallery-1.png" alt="Check-in Bilgisi" class="info-image">
+        <div class="info-text">Check-in işlemleri</div>
+        <a href="javascript:void(0);" class="read-more text-warning mt-2 d-block">Devamını okuyunuz</a>
+        <div class="extra-info">
+            <p>Türk Hava Yolları olarak check-in süreçlerinizi daha kolay ve hızlı şekilde tamamlamanız için alternatif yöntemler sunuyoruz. Tercihinize göre; internet sitemiz veya mobil uygulamamız üzerinden işlem yapabilir, havalimanındaki kiosklarımızı kullanabilir, kontuarlarımıza başvurabilirsiniz. Havalimanındaki bagaj ve güvenlik süreçleri nedeniyle kalkıştan iç hatlar için 2 saat, dış hatlarda 3 saat önce terminale gelmeniz önerilir.
+                <<br />
+
+            </p>
+            
+            <p>Check-in işleminizi mobil uygulamamız veya internet sitemizden gerçekleştirerek zamandan tasarruf ederken; koltuk seçiminizi kendiniz yapabilir, kontuar sırası beklemeden biniş kapısına gidebilir, mobil biniş kartı kolaylığından faydalanabilirsiniz.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Alt Banner -->
+<section class="scroll-banner d-flex align-items-center">
+    <div class="banner-left">
+        <img src="/flynext/assets/images/gallery/gallery-1.png" alt="Banner Görseli">
+    </div>
+    <div class="banner-right text-white">
+        <div class="banner-text-box">
+            <h2 style="color: #DCBB87;">Bagajınız yoksa veya sadece el bagajınız varsa...</h2>
+
+            <p>Online check-in işlemini tamamladıktan sonra oluşturacağınız mobil biniş kartıyla ya da önceden basılmış bir biniş kartınız mevcutsa, doğrudan biniş kapısına gidebilirsiniz.</p>
+            <a href="/kampanyalar" class="btn btn-outline-light mt-2">Mobil Biniş Kartı</a>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Stil -->
+<style>
+    body {
+        background-color: #0F172A;
+        color: white;
+    }
+
+    .input-custom {
+        height: 50px;
+        width: 45%;
+        text-align: center;
+        background-color: #1E293B;
+        color: white;
+        border: 1px solid #DCBB87;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 500;
+        transition: transform 0.3s ease;
+    }
+
+        .input-custom::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+    .form-container {
+        background: #0F172A;
+        padding: 25px;
+        max-width: 600px;
+        margin: 40px auto;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: center;
+        /* EKLENEN KISIM */
+        border: 2px solid #DCBB87;
+    }
+
+
+    .form-header {
+        background: #DCBB87;
+        color: black;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 25px;
+        font-size: 18px;
+    }
+
+    .btn-danger {
+        background-color: #DCBB87 !important;
+        border-color: #DCBB87 !important;
+        color: black !important;
+        transition: transform 0.2s ease;
+    }
+
+        .btn-danger:hover {
+            background-color: #c4a673 !important;
+            transform: scale(1.05);
+        }
+
+    .info-boxes-container {
+        max-width: 1000px;
+        margin: 40px auto 60px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .info-box {
+        width: 48%;
+        background-color: #1E293B;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+        position: relative;
+    }
+
+        .info-box:hover {
+            transform: scale(1.03);
+        }
+
+    .info-image {
+        max-width: 100%;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .extra-info {
+        display: none;
+        margin-top: 10px;
+        font-size: 14px;
+        text-align: left;
+        animation: fadeIn 0.8s ease;
+    }
+
+        .extra-info ul {
+            padding-left: 20px;
+        }
+
+    @@@@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .scroll-banner {
+        display: flex;
+        align-items: stretch; /* her iki tarafın aynı hizada olması için */
+        gap: 40px;
+        background-color: #0F172A;
+        padding: 60px 30px;
+        margin-top: 60px;
+        border-top: 2px solid #DCBB87;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1s ease;
+    }
+
+
+        .scroll-banner.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+   
+    .banner-left,
+    .banner-right {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 250px; /* Sabit yükseklik */
+    }
+
+
+    .banner-left img {
+        width: 100%;
+        max-width: 600px; /* Önceki değerden daha küçük */
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .banner-section {
+        background-image: url('/flynext/assets/images/siteicerik/businessback.jpg');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        height: 500px; /* Yüksekliği artırıldı */
+        display: flex;
+        align-items: center; /* Dikeyde ortalama */
+        justify-content: center;
+        text-align: center;
+        color: white;
+    }
+
+  
+
+    .banner-text-box {
+        background-color: rgba(30, 41, 59, 0.8); /* koyu yarı saydam arka plan */
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #DCBB87;
+        display: inline-block;
+        text-align: right;
+        border: 1px solid #DCBB87;
+        display: inline-block;
+        text-align: left;
+    }
+    
+
+    .banner-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Daha net arka plan */
+        z-index: 1;
+    }
+
+    .banner-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+    }
+
+        .banner-content h1.title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .banner-content p {
+            font-size: 20px;
+        }
+
+
+    @@media (max-width: 768px) {
+        .scroll-banner
+
+    {
+        flex-direction: column;
+        text-align: center;
+    }
+
+        .banner-right .content-box {
+            background-color: rgba(30, 41, 59, 0.8); /* Koyu şeffaf arka plan */
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            text-align: right; /* sağa yasla */
+        }
+
+
+
+    .info-box {
+        width: 100%;
+    }
+
+    .input-custom {
+        width: 100%;
+    }
+
+    }
+    /* Resim hover büyüme efekti */
+    .banner-left img {
+        transition: transform 0.4s ease, box-shadow 0.3s ease;
+    }
+
+        .banner-left img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+        }
+
+    /* Yazı kutusuna animasyon */
+    .banner-text-box {
+        opacity: 0;
+        transform: translateX(40px);
+        transition: all 0.8s ease;
+    }
+
+        /* Sayfa kaydırılınca görünsün */
+        .banner-text-box.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Hover’da yazı kutusu efekti */
+        .banner-text-box:hover {
+            box-shadow: 0 0 20px rgba(220, 187, 135, 0.3);
+        }
+
+</style>
+
+<!-- Script -->
+<script>
+    document.querySelectorAll('.read-more').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const extraInfo = btn.nextElementSibling;
+            if (extraInfo.style.display === "block") {
+                extraInfo.style.display = "none";
+            } else {
+                extraInfo.style.display = "block";
+            }
+        });
+    });
+
+    // Scroll ile banner görünürlüğü
+    window.addEventListener('scroll', function () {
+        var banner = document.querySelector('.scroll-banner');
+        var rect = banner.getBoundingClientRect();
+        var windowHeight = window.innerHeight;
+
+        if (rect.top < windowHeight - 100) {
+            banner.classList.add('visible');
+        }
+    });
+        // Banner yazı kutusuna görünme animasyonu
+    window.addEventListener('scroll', function () {
+        var textBox = document.querySelector('.banner-text-box');
+        var boxRect = textBox.getBoundingClientRect();
+        var windowHeight = window.innerHeight;
+
+        if (boxRect.top < windowHeight - 100) {
+            textBox.classList.add('visible');
+        }
+    });
+
+</script>
+
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
