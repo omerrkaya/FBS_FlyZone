@@ -3,3 +3,248 @@
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
+<!-- Banner (yarım sayfa yüksekliğinde) -->
+<section class="banner-section custom-banner">
+    <div class="overlay"></div>
+
+    <div class="container position-relative h-100">
+        <div class="row align-items-center h-100">
+            <!-- Sol: Fade Box -->
+            <div class="col-md-6 d-flex justify-content-center mb-4 mb-md-0">
+                <div class="fade-box large-box">Ekstra bagaj satın al veya Bagajına ağırlık ekle</div>
+            </div>
+
+            <!-- Sağ: Yazılar -->
+            <div class="col-md-6 text-white text-md-end text-center">
+                <h1 class="title">Ekstra Bagaj Seçenekleriyle Rahat Seyahat Edin</h1>
+                <p>Ekstra bagaj veya mevcut bagajınıza ağırlık ekleme seçenekleri ile seyahatinizi kolaylaştırın. İç rahatlığıyla seyahat etmek için ekstra bagaj hakkı satın alabilir veya mevcut 23 kg olan bagajınıza en fazla 9 kg'a kadar ağırlık ekleyerek bagaj hakkınızı 32 kg'a kadar artırabilirsiniz.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Form Section -->
+<div class="form-wrapper">
+    <div class="form-container">
+        <div class="radio-group">
+            <label><input type="radio" name="bagajSecenek" checked> Ekstra bagaj</label>
+            <label><input type="radio" name="bagajSecenek"> Bagajına ağırlık ekle</label>
+        </div>
+        <form method="post" action="/Bagaj/Sorgula">
+            <div class="mb-3">
+                <label class="form-label">Bilet ya da rezervasyon kodu (PNR)</label>
+                <input type="text" class="form-control" name="pnr" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Yolcunun soyadı</label>
+                <input type="text" class="form-control" name="soyadi" required>
+            </div>
+            <button type="submit" class="btn btn-danger w-100">Ara</button>
+        </form>
+    </div>
+</div>
+
+<!-- Image Boxes Section -->
+<div class="image-section-horizontal">
+    <div class="image-box">
+        <img src="/flynext/assets/images/overview/overview-1.png" alt="Ekstra Bagaj">
+        <p>Mevcut bagaj hakkınızdan daha fazla eşyanız varsa ekstra bagaj hakkı satın alabilirsiniz.</p>
+    </div>
+    <div class="image-box">
+        <img src="/flynext/assets/images/overview/overview-2.png" alt="Bagaj Ağırlık">
+        <p>Mevcut bagaj hakkınıza kilogram ekleyerek dilediğiniz eşyaları yanınıza alabilirsiniz.</p>
+    </div>
+    <div class="image-box">
+        <img src="/flynext/assets/images/package/package-11.png" alt="Online İşlem">
+        <p>Ekstra bagaj hakkı ve bagaj artırma işlemlerinizi online platformlarımızdan gerçekleştirebilirsiniz.</p>
+    </div>
+</div>
+
+<style>
+    .form-wrapper {
+        display: flex;
+        justify-content: center;
+        margin: 50px 0 30px 0;
+    }
+
+    .form-label {
+        color: #f8f9fa; /* Açık gri-beyaz arası, koyu arka plana uygun */
+        font-weight: 500;
+    }
+
+
+    .form-container {
+        background: #0F172A;
+        padding: 30px;
+        max-width: 500px;
+        width: 90%;
+        border-radius: 10px;
+        border: 2px solid transparent;
+        transition: border 0.4s ease, box-shadow 0.4s ease;
+        position: relative;
+    }
+
+        .form-container:hover {
+            border: 2px solid #DCBB87;
+            box-shadow: 0 0 20px rgba(220, 187, 135, 0.5);
+        }
+
+
+        /* Input arkaplan koyu, yazı beyaz */
+        .form-container input.form-control {
+            background-color: #1E293B;
+            border: 1px solid #334155;
+            color: white;
+        }
+
+    /* Radyo butonları */
+    .radio-group {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 20px;
+    }
+
+        .radio-group label {
+            color: white;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin: 0;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+
+    /* Buton stili */
+    .form-container .btn-danger {
+        background-color: #DCBB87;
+        border: none;
+        color: white;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+        .form-container .btn-danger:hover {
+            background-color: #c4a673;
+        }
+
+    /* Input focus efekti (isteğe bağlı) */
+    .form-control:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #DCBB87;
+        border-color: #DCBB87;
+    }
+
+
+    .image-section-horizontal {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 50px;
+    }
+
+    .image-box {
+        width: 250px;
+        background-color: #fff;
+        text-align: center;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .image-box {
+        width: 250px;
+        background-color: #fff;
+        text-align: center;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border: 2px solid #0F172A;
+        /* Ekle: Hover geçişi */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .image-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        .image-box p {
+            font-size: 14px;
+            color: #444;
+        }
+
+    .banner-section .title {
+        color: #DCBB87;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Banner özel stil */
+    .custom-banner {
+        height: 70vh; /* Ekranın %60 yüksekliğini kaplasın */
+        min-height: 400px;
+        background-image: url('@Url.Content("~/flynext/assets/images/siteicerik/businessback.jpg")');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+        /* Arka plan overlay */
+        .custom-banner .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .custom-banner .container {
+            z-index: 2;
+        }
+
+        /* Banner yazı stili */
+        .custom-banner .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #DCBB87;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            margin-top: -100px;
+        }
+
+    /* Fade box büyütülmüş hali */
+    /* Fade-box dikey ortalama ayarı */
+    .large-box {
+        background-color: #dcbb87;
+        color: black;
+        padding: 50px;
+        border-radius: 10px;
+        font-weight: bold;
+        font-size: 22px;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease forwards;
+        text-align: center;
+        min-width: 400px;
+        max-width: 600px;
+        min-height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* Ekle: yukarıdan boşlukla ortalama ayarı */
+        margin-top: -100px;
+    }
+
+
+</style>
+
