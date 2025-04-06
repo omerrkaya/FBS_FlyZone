@@ -1,0 +1,360 @@
+@{
+    ViewData["Title"] = "Arama Sonuçları";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Start Banner
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<section class="banner-section inner-banner-section bg-overlay-black bg_img"
+         data-background="~/flynext/assets/images/bg/inner-bg.png">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-xl-12 text-center">
+                <div class="banner-content">
+                    <h1 class="title">Arama Sonuçları</h1>
+                    <div class="breadcrumb-area">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a asp-controller="Flight" asp-action="Flight">Ana Sayfa</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Arama Sonuçları</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    End Banner
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Start Scroll-To-Top
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<a href="#" class="scrollToTop">
+    <i class="las la-dot-circle"></i>
+    <span>Üst</span>
+</a>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    End Scroll-To-Top
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Start Search Results
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<section class="search-results-section ptb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12">
+                <div class="search-header mb-4">
+                    <h3 class="section-title">"@ViewBag.SearchKeyword" için arama sonuçları</h3>
+                    <div class="search-filter-options">
+                        <div class="form-group">
+                            <select class="form--control" id="searchFilter">
+                                <option value="all">Tüm Sonuçlar</option>
+                                <option value="flights">Uçuşlar</option>
+                                <option value="destinations">Destinasyonlar</option>
+                                <option value="services">Hizmetler</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Örnek arama sonuçları - gerçek veri ile değiştirilecek -->
+                <div class="search-results-list">
+                    <!-- Uçuş Sonuçları -->
+                    <div class="search-result-category mb-5">
+                        <h4 class="category-title">Uçuşlar</h4>
+                        
+                        <!-- Uçuş sonucu öğesi -->
+                        <div class="search-result-item">
+                            <div class="result-content">
+                                <div class="result-icon">
+                                    <i class="fas fa-plane"></i>
+                                </div>
+                                <div class="result-details">
+                                    <h5><a asp-controller="Flight" asp-action="FlightDetails" asp-route-id="1">İstanbul - Londra Uçuşu</a></h5>
+                                    <p>Ekonomi ve Business Class seçenekleriyle İstanbul'dan Londra'ya direkti uçuşlar.</p>
+                                    <div class="result-meta">
+                                        <span class="meta-item"><i class="far fa-calendar-alt"></i> Günlük Uçuşlar</span>
+                                        <span class="meta-item"><i class="far fa-clock"></i> 4sa 15dk</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Uçuş sonucu öğesi -->
+                        <div class="search-result-item">
+                            <div class="result-content">
+                                <div class="result-icon">
+                                    <i class="fas fa-plane"></i>
+                                </div>
+                                <div class="result-details">
+                                    <h5><a asp-controller="Flight" asp-action="FlightDetails" asp-route-id="2">İstanbul - New York Uçuşu</a></h5>
+                                    <p>İstanbul'dan New York'a konforlu ve doğrudan uçuşlar.</p>
+                                    <div class="result-meta">
+                                        <span class="meta-item"><i class="far fa-calendar-alt"></i> Haftada 5 Gün</span>
+                                        <span class="meta-item"><i class="far fa-clock"></i> 11sa 30dk</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hizmetler Sonuçları -->
+                    <div class="search-result-category mb-5">
+                        <h4 class="category-title">Hizmetler</h4>
+                        
+                        <!-- Hizmet sonucu öğesi -->
+                        <div class="search-result-item">
+                            <div class="result-content">
+                                <div class="result-icon">
+                                    <i class="fas fa-concierge-bell"></i>
+                                </div>
+                                <div class="result-details">
+                                    <h5><a asp-controller="Flight" asp-action="BusinessClass">Business Class Hizmetleri</a></h5>
+                                    <p>Özel check-in, VIP bekleme salonu, yataklı koltuklar ve özel ikram seçenekleri ile Business Class deneyimi.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hizmet sonucu öğesi -->
+                        <div class="search-result-item">
+                            <div class="result-content">
+                                <div class="result-icon">
+                                    <i class="fas fa-suitcase"></i>
+                                </div>
+                                <div class="result-details">
+                                    <h5><a asp-controller="Flight" asp-action="ExtraBaggage">Ekstra Bagaj Hizmetleri</a></h5>
+                                    <p>İhtiyaçlarınıza göre ek bagaj hakkı satın alma seçenekleri.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sayfalar Sonuçları -->
+                    <div class="search-result-category">
+                        <h4 class="category-title">Sayfalar</h4>
+                        
+                        <!-- Sayfa sonucu öğesi -->
+                        <div class="search-result-item">
+                            <div class="result-content">
+                                <div class="result-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="result-details">
+                                    <h5><a asp-controller="Flight" asp-action="FrequentlyAskedQuestions">Sıkça Sorulan Sorular</a></h5>
+                                    <p>Uçuşlar, biletler ve hizmetlerimiz hakkında en çok sorulan sorular ve yanıtlar.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sayfa sonucu öğesi -->
+                        <div class="search-result-item">
+                            <div class="result-content">
+                                <div class="result-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div class="result-details">
+                                    <h5><a asp-controller="Flight" asp-action="ContactUs">Bize Ulaşın</a></h5>
+                                    <p>FlyZone müşteri hizmetlerine ulaşabileceğiniz iletişim bilgileri ve formlar.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <!-- Sonuç bulunamadı alanı - Eğer sonuç yoksa gösterilecek -->
+                @if (string.IsNullOrEmpty(ViewBag.SearchKeyword) || ViewBag.SearchKeyword.Length < 2)
+                {
+                    <div class="no-results-found text-center py-5">
+                        <div class="no-results-icon mb-3">
+                            <i class="fas fa-search fa-3x text-muted"></i>
+                        </div>
+                        <h4>Lütfen aramak istediğiniz kelimeyi girin</h4>
+                        <p class="text-muted">En az 2 karakter girmeniz gerekmektedir.</p>
+                        
+                        <div class="search-again-form mt-4">
+                            <form asp-controller="Flight" asp-action="Search" method="GET" class="d-flex justify-content-center">
+                                <div class="form-group" style="width: 60%;">
+                                    <input type="search" name="keyword" class="form--control" placeholder="Uçuş, Destinasyon veya Hizmet Ara...">
+                                </div>
+                                <button type="submit" class="btn--base">Ara</button>
+                            </form>
+                        </div>
+                    </div>
+                }
+                
+                <!-- Arama yapıldı ancak sonuç bulunamadı -->
+                <div id="noResultsContainer" class="no-results-found text-center py-5" style="display: none;">
+                    <div class="no-results-icon mb-3">
+                        <i class="fas fa-search fa-3x text-muted"></i>
+                    </div>
+                    <h4>"<span id="searchedKeyword"></span>" için sonuç bulunamadı</h4>
+                    <p class="text-muted">Farklı anahtar kelimeler kullanarak tekrar arama yapabilirsiniz.</p>
+                    
+                    <div class="search-again-form mt-4">
+                        <form asp-controller="Flight" asp-action="Search" method="GET" class="d-flex justify-content-center">
+                            <div class="form-group" style="width: 60%;">
+                                <input type="search" name="keyword" class="form--control" placeholder="Uçuş, Destinasyon veya Hizmet Ara...">
+                            </div>
+                            <button type="submit" class="btn--base">Ara</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    End Search Results
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<style>
+    .search-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #e6e6e6;
+        padding-bottom: 15px;
+    }
+    
+    .search-result-item {
+        border: 1px solid #e6e6e6;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+    }
+    
+    .search-result-item:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .result-content {
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .result-icon {
+        background-color: #f5f5f5;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        color: #007bff;
+    }
+    
+    .result-details h5 {
+        margin-bottom: 8px;
+    }
+    
+    .result-details p {
+        color: #6c757d;
+        margin-bottom: 10px;
+    }
+    
+    .result-meta {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .meta-item {
+        color: #6c757d;
+        font-size: 14px;
+    }
+    
+    .category-title {
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #e6e6e6;
+    }
+    
+    .search-filter-options {
+        width: 200px;
+    }
+    
+    #searchFilter {
+        border-radius: 5px;
+    }
+    
+    .no-results-found {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        padding: 40px;
+    }
+    
+    .no-results-icon {
+        color: #d1d1d1;
+    }
+    
+    .search-again-form .form-group {
+        margin-right: 10px;
+    }
+</style>
+
+<script>
+    document.getElementById('searchFilter').addEventListener('change', function() {
+        // Filtre değiştiğinde ilgili sonuçları göster/gizle
+        const filterValue = this.value;
+        console.log(`Filtre değişti: ${filterValue}`);
+        
+        const categories = document.querySelectorAll('.search-result-category');
+        let visibleResults = 0;
+        
+        if (filterValue === 'all') {
+            // Tüm kategorileri göster
+            categories.forEach(category => {
+                category.style.display = 'block';
+                visibleResults += category.querySelectorAll('.search-result-item').length;
+            });
+        } else {
+            // Seçilen kategoriyi göster, diğerlerini gizle
+            categories.forEach(category => {
+                const categoryTitle = category.querySelector('.category-title').textContent.toLowerCase();
+                
+                if (filterValue === 'flights' && categoryTitle.includes('uçuş')) {
+                    category.style.display = 'block';
+                    visibleResults += category.querySelectorAll('.search-result-item').length;
+                } else if (filterValue === 'destinations' && categoryTitle.includes('destina')) {
+                    category.style.display = 'block';
+                    visibleResults += category.querySelectorAll('.search-result-item').length;
+                } else if (filterValue === 'services' && categoryTitle.includes('hizmet')) {
+                    category.style.display = 'block';
+                    visibleResults += category.querySelectorAll('.search-result-item').length;
+                } else if (filterValue === 'pages' && categoryTitle.includes('sayfa')) {
+                    category.style.display = 'block';
+                    visibleResults += category.querySelectorAll('.search-result-item').length;
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+        }
+        
+        // Seçilen filtreye göre sonuç yoksa "Sonuç bulunamadı" mesajını göster
+        const noResultsContainer = document.getElementById('noResultsContainer');
+        if (visibleResults === 0 && "@ViewBag.SearchKeyword" !== "" && "@ViewBag.SearchKeyword".length >= 2) {
+            document.getElementById('searchedKeyword').textContent = "@ViewBag.SearchKeyword";
+            noResultsContainer.style.display = 'block';
+        } else {
+            noResultsContainer.style.display = 'none';
+        }
+    });
+    
+    // Sayfa yüklendiğinde, ViewBag.SearchKeyword değerine göre filtrelerin çalışma durumunu kontrol et
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchKeyword = "@ViewBag.SearchKeyword";
+        const resultItems = document.querySelectorAll('.search-result-item');
+        
+        // Eğer arama yapıldı ama hiç sonuç yoksa
+        if (searchKeyword !== "" && searchKeyword.length >= 2 && resultItems.length === 0) {
+            document.getElementById('searchedKeyword').textContent = searchKeyword;
+            document.getElementById('noResultsContainer').style.display = 'block';
+        }
+    });
+</script> 
