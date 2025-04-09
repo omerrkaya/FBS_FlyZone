@@ -1,0 +1,393 @@
+﻿@using EntityLayer.Concrete
+@model List<Flight>
+@{
+	ViewData["Title"] = "SearchedFlight";
+	Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+
+
+
+<div id="flight-list">
+	@foreach (var flight in Model)
+	{
+		<div class="flight-container">
+			<div class="flight-info">
+				<div class="departure">
+					<span class="time">05:15</span>
+					<span class="city">Gaziantep (GZT)</span>
+					<span class="airport">@flight.DepartureAirport.Airport_Name</span>
+				</div>
+
+				<div class="flight-duration">
+					<span class="direct">Direkt</span>
+					<span class="duration">1sa 45dk</span>
+					<span class="plane-icon">✈️</span>
+				</div>
+
+				<div class="arrival">
+					<span class="time">07:00</span>
+					<span class="city">İstanbul (SAW)</span>
+					<span class="airport">@flight.ArrivalAirport.Airport_Name</span>
+				</div>
+
+				<button class="details-btn">Detay</button>
+				<div class="details-price">
+					<span class="price">@flight.Flight_Price TRY</span>
+				</div>
+			</div>
+		</div>
+		<div class="modal-bg">
+			<div class="modal">
+				<span class="close-btn">&times;</span>
+				<h2>Seyahat Detayı</h2>
+				<p class="date">10 Nisan 2025, Perşembe</p>
+				<div class="airline-info">
+					<span>✈️ Ajet Hava Yolları</span>
+					<span>VF3233</span>
+					<span>⏰ 1sa 45dk</span>
+				</div>
+				<div class="route">
+					<div class="departure">
+						<strong>Kalkış</strong>
+						<span class="time">05:15</span>
+						<span class="city">Gaziantep (GZT)</span>
+						<span class="airport">Gaziantep Havalimanı</span>
+					</div>
+					<div class="plane">
+						<span class="icon">✈️</span>
+						<span>Airbus A320</span>
+					</div>
+					<div class="arrival">
+						<strong>Varış</strong>
+						<span class="time">07:00</span>
+						<span class="city">İstanbul (SAW)</span>
+						<span class="airport">Sabiha Gökçen Havalimanı</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+
+<!-- Sayfalama Butonları -->
+<div class="pagination" id="pagination">
+	<button onclick="changePage('prev')">Önceki</button>
+	<button onclick="changePage('next')">Sonraki</button>
+</div>
+
+
+
+
+
+
+
+
+<style>
+
+	.pagination {
+		display: flex;
+		justify-content: center;
+		margin-top: 20px;
+	}
+
+		.pagination button {
+			padding: 10px 20px;
+			margin: 0 5px;
+			background-color: #005294;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+			.pagination button:hover {
+				background-color: #003b70;
+			}
+
+
+	.custom-wrapper {
+		all: unset; /*   Varsayılan stilleri sıfırlar */
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: 90vh;
+	}
+
+	/* 	body.custom-wrapper {
+							display: flex !important;
+							justify-content: center !important;
+							align-items: center !important;
+							margin-top: 200px;
+						}   */
+
+	.flight-container {
+		box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+		border-radius: 8px;
+		padding: 20px;
+		width: 1000px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: 40px;
+	}
+
+	.flight-info {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+	}
+
+	.departure, .arrival, .flight-duration, .details-price {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.time {
+		font-size: 24px;
+		font-weight: bold;
+	}
+
+	.city {
+		font-size: 16px;
+		font-weight: bold;
+		margin-top: 5px;
+	}
+
+	.airport {
+		font-size: 14px;
+		color: #6c757d;
+		margin-top: 2px;
+	}
+
+	.flight-duration {
+		color: #6c757d;
+	}
+
+	.direct {
+		font-size: 14px;
+		margin-bottom: 5px;
+	}
+
+	.duration {
+		font-size: 14px;
+	}
+
+	.plane-icon {
+		font-size: 24px;
+		margin-top: 5px;
+		color: #007bff;
+	}
+
+	.details-price {
+		font-size: 16px;
+	}
+
+	.details {
+		cursor: pointer;
+		color: #007bff;
+		margin-bottom: 10px;
+	}
+
+	.price {
+		font-weight: bold;
+		font-size: 18px;
+	}
+
+
+	.flight-card {
+		background-color: #fff;
+		padding: 20px;
+		border-radius: 8px;
+		box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+		text-align: center;
+	}
+
+	.flight-info span {
+		display: block;
+		margin: 5px 0;
+	}
+
+	.details-btn {
+		margin-top: 10px;
+		padding: 6px 12px;
+		border: none;
+		background-color: #007bff;
+		color: white;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	/*Modal Arkaplanı*/
+	.modal-bg {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0,0,0,0.5);
+		justify-content: center;
+		align-items: center;
+		z-index: 9999;
+		animation: fadeIn 0.3s ease-in-out;
+	}
+
+	/* Modal İçeriği */
+	.modal {
+		display: flow;
+		background-color: #fff;
+		padding: 20px;
+		border-radius: 8px;
+		width: 700px;
+		height: 300px;
+		position: relative;
+		transform: scale(0.7);
+		animation: scaleUp 0.3s forwards ease-in-out;
+	}
+
+	.modal-bg.show {
+		display: flex; /* Görünür hale getirme */
+		opacity: 1; /* Opaklığı artır */
+	}
+
+	.close-btn {
+		position: absolute;
+		top: 10px;
+		right: 15px;
+		font-size: 24px;
+		cursor: pointer;
+		transition: color 0.3s;
+	}
+
+		.close-btn:hover {
+			color: #007bff;
+		}
+
+	.airline-info {
+		display: flex;
+		justify-content: space-around;
+		background-color: #e0f0ff;
+		padding: 10px;
+		border-radius: 4px;
+		margin-top: 10px;
+	}
+
+	.route {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 15px;
+	}
+
+	.departure, .arrival {
+		text-align: center;
+	}
+
+	.plane {
+		text-align: center;
+	}
+
+	.icon {
+		font-size: 24px;
+		color: #007bff;
+	}
+
+	.date {
+		font-weight: bold;
+		text-align: center;
+		margin-top: 10px;
+	}
+
+	/* Animasyonlar */
+	@@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+
+		to {
+			opacity: 1;
+		}
+	}
+
+	@@keyframes scaleUp {
+		from {
+			transform: scale(0.7);
+		}
+
+		to {
+			transform: scale(1);
+		}
+	}
+</style>
+
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		const modalBg = document.querySelector('.modal-bg');
+		const detailsBtn = document.querySelector('.details-btn');
+		const closeBtn = document.querySelector('.close-btn');
+
+		detailsBtn.addEventListener('click', function () {
+			modalBg.style.display  = 'flex';
+		});
+
+		closeBtn.addEventListener('click', function () {
+			modalBg.style.display = 'none';
+		});
+
+		window.addEventListener('click', function (e) {
+			if (e.target === modalBg) {
+				modalBg.style.display = 'none';
+			}
+		});
+	});
+
+		let currentPage = 1;
+	const itemsPerPage = 5;
+
+	function showPage(page) {
+		const flightContainers = document.querySelectorAll('.flight-container');
+		const totalItems = flightContainers.length;
+
+		// Sayfa başına gösterilecek öğelerin başlangıç ve bitiş indekslerini hesapla
+		const startIndex = (page - 1) * itemsPerPage;
+		const endIndex = startIndex + itemsPerPage;
+
+		// Tüm uçuşları gizle
+		flightContainers.forEach((container, index) => {
+			if (index >= startIndex && index < endIndex) {
+				container.style.display = 'block'; // Bu sayfada gösterilecek uçuşlar
+			} else {
+				container.style.display = 'none'; // Diğer uçuşlar gizlenecek
+			}
+		});
+	}
+
+	function changePage(direction) {
+		const flightContainers = document.querySelectorAll('.flight-container');
+		const totalItems = flightContainers.length;
+		const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+		if (direction === 'next' && currentPage < totalPages) {
+			currentPage++;
+		} else if (direction === 'prev' && currentPage > 1) {
+			currentPage--;
+		}
+
+		showPage(currentPage);
+	}
+
+	// Sayfa ilk yüklendiğinde ilk sayfayı göster
+	document.addEventListener('DOMContentLoaded', () => {
+		showPage(currentPage);
+	});
+
+</script>
+
+
+

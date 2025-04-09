@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="~/flynext/assets/css/fontawesome-all.min.css">
     <!-- bootstrap css link -->
     <link rel="stylesheet" href="~/flynext/assets/css/bootstrap.min.css">
+	<!-- bootstrap css link -->
     <!-- favicon -->
     <link rel="shortcut icon" href="~/flynext/assets/images/fav.png" type="image/x-icon">
     <!-- swipper css link -->
@@ -54,26 +55,27 @@
 	@RenderBody()
 
 	@await Html.PartialAsync("PartialFooter")
-	
-@*     <!-- jQuery js -->
-    <script src="~/flynext/assets/js/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap js -->
+
+    <!-- jquery -->
+    <script src="~/flynext/assets/js/jquery.js"></script>
+
+    <!-- bootstrap js -->
     <script src="~/flynext/assets/js/bootstrap.min.js"></script>
-    <!-- Swiper js -->
+    <!-- swipper js -->
     <script src="~/flynext/assets/js/swiper.min.js"></script>
-    <!-- LightCase js -->
+    <!-- lightcase js-->
     <script src="~/flynext/assets/js/lightcase.js"></script>
-    <!-- Odometer js -->
+    <!-- odometer js -->
     <script src="~/flynext/assets/js/odometer.min.js"></script>
-    <!-- Viewport js -->
+    <!-- viewport js -->
     <script src="~/flynext/assets/js/viewport.jquery.js"></script>
-    <!-- AOS js -->
+    <!-- progress js -->
+    <script src="~/flynext/assets/js/circle-progress.min.js"></script>
+    <!-- aos js file -->
     <script src="~/flynext/assets/js/aos.js"></script>
-    <!-- Nice-Select js -->
+    <!-- nice select js -->
     <script src="~/flynext/assets/js/jquery.nice-select.js"></script>
-    <!-- Main js -->
+    <!-- main -->
     <script src="~/flynext/assets/js/main.js"></script>
-     *@
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
