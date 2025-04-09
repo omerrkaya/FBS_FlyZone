@@ -27,15 +27,6 @@ namespace FBS_FlyZone.Controllers
             return View();
         }
 
-        public IActionResult BusinessClass()
-        {
-            return View();
-        }
-        public IActionResult EconomyClass()
-        {
-            return View();
-        }
-
         public IActionResult UcusDurumu()
         {
             return View();
@@ -54,39 +45,30 @@ namespace FBS_FlyZone.Controllers
         {
             return View();
         }
-        public IActionResult Flightdeals()
+
+        public IActionResult Announcements()
         {
             return View();
         }
-        public IActionResult StudentDiscount()
+        public IActionResult Feedback()
         {
             return View();
         }
-        public IActionResult Offer()
-        {
-            return View();
-        }
+  
+
         
         public IActionResult Fleet()
         {
           
             return View();
         }
-        public IActionResult InFlightCatering()
-        {
 
-            return View();
-        }
         public IActionResult GuideVideos()
         {
 
             return View();
         }
-        public IActionResult InflightEntertainment()
-        {
 
-            return View();
-        }
         public IActionResult TransportationInformation()
         {
 
