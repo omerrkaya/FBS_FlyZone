@@ -74,38 +74,8 @@ namespace FBS_FlyZone.Controllers
         {
             return View();
         }
-        // Giriş sayfası burada yapılıyor.
-        public IActionResult Girisyap()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Girisyap(LoginViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // Giriş işlemleri
-            }
-            return View(model);
-        }
-
-        // Kayıt sayfası burada yapılıyor.
-        public IActionResult Kayitol()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Kayitol(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // Kayıt işlemleri
-            }
-            return View(model);
-        }
-
+  
+        
         public IActionResult Fleet()
         {
           
