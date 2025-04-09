@@ -1,10 +1,12 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace FBS_FlyZone.Controllers
 {
+    [Authorize]
     public class Deneme : Controller
     {
         FlightManager fm = new FlightManager(new EfFlightRepository());

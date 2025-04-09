@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FBS_FlyZone.Models;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FBS_FlyZone.Controllers
 {
     public class FlightController : Controller
     {
         // Ana uçuş sayfası
+        [AllowAnonymous]
         public IActionResult Flight()
         {
             return View();

@@ -6,9 +6,14 @@ using BusinessLayer.Concrete;
 using EntityLayer.Concrete;
 using BusinessLayer.ValidationRules;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
+using DataAccessLayer.Concrete;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 namespace FBS_FlyZone.Controllers
 {
+   
     public class AccountController : Controller
     {
 
@@ -16,21 +21,40 @@ namespace FBS_FlyZone.Controllers
 
 
         // GET: Login
+
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
-        // POST: Login
-        [HttpPost]
-        public IActionResult Login(User p)
-        {
-            if (ModelState.IsValid)
-            {
 
-            }
+        // POST: Login
+        [HttpPost] 
+        //[AllowAnonymous]
+        public /*async Task<>*/IActionResult Login(User p)
+        {
+
+            //Context c = new Context();
+            //var datavalue = c.Users.FirstOrDefault(x => x.Email == p.Email && x.UserPassword == p.UserPassword);
+
+            //if (datavalue != null)
+            //{
+            //    var claims = new List<Claim>
+            //    {
+            //        new Claim(ClaimTypes.Name, p.Email)
+            //    };
+            //    var userIdentity = new ClaimsIdentity(claims, "Login");
+            //    ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);  
+            //    await HttpContext.SignInAsync(principal);
+            //    return RedirectToAction("Flight", "Flight");
+            //}
+            //else
+            //{
+
+            //}
             return View();
+
         }
 
         // GET: Register
@@ -79,3 +103,34 @@ namespace FBS_FlyZone.Controllers
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//var claims = new List<Claim>
+//{
+//    new Claim(ClaimTypes.Name, p.Email)
+//};
+//var userIdentity = new ClaimsIdentity(claims, "Login");
+//ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+//await HttpContext.SignInAsync(principal);

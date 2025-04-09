@@ -1,94 +1,85 @@
-@model FBS_FlyZone.Models.LoginViewModel
+@model EntityLayer.Concrete.User
 @{
     ViewData["Title"] = "Giriş Yap";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Start Banner
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<section class="banner-section inner-banner-section bg-overlay-black bg_img"
-         data-background="~/flynext/assets/images/bg/inner-bg.png">
-    <div class="container-fluid">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-xl-12 text-center">
-                <div class="banner-content">
-                    <h1 class="title">Giriş Yap</h1>
-                    <div class="breadcrumb-area">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Ana Sayfa</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Giriş Yap</li>
-                            </ol>
-                        </nav>
+
+
+<section class="account-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-7">
+                <div class="account-form-area">
+                    <div class="account-content">
+                        <div class="text-center mb-4">
+                            <span class="sub-title"><span>Giriş Yap</span></span>
+                            <h2 class="section-title">Hesabınıza giriş yapın</h2>
+                        </div>
+                        <form class="account-form" method="post">
+                            <div class="row mb-10-none">
+                                <div class="col-xl-12 form-group">
+                                    <label class="icon"><i class="las la-envelope"></i></label>
+                                    <input type="email" class="form--control" name="Email" placeholder="Kullanıcı Adı ya da E-Posta" required>
+                                </div>
+                                <div class="col-xl-12 form-group">
+                                    <label class="icon"><i class="icon-Create_Password_icone"></i></label>
+                                    <input type="password" class="form--control" name="UserPassword" placeholder="Şifre" required>
+                                </div>
+                                <div class="col-lg-12 form-group text-center">
+                                    <button type="submit" class="btn--base w-100">Giriş Yap</button>
+                                </div>
+                                <div class="col-lg-12 text-center">
+                                    <div class="or mt-10">
+                                        <label>Veya</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 form-group google-submit text-center">
+                                    <button type="submit" class="btn--base w-100"><span class="mr-2"><img src="~/flynext/assets/images/google.png" alt="google"></span> Google ile Devam Et</button>
+                                </div>
+                                <div class="col-lg-12 text-center">
+                                    <div class="account-item mt-10">
+                                        <label>Henüz kayıt olmadınız mı? <a asp-controller="Account" asp-action="Register" class="text--base">Hesap oluşturun</a></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-End Banner
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Start Account
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<section class="account-section bg--gray ptb-120">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-12 text-center">
-                <div class="section-header">
-                    <span class="sub-title"><span>Giriş Yap</span></span>
-                    <h2 class="section-title">Hesabınıza giriş yapın</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-xl-5 col-lg-6">
-                <div class="account-form-area">
-                    <form class="account-form" asp-action="Login" asp-controller="Account" method="post">
-                        <div class="row mb-10-none">
-                            <div class="col-xl-12 form-group">
-                                <label class="icon"><i class="las la-envelope"></i></label>
-                                <input type="email" class="form--control" asp-for="Email" placeholder="Email" required>
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                            </div>
-                            <div class="col-xl-12 form-group">
-                                <label class="icon"><i class="icon-Create_Password_icone"></i></label>
-                                <input type="password" class="form--control" asp-for="Password" placeholder="Şifre" required>
-                                <span asp-validation-for="Password" class="text-danger"></span>
-                            </div>
-                            <div class="col-lg-12 form-group text-center">
-                                <button type="submit" class="btn--base w-100">Giriş Yap</button>
-                            </div>
-                            <div class="col-lg-12 text-center">
-                                <div class="or mt-10">
-                                    <label>veya</label>
-                                </div>
-                            </div>
-                            <div class="col-lg-12 form-group google-submit text-center">
-                                <button type="button" class="btn--base w-100">
-                                    <span class="mr-2"><img src="~/flynext/assets/images/google.png" alt="google"></span> 
-                                    Google ile Devam Et
-                                </button>
-                            </div>
-                            <div class="col-lg-12 text-center">
-                                <div class="account-item mt-10">
-                                    <label>Henüz hesabınız yok mu? <a href="@Url.Action("Register", "Account")" class="text--base">Hesap oluştur</a></label>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-End Account
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<style>
+    .account-section {
+        background-color: #28333d;
+        padding: 120px 0;
+    }
 
-@section Scripts {
+    .account-content {
+        background-color: #fff;
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+        .account-content .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .account-content .sub-title span {
+            font-size: 18px;
+            font-weight: bold;
+            color: #28333d;
+        }
+</style>
+
+
+
+@* @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+} *@
