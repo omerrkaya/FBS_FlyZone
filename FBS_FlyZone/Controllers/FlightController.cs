@@ -66,15 +66,6 @@ namespace FBS_FlyZone.Controllers
         {
             return View();
         }
-        public IActionResult Announcements()
-        {
-            return View();
-        }
-        public IActionResult Feedback()
-        {
-            return View();
-        }
-  
         
         public IActionResult Fleet()
         {
@@ -104,22 +95,6 @@ namespace FBS_FlyZone.Controllers
         public IActionResult BoardingPass()
         {
             
-            return View();
-        }
-        public IActionResult FrequentlyAskedQuestions()
-        {
-
-            return View();
-        }
-        
-        public IActionResult ContactUs()
-        {
-
-            return View();
-        }
-        public IActionResult HelpCenter()
-        {
-
             return View();
         }
        
