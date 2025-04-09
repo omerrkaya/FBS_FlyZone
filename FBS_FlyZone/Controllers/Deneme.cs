@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FBS_FlyZone.Controllers
 {
-    [Authorize]
+
     public class Deneme : Controller
     {
         FlightManager fm = new FlightManager(new EfFlightRepository());

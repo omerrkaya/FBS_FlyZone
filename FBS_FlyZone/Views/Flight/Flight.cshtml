@@ -1,558 +1,579 @@
-﻿@{
-    ViewData["Title"] = "Uçuş";
-    Layout = "~/Views/Shared/UserLayout.cshtml";
+﻿@using EntityLayer.Concrete
+@model List<Flight>
+
+@{
+	ViewData["Title"] = "Uçuş";
+	Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Start Banner
+	Start Banner
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <section class="banner-section">
-    <div class="banner-element" data-aos="fade-left" data-aos-duration="1200">
-        <img src="~/flynext/assets/images/element/element-21.png" alt="element">
-    </div>
-    <div class="banner-element-two">
-        <img src="~/flynext/assets/images/element/element-3.png" alt="element">
-    </div>
-    <div class="banner-element-three">
-        <img src="~/flynext/assets/images/element/element-4.png" alt="element">
-    </div>
-    <div class="banner-element-four">
-        <img src="~/flynext/assets/images/element/element-5.png" alt="element">
-    </div>
-    <div class="banner-social-area">
-        <ul class="banner-social">
-            <li><a href="#0"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="#0" class="active"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="#0"><i class="fab fa-youtube"></i></a></li>
-            <li><a href="#0"><i class="fab fa-instagram"></i></a></li>
-        </ul>
-    </div>
-    <div class="container-fluid">
-        <div class="row justify-content-center align-items-center mb-30-none">
-            <div class="col-xxl-5 col-xl-6 col-lg-12 mb-30">
-                <div class="banner-content" data-aos="fade-right" data-aos-duration="1800">
-                    <span class="sub-title"><span>Fly</span>Zone</span>
-                    <h1 class="title">Uçuşunuzu Hemen Rezerve Edin</h1>
-                    <p>
-                        FlyZone Airlines, lüks ve kurumsal özel jet charter hizmetleri için standartları aşıyor ve yeni bir seviyeye taşıyor. Profesyonel bir hizmet sunmaktan gurur duyuyoruz.
-                    </p>
-                    <div class="banner-btn">
-                        <a href="@Url.Action("Flight", "Flight")" class="btn--base">
-                            <i class="fas fa-chevron-right mr-2"></i> Uçuşunuzu Planlayın
-                        </a>
-                        <a href="@Url.Action("ContactUs", "Flight")" class="btn--base active">
-                            Teklif İsteyin <i class="icon-Group-2361 ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-7 col-xl-6 col-lg-6 mb-30">
-                <div class="banner-thumb">
-                    <img src="~/flynext/assets/images/element/element-2.png" alt="element">
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="banner-element" data-aos="fade-left" data-aos-duration="1200">
+		<img src="~/flynext/assets/images/element/element-21.png" alt="element">
+	</div>
+	<div class="banner-element-two">
+		<img src="~/flynext/assets/images/element/element-3.png" alt="element">
+	</div>
+	<div class="banner-element-three">
+		<img src="~/flynext/assets/images/element/element-4.png" alt="element">
+	</div>
+	<div class="banner-element-four">
+		<img src="~/flynext/assets/images/element/element-5.png" alt="element">
+	</div>
+	<div class="banner-social-area">
+		<ul class="banner-social">
+			<li><a href="#0"><i class="fab fa-facebook-f"></i></a></li>
+			<li><a href="#0" class="active"><i class="fab fa-twitter"></i></a></li>
+			<li><a href="#0"><i class="fab fa-youtube"></i></a></li>
+			<li><a href="#0"><i class="fab fa-instagram"></i></a></li>
+		</ul>
+	</div>
+	<div class="container-fluid">
+		<div class="row justify-content-center align-items-center mb-30-none">
+			<div class="col-xxl-5 col-xl-6 col-lg-12 mb-30">
+				<div class="banner-content" data-aos="fade-right" data-aos-duration="1800">
+					<span class="sub-title"><span>Fly</span>Zone</span>
+					<h1 class="title">Uçuşunuzu Hemen Rezerve Edin</h1>
+					<p>
+						FlyZone Airlines, lüks ve kurumsal özel jet charter hizmetleri için standartları aşıyor ve yeni bir seviyeye taşıyor. Profesyonel bir hizmet sunmaktan gurur duyuyoruz.
+					</p>
+					<div class="banner-btn">
+						<a href="@Url.Action("Flight", "Flight")" class="btn--base">
+							<i class="fas fa-chevron-right mr-2"></i> Uçuşunuzu Planlayın
+						</a>
+						<a href="@Url.Action("ContactUs", "Flight")" class="btn--base active">
+							Teklif İsteyin <i class="icon-Group-2361 ml-2"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-xxl-7 col-xl-6 col-lg-6 mb-30">
+				<div class="banner-thumb">
+					<img src="~/flynext/assets/images/element/element-2.png" alt="element">
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    End Banner
+	End Banner
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Start Scroll-To-Top
+	Start Scroll-To-Top
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <a href="#" class="scrollToTop">
-    <i class="las la-dot-circle"></i>
-    <span>Üst</span>
+	<i class="las la-dot-circle"></i>
+	<span>Üst</span>
 </a>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    End Scroll-To-Top
+	End Scroll-To-Top
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
- <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Start Call-widget
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Start Call-widget
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <div class="call-widget-wrapper">
-    <button type="button" class="call-widget-btn">
-        <span class="num">
-            <i class="icon-call-icon"></i> +90 (212) 123
-            4567
-        </span> <span class="arrow"></span>
-    </button>
-    <div class="call-widget-form-area">
-        <form class="book-form">
-            <div class="row justify-content-center mb-20-none">
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
-                    <div class="book-select">
-                        <label>Nereden</label>
-                        <div class="book-form-icon">
-                            <i class="icon-from-airplane"></i>
-                        </div>
-                        <select class="book-select form--control">
-                            <option value="istanbul" selected>İstanbul</option>
-                            <option value="ankara">Ankara</option>
-                            <option value="izmir">İzmir</option>
-                            <option value="antalya">Antalya</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
-                    <div class="book-select">
-                        <label>Nereye</label>
-                        <div class="book-form-icon">
-                            <i class="icon-to-airplane"></i>
-                        </div>
-                        <select class="book-select form--control">
-                            <option value="london" selected>Londra</option>
-                            <option value="paris">Paris</option>
-                            <option value="newyork">New York</option>
-                            <option value="tokyo">Tokyo</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
-                    <div class="book-select">
-                        <label>Tarih</label>
-                        <div class="book-form-icon">
-                            <i class="icon-schedule-icon"></i>
-                        </div>
-                        <select class="book-select form--control">
-                            <option value="25/12/2023" selected>25/12/2023</option>
-                            <option value="30/12/2023">30/12/2023</option>
-                            <option value="05/01/2024">05/01/2024</option>
-                            <option value="10/01/2024">10/01/2024</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 form-group">
-                    <label>Yolcu</label>
-                    <div class="book-quantity">
-                        <div class="book-plus-minus">
-                            <div class="dec qtybutton">-</div>
-                            <input class="book-plus-minus-box qty" type="text" name="qty" value="1" readonly>
-                            <div class="inc qtybutton">+</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-12 form-group">
-                    <button type="submit" class="btn--base w-100 mt-10">
-                        <i class="icon-btn-icon"></i> Şimdi
-                        Rezervasyon Yap
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
+	<button type="button" class="call-widget-btn">
+		<span class="num">
+			<i class="icon-call-icon"></i> +90 (212) 123
+			4567
+		</span> <span class="arrow"></span>
+	</button>
+	<div class="call-widget-form-area">
+		<form class="book-form">
+			<div class="row justify-content-center mb-20-none">
+				<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+					<div class="book-select">
+						<label>Nereden</label>
+						<div class="book-form-icon">
+							<i class="icon-from-airplane"></i>
+						</div>
+						<select class="book-select form--control">
+							<option value="istanbul" selected>İstanbul</option>
+							<option value="ankara">Ankara</option>
+							<option value="izmir">İzmir</option>
+							<option value="antalya">Antalya</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+					<div class="book-select">
+						<label>Nereye</label>
+						<div class="book-form-icon">
+							<i class="icon-to-airplane"></i>
+						</div>
+						<select class="book-select form--control">
+							<option value="london" selected>Londra</option>
+							<option value="paris">Paris</option>
+							<option value="newyork">New York</option>
+							<option value="tokyo">Tokyo</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+					<div class="book-select">
+						<label>Tarih</label>
+						<div class="book-form-icon">
+							<i class="icon-schedule-icon"></i>
+						</div>
+						<select class="book-select form--control">
+							<option value="25/12/2023" selected>25/12/2023</option>
+							<option value="30/12/2023">30/12/2023</option>
+							<option value="05/01/2024">05/01/2024</option>
+							<option value="10/01/2024">10/01/2024</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 form-group">
+					<label>Yolcu</label>
+					<div class="book-quantity">
+						<div class="book-plus-minus">
+							<div class="dec qtybutton">-</div>
+							<input class="book-plus-minus-box qty" type="text" name="qty" value="1" readonly>
+							<div class="inc qtybutton">+</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-12 form-group">
+					<button type="submit" class="btn--base w-100 mt-10">
+						<i class="icon-btn-icon"></i> Şimdi
+						Rezervasyon Yap
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
 </div>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    End Call-widget
+	End Call-widget
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
- <section class="book-form-section ptb-120">
-   <div class="container" style="min-height: 800px; min-width: 1300px; border-radius: 25px !important;">
-        <div class="book-form-area bg-overlay-black bg_img" data-background="assets/images/bg/bg-3.png">
-            <div class="row justify-content-center">
-                <div class="col-xl-12 text-center">
-                    <div class="section-header white">
-                        <h2 class="section-title">EN UYGUN UÇUŞU ARA</h2>
-                    </div>
 
-                    <!-- Uçuş Türü Seçimi -->
-                    <div class="flight-type-selector">
-                        <label><input type="radio" name="flightType" value="oneway" checked> Tek Yön</label>
-                        <label><input type="radio" name="flightType" value="round"> Gidiş - Dönüş</label>
-                    </div>
 
-                    <form class="book-form">
-                        <!-- Standart Form -->
-                        <div class="row justify-content-center mb-20-none align-items-center" id="mainFlightForm">
-                            <!-- Nereden -->
-                            <div class="col-xl-auto form-group">
-                                <div class="book-select">
-                                    <label>Nereden</label>
-                                    <div class="book-form-icon">
-                                        <i class="icon-from-airplane"></i>
-                                    </div>
-                                    <select class="book-select form--control">
-                                        <option value="dhaka" selected>Dhaka</option>
-                                        <option value="istanbul">İstanbul</option>
-                                        <option value="istanbul">Paris</option>
-                                        <option value="istanbul">Berlin</option>
-                                        <option value="istanbul">Tokyo</option>
-                                        <option value="istanbul">Belçika</option>
-                                        <option value="istanbul">Moskova</option>
-                                        <option value="istanbul">Rio</option>
-                                        <option value="istanbul">Rusya</option>
-                                    </select>
-                                </div>
-                            </div>
+<section class="book-form-section ptb-60" style="border-radius:15px">
+	<div class="container cccda">
+		<div class="book-form-area bg-overlay-black bg_img" data-background="~/flynext/assets/images/bg/bg-3.png">
+			<div class="row justify-content-center" style="border-radius: 25px">
+				<div class="col-xl-12 text-center">
+					<div class="section-header white">
+						<h2 class="section-title">EN UYGUN UÇUŞU ARA</h2>
+					</div>
 
-                            <!-- Nereye -->
-                            <div class="col-xl-auto form-group">
-                                <div class="book-select">
-                                    <label>Nereye</label>
-                                    <div class="book-form-icon">
-                                        <i class="icon-to-airplane"></i>
-                                    </div>
-                                    <select class="book-select form--control">
-                                        <option value="london" selected>London</option>
-                                        <option value="dhaka">Dhaka</option>
-                                        <option value="istanbul">İstanbul</option>
-                                        <option value="istanbul">Paris</option>
-                                        <option value="istanbul">Berlin</option>
-                                        <option value="istanbul">Tokyo</option>
-                                        <option value="istanbul">Belçika</option>
-                                        <option value="istanbul">Moskova</option>
-                                        <option value="istanbul">Rio</option>
-                                        <option value="istanbul">Rusya</option>
-                                    </select>
-                                </div>
-                            </div>
+					<!-- Uçuş Türü Seçimi -->
+					<div class="flight-type-selector">
+						<label><input type="radio" name="flightType" value="oneway" checked> Tek Yön</label>
+						<label><input type="radio" name="flightType" value="round"> Gidiş - Dönüş</label>
+					</div>
 
-                            <!-- Gidiş Tarihi -->
-                            <div class="col-xl-auto form-group" id="departureDateGroup">
-                                <div class="book-select">
-                                    <label>Gidiş Tarihi</label>
-                                    <div class="book-form-icon">
-                                        <i class="icon-schedule-icon"></i>
-                                    </div>
-                                    <input type="date" class="form--control" />
-                                </div>
-                            </div>
+					<form class="book-form" style="border-radius:15px">
+						<!-- Standart Form -->
+						<div class="row justify-content-center  align-items-center" id="mainFlightForm">
+							<!-- Nereden -->
+							<div class="col-xl-auto form-group">
+								<div class="book-select">
+									<label>Nereden</label>
+									<div class="book-form-icon">
+										<i class="icon-from-airplane"></i>
+									</div>
 
-                            <!-- Dönüş Tarihi -->
-                            <div class="col-xl-auto form-group" id="returnDateGroup" style="display: none;">
-                                <div class="book-select">
-                                    <label>Dönüş Tarihi</label>
-                                    <div class="book-form-icon">
-                                        <i class="icon-schedule-icon"></i>
-                                    </div>
-                                    <input type="date" class="form--control" />
-                                </div>
-                            </div>
+									<select class="book-select form--control custom-select" >
+										@foreach (var item in Model)
+										{
+											<option value="@item.DepartureAirport.AirportID">@item.DepartureAirport.Airport_Name</option>
+										}
+									</select>
 
-                            <!-- Yolcu Sayısı -->
-                         <div class="col-xl-auto form-group position-relative passenger-selector-group" style="min-width: 250px;">
+								</div>
+							</div>
 
-                                <label>Yolcular</label>
-                                <div class="book-quantity">
-                                    <div class="book-plus-minus" id="passengerToggle">
-                                        <input class="book-plus-minus-box qty" id="passengerSummary" type="text" value="1 Yolcu, Ekonomi" readonly>
-                                    </div>
-                                </div>
+							<!-- Nereye -->
+							<div class="col-xl-auto form-group">
+								<div class="book-select">
+									<label>Nereye</label>
+									<div class="book-form-icon">
+										<i class="icon-to-airplane"></i>
+									</div>
+									<select class="book-select form--control custom-select">
+										@foreach (var item in Model)
+										{
+											<option value="@item.ArrivalAirport.AirportID">@item.ArrivalAirport.Airport_Name</option>
+										}
+									</select>
+								</div>
+							</div>
 
-                                <!-- Açılır alan -->
-                                <div id="passengerDetails" class="passenger-details-overlay" style="display: none;">
-                                    <div class="class-selection mb-3">
-                                        <label><input type="radio" name="flightClass" value="Ekonomi" checked> Ekonomi</label>
-                                        <label><input type="radio" name="flightClass" value="Business"> Business</label>
-                                    </div>
+							<!-- Gidiş Tarihi -->
+							<div class="col-xl-auto form-group" id="departureDateGroup">
+								<div class="book-select">
+									<label>Gidiş Tarihi</label>
+									<div class="book-form-icon">
+										<i class="icon-schedule-icon"></i>
+									</div>
+									<input type="date" class="form--control" />
+								</div>
+							</div>
 
-                                    <!-- Yolcu Türleri -->
-                                    <div class="passenger-type">
-                                        <label>Yetişkin</label>
-                                        <div class="qty-buttons">
-                                            <button type="button" onclick="changePassengerCount('adult', -1)">-</button>
-                                            <input type="text" id="adultCount" value="1" onchange="manualChange('adult')" oninput="updatePassengerSummary()" />
-                                            <button type="button" onclick="changePassengerCount('adult', 1)">+</button>
-                                        </div>
-                                    </div>
-                                    <div class="passenger-type">
-                                        <label>Çocuk</label>
-                                        <div class="qty-buttons">
-                                            <button type="button" onclick="changePassengerCount('child', -1)">-</button>
-                                            <input type="text" id="childCount" value="0" onchange="manualChange('child')" oninput="updatePassengerSummary()" />
-                                            <button type="button" onclick="changePassengerCount('child', 1)">+</button>
-                                        </div>
-                                    </div>
-                                    <div class="passenger-type">
-                                        <label>Bebek</label>
-                                        <div class="qty-buttons">
-                                            <button type="button" onclick="changePassengerCount('infant', -1)">-</button>
-                                            <input type="text" id="infantCount" value="0" onchange="manualChange('infant')" oninput="updatePassengerSummary()" />
-                                            <button type="button" onclick="changePassengerCount('infant', 1)">+</button>
-                                        </div>
-                                    </div>
-                                    <div class="passenger-type">
-                                        <label>Öğrenci</label>
-                                        <div class="qty-buttons">
-                                            <button type="button" onclick="changePassengerCount('student', -1)">-</button>
-                                            <input type="text" id="studentCount" value="0" onchange="manualChange('student')" oninput="updatePassengerSummary()" />
-                                            <button type="button" onclick="changePassengerCount('student', 1)">+</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+							<!-- Dönüş Tarihi -->
+							<div class="col-xl-auto form-group" id="returnDateGroup" style="display: none;">
+								<div class="book-select">
+									<label>Dönüş Tarihi</label>
+									<div class="book-form-icon">
+										<i class="icon-schedule-icon"></i>
+									</div>
+									<input type="date" class="form--control" />
+								</div>
+							</div>
 
-                            <!-- Submit -->
-                            <div class="col-xl-12 form-group text-center">
-                               <button type="submit" class="btn--base ml-auto mr-auto mt-30">
-                                    <i class="icon-btn-icon"></i> Uçuş Ara
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+							<!-- Yolcu Sayısı -->
+							<div class="col-xl-auto form-group position-relative passenger-selector-group" style="min-width: 250px;">
+
+								<label>Yolcular</label>
+								<div class="book-quantity">
+									<div class="book-plus-minus" id="passengerToggle">
+										<input class="book-plus-minus-box qty" id="passengerSummary" type="text" value="1 Yolcu, Ekonomi" readonly>
+									</div>
+								</div>
+
+								<!-- Açılır alan -->
+								<div id="passengerDetails" class="passenger-details-overlay" style="display: none;">
+									<div class="class-selection mb-3">
+										<label><input type="radio" name="flightClass" value="Ekonomi" checked> Ekonomi</label>
+										<label><input type="radio" name="flightClass" value="Business"> Business</label>
+									</div>
+
+									<!-- Yolcu Türleri -->
+									<div class="passenger-type">
+										<label>Yetişkin</label>
+										<div class="qty-buttons">
+											<button type="button" onclick="changePassengerCount('adult', -1)">-</button>
+											<input type="text" id="adultCount" value="1" onchange="manualChange('adult')" oninput="updatePassengerSummary()" />
+											<button type="button" onclick="changePassengerCount('adult', 1)">+</button>
+										</div>
+									</div>
+									<div class="passenger-type">
+										<label>Çocuk</label>
+										<div class="qty-buttons">
+											<button type="button" onclick="changePassengerCount('child', -1)">-</button>
+											<input type="text" id="childCount" value="0" onchange="manualChange('child')" oninput="updatePassengerSummary()" />
+											<button type="button" onclick="changePassengerCount('child', 1)">+</button>
+										</div>
+									</div>
+									<div class="passenger-type">
+										<label>Bebek</label>
+										<div class="qty-buttons">
+											<button type="button" onclick="changePassengerCount('infant', -1)">-</button>
+											<input type="text" id="infantCount" value="0" onchange="manualChange('infant')" oninput="updatePassengerSummary()" />
+											<button type="button" onclick="changePassengerCount('infant', 1)">+</button>
+										</div>
+									</div>
+									<div class="passenger-type">
+										<label>Öğrenci</label>
+										<div class="qty-buttons">
+											<button type="button" onclick="changePassengerCount('student', -1)">-</button>
+											<input type="text" id="studentCount" value="0" onchange="manualChange('student')" oninput="updatePassengerSummary()" />
+											<button type="button" onclick="changePassengerCount('student', 1)">+</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Submit -->
+							@* 							<div class="col-xl-12 form-group text-center">
+								<button type="submit" class="btn--base ml-auto mr-auto mt-30">
+									<i class="icon-btn-icon"></i> Uçuş Ara
+								</button>
+							</div>*@
+						</div>
+						<div class="row justify-content-center  align-items-center" id="mainFlightForm">
+
+							<div class="col-xl-12 form-group text-center">
+								<button type="submit" class="btn--base ml-auto mr-auto mt-30">
+									<i class="icon-btn-icon"></i> Uçuş Ara
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </section>
 
-
-
 <style>
-.passenger-details-overlay {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: rgba(30, 30, 30, 0.95);
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 9999;
-    border: 2px solid #dbba86;
-    width: 100%;
-    display: none; 
-    max-height: 400px;
-    overflow-y: auto;
-    transition: opacity 0.3s ease;
-}
+	.custom-select {
+		appearance: none; /* Varsayılan oku gizle */
+		background: url('data:image/svg+xml;base64,...') no-repeat right 10px center; /* Simgeyi özelleştir */
+		padding-right: 30px; /* Simge için boşluk bırak */
+		min-width:200px;
+		max-width: 315px;
+		box-sizing: border-box;
+	}
+
+	.passenger-details-overlay {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		background-color: rgba(30, 30, 30, 0.95);
+		padding: 1rem;
+		border-radius: 10px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+		z-index: 9999;
+		border: 2px solid #dbba86;
+		width: 100%;
+		display: none;
+		max-height: 400px;
+		overflow-y: auto;
+		transition: opacity 0.3s ease;
+	}
 
 
 
-.book-form-section {
-    position: relative;
-}
+	.book-form-section {
+		position: relative;
+	}
 
-.passenger-selector-group {
-    position: relative;
-    z-index: 1000;
-}
+	.passenger-selector-group {
+		position: relative;
+		z-index: 1000;
+	}
 
-.book-form-section.expanded .passenger-details-overlay {
-    display: block;
-}
+	.book-form-section.expanded .passenger-details-overlay {
+		display: block;
+	}
 
-.passenger-details-overlay label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #fff;
-}
+	.passenger-details-overlay label {
+		display: block;
+		margin-bottom: 8px;
+		font-weight: 500;
+		color: #fff;
+	}
 
-.class-selection {
-    display: flex;
-    gap: 25px;
-    margin-bottom: 15px;
-}
+	.class-selection {
+		display: flex;
+		gap: 25px;
+		margin-bottom: 15px;
+	}
 
-.class-selection label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 16px;
-}
+		.class-selection label {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			font-size: 16px;
+		}
 
-.qty-buttons {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
+	.qty-buttons {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-bottom: 10px;
+	}
 
-.qty-buttons input {
-    width: 60px;
-    text-align: center;
-    background: transparent;
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-    font-size: 16px;
-}
+		.qty-buttons input {
+			width: 60px;
+			text-align: center;
+			background: transparent;
+			color: #fff;
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			border-radius: 5px;
+			font-size: 16px;
+		}
 
-.qty-buttons button {
-    width: 30px;
-    height: 30px;
-    background: #dbba86;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-}
+		.qty-buttons button {
+			width: 30px;
+			height: 30px;
+			background: #dbba86;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			font-size: 18px;
+			cursor: pointer;
+		}
 
-.passenger-type {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
+	.passenger-type {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 10px;
+	}
 
-.passenger-type label {
-    font-size: 16px;
-}
+		.passenger-type label {
+			font-size: 16px;
+		}
 
-.flight-type-selector {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin: 20px 0 40px;
-    flex-wrap: nowrap;
-}
+	.flight-type-selector {
+		display: flex;
+		justify-content: center;
+		gap: 40px;
+		margin: 20px 0 40px;
+		flex-wrap: nowrap;
+	}
 
-.flight-type-selector label {
-    color: #fff;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    white-space: nowrap;
-}
+		.flight-type-selector label {
+			color: #fff;
+			font-size: 18px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			white-space: nowrap;
+		}
 
-.flight-type-selector input[type="radio"] {
-    accent-color: red;
-    transform: scale(1.3);
-    margin: 0;
-}
+		.flight-type-selector input[type="radio"] {
+			accent-color: red;
+			transform: scale(1.3);
+			margin: 0;
+		}
 
-.book-form-area {
-    overflow: visible;
-    position: relative;
-    z-index: 1;
-}
+	.book-form-area {
+		overflow: visible;
+		position: relative;
+		z-index: 1;
+	}
 
-#mainFlightForm {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 12px;
-  
-}
-#mainFlightForm .form-group {
-  min-width: 150px;
-  max-width: 190px;
-  flex: 0 0 auto;
-}
+	#mainFlightForm {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		align-items: flex-end;
+		gap: 12px;
+	}
+
+		#mainFlightForm .form-group {
+			min-width: 200px;
+			max-width: 400px;
+			flex: 0 0 auto;
+		}
+
+		.cccda{
+		min-height: 450px;
+		min-width: 1430px;
+		border-radius: 50px;
+		}
 
 </style>
 
 
+
+
+
+
 <script>
-    window.addEventListener("DOMContentLoaded", function () {
-    
-    const today = new Date().toISOString().split('T')[0];
+		window.addEventListener("DOMContentLoaded", function () {
 
-   
-    document.querySelector('input[type="date"]').value = today;
-
-   
-    const returnDateInput = document.querySelector('#returnDateGroup input[type="date"]');
-    if (returnDateInput) {
-        returnDateInput.value = today;
-    }
-});
-
-let passengerCounts = {
-    adult: 1,
-    child: 0,
-    infant: 0,
-    student: 0
-};
-
-function changePassengerCount(type, delta) {
-    if (passengerCounts[type] + delta < 0) return;  
-    passengerCounts[type] += delta;
-    document.getElementById(type + "Count").value = passengerCounts[type];
-    updatePassengerSummary();
-}
-
-function updatePassengerSummary() {
-    const total = Object.values(passengerCounts).reduce((a, b) => a + b, 0); 
-    const cls = document.querySelector('input[name="flightClass"]:checked')?.value || "Ekonomi";  
-    document.getElementById("passengerSummary").value = `${total} Yolcu, ${cls}`;  
-}
+		const today = new Date().toISOString().split('T')[0];
 
 
-document.querySelectorAll('input[name="flightClass"]').forEach((radio) => {
-    radio.addEventListener('change', function () {
-        updatePassengerSummary();  
-    });
-});
+		document.querySelector('input[type="date"]').value = today;
 
 
-document.getElementById("passengerToggle").addEventListener("click", function (e) {
-    e.stopPropagation();
-    const details = document.getElementById("passengerDetails");
-    const section = document.querySelector(".book-form-section");
-    const container = document.querySelector(".container");  
+		const returnDateInput = document.querySelector('#returnDateGroup input[type="date"]');
+		if (returnDateInput) {
+			returnDateInput.value = today;
+		}
+	});
 
-  
-    if (details.style.display === "none" || details.style.display === "") {
-        details.style.display = "block";  
-        container.style.minHeight = '800px';  
-    } else {
-        details.style.display = "none";  
-        section.classList.remove("expanded"); 
-        container.style.minHeight = 'auto'; 
-    }
-});
+	let passengerCounts = {
+		adult: 1,
+		child: 0,
+		infant: 0,
+		student: 0
+	};
 
+	function changePassengerCount(type, delta) {
+		if (passengerCounts[type] + delta < 0) return;
+		passengerCounts[type] += delta;
+		document.getElementById(type + "Count").value = passengerCounts[type];
+		updatePassengerSummary();
+	}
 
-window.addEventListener("click", function (e) {
-    const details = document.getElementById("passengerDetails");
-    const toggle = document.getElementById("passengerToggle");
-
-    if (!details.contains(e.target) && !toggle.contains(e.target)) {
-        details.style.display = "none";  
-        const container = document.querySelector(".container");
-        container.style.minHeight = 'auto';  
-    }
-});
+	function updatePassengerSummary() {
+		const total = Object.values(passengerCounts).reduce((a, b) => a + b, 0);
+		const cls = document.querySelector('input[name="flightClass"]:checked')?.value || "Ekonomi";
+		document.getElementById("passengerSummary").value = `${total} Yolcu, ${cls}`;
+	}
 
 
-window.addEventListener("DOMContentLoaded", function () {
-    const section = document.querySelector(".book-form-section");
-    section.classList.add("expanded");  
-
-   
-    updatePassengerSummary();
-});
+	document.querySelectorAll('input[name="flightClass"]').forEach((radio) => {
+		radio.addEventListener('change', function () {
+			updatePassengerSummary();
+		});
+	});
 
 
-document.querySelectorAll('input[name="flightType"]').forEach((radio) => {
-    radio.addEventListener('change', function () {
-        handleFlightTypeChange(this.value);
-    });
-});
-
-function handleFlightTypeChange(value) {
-    const returnGroup = document.getElementById("returnDateGroup");
-    const passengerGroup = document.querySelector(".book-quantity");
-    const mainFlightForm = document.getElementById("mainFlightForm");
-
-    if (value === "round") {
-        returnGroup.style.display = "block";
-        passengerGroup.style.display = "flex";
-        mainFlightForm.style.display = "flex";
-    } else if (value === "oneway") {
-        returnGroup.style.display = "none";
-        passengerGroup.style.display = "flex";
-        mainFlightForm.style.display = "flex";
-    }
-    if (tripType === "oneway") {
-  document.getElementById("returnDateGroup").style.display = "none";
-} else {
-  document.getElementById("returnDateGroup").style.display = "block";
-}
-
-}
+	document.getElementById("passengerToggle").addEventListener("click", function (e) {
+		e.stopPropagation();
+		const details = document.getElementById("passengerDetails");
+		const section = document.querySelector(".book-form-section");
+		const container = document.querySelector(".container");
 
 
+		if (details.style.display === "none" || details.style.display === "") {
+			details.style.display = "block";
+			container.style.minHeight = '800px';
+		} else {
+			details.style.display = "none";
+			section.classList.remove("expanded");
+			container.style.minHeight = 'auto';
+		}
+	});
 
-window.addEventListener("DOMContentLoaded", function () {
-    const selected = document.querySelector('input[name="flightType"]:checked');
-    if (selected) {
-        handleFlightTypeChange(selected.value);
-    }
-});
+
+	window.addEventListener("click", function (e) {
+		const details = document.getElementById("passengerDetails");
+		const toggle = document.getElementById("passengerToggle");
+
+		if (!details.contains(e.target) && !toggle.contains(e.target)) {
+			details.style.display = "none";
+			const container = document.querySelector(".container");
+			container.style.minHeight = 'auto';
+		}
+	});
+
+
+	window.addEventListener("DOMContentLoaded", function () {
+		const section = document.querySelector(".book-form-section");
+		section.classList.add("expanded");
+
+
+		updatePassengerSummary();
+	});
+
+
+	document.querySelectorAll('input[name="flightType"]').forEach((radio) => {
+		radio.addEventListener('change', function () {
+			handleFlightTypeChange(this.value);
+		});
+	});
+
+	function handleFlightTypeChange(value) {
+		const returnGroup = document.getElementById("returnDateGroup");
+		const passengerGroup = document.querySelector(".book-quantity");
+		const mainFlightForm = document.getElementById("mainFlightForm");
+
+		if (value === "round") {
+			returnGroup.style.display = "block";
+			passengerGroup.style.display = "flex";
+			mainFlightForm.style.display = "flex";
+		} else if (value === "oneway") {
+			returnGroup.style.display = "none";
+			passengerGroup.style.display = "flex";
+			mainFlightForm.style.display = "flex";
+		}
+		if (tripType === "oneway") {
+	  document.getElementById("returnDateGroup").style.display = "none";
+	} else {
+	  document.getElementById("returnDateGroup").style.display = "block";
+	}
+
+	}
+
+
+
+	window.addEventListener("DOMContentLoaded", function () {
+		const selected = document.querySelector('input[name="flightType"]:checked');
+		if (selected) {
+			handleFlightTypeChange(selected.value);
+		}
+	});
 </script>

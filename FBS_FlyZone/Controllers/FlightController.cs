@@ -2,24 +2,40 @@
 using FBS_FlyZone.Models;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
+using BusinessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
 
 namespace FBS_FlyZone.Controllers
 {
     public class FlightController : Controller
     {
+        FlightManager fm = new FlightManager(new EfFlightRepository());
+
         // Ana uçuş sayfası
         [AllowAnonymous]
         public IActionResult Flight()
         {
-            return View();
+            var values = fm.GetFlightListWithAirport();
+
+            return View(values);
+        }
+
+        [HttpGet]
+        public IActionResult SearchedFlight()
+        {
+
+            var values = fm.GetFlightListWithAirport();
+
+            return View(values);
         }
 
         // Uçuş arama işlemi
         [HttpPost]
-        public IActionResult SearchFlight(FlightSearchViewModel model)
+        public IActionResult SearchedFlight(FlightSearchViewModel model)
         {
-            // Uçuş arama işlemlerini burada yapmamız gerek diye düşündüm.
-            return View();
+            var values = fm.GetFlightListWithAirport();
+
+            return View(values);
         }
 
         public IActionResult FlightDetails(int id)
