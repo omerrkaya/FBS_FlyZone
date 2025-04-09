@@ -1,135 +1,135 @@
 ﻿<div class="page-wrapper dark">
-    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   Start Header
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<header class="header-section header-section-one">
-    <div class="header">
-        <div class="header-bottom-area">
-            <div class="container-fluid">
-                <div class="header-menu-content">
-                    <nav class="navbar navbar-expand-lg p-0">
-                        <a class="site-logo site-title" asp-controller="Flight" asp-action="Flight">
-                            <img src="~/flynext/assets/images/logo.png"
-                                 alt="site-logo">
-                        </a>
-                        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
-                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="fas fa-bars"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav main-menu ml-auto">
-                                <li class="menu_has_children">
-                                    <a asp-controller="Flight" asp-action="Flight">Anasayfa</a>
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	   Start Header
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<header class="header-section header-section-one">
+		<div class="header">
+			<div class="header-bottom-area">
+				<div class="container-fluid">
+					<div class="header-menu-content">
+						<nav class="navbar navbar-expand-lg p-0">
+							<a class="site-logo site-title" asp-controller="Flight" asp-action="Flight">
+								<img src="~/flynext/assets/images/logo.png"
+									 alt="site-logo">
+							</a>
+							<button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+									data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+									aria-expanded="false" aria-label="Toggle navigation">
+								<span class="fas fa-bars"></span>
+							</button>
+							<div class="collapse navbar-collapse" id="navbarSupportedContent">
+								<ul class="navbar-nav main-menu ml-auto">
+									<li class="menu_has_children">
+										<a asp-controller="Flight" asp-action="Flight">Anasayfa</a>
 
-                                </li>
-                               <li class="menu_has_children">
-                                    <a href="#0">Bilet Al ve Yönet</a>
-                                    <ul class="sub-menu">
-                                        <li><a asp-controller="Flight" asp-action="Flight">Uçak Bileti</a></li>
-                                        <li><a asp-controller="Flight" asp-action="CheckinBiletyonetimi">Bilet Yönetimi</a></li>
-                                        <li><a asp-controller="Flight" asp-action="CheckinBiletyonetimi">Check-in</a></li>
-                                        <li><a asp-controller="Flight" asp-action="BusinessClass">Uçuş Durumu</a></li>
-                                        <li><a asp-controller="Flight" asp-action="seatselection">Koltuk Seçimi</a></li>
-                                        <li><a asp-controller="Flight" asp-action="ExtraBaggage">Ekstra Bagaj</a></li>
+									</li>
+									<li class="menu_has_children">
+										<a href="#0">Bilet Al ve Yönet</a>
+										<ul class="sub-menu">
+											<li><a asp-controller="Flight" asp-action="Flight">Uçak Bileti</a></li>
+											<li><a asp-controller="BuyAndManageTicket" asp-action="CheckInTicketManagement">Bilet Yönetimi</a></li>
+											<li><a asp-controller="FlBuyAndManageTicketight" asp-action="CheckInTicketManagement">Check-in</a></li>
+											<li><a asp-controller="BuyAndManageTicket" asp-action="FlightStatus">Uçuş Durumu</a></li>
+											<li><a asp-controller="BuyAndManageTicket" asp-action="Seatselection">Koltuk Seçimi</a></li>
+											<li><a asp-controller="BuyAndManageTicket" asp-action="ExtraBaggage">Ekstra Bagaj</a></li>
 
-                                    </ul>
-                                </li>
-                                 <li class="menu_has_children">
-                                    <a href="#0">Seyehat Deneyimi</a>
-                                    <ul class="sub-menu">
-                                        <li> <a asp-controller="Flight" asp-action="BusinessClass">Business Class</a></li>
-                                        <li><a asp-controller="Flight" asp-action="EconomyClass">Economy Class</a></li>
-                                        <li> <a asp-controller="Flight" asp-action="InflightEntertainment">Uçak İçi Eğlence</a></li>
-                                        <li><a asp-controller="Flight" asp-action="InFlightCatering">Uçak İçi İkram</a></li>                 
-                                    </ul>
-                                </li>
-                                <li class="menu_has_children">
-                                    <a href="#0">Fırsatlar</a>
-                                    <ul class="sub-menu">
-                                        <li><a asp-controller="Flight" asp-action="FlightDetails">Uçuş Fırsatları</a></li>
-                                        <li><a asp-controller="Flight" asp-action="Offer">Kampanyalar</a></li>
-                                        <li><a asp-controller="Flight" asp-action="StudentDiscount">Öğrenci İndirimi</a></li>
-                                    </ul>
-                                </li>
-                                 <li class="menu_has_children">
-                                    <a href="#0">Yardım</a>
-                                    <ul class="sub-menu">
-                                        <li><a asp-controller="Flight" asp-action="HelpCenter">Yardım Merkezi</a></li>
-                                        <li><a asp-controller="Flight" asp-action="Feedback">Geri Bildirim</a></li>
-                                        <li><a asp-controller="Flight" asp-action="ContactUs">Bize Ulaşın</a></li>
-                                        <li><a asp-controller="Flight" asp-action="Announcements">Duyurular</a></li>
-                                        <li><a asp-controller="Flight" asp-action="FrequentlyAskedQuestions">Sıkça Sorulan Sorular</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <div class="header-right">
-                                <div class="search-bar d-none d-lg-block">
-                                    <a href="#0"><i class="fas fa-search"></i></a>
-                                    <div class="header-top-search-area">
-                                        <form class="header-search-form"
-                                              asp-controller="Flight" asp-action="Search" method="GET">
+										</ul>
+									</li>
+									<li class="menu_has_children">
+										<a href="#0">Seyehat Deneyimi</a>
+										<ul class="sub-menu">
+											<li><a asp-controller="TravelExperience" asp-action="BusinessClass">Business Class</a></li>
+											<li><a asp-controller="TravelExperience" asp-action="EconomyClass">Economy Class</a></li>
+											<li><a asp-controller="TravelExperience" asp-action="InflightEntertainment">Uçak İçi Eğlence</a></li>
+											<li><a asp-controller="TravelExperience" asp-action="InFlightCatering">Uçak İçi İkram</a></li>
+										</ul>
+									</li>
+									<li class="menu_has_children">
+										<a href="#0">Fırsatlar</a>
+										<ul class="sub-menu">
+											<li><a asp-controller="Deals" asp-action="FlightDetails">Uçuş Fırsatları</a></li>
+											<li><a asp-controller="Deals" asp-action="Offer">Kampanyalar</a></li>
+											<li><a asp-controller="Deals" asp-action="StudentDiscount">Öğrenci İndirimi</a></li>
+										</ul>
+									</li>
+									<li class="menu_has_children">
+										<a href="#0">Yardım</a>
+										<ul class="sub-menu">
+											<li><a asp-controller="Help" asp-action="HelpCenter">Yardım Merkezi</a></li>
+											<li><a asp-controller="Help" asp-action="Feedback">Geri Bildirim</a></li>
+											<li><a asp-controller="Help" asp-action="ContactUs">Bize Ulaşın</a></li>
+											<li><a asp-controller="Help" asp-action="Announcements">Duyurular</a></li>
+											<li><a asp-controller="Help" asp-action="FrequentlyAskedQuestions">Sıkça Sorulan Sorular</a></li>
+										</ul>
+									</li>
+								</ul>
+								<div class="header-right">
+									<div class="search-bar d-none d-lg-block">
+										<a href="#0"><i class="fas fa-search"></i></a>
+										<div class="header-top-search-area">
+											<form class="header-search-form"
+												  asp-controller="Flight" asp-action="Search" method="GET">
 
-                                            <input type="search" name="keyword" id="header_search"
-                                                   placeholder="Uçuş, Destinasyon veya Hizmet Ara...">
-                                           
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="header-action-area">
-                                    <a href="service-details.html" class="action-btn two">
-                                        <i class="icon-btn-icon"></i>
-                                    </a>
-                                    <div class="header-action">
-                                      <a asp-controller="Account" asp-action="Login" class="btn--base">
-                                            <i class="icon-btn-icon"></i> Giriş Yap
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    End Header
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+												<input type="search" name="keyword" id="header_search"
+													   placeholder="Uçuş, Destinasyon veya Hizmet Ara...">
+
+											</form>
+										</div>
+									</div>
+									<div class="header-action-area">
+										<a href="service-details.html" class="action-btn two">
+											<i class="icon-btn-icon"></i>
+										</a>
+										<div class="header-action">
+											<a asp-controller="Account" asp-action="Login" class="btn--base">
+												<i class="icon-btn-icon"></i> Giriş Yap
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		End Header
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 </div>
 
 <script>
-    // Arama butonu tıklandığında arama alanını göster/gizle
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchBtn = document.querySelector('.search-bar a');
-        const searchArea = document.querySelector('.header-top-search-area');
-        
-        if (searchBtn && searchArea) {
-            // Sayfa yüklendiğinde gizli durumda başlat
-            searchArea.style.display = 'none';
-            
-            searchBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                // Toggle arama alanı görünürlüğü
-                if (searchArea.style.display === 'none' || !searchArea.style.display) {
-                    searchArea.style.display = 'block';
-                    // Arama alanına odaklan
-                    document.getElementById('header_search').focus();
-                } else {
-                    searchArea.style.display = 'none';
-                }
-            });
-            
-            // Sayfa herhangi bir yerine tıklandığında arama alanını gizle
-            document.addEventListener('click', function(e) {
-                // Eğer tıklanan öğe arama butonu veya arama alanının içi değilse
-                if (!e.target.closest('.search-bar') && searchArea.style.display === 'block') {
-                    searchArea.style.display = 'none';
-                }
-            });
-        }
-    });
+	// Arama butonu tıklandığında arama alanını göster/gizle
+	document.addEventListener('DOMContentLoaded', function() {
+		const searchBtn = document.querySelector('.search-bar a');
+		const searchArea = document.querySelector('.header-top-search-area');
+
+		if (searchBtn && searchArea) {
+			// Sayfa yüklendiğinde gizli durumda başlat
+			searchArea.style.display = 'none';
+
+			searchBtn.addEventListener('click', function(e) {
+				e.preventDefault();
+				// Toggle arama alanı görünürlüğü
+				if (searchArea.style.display === 'none' || !searchArea.style.display) {
+					searchArea.style.display = 'block';
+					// Arama alanına odaklan
+					document.getElementById('header_search').focus();
+				} else {
+					searchArea.style.display = 'none';
+				}
+			});
+
+			// Sayfa herhangi bir yerine tıklandığında arama alanını gizle
+			document.addEventListener('click', function(e) {
+				// Eğer tıklanan öğe arama butonu veya arama alanının içi değilse
+				if (!e.target.closest('.search-bar') && searchArea.style.display === 'block') {
+					searchArea.style.display = 'none';
+				}
+			});
+		}
+	});
 </script>
 
 @* <style>
@@ -144,16 +144,16 @@
         transition: all 0.3s ease;
         position: relative;
     }
-    
+
     .search-bar a:hover {
         background-color: rgba(255, 255, 255, 0.1);
         transform: translateY(-2px);
     }
-    
+
     .search-bar a i {
         font-size: 18px;
     }
-    
+
     /* Arama alanı stilini düzenle */
     .header-top-search-area {
         position: absolute;
@@ -168,7 +168,7 @@
         z-index: 1000;
         animation: fadeInDown 0.4s ease;
     }
-    
+
     @@keyframes fadeInDown {
         from {
             opacity: 0;
@@ -179,12 +179,12 @@
             transform: translateY(0);
         }
     }
-    
+
     .header-search-form {
         display: flex;
         position: relative;
     }
-    
+
     .header-search-form input[type="search"] {
         border: 1px solid #e5e5e5;
         padding: 10px 15px;
@@ -193,11 +193,11 @@
         outline: none;
         transition: border-color 0.3s ease;
     }
-    
+
     .header-search-form input[type="search"]:focus {
         border-color: #007bff;
     }
-    
+
     .header-search-btn {
         position: absolute;
         right: 5px;
@@ -208,7 +208,7 @@
         color: #6c757d;
         cursor: pointer;
     }
-    
+
     .header-search-btn:hover {
         color: #007bff;
     }

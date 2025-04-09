@@ -26,59 +26,6 @@ namespace FBS_FlyZone.Controllers
         {
             return View();
         }
-
-        public IActionResult UcusDurumu()
-        {
-            return View();
-        }
-
-        public IActionResult CheckinBiletyonetimi()
-        {
-            return View();
-        }
-        public IActionResult seatselection()
-        {
-            return View();
-        }
-
-        public IActionResult ExtraBaggage()
-        {
-            return View();
-        }
-
-        public IActionResult Announcements()
-        {
-            return View();
-        }
-        public IActionResult Feedback()
-        {
-            return View();
-        }
-  
-
-        
-        public IActionResult Fleet()
-        {
-          
-            return View();
-        }
-
-        public IActionResult GuideVideos()
-        {
-
-            return View();
-        }
-
-        public IActionResult TransportationInformation()
-        {
-
-            return View();
-        }
-        public IActionResult BoardingPass()
-        {
-            
-            return View();
-        }
        
         // Arama işlemi
         public IActionResult Search(string keyword)

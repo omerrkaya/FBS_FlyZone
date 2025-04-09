@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "PNR Sorgulama";
+﻿
+@{
+    ViewData["Title"] = "CheckInTicketManagement";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
@@ -47,11 +48,12 @@
         <div class="info-text">Check-in işlemleri</div>
         <a href="javascript:void(0);" class="read-more text-warning mt-2 d-block">Devamını okuyunuz</a>
         <div class="extra-info">
-            <p>Türk Hava Yolları olarak check-in süreçlerinizi daha kolay ve hızlı şekilde tamamlamanız için alternatif yöntemler sunuyoruz. Tercihinize göre; internet sitemiz veya mobil uygulamamız üzerinden işlem yapabilir, havalimanındaki kiosklarımızı kullanabilir, kontuarlarımıza başvurabilirsiniz. Havalimanındaki bagaj ve güvenlik süreçleri nedeniyle kalkıştan iç hatlar için 2 saat, dış hatlarda 3 saat önce terminale gelmeniz önerilir.
+            <p>
+                Türk Hava Yolları olarak check-in süreçlerinizi daha kolay ve hızlı şekilde tamamlamanız için alternatif yöntemler sunuyoruz. Tercihinize göre; internet sitemiz veya mobil uygulamamız üzerinden işlem yapabilir, havalimanındaki kiosklarımızı kullanabilir, kontuarlarımıza başvurabilirsiniz. Havalimanındaki bagaj ve güvenlik süreçleri nedeniyle kalkıştan iç hatlar için 2 saat, dış hatlarda 3 saat önce terminale gelmeniz önerilir.
                 <<br />
 
             </p>
-            
+
             <p>Check-in işleminizi mobil uygulamamız veya internet sitemizden gerçekleştirerek zamandan tasarruf ederken; koltuk seçiminizi kendiniz yapabilir, kontuar sırası beklemeden biniş kapısına gidebilir, mobil biniş kartı kolaylığından faydalanabilirsiniz.</p>
         </div>
     </div>
@@ -176,18 +178,15 @@
         }
 
     @@@@keyframes fadeIn {
-        from
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
 
-    {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .scroll-banner {
@@ -209,7 +208,7 @@
             transform: translateY(0);
         }
 
-   
+
     .banner-left,
     .banner-right {
         flex: 1;
@@ -220,12 +219,12 @@
     }
 
 
-    .banner-left img {
-        width: 100%;
-        max-width: 600px; /* Önceki değerden daha küçük */
-        border-radius: 12px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    }
+        .banner-left img {
+            width: 100%;
+            max-width: 600px; /* Önceki değerden daha küçük */
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
 
     .banner-section {
         background-image: url('/flynext/assets/images/siteicerik/businessback.jpg');
@@ -240,7 +239,7 @@
         color: white;
     }
 
-  
+
 
     .banner-text-box {
         background-color: rgba(30, 41, 59, 0.8); /* koyu yarı saydam arka plan */
@@ -253,7 +252,7 @@
         display: inline-block;
         text-align: left;
     }
-    
+
 
     .banner-overlay {
         position: absolute;
@@ -283,12 +282,10 @@
 
 
     @@media (max-width: 768px) {
-        .scroll-banner
-
-    {
-        flex-direction: column;
-        text-align: center;
-    }
+        .scroll-banner {
+            flex-direction: column;
+            text-align: center;
+        }
 
         .banner-right .content-box {
             background-color: rgba(30, 41, 59, 0.8); /* Koyu şeffaf arka plan */
@@ -300,14 +297,13 @@
 
 
 
-    .info-box {
-        width: 100%;
-    }
+        .info-box {
+            width: 100%;
+        }
 
-    .input-custom {
-        width: 100%;
-    }
-
+        .input-custom {
+            width: 100%;
+        }
     }
     /* Resim hover büyüme efekti */
     .banner-left img {
@@ -377,3 +373,4 @@
 
 <!-- Bootstrap Icons -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+

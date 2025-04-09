@@ -1,7 +1,7 @@
-﻿@{
-    ViewData["Title"] = "UcusDurumu";
+﻿
+@{
+    ViewData["Title"] = "FlightStatus";
     Layout = "~/Views/Shared/UserLayout.cshtml";
-    var bugun = DateTime.Now.ToString("yyyy-MM-dd");
 }
 
 <!-- Banner -->
@@ -18,7 +18,7 @@
                 Değerli yolcularımız,
                 Seyahatinizi en verimli şekilde planlayabilmeniz için uçuşlarınıza ait güncel bilgilere anlık olarak erişim imkânı sunuyoruz. Kalkış ve varış saatleri, olası gecikmeler ve iptaller gibi kritik bilgiler tarafımızdan sürekli olarak güncellenmektedir. Güvenli ve konforlu bir seyahat deneyimi için uçuş durumunuzu sistemimiz üzerinden kolayca takip edebilirsiniz.
             </div>
-           
+
         </div>
     </div>
 </section>
@@ -47,7 +47,7 @@
             </div>
 
             <!-- Tarih -->
-            <input type="date" name="tarih" class="form-control date-custom" value="@bugun">
+            <input type="date" name="tarih" class="form-control date-custom" value="">
 
             <!-- OK Button -->
             <button type="submit" class="btn btn-danger d-flex align-items-center justify-content-center date-custom">
@@ -146,20 +146,18 @@
         }
 
     @@keyframes fadeInUp {
-        from
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
 
-    {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 </style>
 
 <!-- Bootstrap Icons -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
