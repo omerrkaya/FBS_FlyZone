@@ -31,7 +31,7 @@ namespace DataAccessLayer.EntityFramework
         {
             using (var c = new Context())
             {
-                return c.Flights.Include("ArrivalAirport").Include("DepartureAirport").Include("Airline").ToList();
+                return c.Flights.Include("ArrivalAirport").Include("DepartureAirport").Include("Airline").Include("Aircraft").ToList();
 
             }
         }

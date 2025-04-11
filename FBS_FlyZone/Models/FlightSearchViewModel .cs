@@ -14,9 +14,9 @@ public class FlightSearchViewModel
 
     public DateTime? ReturnDate { get; set; }
 
-    [Range(1, 9, ErrorMessage = "Yetişkin sayısı 1-9 arasında olmalıdır")]
+    [Range(1, 9, ErrorMessage = "Yetişkin sayısı en fazla 9 olabilir")]
     public int AdultCount { get; set; } = 1;
 
-    [Range(0, 9, ErrorMessage = "Çocuk sayısı 0-9 arasında olmalıdır")]
+    [Range(0, 9, ErrorMessage = "Çocuk sayısı en fazla 9 olabilir")]
     public int ChildCount { get; set; } = 0;
 }

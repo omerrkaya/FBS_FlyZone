@@ -1,41 +1,42 @@
 ﻿@using EntityLayer.Concrete
+@using System.Globalization
 @model List<Flight>
 @{
 	ViewData["Title"] = "SearchedFlight";
 	Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
-<div class="dark" style="height:100px">
-	
+ <div class="dark" style="height:100px">
 </div>
 
-<div class="custom-wrapper">
+ <div class="custom-wrapper">
 	<div id="flight-list">
 		@foreach (var flight in Model)
 		{
+			var arrivalTime = flight.Flight_DateTime.AddHours(flight.Estimated_Time.Hours).AddMinutes(flight.Estimated_Time.Minutes);
 			<div class="flight-container">
 				<div class="flight-info">
 					<div class="departure">
-						<span class="time">05:15</span>
-						<span class="city">Gaziantep (GZT)</span>
-						<span class="airport">@flight.DepartureAirport.Airport_Name</span>
+						<span class="time">@flight.Flight_DateTime.ToString("HH:mm") </span>
+						<span class="city">@flight.DepartureAirport?.AP_City (@flight.DepartureAirport?.IATA_Code)</span>
+						<span class="airport">@flight.DepartureAirport?.Airport_Name</span>
 					</div>
 
 					<div class="flight-duration">
 						<span class="direct">Direkt</span>
-						<span class="duration">1sa 45dk</span>
+						<span class="duration">@($"{flight.Estimated_Time.Hours} sa {flight.Estimated_Time.Minutes} dk")</span>
 						<span class="plane-icon">✈️</span>
 					</div>
 
 					<div class="arrival">
-						<span class="time">07:00</span>
-						<span class="city">İstanbul (SAW)</span>
-						<span class="airport">@flight.ArrivalAirport.Airport_Name</span>
+						<span class="time">@arrivalTime.ToString("HH:mm")</span>
+						<span class="city">@flight.ArrivalAirport?.AP_City (@flight.ArrivalAirport?.IATA_Code)</span>
+						<span class="airport">@flight.ArrivalAirport?.Airport_Name</span>
 					</div>
 
 					<button class="details-btn">Detay</button>
 					<div class="details-price">
-						<span class="price">@flight.Flight_Price TRY</span>
+						<span class="price">@flight.Flight_Price? TRY</span>
 					</div>
 				</div>
 			</div>
@@ -43,28 +44,28 @@
 				<div class="modal">
 					<span class="close-btn">&times;</span>
 					<h2>Seyahat Detayı</h2>
-					<p class="date">10 Nisan 2025, Perşembe</p>
+					<p class="date">@flight.Flight_DateTime.ToString("dd MMMM yyyy, dddd", new CultureInfo("tr-TR"))</p>
 					<div class="airline-info">
-						<span>✈️ Ajet Hava Yolları</span>
-						<span>VF3233</span>
-						<span>⏰ 1sa 45dk</span>
+						<span>✈️ @flight.Airline.Airlines_Name</span>
+						<span>@flight.Flight_Code?</span>
+						<span>⏰ @($"{flight.Estimated_Time.Hours} sa {flight.Estimated_Time.Minutes} dk")</span>
 					</div>
 					<div class="route">
 						<div class="departure">
 							<strong>Kalkış</strong>
-							<span class="time">05:15</span>
-							<span class="city">Gaziantep (GZT)</span>
-							<span class="airport">Gaziantep Havalimanı</span>
+							<span class="time">@flight.Flight_DateTime.ToString("HH:mm")</span>
+							<span class="city">@flight.DepartureAirport?.AP_City (@flight.DepartureAirport?.IATA_Code)</span>
+							<span class="airport">@flight.DepartureAirport?.Airport_Name</span>
 						</div>
 						<div class="plane">
 							<span class="icon">✈️</span>
-							<span>Airbus A320</span>
+							<span>@flight.Aircraft?.Aircraft_Model</span>
 						</div>
 						<div class="arrival">
 							<strong>Varış</strong>
-							<span class="time">07:00</span>
-							<span class="city">İstanbul (SAW)</span>
-							<span class="airport">Sabiha Gökçen Havalimanı</span>
+							<span class="time">@arrivalTime.ToString("HH:mm")</span>
+							<span class="city">@flight.DepartureAirport?.AP_City (@flight.DepartureAirport?.IATA_Code)</span>
+							<span class="airport">@flight.ArrivalAirport?.Airport_Name</span>
 						</div>
 					</div>
 				</div>
@@ -73,21 +74,17 @@
 	</div>
 
 	<!-- Sayfalama Butonları -->
-	<div class="pagination" id="pagination" >
+	<div class="pagination" id="pagination">
 		<button onclick="changePage('prev')">Önceki</button>
 		<button onclick="changePage('next')">Sonraki</button>
 	</div>
 </div>
-
-
-
+ 
 
 
 
 
 <style>
-
-
 	.pagination {
 		display: flex;
 		justify-content: center;
@@ -109,14 +106,12 @@
 				background-color: #003b70;
 			}
 
-
 	.custom-wrapper {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		margin-top: 100px; /* Navbar’a çarpmadan başlasın */
 	}
-
 
 	body.custom-wrapper {
 		display: flex !important;
@@ -129,7 +124,7 @@
 		box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 		border-radius: 8px;
 		padding: 20px;
-		width: 1000px;
+		width: 1250px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -141,13 +136,20 @@
 		align-items: center;
 		justify-content: space-between;
 		width: 100%;
+		gap: 20px;
 	}
 
+	/* Her bir bilgi bloğunun genişliği sabitlendi, kayma engellendi */
 	.departure, .arrival, .flight-duration, .details-price {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
+		width: 250px;
+		min-height: 100px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.time {
@@ -199,8 +201,8 @@
 	.price {
 		font-weight: bold;
 		font-size: 18px;
+		color: #005294;
 	}
-
 
 	.flight-card {
 		background-color: #fff;
@@ -225,7 +227,7 @@
 		cursor: pointer;
 	}
 
-	/*Modal Arkaplanı*/
+	/* Modal Arkaplanı */
 	.modal-bg {
 		display: none;
 		position: fixed;
@@ -254,8 +256,8 @@
 	}
 
 	.modal-bg.show {
-		display: flex; /* Görünür hale getirme */
-		opacity: 1; /* Opaklığı artır */
+		display: flex;
+		opacity: 1;
 	}
 
 	.close-btn {
@@ -329,24 +331,30 @@
 </style>
 
 
+
 <script>
 	document.addEventListener("DOMContentLoaded", function () {
-		const modalBg = document.querySelector('.modal-bg');
-		const detailsBtn = document.querySelector('.details-btn');
-		const closeBtn = document.querySelector('.close-btn');
+		const detailButtons = document.querySelectorAll('.details-btn');
+		const modals = document.querySelectorAll('.modal-bg');
 
-		detailsBtn.addEventListener('click', function () {
-			modalBg.style.display  = 'flex';
-		});
+		detailButtons.forEach((button, index) => {
+			const modal = modals[index];
 
-		closeBtn.addEventListener('click', function () {
-			modalBg.style.display = 'none';
-		});
+			button.addEventListener('click', function () {
+				modal.classList.add("show");
+			});
 
-		window.addEventListener('click', function (e) {
-			if (e.target === modalBg) {
-				modalBg.style.display = 'none';
-			}
+			const closeBtn = modal.querySelector('.close-btn');
+
+			closeBtn.addEventListener('click', function () {
+				modal.classList.remove("show");
+			});
+
+			window.addEventListener('click', function (e) {
+				if (e.target === modal) {
+					modal.classList.remove("show");
+				}
+			});
 		});
 	});
 
