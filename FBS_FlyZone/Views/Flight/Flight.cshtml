@@ -34,7 +34,7 @@
 		<div class="row justify-content-center align-items-center mb-30-none">
 			<div class="col-xxl-5 col-xl-6 col-lg-12 mb-30">
 				<div class="banner-content" data-aos="fade-right" data-aos-duration="1800">
-					<span class="sub-title"><span>Fly</span>Zone</span>
+					<span class="sub-title"><span>Fly</span>Next</span>
 					<h1 class="title">Uçuşunuzu Hemen Rezerve Edin</h1>
 					<p>
 						FlyZone Airlines, lüks ve kurumsal özel jet charter hizmetleri için standartları aşıyor ve yeni bir seviyeye taşıyor. Profesyonel bir hizmet sunmaktan gurur duyuyoruz.
@@ -149,8 +149,6 @@
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	End Call-widget
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-
 <section class="book-form-section ptb-60" style="border-radius:15px">
 	<div class="container cccda">
 		<div class="book-form-area bg-overlay-black bg_img" data-background="~/flynext/assets/images/bg/bg-3.png">
@@ -177,7 +175,7 @@
 										<i class="icon-from-airplane"></i>
 									</div>
 
-									<select class="book-select form--control custom-select" >
+									<select class="book-select form--control custom-select">
 										@foreach (var item in Model)
 										{
 											<option value="@item.DepartureAirport.AirportID">@item.DepartureAirport.Airport_Name</option>
@@ -301,12 +299,60 @@
 
 </section>
 
+
+<div class="bilgilendirme-kutusu">
+	<h4>Değerli Yolcularımız,</h4>
+	<p>
+		İstanbul'da yaşanan hava muhalefeti nedeniyle, 19-20-21-22-23 Şubat 2025 tarihli,
+		İstanbul Havalimanı (IST) kalkış ve varışlı bazı uçuşlarımız iptal edilmiştir.
+		Uçuşlarınızla ilgili güncel bilgiye <a href="@Url.Action("FlightStatus", "BuyAndManageTicket")" style="color:#dbba86;">
+			<strong>
+
+				uçuş durumu
+
+			</strong>
+		</a> sayfamız üzerinden,
+		uçuş numaranızı, kalkış ve varış yeri bilgisini girerek ulaşabilir, iade veya değişiklik
+		haklarınızı yine aynı sayfadan öğrenebilirsiniz.
+	</p>
+	<p>Anlayışınız için teşekkür ederiz.</p>
+	<p class="son-guncelleme">Son güncelleme: 22.02.2025 11:30 (GMT +3)</p>
+</div>
+
 <style>
+	.bilgilendirme-kutusu {
+		border: 1px solid #ccc;
+		color: white;
+		background-color: #19232d;
+		padding: 20px;
+		margin: 20px auto;
+		margin-bottom: 70px;
+		max-width: 1200px;
+		font-family: Arial, sans-serif;
+		border-left: 5px solid #dbba86;
+	}
+
+		.bilgilendirme-kutusu h4 {
+			color: #dbba86;
+			margin-top: 0;
+		}
+
+		.bilgilendirme-kutusu p {
+			margin: 10px 0;
+			line-height: 1.6;
+		}
+
+	.son-guncelleme {
+		font-size: 0.9em;
+		color: #555;
+		margin-top: 10px;
+	}
+
 	.custom-select {
 		appearance: none; /* Varsayılan oku gizle */
 		background: url('data:image/svg+xml;base64,...') no-repeat right 10px center; /* Simgeyi özelleştir */
 		padding-right: 30px; /* Simge için boşluk bırak */
-		min-width:200px;
+		min-width: 200px;
 		max-width: 315px;
 		box-sizing: border-box;
 	}
@@ -445,11 +491,11 @@
 			flex: 0 0 auto;
 		}
 
-		.cccda{
+	.cccda {
 		min-height: 450px;
 		min-width: 1430px;
 		border-radius: 50px;
-		}
+	}
 
 </style>
 

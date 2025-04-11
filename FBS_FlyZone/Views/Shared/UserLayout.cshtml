@@ -1,7 +1,4 @@
-﻿@{
-    Layout = null;
-}
-
+﻿
 @{
 	ViewData["Title"] = "Home Page";
 }
@@ -77,5 +74,7 @@
     <script src="~/flynext/assets/js/jquery.nice-select.js"></script>
     <!-- main -->
     <script src="~/flynext/assets/js/main.js"></script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

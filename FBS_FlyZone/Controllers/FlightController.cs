@@ -21,6 +21,7 @@ namespace FBS_FlyZone.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult SearchedFlight()
         {
 

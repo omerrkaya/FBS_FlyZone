@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FBS_FlyZone.Controllers
 {
+    [AllowAnonymous]
     public class BuyAndManageTicketController : Controller
     {
         public IActionResult FlightStatus()
