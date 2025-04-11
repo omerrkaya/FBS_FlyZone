@@ -18,6 +18,10 @@ namespace DataAccessLayer.Concrete
                 //"Password = ......;" +
                 "Trusted_Connection=True;" +
                 "TrustServerCertificate=True;");
+
+            // Umut için inmemory database, yukarısı silinir ve aşağısı açılır, Lütfen normal normal şartlarda dokunmayın.
+               // optionsBuilder.UseInMemoryDatabase("FBS_FlyzoneDb");
+
         }
 
         public DbSet<User> Users { get; set; }
