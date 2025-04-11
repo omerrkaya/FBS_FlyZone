@@ -35,10 +35,11 @@ namespace BusinessLayer.Concrete
         public List<Flight> GetListAll()
         {
             using var c = new Context();
-            return c.Set<Flight>()
+            return c.Set<Flight>()     
                     .Include(f => f.Airline) // İlgili veriyi de yükle
                     .Include(f => f.DepartureAirport) // İlgili veriyi de yükle
                     .Include(f => f.ArrivalAirport)
+                    .Include(f => f.Aircraft)
                     .ToList();
         }
 

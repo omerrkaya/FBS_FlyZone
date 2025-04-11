@@ -27,6 +27,12 @@ namespace FBS_FlyZone.Controllers
 
             var values = fm.GetFlightListWithAirport();
 
+            if (values == null)
+            {
+                // Flight bulunamadığında hatayı önleyin
+                return View("Error");
+            }
+
             return View(values);
         }
 
@@ -34,7 +40,14 @@ namespace FBS_FlyZone.Controllers
         [HttpPost]
         public IActionResult SearchedFlight(FlightSearchViewModel model)
         {
-            var values = fm.GetFlightListWithAirport();
+            var values = fm.GetListAll();
+
+            
+            if (values == null)
+            {
+                // Flight bulunamadığında hatayı önleyin
+                return View("Error");
+            }
 
             return View(values);
         }
