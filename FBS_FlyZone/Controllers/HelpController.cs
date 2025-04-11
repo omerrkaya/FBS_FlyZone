@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FBS_FlyZone.Controllers
 {
+    [AllowAnonymous]
     public class HelpController : Controller
     {
         public IActionResult HelpCenter()

@@ -30,10 +30,10 @@
 
 <!-- Form -->
 <div class="form-container mt-4">
-    <form method="post" action="/Ucus/DurumSorgula">
-        <div class="d-flex justify-content-center align-items-center gap-2">
+    <form method="post">
+        <div class="d-flex justify-content-center align-items-center gap-2" style="border-radius:15px;margin-right:5px">
             <!-- Combobox -->
-            <select class="form-select combobox-custom form-control" name="secim">
+            <select class="form-select combobox-custom form-control" name="secim" style="border-radius:15px;margin-right:5px">
                 <option selected disabled>Uçuş No</option>
                 <option value="1">1001</option>
                 <option value="2">2342</option>
@@ -41,16 +41,16 @@
             </select>
 
             <!-- TK + Textbox -->
-            <div class="input-group textbox-custom align-items-center" style="height: 50px; margin-top: 14px;">
-                <span class="input-group-text bg-light text-dark fw-bold">TK</span>
-                <input type="text" name="ucusNo" class="form-control" placeholder="Uçuş numaranızı girin">
+            <div class="input-group textbox-custom align-items-center" style="height: 50px; margin-top: 14px;margin-left:5px; margin-right:15px; background-color:#DCBB87;">
+                <span class="input-group-text text-dark fw-bold" style="background-color:white; border-radius:5px;margin-right:3px;margin-left:3px;">TK</span>
+                <input type="text" name="ucusNo" class="form-control" placeholder="Uçuş numaranızı girin" style="background-color:white;border-radius:5px;margin-left:3px;margin-right:3px;">
             </div>
 
             <!-- Tarih -->
-            <input type="date" name="tarih" class="form-control date-custom" value="">
+            <input type="date" name="tarih" class="form-control date-custom" value="" style="margin-right:5px">
 
             <!-- OK Button -->
-            <button type="submit" class="btn btn-danger d-flex align-items-center justify-content-center date-custom">
+            <button type="submit" class="btn btn-danger d-flex align-items-center justify-content-center date-custom" style="border-radius:5px;">
                 <i class="bi bi-arrow-right"></i>
             </button>
         </div>

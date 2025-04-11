@@ -9,23 +9,23 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
-//builder.Services.AddSession();
+builder.Services.AddSession();
 
 
-//builder.Services.AddMvc(config =>
-//{
-//    var policy = new AuthorizationPolicyBuilder()
-//        .RequireAuthenticatedUser()
-//        .Build();
-//    config.Filters.Add(new AuthorizeFilter(policy));
-//});
+builder.Services.AddMvc(config =>
+{
+    var policy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+    config.Filters.Add(new AuthorizeFilter(policy));
+});
 
-//builder.Services.AddMvc();
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//  .AddCookie(option =>
-//  {
-//      option.LoginPath = "/Account/Login";
-//  });
+builder.Services.AddMvc();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+  .AddCookie(option =>
+  {
+      option.LoginPath = "/Account/Login";
+  });
 
 
 
@@ -45,9 +45,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-//app.UseAuthentication();
+app.UseAuthentication();
 
-//app.UseSession();
+app.UseSession();
 
 app.UseRouting();
 

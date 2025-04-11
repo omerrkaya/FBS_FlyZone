@@ -27,7 +27,7 @@
 								<div class="col-xl-12 form-group">
 									<label class="icon"><i class="icon-name_icone"></i></label>
 									@* <input type="text" class="form--control" name="User_Name_Surname" placeholder="Kullanıcı Adı" required> *@	
-									@Html.TextBoxFor(m => m.User_Name_Surname, new { @class = "form--control", placeholder = "Kullanıcı Adı", required = "required" })
+									@Html.TextBoxFor(m => m.User_Name_Surname, new { @class = "form--control", placeholder = "Ad Soyad", required = "required" })
 									@Html.ValidationMessageFor(m => m.User_Name_Surname, "", new { @class = "text-danger" })
 							</div>
 								<div class="col-xl-12 form-group">

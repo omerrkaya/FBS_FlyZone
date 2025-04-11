@@ -5,77 +5,79 @@
 	Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
+<div class="dark" style="height:100px">
+	
+</div>
 
-
-
-<div id="flight-list">
-	@foreach (var flight in Model)
-	{
-		<div class="flight-container">
-			<div class="flight-info">
-				<div class="departure">
-					<span class="time">05:15</span>
-					<span class="city">Gaziantep (GZT)</span>
-					<span class="airport">@flight.DepartureAirport.Airport_Name</span>
-				</div>
-
-				<div class="flight-duration">
-					<span class="direct">Direkt</span>
-					<span class="duration">1sa 45dk</span>
-					<span class="plane-icon">✈️</span>
-				</div>
-
-				<div class="arrival">
-					<span class="time">07:00</span>
-					<span class="city">İstanbul (SAW)</span>
-					<span class="airport">@flight.ArrivalAirport.Airport_Name</span>
-				</div>
-
-				<button class="details-btn">Detay</button>
-				<div class="details-price">
-					<span class="price">@flight.Flight_Price TRY</span>
-				</div>
-			</div>
-		</div>
-		<div class="modal-bg">
-			<div class="modal">
-				<span class="close-btn">&times;</span>
-				<h2>Seyahat Detayı</h2>
-				<p class="date">10 Nisan 2025, Perşembe</p>
-				<div class="airline-info">
-					<span>✈️ Ajet Hava Yolları</span>
-					<span>VF3233</span>
-					<span>⏰ 1sa 45dk</span>
-				</div>
-				<div class="route">
+<div class="custom-wrapper">
+	<div id="flight-list">
+		@foreach (var flight in Model)
+		{
+			<div class="flight-container">
+				<div class="flight-info">
 					<div class="departure">
-						<strong>Kalkış</strong>
 						<span class="time">05:15</span>
 						<span class="city">Gaziantep (GZT)</span>
-						<span class="airport">Gaziantep Havalimanı</span>
+						<span class="airport">@flight.DepartureAirport.Airport_Name</span>
 					</div>
-					<div class="plane">
-						<span class="icon">✈️</span>
-						<span>Airbus A320</span>
+
+					<div class="flight-duration">
+						<span class="direct">Direkt</span>
+						<span class="duration">1sa 45dk</span>
+						<span class="plane-icon">✈️</span>
 					</div>
+
 					<div class="arrival">
-						<strong>Varış</strong>
 						<span class="time">07:00</span>
 						<span class="city">İstanbul (SAW)</span>
-						<span class="airport">Sabiha Gökçen Havalimanı</span>
+						<span class="airport">@flight.ArrivalAirport.Airport_Name</span>
+					</div>
+
+					<button class="details-btn">Detay</button>
+					<div class="details-price">
+						<span class="price">@flight.Flight_Price TRY</span>
 					</div>
 				</div>
 			</div>
-		</div>
-	}
-</div>
+			<div class="modal-bg">
+				<div class="modal">
+					<span class="close-btn">&times;</span>
+					<h2>Seyahat Detayı</h2>
+					<p class="date">10 Nisan 2025, Perşembe</p>
+					<div class="airline-info">
+						<span>✈️ Ajet Hava Yolları</span>
+						<span>VF3233</span>
+						<span>⏰ 1sa 45dk</span>
+					</div>
+					<div class="route">
+						<div class="departure">
+							<strong>Kalkış</strong>
+							<span class="time">05:15</span>
+							<span class="city">Gaziantep (GZT)</span>
+							<span class="airport">Gaziantep Havalimanı</span>
+						</div>
+						<div class="plane">
+							<span class="icon">✈️</span>
+							<span>Airbus A320</span>
+						</div>
+						<div class="arrival">
+							<strong>Varış</strong>
+							<span class="time">07:00</span>
+							<span class="city">İstanbul (SAW)</span>
+							<span class="airport">Sabiha Gökçen Havalimanı</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
 
-<!-- Sayfalama Butonları -->
-<div class="pagination" id="pagination">
-	<button onclick="changePage('prev')">Önceki</button>
-	<button onclick="changePage('next')">Sonraki</button>
+	<!-- Sayfalama Butonları -->
+	<div class="pagination" id="pagination" >
+		<button onclick="changePage('prev')">Önceki</button>
+		<button onclick="changePage('next')">Sonraki</button>
+	</div>
 </div>
-
 
 
 
@@ -85,10 +87,12 @@
 
 <style>
 
+
 	.pagination {
 		display: flex;
 		justify-content: center;
 		margin-top: 20px;
+		margin-bottom: 30px;
 	}
 
 		.pagination button {
@@ -107,20 +111,19 @@
 
 
 	.custom-wrapper {
-		all: unset; /*   Varsayılan stilleri sıfırlar */
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		align-items: center;
-		height: 90vh;
+		margin-top: 100px; /* Navbar’a çarpmadan başlasın */
 	}
 
-	/* 	body.custom-wrapper {
-							display: flex !important;
-							justify-content: center !important;
-							align-items: center !important;
-							margin-top: 200px;
-						}   */
+
+	body.custom-wrapper {
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+		margin-top: 200px;
+	}
 
 	.flight-container {
 		box-shadow: 0 4px 10px rgba(0,0,0,0.1);

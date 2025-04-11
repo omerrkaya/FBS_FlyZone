@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace FBS_FlyZone.Controllers
 {
-   
+ [AllowAnonymous]
     public class AccountController : Controller
     {
 
@@ -30,30 +30,30 @@ namespace FBS_FlyZone.Controllers
 
 
         // POST: Login
-        [HttpPost] 
-        //[AllowAnonymous]
-        public /*async Task<>*/IActionResult Login(User p)
+        [HttpPost]
+       
+        public async Task<IActionResult>  Login(User p)
         {
 
-            //Context c = new Context();
-            //var datavalue = c.Users.FirstOrDefault(x => x.Email == p.Email && x.UserPassword == p.UserPassword);
+            Context c = new Context();
+            var datavalue = c.Users.FirstOrDefault(x => x.Email == p.Email && x.UserPassword == p.UserPassword);
 
-            //if (datavalue != null)
-            //{
-            //    var claims = new List<Claim>
-            //    {
-            //        new Claim(ClaimTypes.Name, p.Email)
-            //    };
-            //    var userIdentity = new ClaimsIdentity(claims, "Login");
-            //    ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);  
-            //    await HttpContext.SignInAsync(principal);
-            //    return RedirectToAction("Flight", "Flight");
-            //}
-            //else
-            //{
+            if (datavalue != null)
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, p.Email)
+                };
+                var userIdentity = new ClaimsIdentity(claims, "Login");
+                ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+                await HttpContext.SignInAsync(principal);
+                return RedirectToAction("Flight", "Flight");
+            }
+            else
+            {
+                return View();
+            }
 
-            //}
-            return View();
 
         }
 
