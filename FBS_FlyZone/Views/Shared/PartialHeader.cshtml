@@ -81,9 +81,26 @@
 											<i class="icon-btn-icon"></i>
 										</a>
 										<div class="header-action">
-											<a asp-controller="Account" asp-action="Login" class="btn--base">
-												<i class="icon-btn-icon"></i> Giriş Yap
-											</a>
+											@if (User.Identity != null && User.Identity.IsAuthenticated) //eğer kullanıcı giriş yapmışsa ve null değilse ve authenticated ise(doğrulanmış) bu şekilde düşündüm, kafana yatmazsa değişebilirsinin.
+											{
+												<div class="dropdown">
+													<a class="btn--base dropdown-toggle" href="#" role="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														<i class="fas fa-user-circle"></i> @User.Identity.Name
+													</a>
+													<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+														<a class="dropdown-item" asp-controller="Account" asp-action="Profile"><i class="fas fa-id-card"></i> Profilim</a>
+														<a class="dropdown-item" href="#"><i class="fas fa-ticket-alt"></i> Biletlerim</a>
+														<div class="dropdown-divider"></div>
+														<a class="dropdown-item" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+													</div>
+												</div>
+											}
+											else
+											{
+												<a asp-controller="Account" asp-action="Login" class="btn--base">
+													<i class="icon-btn-icon"></i> Giriş Yap
+												</a>
+											}
 										</div>
 									</div>
 								</div>
