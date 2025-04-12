@@ -5,9 +5,17 @@
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
+<style>
+	body {
+		background-color: #19232d;
+	}
+
+
+</style>
+<div style="margin-top:100px;margin-bottom:100px; background-color:#19232D ; background-color:transparent;"></div>
 @if (Model != null)
 {
-    <div class="container py-5">
+    <div class="container py-5 ">
         <div class="row">
             <!-- Sol Menü -->
             <div class="col-lg-3">
@@ -21,7 +29,8 @@
                     </div>
                 </div>
                 <div class="card mb-4">
-                    <div class="card-body">
+                    <div class="card-body"
+                    >
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                 <a href="#profile-info" class="text-decoration-none">Profil Bilgilerim</a>
@@ -31,9 +40,6 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                 <a href="#flight-history" class="text-decoration-none">Uçuş Geçmişim</a>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <a href="#preferences" class="text-decoration-none">Tercihlerim</a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                 <a href="#settings" class="text-decoration-none">Hesap Ayarları</a>
@@ -46,11 +52,11 @@
             <!-- Sağ İçerik -->
             <div class="col-lg-9">
                 <!-- Profil Bilgileri -->
-                <section id="profile-info" class="card mb-4">
+                <section id="profile-info" class="card mb-4" >
                     <div class="card-header">
                         <h4>Profil Bilgilerim</h4>
                     </div>
-                    <div class="card-body">
+					<div class="card-body" style="margin-bottom:22px;">
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Ad Soyad</p>
@@ -173,57 +179,6 @@
                     </div>
                 </section>
 
-                <!--Profil Kişi Tercihleri -->
-                <section id="preferences" class="card mb-4">
-                    <div class="card-header">
-                        <h4>Tercihlerim</h4>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="mb-3">
-                                <label class="form-label">Favori Uçuş Sınıfı</label>
-                                <select class="form-select">
-                                    <option selected>Ekonomi</option>
-                                    <option>Business</option>
-                                    <option>First Class</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Tercih Ettiğim Havayolları</label>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="thk" checked>
-                                    <label class="form-check-label" for="thk">Türk Hava Yolları</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="pegasus" checked>
-                                    <label class="form-check-label" for="pegasus">Pegasus</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="anadolujet">
-                                    <label class="form-check-label" for="anadolujet">AnadoluJet</label>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Koltuk Tercihi</label>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="seatPreference" id="window" checked>
-                                    <label class="form-check-label" for="window">Pencere Kenarı</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="seatPreference" id="aisle">
-                                    <label class="form-check-label" for="aisle">Koridor</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="seatPreference" id="noPreference">
-                                    <label class="form-check-label" for="noPreference">Fark Etmez</label>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary">Kaydet</button>
-                            </div>
-                        </form>
-                    </div>
-                </section>
 
                 <!-- Hesap Ayarları -->
                 <section id="settings" class="card mb-4">

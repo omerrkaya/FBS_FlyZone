@@ -19,11 +19,11 @@ namespace EntityLayer.Concrete
 
         
         [Required,StringLength(3)]
-        public char IATA_Code { get; set; }
+        public string IATA_Code { get; set; }
 
         
         [Required, StringLength(4)]
-        public char ICAO_Code { get; set; }
+        public string ICAO_Code { get; set; }
 
         
         [Required, StringLength(50)]

@@ -6,10 +6,10 @@
 	Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
- <div class="dark" style="height:100px">
+<div class="dark" style="height:100px">
 </div>
 
- <div class="custom-wrapper">
+<div class="custom-wrapper" style="font-family:monospace;">
 	<div id="flight-list">
 		@foreach (var flight in Model)
 		{
@@ -34,20 +34,23 @@
 						<span class="airport">@flight.ArrivalAirport?.Airport_Name</span>
 					</div>
 
-					<button class="details-btn">Detay</button>
+					<button class="details-btn" style="box-shadow: 5px 3px rgba(0,0,0,0.3);">Detay</button>
 					<div class="details-price">
-						<span class="price">@flight.Flight_Price? TRY</span>
+						<span class="price">@flight.Flight_Price TRY</span>
+						<br />
+						<a href="@Url.Action("FlightDetail", "Flight", new { id = flight.FlightID })" class="buy">Satın Al</a>
+
 					</div>
 				</div>
 			</div>
 			<div class="modal-bg">
-				<div class="modal">
+				<div class="modal" style="text-align:center; ">
 					<span class="close-btn">&times;</span>
-					<h2>Seyahat Detayı</h2>
+					<h2 style="text-align:center; font-family:monospace ; color:#dcbb87;">Seyahat Detayı</h2>
 					<p class="date">@flight.Flight_DateTime.ToString("dd MMMM yyyy, dddd", new CultureInfo("tr-TR"))</p>
 					<div class="airline-info">
 						<span>✈️ @flight.Airline.Airlines_Name</span>
-						<span>@flight.Flight_Code?</span>
+						<span>@flight.Flight_Code</span>
 						<span>⏰ @($"{flight.Estimated_Time.Hours} sa {flight.Estimated_Time.Minutes} dk")</span>
 					</div>
 					<div class="route">
@@ -64,7 +67,7 @@
 						<div class="arrival">
 							<strong>Varış</strong>
 							<span class="time">@arrivalTime.ToString("HH:mm")</span>
-							<span class="city">@flight.DepartureAirport?.AP_City (@flight.DepartureAirport?.IATA_Code)</span>
+							<span class="city">@flight.ArrivalAirport?.AP_City (@flight.ArrivalAirport?.IATA_Code)</span>
 							<span class="airport">@flight.ArrivalAirport?.Airport_Name</span>
 						</div>
 					</div>
@@ -75,16 +78,36 @@
 
 	<!-- Sayfalama Butonları -->
 	<div class="pagination" id="pagination">
-		<button onclick="changePage('prev')">Önceki</button>
-		<button onclick="changePage('next')">Sonraki</button>
+		<button onclick="changePage('prev')" style="box-shadow: 5px 3px rgba(0,0,0,0.3);">
+			Önceki
+		</button>
+		<button onclick="changePage('next')" style="box-shadow: 5px 3px rgba(0,0,0,0.3);">
+			Sonraki
+		</button>
 	</div>
 </div>
- 
+
 
 
 
 
 <style>
+	.buy {
+		background-color: #dcbb87;
+		width: 50%;
+		box-shadow: 5px 3px rgba(0,0,0,0.3);
+		border-radius: 5px;
+		text-decoration: none;
+		color: #19232D;
+		font-weight: bold;
+	}
+
+		.buy:hover {
+			background-color: #19232D;
+			color: #dcbb87;
+			transition: background-color 0.4s;
+		}
+
 	.pagination {
 		display: flex;
 		justify-content: center;
@@ -95,39 +118,44 @@
 		.pagination button {
 			padding: 10px 20px;
 			margin: 0 5px;
-			background-color: #005294;
-			color: white;
+			background: #dcbb87;
+			color: #19232D;
 			border: none;
 			border-radius: 5px;
 			cursor: pointer;
 		}
 
 			.pagination button:hover {
-				background-color: #003b70;
+				background-color: #19232D;
+				color: #dcbb87;
+				transition: background-color 0.3s;
 			}
 
 	.custom-wrapper {
+		background-color:#3d3d3d;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin-top: 100px; /* Navbar’a çarpmadan başlasın */
+		padding-top: 70px; /* Navbar’a çarpmadan başlasın */
 	}
 
 	body.custom-wrapper {
 		display: flex !important;
 		justify-content: center !important;
 		align-items: center !important;
-		margin-top: 200px;
 	}
 
 	.flight-container {
-		box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+		background-color: #19232D;
+		color: #dcbb87;
+		box-shadow: 11px 8px rgba(0,0,0,0.3);
 		border-radius: 8px;
 		padding: 20px;
-		width: 1250px;
+		width: 1270px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		margin-bottom: 20px;
 		gap: 40px;
 	}
 
@@ -164,13 +192,14 @@
 	}
 
 	.airport {
+		width: 100%;
 		font-size: 14px;
-		color: #6c757d;
+		color: #dcbb87;
 		margin-top: 2px;
 	}
 
 	.flight-duration {
-		color: #6c757d;
+		color: #dcbb87;
 	}
 
 	.direct {
@@ -185,7 +214,7 @@
 	.plane-icon {
 		font-size: 24px;
 		margin-top: 5px;
-		color: #007bff;
+		color: #dcbb87;
 	}
 
 	.details-price {
@@ -194,21 +223,22 @@
 
 	.details {
 		cursor: pointer;
-		color: #007bff;
+		color: #dcbb87;
 		margin-bottom: 10px;
 	}
 
 	.price {
 		font-weight: bold;
 		font-size: 18px;
-		color: #005294;
+		color: #dcbb87;
 	}
 
 	.flight-card {
-		background-color: #fff;
+		background-color: #dcbb87;
+		color: #19232D;
 		padding: 20px;
 		border-radius: 8px;
-		box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+		box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 		text-align: center;
 	}
 
@@ -221,11 +251,17 @@
 		margin-top: 10px;
 		padding: 6px 12px;
 		border: none;
-		background-color: #007bff;
-		color: white;
+		background-color: #dcbb87;
+		color: #19232D;
 		border-radius: 4px;
 		cursor: pointer;
 	}
+
+		.details-btn:hover {
+			background-color: #19232D;
+			color: #dcbb87;
+			transition: background-color 0.4s;
+		}
 
 	/* Modal Arkaplanı */
 	.modal-bg {
@@ -245,7 +281,8 @@
 	/* Modal İçeriği */
 	.modal {
 		display: flow;
-		background-color: #fff;
+		background-color: #19232D;
+		color: #dcbb87;
 		padding: 20px;
 		border-radius: 8px;
 		width: 700px;
@@ -270,13 +307,14 @@
 	}
 
 		.close-btn:hover {
-			color: #007bff;
+			color: #dcbb87;
 		}
 
 	.airline-info {
 		display: flex;
 		justify-content: space-around;
-		background-color: #e0f0ff;
+		background-color: #dcbb87;
+		color: #19232D;
 		padding: 10px;
 		border-radius: 4px;
 		margin-top: 10px;
