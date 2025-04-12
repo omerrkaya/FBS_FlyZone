@@ -99,7 +99,28 @@ namespace FBS_FlyZone.Controllers
         // Profil sayfası
         public IActionResult Profile()
         {
-            return View();
+            if (User.Identity == null || !User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var userEmail = User.Identity.Name;
+            Context c = new Context();
+            var userValues = c.Users.FirstOrDefault(x => x.Email == userEmail);
+
+            if (userValues == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            return View(userValues);
+        }
+
+        // Çıkış işlemi
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Flight", "Flight");
         }
     }
 }

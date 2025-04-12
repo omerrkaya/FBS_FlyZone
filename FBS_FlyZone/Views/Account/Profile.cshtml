@@ -1,0 +1,294 @@
+@using EntityLayer.Concrete
+@model User
+@{
+    ViewData["Title"] = "Kullanıcı Profili";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+@if (Model != null)
+{
+    <div class="container py-5">
+        <div class="row">
+            <!-- Sol Menü -->
+            <div class="col-lg-3">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">@Model.User_Name_Surname</h5>
+                        <p class="text-muted mb-1">@Model.Email</p>
+                        <p class="text-muted mb-4">FlyZone Üyesi</p>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <a href="#profile-info" class="text-decoration-none">Profil Bilgilerim</a>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <a href="#my-tickets" class="text-decoration-none">Biletlerim</a>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <a href="#flight-history" class="text-decoration-none">Uçuş Geçmişim</a>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <a href="#preferences" class="text-decoration-none">Tercihlerim</a>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <a href="#settings" class="text-decoration-none">Hesap Ayarları</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sağ İçerik -->
+            <div class="col-lg-9">
+                <!-- Profil Bilgileri -->
+                <section id="profile-info" class="card mb-4">
+                    <div class="card-header">
+                        <h4>Profil Bilgilerim</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Ad Soyad</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Model.User_Name_Surname</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">E-posta</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Model.Email</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Üyelik Tarihi</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Model.RegisterationDate.ToString("dd.MM.yyyy")</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-primary">Bilgilerimi Güncelle</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Biletlerim (Örnek görüntü için oluşturdum) -->
+                <section id="my-tickets" class="card mb-4">
+                    <div class="card-header">
+                        <h4>Biletlerim</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>PNR</th>
+                                        <th>Nereden</th>
+                                        <th>Nereye</th>
+                                        <th>Tarih</th>
+                                        <th>Durum</th>
+                                        <th>İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Örnek bilet verileri (yine bunlar da Örnek veriler) -->
+                                    <tr>
+                                        <td>FZ12345</td>
+                                        <td>İstanbul</td>
+                                        <td>Ankara</td>
+                                        <td>15.07.2023</td>
+                                        <td><span class="badge bg-success">Onaylandı</span></td>
+                                        <td>
+                                            <a href="#" class="btn btn-sm btn-info">Detay</a>
+                                            <a href="#" class="btn btn-sm btn-warning">Değişiklik</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>FZ67890</td>
+                                        <td>İzmir</td>
+                                        <td>Antalya</td>
+                                        <td>22.08.2023</td>
+                                        <td><span class="badge bg-danger">İptal</span></td>
+                                        <td>
+                                            <a href="#" class="btn btn-sm btn-info">Detay</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!--Kişi Uçuş Geçmişmi -->
+                <section id="flight-history" class="card mb-4">
+                    <div class="card-header">
+                        <h4>Uçuş Geçmişim</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Uçuş Kodu</th>
+                                        <th>Nereden</th>
+                                        <th>Nereye</th>
+                                        <th>Tarih</th>
+                                        <th>Havayolu</th>
+                                        <th>Durum</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Örnek geçmiş uçuş verileri -->
+                                    <tr>
+                                        <td>TK1234</td>
+                                        <td>İstanbul</td>
+                                        <td>Londra</td>
+                                        <td>10.05.2023</td>
+                                        <td>Türk Hava Yolları</td>
+                                        <td><span class="badge bg-secondary">Tamamlandı</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>PC2345</td>
+                                        <td>Berlin</td>
+                                        <td>İstanbul</td>
+                                        <td>15.03.2023</td>
+                                        <td>Pegasus</td>
+                                        <td><span class="badge bg-secondary">Tamamlandı</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!--Profil Kişi Tercihleri -->
+                <section id="preferences" class="card mb-4">
+                    <div class="card-header">
+                        <h4>Tercihlerim</h4>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label">Favori Uçuş Sınıfı</label>
+                                <select class="form-select">
+                                    <option selected>Ekonomi</option>
+                                    <option>Business</option>
+                                    <option>First Class</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Tercih Ettiğim Havayolları</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="thk" checked>
+                                    <label class="form-check-label" for="thk">Türk Hava Yolları</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="pegasus" checked>
+                                    <label class="form-check-label" for="pegasus">Pegasus</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="anadolujet">
+                                    <label class="form-check-label" for="anadolujet">AnadoluJet</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Koltuk Tercihi</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="seatPreference" id="window" checked>
+                                    <label class="form-check-label" for="window">Pencere Kenarı</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="seatPreference" id="aisle">
+                                    <label class="form-check-label" for="aisle">Koridor</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="seatPreference" id="noPreference">
+                                    <label class="form-check-label" for="noPreference">Fark Etmez</label>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary">Kaydet</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Hesap Ayarları -->
+                <section id="settings" class="card mb-4">
+                    <div class="card-header">
+                        <h4>Hesap Ayarları</h4>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="currentPassword" class="form-label">Mevcut Şifre</label>
+                                <input type="password" class="form-control" id="currentPassword">
+                            </div>
+                            <div class="mb-3">
+                                <label for="newPassword" class="form-label">Yeni Şifre</label>
+                                <input type="password" class="form-control" id="newPassword">
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">Yeni Şifre (Tekrar)</label>
+                                <input type="password" class="form-control" id="confirmPassword">
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary">Şifremi Değiştir</button>
+                            </div>
+                        </form>
+                        <hr>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                <label class="form-check-label" for="emailNotifications">E-posta Bildirimleri</label>
+                            </div>
+                            <small class="text-muted">Kampanya ve fırsatlardan haberdar olmak için e-posta almak istiyorum.</small>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-danger">Hesabımı Sil</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container py-5">
+        <div class="alert alert-warning">
+            <h4>Kullanıcı bilgileri yüklenemedi!</h4>
+            <p>Lütfen tekrar giriş yapmayı deneyin.</p>
+            <a asp-controller="Account" asp-action="Login" class="btn btn-primary">Giriş Yap</a>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        // Profil sayfası için gerekli JavaScript kodları buraya eklenebilir
+        $(document).ready(function() {
+            // Sayfa içi linkler için smooth scroll
+            $('a[href^="#"]').on('click', function(e) {
+                e.preventDefault();
+                var target = $(this.hash);
+                $('html, body').animate({
+                    scrollTop: target.offset().top - 20
+                }, 500);
+            });
+        });
+    </script>
+} 
