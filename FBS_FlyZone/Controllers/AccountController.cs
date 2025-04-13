@@ -115,6 +115,51 @@ namespace FBS_FlyZone.Controllers
 
             return View(userValues);
         }
+        
+        // GET: ChangePassword 
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            if (User.Identity == null || !User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login");
+            }
+            
+            return View(new ChangePasswordViewModel());
+        }
+        
+        // POST: ChangePassword
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            
+            if (User.Identity == null || !User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login");
+            }
+            
+            var userEmail = User.Identity?.Name ?? string.Empty;
+            
+            bool result = um.ChangePassword(
+                userEmail, 
+                model.CurrentPassword ?? string.Empty, 
+                model.NewPassword ?? string.Empty);
+            
+            if (result)
+            {
+                TempData["SuccessMessage"] = "Şifreniz başarıyla değiştirildi.";
+                return RedirectToAction("Profile");
+            }
+            else
+            {
+                ModelState.AddModelError("CurrentPassword", "Mevcut şifreniz doğru değil.");
+                return View(model);
+            }
+        }
 
         // Çıkış işlemi
         public async Task<IActionResult> Logout()
@@ -124,34 +169,3 @@ namespace FBS_FlyZone.Controllers
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//var claims = new List<Claim>
-//{
-//    new Claim(ClaimTypes.Name, p.Email)
-//};
-//var userIdentity = new ClaimsIdentity(claims, "Login");
-//ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
-//await HttpContext.SignInAsync(principal);
