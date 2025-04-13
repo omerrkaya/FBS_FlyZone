@@ -164,7 +164,8 @@
 						<label><input type="radio" name="flightType" value="round"> Gidiş - Dönüş</label>
 					</div>
 
-					<form class="book-form" style="border-radius:15px">
+					@using (Html.BeginForm("SearchedFlight", "Flight", FormMethod.Post, new { @class = "book-form" }))
+					{
 						<!-- Standart Form -->
 						<div class="row justify-content-center  align-items-center" id="mainFlightForm">
 							<!-- Nereden -->
@@ -175,7 +176,7 @@
 										<i class="icon-from-airplane"></i>
 									</div>
 
-									<select class="book-select form--control custom-select">
+									<select name="DepartureAirportId" class="book-select form--control custom-select">
 										@foreach (var item in Model)
 										{
 											<option value="@item.DepartureAirport.AirportID">@item.DepartureAirport.Airport_Name</option>
@@ -192,7 +193,7 @@
 									<div class="book-form-icon">
 										<i class="icon-to-airplane"></i>
 									</div>
-									<select class="book-select form--control custom-select">
+									<select name="ArrivalAirportId" class="book-select form--control custom-select">
 										@foreach (var item in Model)
 										{
 											<option value="@item.ArrivalAirport.AirportID">@item.ArrivalAirport.Airport_Name</option>
@@ -208,7 +209,7 @@
 									<div class="book-form-icon">
 										<i class="icon-schedule-icon"></i>
 									</div>
-									<input type="date" class="form--control" />
+									<input type="date" class="form--control" name="DepartureDate" />
 								</div>
 							</div>
 
@@ -219,7 +220,7 @@
 									<div class="book-form-icon">
 										<i class="icon-schedule-icon"></i>
 									</div>
-									<input type="date" class="form--control" />
+									<input type="date" class="form--control" name="ReturnDate" />
 								</div>
 							</div>
 
@@ -229,15 +230,15 @@
 								<label>Yolcular</label>
 								<div class="book-quantity">
 									<div class="book-plus-minus" id="passengerToggle">
-										<input class="book-plus-minus-box qty" id="passengerSummary" type="text" value="1 Yolcu, Ekonomi" readonly>
+										<input class="book-plus-minus-box qty" id="passengerSummary" type="text" value="1 Yolcu, Ekonomi" readonly >
 									</div>
 								</div>
 
 								<!-- Açılır alan -->
 								<div id="passengerDetails" class="passenger-details-overlay" style="display: none;">
 									<div class="class-selection mb-3">
-										<label><input type="radio" name="flightClass" value="Ekonomi" checked> Ekonomi</label>
-										<label><input type="radio" name="flightClass" value="Business"> Business</label>
+										<label><input type="radio" name="FlightClass" value="Ekonomi" checked> Ekonomi</label>
+										<label><input type="radio" name="FlightClass" value="Business"> Business</label>
 									</div>
 
 									<!-- Yolcu Türleri -->
@@ -245,7 +246,7 @@
 										<label>Yetişkin</label>
 										<div class="qty-buttons">
 											<button type="button" onclick="changePassengerCount('adult', -1)">-</button>
-											<input type="text" id="adultCount" value="1" onchange="manualChange('adult')" oninput="updatePassengerSummary()" />
+											<input type="text" id="adultCount" value="1" onchange="manualChange('adult')" oninput="updatePassengerSummary()" name="AdultCount" />
 											<button type="button" onclick="changePassengerCount('adult', 1)">+</button>
 										</div>
 									</div>
@@ -253,11 +254,11 @@
 										<label>Çocuk</label>
 										<div class="qty-buttons">
 											<button type="button" onclick="changePassengerCount('child', -1)">-</button>
-											<input type="text" id="childCount" value="0" onchange="manualChange('child')" oninput="updatePassengerSummary()" />
+											<input type="text" id="childCount" value="0" onchange="manualChange('child')" oninput="updatePassengerSummary()" name="ChildCount" />
 											<button type="button" onclick="changePassengerCount('child', 1)">+</button>
 										</div>
 									</div>
-									<div class="passenger-type">
+@* 									<div class="passenger-type">
 										<label>Bebek</label>
 										<div class="qty-buttons">
 											<button type="button" onclick="changePassengerCount('infant', -1)">-</button>
@@ -272,16 +273,10 @@
 											<input type="text" id="studentCount" value="0" onchange="manualChange('student')" oninput="updatePassengerSummary()" />
 											<button type="button" onclick="changePassengerCount('student', 1)">+</button>
 										</div>
-									</div>
+									</div> *@
 								</div>
 							</div>
 
-							<!-- Submit -->
-							@* 							<div class="col-xl-12 form-group text-center">
-								<button type="submit" class="btn--base ml-auto mr-auto mt-30">
-									<i class="icon-btn-icon"></i> Uçuş Ara
-								</button>
-							</div>*@
 						</div>
 						<div class="row justify-content-center  align-items-center" id="mainFlightForm">
 
@@ -291,7 +286,7 @@
 								</button>
 							</div>
 						</div>
-					</form>
+					}
 				</div>
 			</div>
 		</div>
