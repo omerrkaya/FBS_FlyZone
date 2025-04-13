@@ -25,7 +25,7 @@ namespace FBS_FlyZone.Controllers
         public IActionResult SearchedFlight()
         {
 
-            var values = fm.GetFlightListWithAirport();
+            var values = fm.GetListAll();
 
             if (values == null)
             {
@@ -38,11 +38,16 @@ namespace FBS_FlyZone.Controllers
 
         // Uçuş arama işlemi
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult SearchedFlight(FlightSearchViewModel model)
         {
-            var values = fm.GetListAll();
+            var values = fm.GetListAll()
+                .Where(f => f.DepartureAirport.AirportID == model.DepartureAirportId &&
+                             f.ArrivalAirport.AirportID == model.ArrivalAirportId &&
+                             f.Flight_DateTime.Date == model.DepartureDate.Date).ToList();
 
-            
+
+
             if (values == null)
             {
                 // Flight bulunamadığında hatayı önleyin
