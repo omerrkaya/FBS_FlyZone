@@ -4,12 +4,15 @@ using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using DataAccessLayer.Concrete;
+using System.Security.Claims;
 
 namespace FBS_FlyZone.Controllers
 {
     public class FlightController : Controller
     {
         FlightManager fm = new FlightManager(new EfFlightRepository());
+        UserManager um = new UserManager(new EfUserRepository());
 
         // Ana uçuş sayfası
         [AllowAnonymous]
@@ -36,25 +39,31 @@ namespace FBS_FlyZone.Controllers
             return View(values);
         }
 
-        // Uçuş arama işlemi
         [HttpPost]
-        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public IActionResult SearchedFlight(FlightSearchViewModel model)
         {
-            var values = fm.GetListAll()
-                .Where(f => f.DepartureAirport.AirportID == model.DepartureAirportId &&
-                             f.ArrivalAirport.AirportID == model.ArrivalAirportId &&
-                             f.Flight_DateTime.Date == model.DepartureDate.Date).ToList();
-
-
-
-            if (values == null)
+            if (User.Identity == null || !User.Identity.IsAuthenticated)
             {
-                // Flight bulunamadığında hatayı önleyin
-                return View("Error");
+                return RedirectToAction("Login");
             }
 
-            return View(values);
+            var userId = User.FindFirstValue("UserId");
+            Context c = new Context();
+            var userValues = c.Users.FirstOrDefault(x => x.UserID.ToString() == userId);
+
+            var flights = fm.GetListAll()
+                .Where(f => f.DepartureAirport.AirportID == model.DepartureAirportId &&
+                            f.ArrivalAirport.AirportID == model.ArrivalAirportId &&
+                            f.Flight_DateTime.Date == model.DepartureDate.Date).ToList();
+
+
+            foreach (var flight in flights)
+            {
+                var TotalFlights = flight.Flight_Price * (model.AdultCount + model.ChildCount);
+            }
+
+            return View(flights);
         }
 
         public IActionResult FlightDetails(int id)
