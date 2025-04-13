@@ -1,17 +1,15 @@
 ﻿@using EntityLayer.Concrete
 @model List<Flight>
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/UserLayout.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/UserLayout.cshtml";
 }
-
-<h1>Index</h1>
 
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h2>Flight List</h2>
-			<table class="table table-bordered">
+
+	@* 		<table class="table table-bordered">
 				<thead>
 					<tr>
 						<th>Flight ID</th>
@@ -31,12 +29,153 @@
 							<td>@item.ArrivalAirport.Airport_Name</td>
 							<td>@item.Flight_Price</td>
 						</tr>
-					
+
 					}
-						
-					
+
+
 				</tbody>
-			</table>
+			</table> *@
+			<!-- Modal -->
+			
 		</div>
 	</div>
 </div>
+
+
+
+<div id="seatSelectionModal" class="modal" style="background-color:wheat;">
+	<div class="modal-content">
+		<span class="close">&times;</span>
+		<h2>Koltuk Seçimi</h2>
+		<div class="seat-map">
+			<!-- Koltuklar burada oluşturulacak -->
+		</div>
+		<button class="btn btn--base">Seçimi Onayla</button>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+<style>
+	.modal {
+		position: fixed;
+		z-index: 9999;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background-color: rgb(0,0,0);
+		background-color: rgba(0,0,0,0.4);
+		padding-top: 60px;
+	}
+
+	.modal-content {
+		background-color: #fefefe;
+		margin: 5% auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 80%;
+	}
+
+	.close {
+		color: #aaa;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
+	}
+
+		.close:hover,
+		.close:focus {
+			color: black;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+	.seat-map {
+		display: grid;
+		grid-template-columns: repeat(3, auto);
+		gap: 10px;
+		justify-content: center;
+	}
+
+	.seat {
+		width: 30px;
+		height: 30px;
+		background-color: #ddd;
+		border: 1px solid #ccc;
+		text-align: center;
+		line-height: 30px;
+		cursor: pointer;
+	}
+
+		.seat.selected {
+			background-color: #6c757d;
+			color: white;
+		}
+
+	.gap {
+		width: 20px; /* Boşluk genişliği */
+	}
+</style>
+
+
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		var modal = document.getElementById("seatSelectionModal");
+		var btn = document.querySelector(".btn--base"); // Satın al butonu
+		var span = document.getElementsByClassName("close")[0];
+
+		btn.onclick = function() {
+			modal.style.display = "block";
+			createSeatMap();
+		}
+
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+
+		function createSeatMap() {
+			var seatMap = document.querySelector(".seat-map");
+			seatMap.innerHTML = ""; // Önceki koltukları temizle
+
+			var seatNumber = 1;
+			for (var row = 0; row < 2; row++) {
+				for (var col = 0; col < 3; col++) {
+					var seat1 = createSeat(seatNumber++);
+					var seat2 = createSeat(seatNumber++);
+					seatMap.appendChild(seat1);
+					seatMap.appendChild(seat2);
+
+					if (col < 2) { // Son sütunda boşluk ekleme
+						var gap = document.createElement('div');
+						gap.className = 'gap';
+						seatMap.appendChild(gap);
+					}
+				}
+			}
+		}
+
+		function createSeat(number) {
+			var seat = document.createElement('div');
+			seat.className = 'seat';
+			seat.textContent = number;
+			seat.onclick = function() {
+				seat.classList.toggle('selected');
+			};
+			return seat;
+		}
+	});
+</script>

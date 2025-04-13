@@ -166,6 +166,7 @@
 
 					@using (Html.BeginForm("SearchedFlight", "Flight", FormMethod.Post, new { @class = "book-form" }))
 					{
+						@Html.AntiForgeryToken()
 						<!-- Standart Form -->
 						<div class="row justify-content-center  align-items-center" id="mainFlightForm">
 							<!-- Nereden -->
