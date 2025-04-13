@@ -10,5 +10,7 @@ namespace BusinessLayer.Abstract
     public interface IUserService
     {
         void RegisterUserAdd(User user);
+        bool ChangePassword(string email, string currentPassword, string newPassword); // Şifre değiştirme işlemi için gerekli olan method. Bool tipinde döndürüyorum. Şifre doğru ise true, yanlış ise false döndürüyorum.
+        User? GetUserByEmail(string email); // usermanager da kullanılacak.
     }
 }

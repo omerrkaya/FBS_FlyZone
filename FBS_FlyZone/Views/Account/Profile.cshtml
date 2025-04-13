@@ -51,6 +51,14 @@
 
             <!-- Sağ İçerik -->
             <div class="col-lg-9">
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        @TempData["SuccessMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                
                 <!-- Profil Bilgileri -->
                 <section id="profile-info" class="card mb-4" >
                     <div class="card-header">
@@ -186,23 +194,13 @@
                         <h4>Hesap Ayarları</h4>
                     </div>
                     <div class="card-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="currentPassword" class="form-label">Mevcut Şifre</label>
-                                <input type="password" class="form-control" id="currentPassword">
-                            </div>
-                            <div class="mb-3">
-                                <label for="newPassword" class="form-label">Yeni Şifre</label>
-                                <input type="password" class="form-control" id="newPassword">
-                            </div>
-                            <div class="mb-3">
-                                <label for="confirmPassword" class="form-label">Yeni Şifre (Tekrar)</label>
-                                <input type="password" class="form-control" id="confirmPassword">
-                            </div>
+                        <div class="mb-3">
+                            <h5>Şifre Değiştirme</h5>
+                            <p class="text-muted">Hesabınızın güvenliği için düzenli olarak şifrenizi değiştirmenizi öneririz.</p>
                             <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary">Şifremi Değiştir</button>
+                                <a asp-controller="Account" asp-action="ChangePassword" class="btn btn-primary">Şifremi Değiştir</a>
                             </div>
-                        </form>
+                        </div>
                         <hr>
                         <div class="mb-3">
                             <div class="form-check form-switch">
