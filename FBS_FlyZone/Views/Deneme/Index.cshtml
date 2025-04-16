@@ -5,177 +5,354 @@
 	Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-
-	@* 		<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th>Flight ID</th>
-						<th>Flight Name</th>
-						<th>Departure</th>
-						<th>Arrival</th>
-						<th>Price</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach (var item in Model)
-					{
-						<tr>
-							<td>@item.FlightID</td>
-							<td>@item.Airline.Airlines_Name</td>
-							<td>@item.DepartureAirport.Airport_Name</td>
-							<td>@item.ArrivalAirport.Airport_Name</td>
-							<td>@item.Flight_Price</td>
-						</tr>
-
-					}
 
 
-				</tbody>
-			</table> *@
-			<!-- Modal -->
-			
+<div class="reservation-container" style="margin-top:130px;">
+	<div class="reservation-header">
+		<h2><i class="fas fa-plane"></i> Uçuş Rezervasyonu</h2>
+	</div>
+
+	<div class="reservation-steps">
+		<div class="step active">
+			<div class="step-number">1</div>
+			<div class="step-title">Yolcu Bilgileri</div>
+		</div>
+		<div class="step">
+			<div class="step-number">2</div>
+			<div class="step-title">Koltuk Seçimi</div>
+		</div>
+		<div class="step">
+			<div class="step-number">3</div>
+			<div class="step-title">Ödeme</div>
+		</div>
+		<div class="step">
+			<div class="step-number">4</div>
+			<div class="step-title">Onay</div>
 		</div>
 	</div>
-</div>
 
+	<form class="reservation-form" action="#" method="post">
+		<div class="form-section">
+			<div class="section-title">
+				<i class="fas fa-user"></i> Temel Bilgiler
+			</div>
 
+			<div class="row g-3">
+				<div class="col-md-6">
+					<label for="fullName" class="form-label">Ad Soyad</label>
+					<input type="text" class="form-control" id="fullName" name="Passenger.Passenger_Name_Surname" placeholder="Ad ve soyadınız" required>
+				</div>
 
-<div id="seatSelectionModal" class="modal" style="background-color:wheat;">
-	<div class="modal-content">
-		<span class="close">&times;</span>
-		<h2>Koltuk Seçimi</h2>
-		<div class="seat-map">
-			<!-- Koltuklar burada oluşturulacak -->
+				<div class="col-md-6 ">
+					<label for="gender" class="form-label">Cinsiyet</label>
+					<select class="form-select" id="gender" name="Passenger.Gender" required>
+						<option value="" selected>Cinsiyet seçiniz</option>
+						<option value="Erkek">Erkek</option>
+						<option value="Kadın">Kadın</option>
+					</select>
+				</div>
+
+				<div class="col-md-6">
+					<label for="birthDate" class="form-label">Doğum Tarihi</label>
+					<input type="date" class="form-control" id="birthDate" name="Passenger.Birth_Time" required>
+				</div>
+
+				<div class="col-md-6">
+					<label for="nationality" class="form-label">Uyruk</label>
+					<input type="text" class="form-control" id="nationality" name="Passenger.Nationality" placeholder="Uyruğunuz" required>
+				</div>
+			</div>
 		</div>
-		<button class="btn btn--base">Seçimi Onayla</button>
-	</div>
+
+		<div class="form-section">
+			<div class="section-title">
+				<i class="fas fa-id-card"></i> Kimlik Bilgileri
+			</div>
+
+			<div class="row g-3">
+				<div class="col-md-6">
+					<label for="idNumber" class="form-label">TC Kimlik No / Pasaport No</label>
+					<input type="text" class="form-control" id="idNumber" name="Passenger.TcNo_PasaportNo" placeholder="TC veya pasaport numaranız" required>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-section">
+			<div class="section-title">
+				<i class="fas fa-address-book"></i> İletişim Bilgileri
+			</div>
+
+			<div class="row g-3">
+				<div class="col-md-6">
+					<label for="email" class="form-label">E-posta Adresi</label>
+					<input type="email" class="form-control" id="email" name="Passenger.Email" placeholder="E-posta adresiniz" required>
+				</div>
+
+				<div class="col-md-6">
+					<label for="phone" class="form-label">Telefon Numarası</label>
+
+					<input type="tel" class="form-control" id="phone" name="Passenger.Phone_Number" placeholder="+90 (5__) ___ __ __  şeklinde yazınız" required>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="form-section">
+			<div class="section-title">
+				<i class="fas fa-credit-card"></i> Ödeme Yöntemi
+			</div>
+
+			<div class="row g-3">
+				<div class="col-12">
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="PaymentMethod" id="creditCard" value="Kredi Kartı" checked>
+						<label class="form-check-label" for="creditCard">
+							<i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i> Kredi Kartı
+						</label>
+					</div>
+
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="PaymentMethod" id="bankTransfer" value="Havale / EFT">
+						<label class="form-check-label" for="bankTransfer">
+							<i class="fas fa-university"></i> Havale / EFT
+						</label>
+					</div>
+
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="PaymentMethod" id="balance" value="Bakiye ile ödeme">
+						<label class="form-check-label" for="balance">
+							<i class="fas fa-wallet"></i> Bakiye ile ödeme
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<input type="hidden" name="Flight.FlightID" value="">
+
+		<div class="form-section mt-4">
+			<button type="submit" class="btn btn-primary btn-submit">
+				<i class="fas fa-check-circle me-2"></i> Rezervasyonu Tamamla
+			</button>
+		</div>
+	</form>
 </div>
-
-
-
-
-
-
-
-
 
 <style>
-	.modal {
-		position: fixed;
-		z-index: 9999;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		overflow: auto;
-		background-color: rgb(0,0,0);
-		background-color: rgba(0,0,0,0.4);
-		padding-top: 60px;
+	:root {
+		--dark-primary: #19232D; /* Ana koyu */
+		--dark-secondary: #3d3d3d; /* İkincil koyu */
+		--gold-accent: #dcbb87; /* Altın vurgu */
+		--light-bg: #f5f2eb; /* Krem-altın tonu arkaplan */
+		--medium-gray: #6d7b8c; /* Ara ton */
 	}
 
-	.modal-content {
-		background-color: #fefefe;
-		margin: 5% auto;
-		padding: 20px;
-		border: 1px solid #888;
-		width: 80%;
+	body {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		background-color: var( --dark-primary);
+		color: var(--dark-primary);
 	}
 
-	.close {
-		color: #aaa;
-		float: right;
-		font-size: 28px;
-		font-weight: bold;
-	}
-
-		.close:hover,
-		.close:focus {
-			color: black;
-			text-decoration: none;
-			cursor: pointer;
-		}
-
-	.seat-map {
-		display: grid;
-		grid-template-columns: repeat(3, auto);
-		gap: 10px;
-		justify-content: center;
-	}
-
-	.seat {
-		width: 30px;
-		height: 30px;
-		background-color: #ddd;
-		border: 1px solid #ccc;
+	/* HEADER FIX */
+	.reservation-header {
+		background: linear-gradient(to right, var( --dark-primary), var(--dark-secondary));
+		color: #ffffff;
+		padding: 2rem;
 		text-align: center;
-		line-height: 30px;
-		cursor: pointer;
+		border-bottom: 3px solid var(--gold-accent);
+		border-radius: 12px 12px 0px 0px;
 	}
 
-		.seat.selected {
-			background-color: #6c757d;
-			color: white;
+		.reservation-header h2 {
+			background: var(--gold-accent);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+			font-weight: 700;
+			text-shadow: none;
+			display: inline-block;
+			padding: 0 15px;
 		}
 
-	.gap {
-		width: 20px; /* Boşluk genişliği */
+		/* Kenarlık efekti eklemek isterseniz */
+		.reservation-header h2 {
+			position: relative;
+		}
+
+			.reservation-header h2::after {
+				content: "";
+				position: absolute;
+				bottom: -5px;
+				left: 15%;
+				width: 70%;
+				height: 2px;
+				background: linear-gradient(90deg, transparent, #dcbb87, transparent);
+			}
+
+	/* STEPS FIX */
+	.reservation-steps {
+		display: flex;
+		justify-content: space-between;
+		padding: 1.5rem 2rem;
+		background: linear-gradient(to right, var(--dark-primary), var(--dark-secondary));
+		position: relative;
+	}
+
+		.reservation-steps::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 3px;
+			background:var(--gold-accent);
+
+		}
+
+	.step {
+		position: relative;
+		z-index: 1;
+		text-align: center;
+		flex: 1;
+	}
+
+		.step.active .step-number {
+			background: var(--gold-accent);
+			color: var(--dark-primary);
+			transform: scale(1.1);
+			box-shadow: 0 0 0 3px rgba(220, 187, 135, 0.3);
+		}
+
+	.step-number {
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		background: rgba(255,255,255,0.1);
+		color: var(--gold-accent);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: bold;
+		margin-bottom: 0.5rem;
+		transition: all 0.3s ease;
+		border: 2px solid var(--gold-accent);
+	}
+
+	.step-title {
+		color: white;
+		font-size: 0.85rem;
+		font-weight: 500;
+		opacity: 0.9;
+	}
+
+	/* CONTAINER */
+	.reservation-container {
+		max-width: 900px;
+		margin: 3rem auto;
+		border-radius: 12px;
+		overflow: visible;
+		box-shadow: 0 15px 40px rgba(25, 35, 45, 0.15);
+		background: white;
+		border: 1px solid var(--gold-accent);
+	}
+
+	/* FORM */
+	.reservation-form {
+		padding: 3rem;
+		background: linear-gradient(to right, var(--dark-primary), var(--dark-secondary));
+		color: var(--gold-accent);
+		border-radius: 0px 0px 12px 12px;
+	}
+
+	.section-title {
+		color: var(--gold-accent);
+		border-left: 4px solid var(--gold-accent);
+		padding-left: 1rem;
+		margin: 2rem 0 1.5rem;
+		font-size: 1.3rem;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+		.section-title i {
+			color: var(--gold-accent);
+		}
+
+	.form-control, .form-select {
+		padding: 0.8rem 1rem;
+		border-radius: 8px;
+		border: 1px solid #ced4da;
+		transition: all 0.3s;
+	}
+
+		.form-control:focus, .form-select:focus {
+			border-color: var(--accent-color);
+			box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+		}
+
+
+	.nice-select .current {
+		color: #1a1a1a;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 42px;
+
+	}
+
+	.nice-select{
+		color: var(--gold-accent);
+		border-radius: 8px;
+		border: 1px solid #ced4da;
+		padding: 0.8rem 1rem;
+		width: 60%;
+		text-align: center;
+	    display:flex;
+		align-items: center;
+	}
+
+	.btn-submit {
+		background: linear-gradient(to right, var(--dark-primary), var(--dark-secondary));
+		color: var(--gold-accent);
+		border: none;
+		padding: 1rem 2rem;
+		font-weight: 600;
+		letter-spacing: 1px;
+		border: 2px solid var(--gold-accent);
+		border-radius: 8px;
+		transition: all 0.5s;
+		margin-top: 1rem;
+		width: 100%;
+		text-transform: uppercase;
+		font-size: 0.95rem;
+	}
+
+		.btn-submit:hover {
+			border: 2px solid var(--medium-gray);
+			transform: translateY(-2px);
+			box-shadow: 0 5px 15px rgba(61, 61, 61, 0.2);
+			background: linear-gradient(to right, var(--dark-secondary), var(--dark-primary));
+		}
+
+	@@media (max-width: 768px) {
+		.reservation-steps {
+			background: var(--gold-accent);
+			flex-direction: column;
+			gap: 15px;
+			padding: 1.5rem;
+		}
+
+		.step {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			text-align: left;
+		}
+
+		.step-number {
+			margin-bottom: 0;
+		}
 	}
 </style>
 
-
-<script>
-	document.addEventListener("DOMContentLoaded", function() {
-		var modal = document.getElementById("seatSelectionModal");
-		var btn = document.querySelector(".btn--base"); // Satın al butonu
-		var span = document.getElementsByClassName("close")[0];
-
-		btn.onclick = function() {
-			modal.style.display = "block";
-			createSeatMap();
-		}
-
-		span.onclick = function() {
-			modal.style.display = "none";
-		}
-
-		window.onclick = function(event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
-			}
-		}
-
-		function createSeatMap() {
-			var seatMap = document.querySelector(".seat-map");
-			seatMap.innerHTML = ""; // Önceki koltukları temizle
-
-			var seatNumber = 1;
-			for (var row = 0; row < 2; row++) {
-				for (var col = 0; col < 3; col++) {
-					var seat1 = createSeat(seatNumber++);
-					var seat2 = createSeat(seatNumber++);
-					seatMap.appendChild(seat1);
-					seatMap.appendChild(seat2);
-
-					if (col < 2) { // Son sütunda boşluk ekleme
-						var gap = document.createElement('div');
-						gap.className = 'gap';
-						seatMap.appendChild(gap);
-					}
-				}
-			}
-		}
-
-		function createSeat(number) {
-			var seat = document.createElement('div');
-			seat.className = 'seat';
-			seat.textContent = number;
-			seat.onclick = function() {
-				seat.classList.toggle('selected');
-			};
-			return seat;
-		}
-	});
-</script>

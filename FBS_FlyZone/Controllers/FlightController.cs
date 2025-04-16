@@ -7,6 +7,7 @@ using DataAccessLayer.EntityFramework;
 using DataAccessLayer.Concrete;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 
 namespace FBS_FlyZone.Controllers
 {
@@ -69,6 +70,7 @@ namespace FBS_FlyZone.Controllers
             return View(flights);
         }
 
+
         public IActionResult FlightDetails(int id)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);  // Kullanıcının ID'sini almak için
@@ -123,21 +125,34 @@ namespace FBS_FlyZone.Controllers
                 }
 
 
-                // Yeni Passenger oluştur
-                var passenger = new Passenger
+                // Kullanıcının daha önce kaydedilmiş bir Passenger'ı var mı diye kontrol et
+                var existingPassenger = pm.GetPassengerByUserId(int.Parse(userId));
+
+                Passenger passenger;
+
+                if (existingPassenger != null)
                 {
-                    Passenger_Name_Surname = model.Passenger.Passenger_Name_Surname,
-                    TcNo_PasaportNo = model.Passenger.TcNo_PasaportNo,
-                    Birth_Time = model.Passenger.Birth_Time,
-                    Gender = model.Passenger.Gender,
-                    Email = model.Passenger.Email,
-                    Phone_Number = model.Passenger.Phone_Number,
-                    Nationality = model.Passenger.Nationality,
-                    UserID = int.Parse(userId),  // Kullanıcının ID'sini al
+                    // Eğer yolcu zaten varsa, mevcut olanı kullan
+                    passenger = existingPassenger;
+                }
+                else
+                {
+                    // Yeni Passenger oluştur
+                    passenger = new Passenger
+                    {
+                        Passenger_Name_Surname = model.Passenger.Passenger_Name_Surname,
+                        TcNo_PasaportNo = model.Passenger.TcNo_PasaportNo,
+                        Birth_Time = model.Passenger.Birth_Time,
+                        Gender = model.Passenger.Gender,
+                        Email = model.Passenger.Email,
+                        Phone_Number = model.Passenger.Phone_Number,
+                        Nationality = model.Passenger.Nationality,
+                        UserID = int.Parse(userId),  // Kullanıcının ID'sini al
+                    };
+                    pm.AddPassenger(passenger);  // Yeni yolcuyu veritabanına ekle
+                }
 
-                };
-
-                pm.AddPassenger(passenger); // Yeni yolcuyu veritabanına ekle
+               
 
                 // Yeni Reservation oluştur
                 var reservation = new Reservation
@@ -159,12 +174,13 @@ namespace FBS_FlyZone.Controllers
             return View(model);  // Eğer model geçerli değilse tekrar formu göster
         }
 
+
         // Arama işlemi
         public IActionResult Search(string keyword)
         {
             ViewBag.SearchKeyword = keyword;
             return View();
         }
-        
+
     }
 }

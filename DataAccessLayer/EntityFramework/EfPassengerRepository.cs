@@ -23,7 +23,14 @@ namespace DataAccessLayer.EntityFramework
 
         public Passenger GetById(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new Context())
+            {
+                // UserID'ye göre yolcu bilgilerini sorguluyoruz
+                var passenger = context.Passengers.FirstOrDefault(p => p.UserID == id);
+
+                return passenger;
+            }
+
         }
 
         public void Insert(Passenger genent)

@@ -15,5 +15,7 @@ namespace BusinessLayer.Abstract
         void DeletePassenger(int passengerId);
         Passenger GetPassengerById(int passengerId);
         List<Passenger> GetAllPassengers();
+
+        Passenger GetPassengerByUserId(int id);
     }
 }
