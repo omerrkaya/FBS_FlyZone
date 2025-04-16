@@ -24,7 +24,13 @@ namespace DataAccessLayer.EntityFramework
 
         public Flight GetById(int id)
         {
-            throw new NotImplementedException();
+            using (var c = new Context())
+            {
+                var flight = c.Flights.FirstOrDefault(x => x.FlightID == id);
+                if (flight == null)
+                    throw new Exception("Uçuş bulunamadı."); // ya da özel bir exception sınıfı
+                return flight;
+            }
         }
 
         public List<Flight> GetFlightListWithAirport()

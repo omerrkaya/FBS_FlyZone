@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+ using Microsoft.AspNetCore.Mvc;
 using FBS_FlyZone.Models;
 using Microsoft.AspNetCore.Identity;
 using DataAccessLayer.EntityFramework;
@@ -43,7 +43,7 @@ namespace FBS_FlyZone.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, datavalue.Email),
-                    new Claim("UserId", datavalue.UserID.ToString())
+                    new Claim(ClaimTypes.NameIdentifier, datavalue.UserID.ToString())
                 };
                 var userIdentity = new ClaimsIdentity(claims, "Login");
                 ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);

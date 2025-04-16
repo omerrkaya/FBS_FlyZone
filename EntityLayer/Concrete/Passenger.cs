@@ -41,7 +41,12 @@ namespace EntityLayer.Concrete
         [StringLength(50)]
         public string Nationality { get; set; }
 
+        public string? Gender { get; set; }
 
+        public int UserID { get; set; }
+
+        [ForeignKey("UserID")]
+        public User User { get; set; }
 
     }
 }

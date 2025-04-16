@@ -1,6 +1,97 @@
-﻿@{
+﻿@using EntityLayer.Concrete
+@model FBS_FlyZone.Models.ReservationViewModel
+
+@{
 	ViewData["Title"] = "FlightDetails";
 	Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
 
+
+
+<div class="reservation-box">
+	<h2 class="text-center text-primary mb-4">Rezervasyon İşlemleri</h2>
+
+	<!-- 1. Yolcu Bilgileri -->
+	<div class="mb-4">
+		<form asp-action="CreateReservation" method="post">
+			@Html.AntiForgeryToken()
+
+			<!-- Passenger bilgileri -->
+			<input type="text" class="form-control" name="Passenger.Passenger_Name_Surname" placeholder="Ad Soyad" required />
+
+			<select class="form-select" name="Passenger.Gender" required>
+				<option disabled selected>Cinsiyet</option>
+				<option value="Erkek">Erkek</option>
+				<option value="Kadın">Kadın</option>
+			</select>
+
+			<input type="date" class="form-control" name="Passenger.Birth_Time" required />
+
+			<input type="text" class="form-control" name="Passenger.TcNo_PasaportNo" placeholder="TC No / Pasaport No" required />
+
+			<input type="text" class="form-control" name="Passenger.Email" placeholder="Email" required />
+
+			<input type="text" class="form-control" name="Passenger.Phone_Number" placeholder="Telefon" required />
+
+			<input type="text" class="form-control" name="Passenger.Nationality" placeholder="Uyruk" required />
+
+			<!-- Ödeme yöntemi -->
+			<select class="form-select" name="PaymentMethod" required>
+				<option value="Kredi Kartı">Kredi Kartı</option>
+				<option value="Havale / EFT">Havale / EFT</option>
+				<option value="Bakiye ile ödeme">Bakiye ile ödeme</option>
+			</select>
+
+			<input type="hidden" name="Flight.FlightID" value="@Model.Flight.FlightID" />
+
+			<button type="submit" class="btn btn-primary">Rezervasyonu Tamamla</button>
+		</form>
+	</div>
+
+</div>
+
+<style>
+	body {
+		background-color: #f4f8fb;
+		font-family: 'Segoe UI', sans-serif;
+	}
+
+	.reservation-box {
+		background-color: #fff;
+		padding: 40px;
+		border-radius: 20px;
+		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+		margin: 40px auto;
+		max-width: 1000px;
+	}
+
+	.section-title {
+		font-weight: 600;
+		font-size: 1.4rem;
+		margin-bottom: 20px;
+		color: #005294;
+	}
+
+	.btn-reserve {
+		background-color: #005294;
+		color: white;
+		border-radius: 12px;
+		padding: 12px 24px;
+		font-weight: bold;
+	}
+
+		.btn-reserve:hover {
+			background-color: #003f77;
+		}
+
+	.summary-box {
+		background-color: #e9f1f7;
+		border-radius: 12px;
+		padding: 20px;
+	}
+
+	.form-check-label {
+		font-size: 0.9rem;
+	}
+</style>
