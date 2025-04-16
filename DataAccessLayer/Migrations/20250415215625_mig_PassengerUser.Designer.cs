@@ -4,6 +4,7 @@ using DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20250415215625_mig_PassengerUser")]
+    partial class mig_PassengerUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,9 +199,6 @@ namespace DataAccessLayer.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nationality")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -277,12 +277,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("PassengerID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Payment_Method")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Payment_Status")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("Reservation_Date")
                         .HasColumnType("datetime2");
 
@@ -294,16 +288,11 @@ namespace DataAccessLayer.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
                     b.HasKey("ReservationID");
 
                     b.HasIndex("FlightID");
 
                     b.HasIndex("PassengerID");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Reservations");
                 });
@@ -415,17 +404,9 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EntityLayer.Concrete.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Flight");
 
                     b.Navigation("Passenger");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Aircraft", b =>

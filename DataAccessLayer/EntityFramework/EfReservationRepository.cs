@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 
 namespace DataAccessLayer.EntityFramework
@@ -27,7 +28,11 @@ namespace DataAccessLayer.EntityFramework
 
         public void Insert(Reservation genent)
         {
-            throw new NotImplementedException();
+           using (var c = new Context())
+            {
+                c.Reservations.Add(genent);
+                c.SaveChanges();
+            }
         }
 
         public void Update(Reservation genent)
