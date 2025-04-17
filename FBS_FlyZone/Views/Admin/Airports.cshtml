@@ -1,0 +1,136 @@
+@model List<EntityLayer.Concrete.Airport>
+@{
+    ViewData["Title"] = "Havaalanları";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="mb-4">Havaalanları Yönetimi</h2>
+            <p class="text-muted">Sistemdeki tüm havaalanlarını bu sayfadan yönetebilirsiniz.</p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Havaalanı Ekle</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="airportName" class="form-label">Havaalanı Adı</label>
+                            <input type="text" class="form-control" id="airportName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="airportIATA" class="form-label">IATA Kodu</label>
+                            <input type="text" class="form-control" id="airportIATA" maxlength="3" required>
+                            <div class="form-text">Örn: IST, SAW, ADB</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="airportICAO" class="form-label">ICAO Kodu</label>
+                            <input type="text" class="form-control" id="airportICAO" maxlength="4" required>
+                            <div class="form-text">Örn: LTFM, LTFJ, LTBJ</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="airportCity" class="form-label">Şehir</label>
+                            <input type="text" class="form-control" id="airportCity" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="airportCountry" class="form-label">Ülke</label>
+                            <input type="text" class="form-control" id="airportCountry" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Havaalanı Ekle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Havaalanları</h5>
+                    <div class="input-group" style="width: 300px;">
+                        <input type="text" class="form-control" placeholder="Havaalanı ara..." aria-label="Havaalanı ara">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Havaalanı Adı</th>
+                                    <th>IATA Kodu</th>
+                                    <th>ICAO Kodu</th>
+                                    <th>Şehir</th>
+                                    <th>Ülke</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Any())
+                                {
+                                    @foreach (var airport in Model)
+                                    {
+                                        <tr>
+                                            <td>@airport.AirportID</td>
+                                            <td>@airport.Airport_Name</td>
+                                            <td>@airport.IATA_Code</td>
+                                            <td>@airport.ICAO_Code</td>
+                                            <td>@airport.AP_City</td>
+                                            <td>@airport.AP_Country</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="#" class="btn btn-sm btn-warning">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-sm btn-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="7" class="text-center">Henüz havaalanı kaydı bulunmamaktadır.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <nav aria-label="Page navigation" class="mt-4">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Önceki</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Sonraki</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Burada havaalanları ile ilgili JavaScript kodları yer alabilir
+        });
+    </script>
+} 

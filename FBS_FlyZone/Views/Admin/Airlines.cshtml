@@ -1,0 +1,134 @@
+@model List<EntityLayer.Concrete.Airline>
+@{
+    ViewData["Title"] = "Havayolu Şirketleri";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="mb-4">Havayolu Şirketleri Yönetimi</h2>
+            <p class="text-muted">Sistemdeki tüm havayolu şirketlerini bu sayfadan yönetebilirsiniz.</p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Havayolu Ekle</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="airlineName" class="form-label">Havayolu Adı</label>
+                            <input type="text" class="form-control" id="airlineName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="airlineCode" class="form-label">IATA Kodu</label>
+                            <input type="text" class="form-control" id="airlineCode" maxlength="2" required>
+                            <div class="form-text">Örn: TK, PC, XQ</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="airlineICAO" class="form-label">ICAO Kodu</label>
+                            <input type="text" class="form-control" id="airlineICAO" maxlength="3" required>
+                            <div class="form-text">Örn: THY, PGT, SKG</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="airlineCountry" class="form-label">Ülke</label>
+                            <input type="text" class="form-control" id="airlineCountry" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="airlineYear" class="form-label">Kuruluş Yılı</label>
+                            <input type="number" class="form-control" id="airlineYear" min="1900" max="2099">
+                        </div>
+                        <div class="mb-3">
+                            <label for="airlineStatus" class="form-label">Durum</label>
+                            <select class="form-select" id="airlineStatus">
+                                <option value="1" selected>Aktif</option>
+                                <option value="0">Pasif</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Havayolu Ekle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Havayolu Şirketleri</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Havayolu Adı</th>
+                                    <th>IATA Kodu</th>
+                                    <th>ICAO Kodu</th>
+                                    <th>Ülke</th>
+                                    <th>Kuruluş Yılı</th>
+                                    <th>Durum</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Any())
+                                {
+                                    @foreach (var airline in Model)
+                                    {
+                                        <tr>
+                                            <td>@airline.AirlineID</td>
+                                            <td>@airline.Airlines_Name</td>
+                                            <td>@airline.AL_IATA_Code</td>
+                                            <td>@airline.AL_ICAO_Code</td>
+                                            <td>@airline.Central_Country</td>
+                                            <td>@airline.YearOfEstablishment</td>
+                                            <td>
+                                                @if (airline.Is_It_Active)
+                                                {
+                                                    <span class="badge bg-success">Aktif</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-danger">Pasif</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="#" class="btn btn-sm btn-warning">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-sm btn-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="8" class="text-center">Henüz havayolu şirketi kaydı bulunmamaktadır.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Burada havayolları ile ilgili JavaScript kodları yer alabilir
+        });
+    </script>
+} 

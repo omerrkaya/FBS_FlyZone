@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Admin Oluştur";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<div style="margin-top: 50px;"></div>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Admin Oluşturma Aracı</h3>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="alert alert-info">
+                            @ViewBag.Message
+                        </div>
+                    }
+                    
+                    <p>Bu sayfa test amaçlı olarak admin kullanıcısı oluşturmak için tasarlanmıştır.</p>
+                    
+                    <div class="mt-4">
+                        <p><strong>Admin Bilgileri:</strong></p>
+                        <ul>
+                            <li>Email: admin@flyzone.com</li>
+                            <li>Şifre: admin123</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <p>Giriş yapmak için:</p>
+                        <a href="/Account/Login" class="btn btn-primary">Giriş Sayfasına Git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
