@@ -129,20 +129,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="seat-map-section">
-			<h3><i class="fas fa-chair"></i> Koltuk Seçimi</h3>
-			<div class="seat-map">
-				@foreach (var seat in Model.Availableseats)
-				{
-					<div class="seat @(seat.IsOccupied ? "occupied" : "")"
-						 data-seat-number="@seat.SeatNumber">
-						@seat.SeatNumber
-					</div>
-				}
-			</div>
-			<input type="hidden" id="selectedSeat" name="SeatNumber" />
-		</div>
-
+	
 		<input type="hidden" name="Flight.FlightID" value="@Model.Flight.FlightID">
 
 		<div class="form-section mt-4">
@@ -155,42 +142,6 @@
 
 
 <style>
-
-	.seat-map-section {
-		margin: 2rem 0;
-		padding: 1rem;
-		background: #19232D;
-		border-radius: 8px;
-	}
-
-	.seat-map {
-		display: grid;
-		grid-template-columns: repeat(6, 1fr);
-		gap: 10px;
-		margin-top: 1rem;
-	}
-
-	.seat {
-		width: 40px;
-		height: 40px;
-		background: #dcbb87;
-		color: #19232D;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 4px;
-		cursor: pointer;
-		font-weight: bold;
-	}
-
-		.seat.occupied {
-			background: #3d3d3d;
-			cursor: not-allowed;
-		}
-
-		.seat:hover:not(.occupied) {
-			transform: scale(1.1);
-		}
 
 	:root {
 		--dark-primary: #19232D; /* Ana koyu */

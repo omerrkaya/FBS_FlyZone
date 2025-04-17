@@ -77,24 +77,7 @@ namespace FBS_FlyZone.Controllers
 
         public IActionResult FlightDetails(int id)
         {
-            Context context = new Context();
-            if (!context.Seats.Any())
-            {
-                var flights = context.Flights.ToList();
-                foreach (var flight in flights)
-                {
-                    for (int i = 1; i <= 30; i++)
-                    {
-                        context.Seats.Add(new Seat
-                        {
-                            FlightID = flight.FlightID,
-                            SeatNumber = $"{i}{Convert.ToChar(64 + (i % 6) + 1)}", // 1A, 2B, ..., 6F, 7A...
-                            IsOccupied = false
-                        });
-                    }
-                }
-                context.SaveChanges();
-            }
+
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);  // Kullanıcının ID'sini almak için
             if (string.IsNullOrEmpty(userId))
@@ -121,7 +104,7 @@ namespace FBS_FlyZone.Controllers
 
                 var reservationViewModel = new ReservationViewModel
                 {
-                    Availableseats = availableSeats,
+                    SeatNumber="1",
                     Flight = flight,
                     User = userValues,
                     Passenger = new Passenger()  // Yeni Passenger nesnesi oluştur
