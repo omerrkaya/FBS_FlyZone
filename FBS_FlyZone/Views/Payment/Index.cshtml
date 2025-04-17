@@ -1,192 +1,446 @@
-<!--Index.cshtml ödeme sayfası. -->
 @model FBS_FlyZone.Models.PaymentViewModel
 @{
-    ViewData["Title"] = "Ödeme";
-    Layout = "~/Views/Shared/UserLayout.cshtml";
+	ViewData["Title"] = "PaymentFailed";
+	Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
 <div style="margin-top: 50px;"></div> <!-- Ödeme sayfasının üstüne boşluk bırakır. Navbar ile arasında boşluk bırakır. -->
 
-<div class="container py-5">
-    <div class="row">
-        <!-- Sol Taraf - Ödeme Formu -->
-        <div class="col-lg-8">
-            <div class="card mb-4">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Ödeme Bilgileri</h4>
-                </div>
-                <div class="card-body">
-                    <form asp-action="Index" method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="reservation-container" style="margin-top:130px;">
+	<div class="reservation-header">
+		<h2><i class="fas fa-plane"></i> Ödeme</h2>
+	</div>
 
-                        <div class="mb-4">
-                            <h5 class="mb-3">Kart Bilgileri</h5>
-                            
-                            <div class="mb-3">
-                                <label asp-for="CardHolderName" class="form-label">Kart Üzerindeki İsim</label>
-                                <input asp-for="CardHolderName" class="form-control" placeholder="JOHN SMITH">
-                                <span asp-validation-for="CardHolderName" class="text-danger"></span>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label asp-for="CardNumber" class="form-label">Kart Numarası</label>
-                                <div class="input-group">
-                                    <input asp-for="CardNumber" class="form-control" placeholder="1234 5678 9012 3456">
-                                    <span class="input-group-text">
-                                        <i class="bi bi-credit-card"></i>
-                                    </span>
-                                </div>
-                                <span asp-validation-for="CardNumber" class="text-danger"></span>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label asp-for="ExpiryDate" class="form-label">Son Kullanma Tarihi</label>
-                                    <input asp-for="ExpiryDate" class="form-control" placeholder="MM/YY">
-                                    <span asp-validation-for="ExpiryDate" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label asp-for="CVV" class="form-label">CVV</label>
-                                    <input asp-for="CVV" class="form-control" placeholder="123">
-                                    <span asp-validation-for="CVV" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <h5 class="mb-3">Fatura Bilgileri</h5>
-                            
-                            <div class="mb-3">
-                                <label class="form-label">Fatura Adresi</label>
-                                <textarea class="form-control" rows="3" placeholder="Sokak, Mahalle, İlçe, Şehir"></textarea>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">Şehir</label>
-                                    <input type="text" class="form-control" placeholder="İstanbul">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Posta Kodu</label>
-                                    <input type="text" class="form-control" placeholder="34000">
-                                </div>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label class="form-label">E-posta (Bilet için)</label>
-                                <input type="email" class="form-control" placeholder="ornek@email.com">
-                            </div>
-                        </div>
-                        
-                        <div class="form-check mb-4">
-                            <input class="form-check-input" type="checkbox" id="acceptTerms">
-                            <label class="form-check-label" for="acceptTerms">
-                                Ödeme koşullarını ve gizlilik politikasını kabul ediyorum
-                            </label>
-                        </div>
-                        
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg">Ödemeyi Tamamla</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Sağ Taraf - Sipariş Özeti -->
-        <div class="col-lg-4">
-            <div class="card mb-4">
-                <div class="card-header bg-secondary text-white">
-                    <h4 class="mb-0">Sipariş Özeti</h4>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-between mb-3">
-                        <span>Uçuş Bilgisi:</span>
-                        <span>İstanbul - Antalya</span>
-                    </div>
-                    <div class="d-flex justify-content-between mb-3">
-                        <span>Tarih:</span>
-                        <span>15.08.2025</span>
-                    </div>
-                    <div class="d-flex justify-content-between mb-3">
-                        <span>Yolcu:</span>
-                        <span>1 Yetişkin</span>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-between mb-3">
-                        <span>Bilet Ücreti:</span>
-                        <span>1.200 ₺</span>
-                    </div>
-                    <div class="d-flex justify-content-between mb-3">
-                        <span>Vergiler:</span>
-                        <span>350 ₺</span>
-                    </div>
-                    <div class="d-flex justify-content-between mb-3">
-                        <span>Hizmet Bedeli:</span>
-                        <span>50 ₺</span>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-between">
-                        <strong>Toplam Tutar:</strong>
-                        <strong>1.600 ₺</strong>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card mb-4">
-                <div class="card-header bg-info text-white">
-                    <h5 class="mb-0">Güvenli Ödeme</h5>
-                </div>
-                <div class="card-body">
-                    <p class="small text-muted">
-                        Tüm kredi kartı bilgileriniz SSL sertifikası ile şifrelenerek korunmaktadır. 
-                        Bilgileriniz üçüncü partilerle paylaşılmaz.
-                    </p>
-                    <div class="text-center mt-3">
-                        <i class="bi bi-shield-lock fs-1 text-success"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="d-grid">
-                <a href="#" class="btn btn-outline-secondary mb-2">
-                    <i class="bi bi-arrow-left"></i> Uçuş Seçimine Geri Dön
-                </a>
-            </div>
-        </div>
-    </div>
+	<div class="reservation-steps">
+		<div class="step ">
+			<div class="step-number">1</div>
+			<div class="step-title">Yolcu Bilgileri</div>
+		</div>
+		<div class="step">
+			<div class="step-number">2</div>
+			<div class="step-title">Koltuk Seçimi</div>
+		</div>
+		<div class="step active">
+			<div class="step-number">3</div>
+			<div class="step-title">Ödeme</div>
+		</div>
+		<div class="step">
+			<div class="step-number">4</div>
+			<div class="step-title">Onay</div>
+		</div>
+	</div>
+
+	<div class="reservation-form " style="border-radius:0px">
+		<div class="form-section">
+			<div class="section-title">
+				<i class=""></i> Sipariş Özeti
+			</div>
+			<div class="card-body">
+				<div class="d-flex justify-content-between mb-3">
+					<span>Uçuş Bilgisi:</span>
+					<span>İstanbul - Antalya</span>
+				</div>
+				<div class="d-flex justify-content-between mb-3">
+					<span>Tarih:</span>
+					<span>15.08.2025</span>
+				</div>
+				<div class="d-flex justify-content-between mb-3">
+					<span>Yolcu:</span>
+					<span>1 Yetişkin</span>
+				</div>
+				<hr>
+				<div class="d-flex justify-content-between mb-3">
+					<span>Bilet Ücreti:</span>
+					<span>1.200 ₺</span>
+				</div>
+				<div class="d-flex justify-content-between mb-3">
+					<span>Vergiler:</span>
+					<span>350 ₺</span>
+				</div>
+				<div class="d-flex justify-content-between mb-3">
+					<span>Hizmet Bedeli:</span>
+					<span>50 ₺</span>
+				</div>
+				<hr>
+				<div class="d-flex justify-content-between">
+					<strong style="font-size: 1.3em; font-weight:1000; ">Toplam Tutar:</strong>
+					<strong style="font-size: 1.3em; font-weight:1000; "> 1.600 ₺</strong>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="cizgi"></div>
+	<form asp-action="Index" method="post" class="reservation-form" style="border-radius:0px;">
+
+		<div class="form-section">
+			<div class="section-title">
+				<i class="fas fa-credit-card"></i> Kart Bilgileri
+			</div>
+
+			<div class="row g-3">
+				<div class="col-md-6">
+					<label class="form-label">Kart Üzerindeki Ad ve Soyad</label>
+					<input type="text" class="form-control" id="CardHolderName" asp-for="CardHolderName" placeholder="Adınız ve Soyadınız" required>
+					<span asp-validation-for="CardHolderName" class="text-danger"></span>
+
+				</div>
+
+
+				<div class="col-md-3">
+					<label class="form-label">Son Kullanma Tarihi</label>
+					<input type="text" class="form-control" id="ExpiryDate" asp-for="ExpiryDate" placeholder="MM/YY" required>
+					<span asp-validation-for="ExpiryDate" class="text-danger"></span>
+
+				</div>
+
+				<div class="col-md-6">
+					<label for="nationality" class="form-label">Kart Numarası</label>
+					<input type="text" maxlength="19" class="form-control" id="CardNumber" asp-for="CardNumber" placeholder="1234 5678 9012 3456" required>
+					<span asp-validation-for="CardNumber" class="text-danger"></span>
+
+				</div>
+
+				<div class="col-md-2">
+					<label class="form-label">CVV</label>
+					<input type="text" class="form-control" id="cardDate" asp-for="CVV" placeholder="123" required>
+					<span asp-validation-for="CVV" class="text-danger"></span>
+
+				</div>
+			</div>
+		</div>
+
+
+		<div class="form-section">
+			<div class="section-title">
+				<i class="fas fa-address-book"></i> Fatura Bilgileri
+			</div>
+
+			<div class="row g-3">
+
+				<div class="col-md-6">
+					<label class="form-label">E-posta Adresi</label>
+					<textarea class="form-control" id="adress" name="Passenger.Email" placeholder="Fatura adresini giriniz" style="height:50px; min-height:50px;" required></textarea>
+				</div>
+				<div class="col-md-3">
+					<label class="form-label">Şehir</label>
+					<input type="text" class="form-control" id="city" name="City" placeholder="Şehir" required>
+				</div>
+
+
+				<div class="col-md-6">
+					<label class="form-label">E-posta Adresi</label>
+					<input type="email" class="form-control" id="email" name="Passenger.Email" placeholder="E-posta adresiniz" required>
+				</div>
+
+				<div class="col-md-3">
+					<label class="form-label">Posta Kodu</label>
+					<input type="text" class="form-control" id="postacode" name="PostaCode" placeholder="Posta Kodunu giriniz" required>
+				</div>
+
+				<div class="form-check mb-4 mt-4" style="padding-left:40px;">
+					<input class="form-check-input" type="checkbox" id="acceptTerms">
+					<label class="form-check-label" for="acceptTerms">
+						Ödeme koşullarını ve gizlilik politikasını kabul ediyorum
+					</label>
+				</div>
+
+			</div>
+		</div>
+
+
+		<input type="hidden" name="Flight.FlightID" value="">
+
+		<div class="form-section mt-4">
+			<button type="submit" class="btn btn-primary btn-submit">
+				<i class="fas fa-check-circle me-2"></i> Ödemeyi Tamamla
+			</button>
+		</div>
+	</form>
+
+	<div>
+		<div class="reservation-form">
+			<div class="form-section">
+				<i class="mb-0">Güvenli Ödeme</i>
+			</div>
+			<div class="card-body">
+				<p class="small" style="color:var(--gold-accent)">
+					Tüm kredi kartı bilgileriniz SSL sertifikası ile şifrelenerek korunmaktadır.
+					Bilgileriniz üçüncü partilerle paylaşılmaz.
+				</p>
+				<div class="text-center mt-3">
+					<i class="bi bi-shield-lock fs-1 text-success"></i>
+				</div>
+			</div>
+			<a href="#" class="btn btn-primary btn-submit" style="height:50px; padding:11px;">
+				<i class="fas fa-arrow-left"></i> Uçuş Seçimine Geri Dön
+			</a>
+		</div>
+
+	</div>
+
 </div>
 
+
+
+<style>
+	.cizgi {
+		content: '';
+		position: relative;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: var(--gold-accent);
+	}
+
+	:root {
+		--dark-primary: #19232D; /* Ana koyu */
+		--dark-secondary: #3d3d3d; /* İkincil koyu */
+		--gold-accent: #dcbb87; /* Altın vurgu */
+		--light-bg: #f5f2eb; /* Krem-altın tonu arkaplan */
+		--medium-gray: #6d7b8c; /* Ara ton */
+	}
+
+	body {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		background-color: var( --dark-primary);
+		color: var(--dark-primary);
+	}
+
+	/* HEADER FIX */
+	.reservation-header {
+		background: linear-gradient(to right, var( --dark-primary), var(--dark-secondary));
+		color: #ffffff;
+		padding: 2rem;
+		text-align: center;
+		border-bottom: 3px solid var(--gold-accent);
+		border-radius: 12px 12px 0px 0px;
+	}
+
+		.reservation-header h2 {
+			background: var(--gold-accent);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+			font-weight: 700;
+			text-shadow: none;
+			display: inline-block;
+			padding: 0 15px;
+		}
+
+		/* Kenarlık efekti eklemek isterseniz */
+		.reservation-header h2 {
+			position: relative;
+		}
+
+			.reservation-header h2::after {
+				content: "";
+				position: absolute;
+				bottom: -5px;
+				left: 15%;
+				width: 70%;
+				height: 2px;
+				background: linear-gradient(90deg, transparent, #dcbb87, transparent);
+			}
+
+	/* STEPS FIX */
+	.reservation-steps {
+		display: flex;
+		justify-content: space-between;
+		padding: 1.5rem 2rem;
+		background: linear-gradient(to right, var(--dark-primary), var(--dark-secondary));
+		position: relative;
+	}
+
+		.reservation-steps::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 3px;
+			background: var(--gold-accent);
+		}
+
+	.step {
+		position: relative;
+		z-index: 1;
+		text-align: center;
+		flex: 1;
+	}
+
+		.step.active .step-number {
+			background: var(--gold-accent);
+			color: var(--dark-primary);
+			transform: scale(1.1);
+			box-shadow: 0 0 0 3px rgba(220, 187, 135, 0.3);
+		}
+
+	.step-number {
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		background: rgba(255,255,255,0.1);
+		color: var(--gold-accent);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: bold;
+		margin-bottom: 0.5rem;
+		transition: all 0.3s ease;
+		border: 2px solid var(--gold-accent);
+	}
+
+	.step-title {
+		color: white;
+		font-size: 0.85rem;
+		font-weight: 500;
+		opacity: 0.9;
+	}
+
+	/* CONTAINER */
+	.reservation-container {
+		max-width: 900px;
+		margin: 3rem auto;
+		border-radius: 12px;
+		overflow: visible;
+		box-shadow: 0 15px 40px rgba(25, 35, 45, 0.15);
+		background: white;
+		border: 1px solid var(--gold-accent);
+	}
+
+	/* FORM */
+	.reservation-form {
+		padding: 3rem;
+		background: linear-gradient(to right, var(--dark-primary), var(--dark-secondary));
+		color: var(--gold-accent);
+		border-radius: 0px 0px 12px 12px;
+	}
+
+	.section-title {
+		color: var(--gold-accent);
+		border-left: 4px solid var(--gold-accent);
+		padding-left: 1rem;
+		margin: 2rem 0 1.5rem;
+		font-size: 1.3rem;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+		.section-title i {
+			color: var(--gold-accent);
+		}
+
+	.form-control, .form-select {
+		padding: 0.8rem 1rem;
+		border-radius: 8px;
+		border: 1px solid #ced4da;
+		transition: all 0.3s;
+	}
+
+		.form-control:focus, .form-select:focus {
+			border-color: var(--accent-color);
+			box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+		}
+
+
+	.nice-select .current {
+		color: #1a1a1a;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 42px;
+	}
+
+	.nice-select {
+		color: var(--gold-accent);
+		border-radius: 8px;
+		border: 1px solid #ced4da;
+		padding: 0.8rem 1rem;
+		width: 60%;
+		text-align: center;
+		display: flex;
+		align-items: center;
+	}
+
+	.btn-submit {
+		background: linear-gradient(to right, var(--dark-primary), var(--dark-secondary));
+		color: var(--gold-accent);
+		border: none;
+		padding: 1rem 2rem;
+		font-weight: 600;
+		letter-spacing: 1px;
+		border: 2px solid var(--gold-accent);
+		border-radius: 8px;
+		transition: all 0.5s;
+		margin-top: 1rem;
+		width: 100%;
+		text-transform: uppercase;
+		font-size: 0.95rem;
+	}
+
+		.btn-submit:hover {
+			border: 2px solid var(--medium-gray);
+			transform: translateY(-2px);
+			box-shadow: 0 5px 15px rgba(61, 61, 61, 0.2);
+			background: linear-gradient(to right, var(--dark-secondary), var(--dark-primary));
+		}
+
+	@@media (max-width: 768px) {
+		.reservation-steps {
+			background: var(--gold-accent);
+			flex-direction: column;
+			gap: 15px;
+			padding: 1.5rem;
+		}
+
+		.step {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			text-align: left;
+		}
+
+		.step-number {
+			margin-bottom: 0;
+		}
+	}
+</style>
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
-    <script>
-        // Kredi kartı numarası formatlama (4 hanede bir boşluk)
-        $(document).ready(function() {
-            $("#CardNumber").on("keyup", function() {
-                var value = $(this).val().replace(/\s+/g, "").replace(/[^0-9]/gi, ""); //4 hanede bir boşluk koyar.
-                var formattedValue = "";
-                
-                for(var i = 0; i < value.length; i++) {
-                    if(i > 0 && i % 4 === 0){
-                        formattedValue += " ";
-                    }
-                    formattedValue += value[i];
-                }
-                
-                $(this).val(formattedValue);
-            });
-            
-            // Son kullanma tarihi formatlama (MM/YY)
-            $("#ExpiryDate").on("keyup", function() {
-                var value = $(this).val().replace(/\s+/g, "").replace(/[^0-9]/gi, ""); //4 hanede bir boşluk koyar.
-                
-                if(value.length > 2) {
-                    value = value.substring(0, 2) + "/" + value.substring(2, 4); //2 haneden sonra / koyar.
-                }
-                
-                $(this).val(value);
-            });
-        });
-    </script>
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+
+	<script>
+		// Kredi kartı numarası formatlama (4 hanede bir boşluk)
+		$(document).ready(function() {
+			$("#CardNumber").on("keyup", function() {
+				var value = $(this).val().replace(/\s+/g, "").replace(/[^0-9]/gi, ""); //4 hanede bir boşluk koyar.
+				var formattedValue = "";
+
+				for(var i = 0; i < value.length; i++) {
+					if(i > 0 && i % 4 === 0){
+						formattedValue += " ";
+					}
+					formattedValue += value[i];
+				}
+
+				$(this).val(formattedValue);
+			});
+
+			// Son kullanma tarihi formatlama (MM/YY)
+			$("#ExpiryDate").on("keyup", function() {
+				var value = $(this).val().replace(/\s+/g, "").replace(/[^0-9]/gi, ""); //4 hanede bir boşluk koyar.
+
+				if(value.length > 2) {
+					value = value.substring(0, 2) + "/" + value.substring(2, 4); //2 haneden sonra / koyar.
+				}
+
+				$(this).val(value);
+			});
+		});
+	</script>
 } 
