@@ -11,8 +11,12 @@ using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 
 namespace FBS_FlyZone.Controllers
 {
+
     public class FlightController : Controller
     {
+
+
+
         FlightManager fm = new FlightManager(new EfFlightRepository());
         UserManager um = new UserManager(new EfUserRepository());
         ReservationManager rm = new ReservationManager(new EfReservationRepository());
@@ -73,6 +77,25 @@ namespace FBS_FlyZone.Controllers
 
         public IActionResult FlightDetails(int id)
         {
+            Context context = new Context();
+            if (!context.Seats.Any())
+            {
+                var flights = context.Flights.ToList();
+                foreach (var flight in flights)
+                {
+                    for (int i = 1; i <= 30; i++)
+                    {
+                        context.Seats.Add(new Seat
+                        {
+                            FlightID = flight.FlightID,
+                            SeatNumber = $"{i}{Convert.ToChar(64 + (i % 6) + 1)}", // 1A, 2B, ..., 6F, 7A...
+                            IsOccupied = false
+                        });
+                    }
+                }
+                context.SaveChanges();
+            }
+
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);  // Kullanıcının ID'sini almak için
             if (string.IsNullOrEmpty(userId))
             {
@@ -87,6 +110,9 @@ namespace FBS_FlyZone.Controllers
                     return View("Error");  // Kullanıcı veritabanında bulunamadıysa hata sayfası
                 }
 
+                var availableSeats = c.Seats
+                        .Where(s => s.FlightID == id && !s.IsOccupied)
+                        .ToList();
                 var flight = fm.GetFlightById(id);  // Uçuş bilgilerini al
                 if (flight == null)
                 {
@@ -95,6 +121,7 @@ namespace FBS_FlyZone.Controllers
 
                 var reservationViewModel = new ReservationViewModel
                 {
+                    Availableseats = availableSeats,
                     Flight = flight,
                     User = userValues,
                     Passenger = new Passenger()  // Yeni Passenger nesnesi oluştur
@@ -152,7 +179,7 @@ namespace FBS_FlyZone.Controllers
                     pm.AddPassenger(passenger);  // Yeni yolcuyu veritabanına ekle
                 }
 
-               
+
 
                 // Yeni Reservation oluştur
                 var reservation = new Reservation

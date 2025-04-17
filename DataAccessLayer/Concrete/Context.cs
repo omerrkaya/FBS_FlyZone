@@ -32,6 +32,7 @@ namespace DataAccessLayer.Concrete
         public DbSet<Aircraft> Aircrafts { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Seat> Seats { get; set; }
 
 
 
