@@ -1,0 +1,91 @@
+@model EntityLayer.Concrete.User
+@{
+    ViewData["Title"] = "Yeni Kullanıcı Ekle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Users">Kullanıcılar</a></li>
+                    <li class="breadcrumb-item active">Yeni Kullanıcı</li>
+                </ol>
+            </nav>
+            <h2 class="mb-1">Yeni Kullanıcı Ekle</h2>
+            <p class="text-muted">Sisteme yeni bir kullanıcı kaydı oluşturun.</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="AddUser" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="User_Name_Surname" class="form-label">Ad Soyad</label>
+                            <input asp-for="User_Name_Surname" class="form-control" />
+                            <span asp-validation-for="User_Name_Surname" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">E-posta</label>
+                            <input asp-for="Email" class="form-control" type="email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="UserPassword" class="form-label">Şifre</label>
+                            <input asp-for="UserPassword" class="form-control" type="password" />
+                            <span asp-validation-for="UserPassword" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="UserRole" class="form-label">Rol</label>
+                            <select asp-for="UserRole" class="form-select">
+                                <option value="User">Kullanıcı</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                            <span asp-validation-for="UserRole" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Users" class="btn btn-secondary">İptal</a>
+                            <button type="submit" class="btn btn-primary">Kullanıcı Ekle</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Yardım</h5>
+                </div>
+                <div class="card-body">
+                    <h6>Şifre Gereksinimleri</h6>
+                    <ul class="small text-muted">
+                        <li>En az 6 karakter uzunluğunda olmalı</li>
+                        <li>En fazla 24 karakter uzunluğunda olmalı</li>
+                        <li>Büyük/küçük harf ve rakam içermesi önerilir</li>
+                    </ul>
+                    
+                    <h6 class="mt-4">Kullanıcı Rolleri</h6>
+                    <ul class="small text-muted">
+                        <li><strong>Admin:</strong> Tam yönetici yetkileri</li>
+                        <li><strong>Kullanıcı:</strong> Standart kullanıcı yetkileri</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

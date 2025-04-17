@@ -1,0 +1,220 @@
+@model List<EntityLayer.Concrete.Reservation>
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="mb-4">Dashboard</h2>
+            <p class="text-muted">FlyZone uçuş rezervasyon sistemi admin paneline hoş geldiniz.</p>
+            
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger">
+                    <h5>Bir hata oluştu!</h5>
+                    <p>@ViewBag.ErrorMessage</p>
+                </div>
+            }
+        </div>
+    </div>
+    
+    <!-- İstatistik Kartları -->
+    <div class="row mb-5">
+        <!-- Kullanıcı Sayısı -->
+        <div class="col-md-3 mb-4">
+            <div class="card card-stats">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="stat-icon bg-primary bg-opacity-25 text-primary">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0">Kullanıcılar</h5>
+                            <h2 class="mt-2 mb-0">@ViewBag.UserCount</h2>
+                        </div>
+                    </div>
+                    <p class="card-text mt-3 mb-0 text-muted">Toplam kayıtlı kullanıcı</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Uçuş Sayısı -->
+        <div class="col-md-3 mb-4">
+            <div class="card card-stats">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="stat-icon bg-info bg-opacity-25 text-info">
+                            <i class="bi bi-airplane"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0">Uçuşlar</h5>
+                            <h2 class="mt-2 mb-0">@ViewBag.FlightCount</h2>
+                        </div>
+                    </div>
+                    <p class="card-text mt-3 mb-0 text-muted">Toplam uçuş sayısı</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rezervasyon Sayısı -->
+        <div class="col-md-3 mb-4">
+            <div class="card card-stats">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="stat-icon bg-success bg-opacity-25 text-success">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0">Rezervasyonlar</h5>
+                            <h2 class="mt-2 mb-0">@ViewBag.ReservationCount</h2>
+                        </div>
+                    </div>
+                    <p class="card-text mt-3 mb-0 text-muted">Toplam rezervasyon</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Havayolu Sayısı -->
+        <div class="col-md-3 mb-4">
+            <div class="card card-stats">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="stat-icon bg-warning bg-opacity-25 text-warning">
+                            <i class="bi bi-building"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0">Havayolları</h5>
+                            <h2 class="mt-2 mb-0">@ViewBag.AirlineCount</h2>
+                        </div>
+                    </div>
+                    <p class="card-text mt-3 mb-0 text-muted">Toplam havayolu</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Son Rezervasyonlar -->
+        <div class="col-md-8 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Son Rezervasyonlar</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Yolcu</th>
+                                    <th>Uçuş</th>
+                                    <th>Tarih</th>
+                                    <th>Durum</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Any())
+                                {
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.ReservationID</td>
+                                            <td>@item.PassengerID</td>
+                                            <td>@item.FlightID</td>
+                                            <td>@item.Reservation_Date.ToString("dd.MM.yyyy")</td>
+                                            <td>
+                                                @if (item.Reservation_Status == "Confirmed")
+                                                {
+                                                    <span class="badge bg-success">Onaylandı</span>
+                                                }
+                                                else if (item.Reservation_Status == "Pending")
+                                                {
+                                                    <span class="badge bg-warning">Beklemede</span>
+                                                }
+                                                else if (item.Reservation_Status == "Cancelled")
+                                                {
+                                                    <span class="badge bg-danger">İptal</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary">@item.Reservation_Status</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a href="#" class="btn btn-sm btn-info">Detay</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6" class="text-center">Rezervasyon bulunamadı.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Grafik: Aylık Rezervasyonlar -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Aylık Rezervasyonlar</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Grafik için örnek veriler
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx = document.getElementById('monthlyChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran'],
+                    datasets: [{
+                        label: 'Rezervasyonlar',
+                        data: [65, 59, 80, 81, 56, 55],
+                        borderColor: '#0d6efd',
+                        backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                borderDash: [2, 4]
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+} 

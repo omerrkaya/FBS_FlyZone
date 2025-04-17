@@ -1,4 +1,4 @@
- using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using FBS_FlyZone.Models;
 using Microsoft.AspNetCore.Identity;
 using DataAccessLayer.EntityFramework;
@@ -160,6 +160,37 @@ namespace FBS_FlyZone.Controllers
                 ModelState.AddModelError("CurrentPassword", "Mevcut şifreniz doğru değil.");
                 return View(model);
             }
+        }
+
+        // Admin oluşturma - Test için
+        [AllowAnonymous]
+        public IActionResult CreateAdmin()
+        {
+            // Önce kontrol edelim, zaten admin var mı?
+            Context c = new Context();
+            var existingAdmin = c.Users.FirstOrDefault(x => x.UserRole == "Admin");
+            
+            if (existingAdmin != null)
+            {
+                ViewBag.Message = "Zaten bir admin kullanıcısı mevcut. Email: " + existingAdmin.Email;
+                return View();
+            }
+            
+            // Admin yoksa oluşturalım, default değerleri veriyorum. burayı böyle düşündüm ama controller da allowanonymous eklemem gerekiyor. Şimdi ekledim allowanonymous artık direkt /Account/CreateAdmin yapınca giriş bilgisi görünüyor.
+            // Direkt /Admin sekmesinden (veya /Admin/Test sekmesinden) erişebilirsin kanka.
+            User adminUser = new User
+            {
+                User_Name_Surname = "Admin Kullanıcı",
+                Email = "admin@flyzone.com",
+                UserPassword = "admin123",
+                UserRole = "Admin",
+                RegisterationDate = DateTime.Now
+            };
+            
+            um.RegisterUserAdd(adminUser);
+            
+            ViewBag.Message = "Admin kullanıcısı oluşturuldu. Email: admin@flyzone.com, Şifre: admin123";
+            return View();
         }
 
         // Çıkış işlemi
