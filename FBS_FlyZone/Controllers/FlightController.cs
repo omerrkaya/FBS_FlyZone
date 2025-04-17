@@ -164,21 +164,21 @@ namespace FBS_FlyZone.Controllers
 
 
 
-                // Yeni Reservation oluştur
-                var reservation = new Reservation
-                {
-                    FlightID = model.Flight.FlightID,
-                    PassengerID = passenger.PassengerID,
-                    Reservation_Date = DateTime.Now,
-                    Reservation_Status = "Onay Bekliyor",
-                    Payment_Method = model.PaymentMethod,
-                    Seat_Number = "1",
-                    UserID = int.Parse(userId)
-                };
+                //// Yeni Reservation oluştur
+                //var reservation = new Reservation
+                //{
+                //    FlightID = model.Flight.FlightID,
+                //    PassengerID = passenger.PassengerID,
+                //    Reservation_Date = DateTime.Now,
+                //    Reservation_Status = "Onay Bekliyor",
+                //    Payment_Method = model.PaymentMethod,
+                //    Seat_Number = "1",
+                //    UserID = int.Parse(userId)
+                //};
 
-                rm.AddReservation(reservation); // Yeni rezervasyonu veritabanına ekle
+                //rm.AddReservation(reservation); // Yeni rezervasyonu veritabanına ekle
 
-                return RedirectToAction("ReservationSuccess"); // Başarıyla rezervasyon tamamlandı
+                return RedirectToAction("Index", "Payment"); // Başarıyla rezervasyon tamamlandı
             }
 
             return View(model);  // Eğer model geçerli değilse tekrar formu göster

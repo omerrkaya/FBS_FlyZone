@@ -5,7 +5,7 @@ namespace FBS_FlyZone.Models
     public class PaymentViewModel
     {
         [Required(ErrorMessage = "Kart numarası zorunludur")]
-        [CreditCard(ErrorMessage = "Geçerli bir kart numarası giriniz")]
+        //[CreditCard(ErrorMessage = "Geçerli bir kart numarası giriniz")]
         public string? CardNumber { get; set; }
 
         [Required(ErrorMessage = "Son kullanma tarihi zorunludur")]

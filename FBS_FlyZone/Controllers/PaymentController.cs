@@ -36,5 +36,11 @@ namespace FBS_FlyZone.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
+        public IActionResult PaymentFailed() //başarısız ödeme sayfasına yönlendirilir. Gerekirse burası değiştirilebilir.
+        {
+            return View();
+        }
     }
 } 
