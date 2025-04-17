@@ -11,6 +11,8 @@ namespace FBS_FlyZone.Models
         // Ek alanlar
         public string PaymentMethod { get; set; }
         public string? SeatNumber { get; set; }  // Eğer koltuk seçimi varsa
+
+        public List<Seat> Availableseats { get; set; }
     }
 
 }

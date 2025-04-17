@@ -76,19 +76,6 @@
 
 		}
 	</div>
-@* 	<!-- Modal -->
-	<div id="seatSelectionModal" class="modal-bg">
-		<div class="modal">
-			<span class="close-btn">&times;</span>
-			<h2 style="text-align:center; font-family:monospace; color:#dcbb87;">Koltuk Seçimi</h2>
-			<div class="seat-map">
-				<!-- Koltuklar burada oluşturulacak -->
-			</div>
-			<br />
-			<br />
-			<button class="btn btn--end" style="align-items:center; display:block;">Seçimi Onayla</button>
-		</div>
-	</div> *@
 
 	<!-- Sayfalama Butonları -->
 	<div class="pagination" id="pagination">
@@ -104,33 +91,7 @@
 
 
 <style>
-/* 	.seat-map {
-		display: grid;
-		grid-template-columns: repeat(9, auto);
-		gap: 10px;
-		justify-content: center;
-		margin-top: 20px;
-	}
 
-	.seat {
-		width: 30px;
-		height: 30px;
-		background-color: #dcbb87;
-		border: 1px solid #19232D;
-		color: #19232D;
-		text-align: center;
-		line-height: 30px;
-		cursor: pointer;
-	}
-
-		.seat.selected {
-			background-color: #6c757d;
-			color: white;
-		}
-
-	.gap {
-		width: 20px; /* Boşluk genişliği
-		}*/
 	 
 
 	.buy {
@@ -481,62 +442,7 @@
 		showPage(currentPage);
 	});
 
-	//-----------------------------------------------------------------
 
-	//  document.addEventListener("DOMContentLoaded", function() {
-	// 	const buyButtons = document.querySelectorAll('.buy');
-	// 	const seatModal = document.getElementById("seatSelectionModal");
-	// 	const closeBtn = seatModal.querySelector('.close-btn');
-
-	// 	buyButtons.forEach(button => {
-	// 		button.addEventListener('click', function(event) {
-	// 			event.preventDefault(); // Varsayılan link davranışını engelle
-	// 			seatModal.classList.add("show");
-	// 			createSeatMap();
-	// 		});
-	// 	});
-
-	// 	closeBtn.addEventListener('click', function() {
-	// 		seatModal.classList.remove("show");
-	// 	});
-
-	// 	window.addEventListener('click', function(e) {
-	// 		if (e.target === seatModal) {
-	// 			seatModal.classList.remove("show");
-	// 		}
-	// 	});
-
-	// 	function createSeatMap() {
-	// 		const seatMap = document.querySelector(".seat-map");
-	// 		seatMap.innerHTML = ""; // Önceki koltukları temizle
-
-	// 		let seatNumber = 1;
-	// 		for (let row = 0; row < 2; row++) {
-	// 			for (let col = 0; col < 3; col++) {
-	// 				const seat1 = createSeat(seatNumber++);
-	// 				const seat2 = createSeat(seatNumber++);
-	// 				seatMap.appendChild(seat1);
-	// 				seatMap.appendChild(seat2);
-
-	// 				if (col < 3) { // Son sütunda boşluk ekleme
-	// 					const gap = document.createElement('div');
-	// 					gap.className = 'gap';
-	// 					seatMap.appendChild(gap);
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-
-	// 	function createSeat(number) {
-	// 		const seat = document.createElement('div');
-	// 		seat.className = 'seat';
-	// 		seat.textContent = number;
-	// 		seat.onclick = function() {
-	// 			seat.classList.toggle('selected');
-	// 		};
-	// 		return seat;
-	// 	}
-	// });
 </script>
 
 

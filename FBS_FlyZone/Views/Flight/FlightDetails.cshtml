@@ -31,7 +31,7 @@
 		</div>
 	</div>
 
-	
+
 	@using (Html.BeginForm("CreateReservation", "Flight", FormMethod.Post, new { @class = "reservation-form" }))
 	{
 		<div class="form-section">
@@ -129,6 +129,19 @@
 				</div>
 			</div>
 		</div>
+		<div class="seat-map-section">
+			<h3><i class="fas fa-chair"></i> Koltuk Seçimi</h3>
+			<div class="seat-map">
+				@foreach (var seat in Model.Availableseats)
+				{
+					<div class="seat @(seat.IsOccupied ? "occupied" : "")"
+						 data-seat-number="@seat.SeatNumber">
+						@seat.SeatNumber
+					</div>
+				}
+			</div>
+			<input type="hidden" id="selectedSeat" name="SeatNumber" />
+		</div>
 
 		<input type="hidden" name="Flight.FlightID" value="@Model.Flight.FlightID">
 
@@ -142,6 +155,43 @@
 
 
 <style>
+
+	.seat-map-section {
+		margin: 2rem 0;
+		padding: 1rem;
+		background: #19232D;
+		border-radius: 8px;
+	}
+
+	.seat-map {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		gap: 10px;
+		margin-top: 1rem;
+	}
+
+	.seat {
+		width: 40px;
+		height: 40px;
+		background: #dcbb87;
+		color: #19232D;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 4px;
+		cursor: pointer;
+		font-weight: bold;
+	}
+
+		.seat.occupied {
+			background: #3d3d3d;
+			cursor: not-allowed;
+		}
+
+		.seat:hover:not(.occupied) {
+			transform: scale(1.1);
+		}
+
 	:root {
 		--dark-primary: #19232D; /* Ana koyu */
 		--dark-secondary: #3d3d3d; /* İkincil koyu */
@@ -356,3 +406,14 @@
 		}
 	}
 </style>
+
+<script>
+					document.querySelectorAll('.seat:not(.occupied)').forEach(seat => {
+		seat.addEventListener('click', () => {
+			document.querySelectorAll('.seat').forEach(s =>
+				s.classList.remove('selected'));
+			seat.classList.add('selected');
+			document.getElementById('selectedSeat').value = seat.dataset.seatNumber;
+		});
+	});
+</script>
