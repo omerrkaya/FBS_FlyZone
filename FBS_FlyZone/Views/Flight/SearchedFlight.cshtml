@@ -1,6 +1,7 @@
 ﻿@using EntityLayer.Concrete
 @using System.Globalization
 @model List<Flight>
+
 @{
 	ViewData["Title"] = "SearchedFlight";
 	Layout = "~/Views/Shared/UserLayout.cshtml";
@@ -14,6 +15,8 @@
 		@foreach (var flight in Model)
 		{
 			var arrivalTime = flight.Flight_DateTime.AddHours(flight.Estimated_Time.Hours).AddMinutes(flight.Estimated_Time.Minutes);
+			string totalPrice = ((decimal)flight.TotalPrice).ToString("F2");
+
 			<div class="flight-container">
 				<div class="flight-info">
 					<div class="departure">
@@ -36,7 +39,7 @@
 
 					<button class="details-btn" style="box-shadow: 5px 3px rgba(0,0,0,0.3);">Detay</button>
 					<div class="details-price">
-						<span class="price">@flight.Flight_Price TRY</span>
+						<span class="price">@totalPrice TRY</span>
 						<br />
 						<a href="@Url.Action("FlightDetails", "Flight", new { id = flight.FlightID , userid = ViewBag.UserId})" class="buy">Satın Al</a>
 					</div>

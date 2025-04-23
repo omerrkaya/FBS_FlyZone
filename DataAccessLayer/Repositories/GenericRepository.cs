@@ -21,6 +21,7 @@ namespace DataAccessLayer.Repositories
         {
             using var c = new Context();
             return c.Set<Gen_Ent>().ToList();
+
         }
 
         public Gen_Ent GetById(int id)
@@ -34,6 +35,7 @@ namespace DataAccessLayer.Repositories
            using var c = new Context();
             c.Add(genent);
             c.SaveChanges();
+
         }
 
         public void Update(Gen_Ent genent)

@@ -35,10 +35,15 @@ namespace EntityLayer.Concrete
         public string Payment_Method { get; set; }
         public string Payment_Status { get; set; }
 
+        
+
+
         [ForeignKey("User")]
         [Required]  // Bu, UserID'nin boş olamayacağını belirtir.
         public int UserID { get; set; }
         public User User { get; set; }
+
+        
 
         public ICollection<Flight> Flights { get; set; }
     }

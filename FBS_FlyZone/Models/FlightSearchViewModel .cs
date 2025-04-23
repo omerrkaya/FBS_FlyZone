@@ -1,9 +1,11 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using EntityLayer.Concrete;
 
 public class FlightSearchViewModel
 {
+
 
     [Required(ErrorMessage = "Kalkış yeri zorunludur")]
     public int DepartureAirportId { get; set; }

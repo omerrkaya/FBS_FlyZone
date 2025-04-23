@@ -51,6 +51,8 @@ namespace EntityLayer.Concrete
 
         public decimal Flight_Price { get; set; }
 
+        public decimal? TotalPrice { get; set; }
+
 
     }
 }

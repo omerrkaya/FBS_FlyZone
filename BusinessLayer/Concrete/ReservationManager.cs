@@ -21,7 +21,7 @@ namespace BusinessLayer.Concrete
 
         public void AddReservation(Reservation reservation)
         {
-           _reservationDal.Insert(reservation);
+          _reservationDal.Insert(reservation);
         }
 
         public void DeleteReservation(int reservationId)
@@ -40,6 +40,14 @@ namespace BusinessLayer.Concrete
             using (var context = new Context())
             {
                 return context.Reservations.FirstOrDefault(r => r.ReservationID == reservationId);
+            }
+        }
+
+        public List<Reservation> GetReservationsByUserId(int userId)
+        {
+            using ( var c = new Context())
+            {
+                return c.Reservations.Where(r => r.UserID == userId).ToList();
             }
         }
 

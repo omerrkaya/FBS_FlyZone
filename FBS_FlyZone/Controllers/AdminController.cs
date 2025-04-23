@@ -20,9 +20,11 @@ namespace FBS_FlyZone.Controllers
     {
         private readonly UserManager _userManager;
         private readonly Context _context;
+        private readonly FlightManager _flightManager;
 
         public AdminController()
         {
+            _flightManager= new FlightManager(new EfFlightRepository());
             _userManager = new UserManager(new EfUserRepository());
             _context = new Context();
         }
@@ -131,7 +133,7 @@ namespace FBS_FlyZone.Controllers
         [AllowAnonymous]
         public IActionResult Flights()
         {
-            var flights = _context.Flights.ToList(); // Uçuşları listeleyip view'e gönderiyorum.
+            var flights = _flightManager.GetFlightListWithAirport(); // Uçuşları listeleyip view'e gönderiyorum.
             return View(flights);
         }
 

@@ -14,5 +14,6 @@ namespace BusinessLayer.Abstract
         void DeleteReservation(int reservationId);
         Reservation GetReservationById(int reservationId);
         List<Reservation> GetAllReservations();
+         List<Reservation> GetReservationsByUserId(int userId);
     }
 }
