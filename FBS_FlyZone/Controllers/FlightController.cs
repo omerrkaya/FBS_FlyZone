@@ -8,6 +8,7 @@ using DataAccessLayer.Concrete;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FBS_FlyZone.Controllers
 {
@@ -32,7 +33,6 @@ namespace FBS_FlyZone.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult SearchedFlight()
         {
 
@@ -56,6 +56,8 @@ namespace FBS_FlyZone.Controllers
                 return RedirectToAction("Login");
             }
 
+
+
             var userId = User.FindFirstValue("UserId");
             Context c = new Context();
             var userValues = c.Users.FirstOrDefault(x => x.UserID.ToString() == userId);
@@ -68,16 +70,19 @@ namespace FBS_FlyZone.Controllers
 
             foreach (var flight in flights)
             {
-                var TotalFlights = flight.Flight_Price * (model.AdultCount + model.ChildCount);
+                decimal childcount = model.ChildCount * 8m / 10m;
+                decimal adultcount = model.AdultCount;
+                flight.TotalPrice = flight.Flight_Price * Convert.ToDecimal(childcount + adultcount);
+
+                var childCount = HttpContext.Session.GetInt32("ChildCount");
+                var adultCount = HttpContext.Session.GetInt32("AdultCount");
+                var totalPrice = Convert.ToDecimal(HttpContext.Session.GetString("TotalPrice"));
             }
 
             return View(flights);
         }
-
-
         public IActionResult FlightDetails(int id)
         {
-
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);  // Kullanıcının ID'sini almak için
             if (string.IsNullOrEmpty(userId))
@@ -102,9 +107,17 @@ namespace FBS_FlyZone.Controllers
                     return View("Error");  // Uçuş bulunamazsa hata sayfası
                 }
 
+                // Session'dan verileri okuma
+                var childCount = HttpContext.Session.GetInt32("ChildCount") ?? 0;
+                var adultCount = HttpContext.Session.GetInt32("AdultCount") ?? 0;
+                var totalPrice = Convert.ToDecimal(HttpContext.Session.GetString("TotalPrice") ?? "0");
+
                 var reservationViewModel = new ReservationViewModel
                 {
-                    SeatNumber="1",
+                    SeatNumber = "1",
+                    TotalPrice = totalPrice,
+                    AdultCount = (int)adultCount,
+                    ChildCount = (int)childCount,
                     Flight = flight,
                     User = userValues,
                     Passenger = new Passenger()  // Yeni Passenger nesnesi oluştur
@@ -164,7 +177,7 @@ namespace FBS_FlyZone.Controllers
 
 
 
-                // Yeni Reservation oluştur
+                //Yeni Reservation oluştur
                 var reservation = new Reservation
                 {
                     FlightID = model.Flight.FlightID,
@@ -176,7 +189,7 @@ namespace FBS_FlyZone.Controllers
                     UserID = int.Parse(userId)
                 };
 
-                rm.AddReservation(reservation); // Yeni rezervasyonu veritabanına ekle
+                //rm.AddReservation(reservation); // Yeni rezervasyonu veritabanına ekle
 
                 return RedirectToAction("Index", "Payment"); // Başarıyla rezervasyon tamamlandı
             }
@@ -191,6 +204,7 @@ namespace FBS_FlyZone.Controllers
             ViewBag.SearchKeyword = keyword;
             return View();
         }
+
 
     }
 }

@@ -58,5 +58,7 @@ namespace BusinessLayer.Concrete
         {
             return _flightDal.GetFlightListWithAirport();
         }
+
+       
     }
 }

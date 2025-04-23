@@ -9,14 +9,17 @@ namespace FBS_FlyZone.Controllers
     [AllowAnonymous]
     public class PaymentController : Controller 
     {
+
+        
         [HttpGet] //get işlemi yapılır.
         public IActionResult Index()
         {
+
             return View(new PaymentViewModel()); //ödeme sayfasına yönlendirilir.
         }
         
         [HttpPost] //post işlemi yapılır.
-        public IActionResult Index(PaymentViewModel model)
+        public IActionResult Index(PaymentViewModel model,  decimal totalPrice, int adultCount, int childCount)
         {
             if (!ModelState.IsValid)
             {

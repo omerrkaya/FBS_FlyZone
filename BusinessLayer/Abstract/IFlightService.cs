@@ -16,6 +16,8 @@ namespace BusinessLayer.Abstract
         Flight GetFlightById(int id);
         List<Flight> GetListAll();
         List<Flight> GetFlightListWithAirport();
+
+
     }
 
 }

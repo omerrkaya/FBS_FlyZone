@@ -9,6 +9,7 @@ namespace DataAccessLayer.Abstract
 {
     public interface IFlightDal:IGenericDal<Flight>
     {
-       List<Flight> GetFlightListWithAirport();
+       List<Flight> GetFlightListWithAirport();    
+
     }
 }

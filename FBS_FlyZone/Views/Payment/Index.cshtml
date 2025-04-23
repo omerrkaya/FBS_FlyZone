@@ -4,6 +4,8 @@
 	Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
+
+
 <div style="margin-top: 50px;"></div> <!-- Ödeme sayfasının üstüne boşluk bırakır. Navbar ile arasında boşluk bırakır. -->
 
 <div class="reservation-container" style="margin-top:130px;">
@@ -36,36 +38,49 @@
 				<i class=""></i> Sipariş Özeti
 			</div>
 			<div class="card-body">
-				<div class="d-flex justify-content-between mb-3">
-					<span>Uçuş Bilgisi:</span>
-					<span>İstanbul - Antalya</span>
-				</div>
-				<div class="d-flex justify-content-between mb-3">
-					<span>Tarih:</span>
-					<span>15.08.2025</span>
-				</div>
-				<div class="d-flex justify-content-between mb-3">
-					<span>Yolcu:</span>
-					<span>1 Yetişkin</span>
-				</div>
-				<hr>
-				<div class="d-flex justify-content-between mb-3">
-					<span>Bilet Ücreti:</span>
-					<span>1.200 ₺</span>
-				</div>
-				<div class="d-flex justify-content-between mb-3">
-					<span>Vergiler:</span>
-					<span>350 ₺</span>
-				</div>
-				<div class="d-flex justify-content-between mb-3">
-					<span>Hizmet Bedeli:</span>
-					<span>50 ₺</span>
-				</div>
-				<hr>
-				<div class="d-flex justify-content-between">
-					<strong style="font-size: 1.3em; font-weight:1000; ">Toplam Tutar:</strong>
-					<strong style="font-size: 1.3em; font-weight:1000; "> 1.600 ₺</strong>
-				</div>
+				@if (true)
+				{
+@* 					var childCount =
+					var adultCount = 
+					var totalPrice = 
+ *@
+
+					<div class="d-flex justify-content-between mb-3">
+						<span>Uçuş Bilgisi:</span>
+						<span>İstanbul - Antalya</span>
+					</div>
+					<div class="d-flex justify-content-between mb-3">
+						<span>Tarih:</span>
+						<span>15.08.2025</span>
+					</div>
+					<div class="d-flex justify-content-between mb-3">
+						<span>Yolcu:</span>
+						<span>1Yetişkin, 1Çocuk</span>
+					</div>
+					<hr>
+					<div class="d-flex justify-content-between mb-3">
+						<span>Bilet Ücreti:</span>
+						<span>1 ₺</span>
+					</div>
+					<div class="d-flex justify-content-between mb-3">
+						<span>Vergiler:</span>
+						<span>1 ₺</span>
+					</div>
+					<div class="d-flex justify-content-between mb-3">
+						<span>Hizmet Bedeli:</span>
+						<span>1 ₺</span>
+					</div>
+					<hr>
+					<div class="d-flex justify-content-between">
+						<strong style="font-size: 1.3em; font-weight:1000; ">Toplam Tutar:</strong>
+						<strong style="font-size: 1.3em; font-weight:1000; "> 1 TRY</strong>
+					</div>
+				}
+				else
+				{
+					<p>Veriler bulunamadı.</p>
+				}
+				
 			</div>
 		</div>
 	</div>

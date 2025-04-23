@@ -33,6 +33,7 @@ namespace DataAccessLayer.EntityFramework
             }
         }
 
+
         public List<Flight> GetFlightListWithAirport()
         {
             using (var c = new Context())
@@ -46,6 +47,7 @@ namespace DataAccessLayer.EntityFramework
         {
             throw new NotImplementedException();
         }
+
 
         public void Update(Flight genent)
         {
