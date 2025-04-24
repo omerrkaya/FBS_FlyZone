@@ -26,6 +26,14 @@ namespace DataAccessLayer.EntityFramework
             throw new NotImplementedException();
         }
 
+        public Reservation GetReservationByPassengerAndFlight(int passengerId, int flightId)
+        {
+            using (var c = new Context())
+            {
+                return c.Reservations.FirstOrDefault(x => x.PassengerID == passengerId && x.FlightID == flightId);
+            }
+        }
+
         public void Insert(Reservation genent)
         {
            using (var c = new Context())

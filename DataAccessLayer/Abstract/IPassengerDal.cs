@@ -9,6 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IPassengerDal: IGenericDal<Passenger>
     {
-       
+        Passenger GetPassengerByUserIdAndTcNo(int id, string tc);
     }
 }

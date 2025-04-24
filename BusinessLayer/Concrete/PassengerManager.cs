@@ -43,6 +43,11 @@ namespace BusinessLayer.Concrete
             return _passengerDal.GetById(id);
         }
 
+        public Passenger GetPassengerByUserIdAndTcNo(int userId, string tcOrPassport)
+        {
+            return _passengerDal.GetPassengerByUserIdAndTcNo(userId,tcOrPassport); 
+        }
+
         public void UpdatePassenger(Passenger passenger)
         {
             throw new NotImplementedException();

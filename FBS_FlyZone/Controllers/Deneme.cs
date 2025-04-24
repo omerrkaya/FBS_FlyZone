@@ -17,5 +17,12 @@ namespace FBS_FlyZone.Controllers
 
             return View(values);
         }
+
+        [AllowAnonymous]
+        public IActionResult FlightDetailss()
+        {
+           
+            return View();
+        }
     }
 }

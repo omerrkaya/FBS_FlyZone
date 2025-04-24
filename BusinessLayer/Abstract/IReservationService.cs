@@ -15,5 +15,7 @@ namespace BusinessLayer.Abstract
         Reservation GetReservationById(int reservationId);
         List<Reservation> GetAllReservations();
          List<Reservation> GetReservationsByUserId(int userId);
+
+        Reservation GetReservationByPassengerAndFlight(int passengerId, int flightId);
     }
 }

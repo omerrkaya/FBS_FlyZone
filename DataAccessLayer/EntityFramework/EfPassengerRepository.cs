@@ -33,6 +33,14 @@ namespace DataAccessLayer.EntityFramework
 
         }
 
+        public Passenger GetPassengerByUserIdAndTcNo(int id, string tcOrPassport)
+        {
+            using (var context = new Context())
+            {
+                return context.Passengers.FirstOrDefault(p => p.UserID == id && p.TcNo_PasaportNo == tcOrPassport);
+            }
+        }
+
         public void Insert(Passenger genent)
         {
             using (var c = new Context())
