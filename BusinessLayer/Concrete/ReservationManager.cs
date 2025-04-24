@@ -43,6 +43,11 @@ namespace BusinessLayer.Concrete
             }
         }
 
+        public Reservation GetReservationByPassengerAndFlight(int passengerId, int flightId)
+        {
+            return _reservationDal.GetReservationByPassengerAndFlight(passengerId, flightId);
+        }
+
         public List<Reservation> GetReservationsByUserId(int userId)
         {
             using ( var c = new Context())

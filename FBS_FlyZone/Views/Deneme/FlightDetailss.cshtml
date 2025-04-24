@@ -1,10 +1,8 @@
-﻿@using EntityLayer.Concrete
-@model FBS_FlyZone.Models.PassengerFormViewModel
-
-@{
-	ViewData["Title"] = "FlightDetails";
+﻿@{
+	ViewData["Title"] = "FlightDetailss";
 	Layout = "~/Views/Shared/UserLayout.cshtml";
 }
+
 
 
 <div class="reservation-container" style="margin-top:130px;">
@@ -33,24 +31,24 @@
 
 
 
-	@using (Html.BeginForm("CreateReservation", "Flight", FormMethod.Post, new { @class = "reservation-form" }))
-	{
-		@for (int i = 0; i < Model.Passengers.Count; i++)
+	<form class="reservation-form" method="post">
+		@for (int i = 1; i < 3; i++)
 		{
+
 			<div class="form-section">
 				<div class="section-title">
-					<i class="fas fa-user"></i> Yolcu @(i+1).ToString() Bilgiler
+					<i class="fas fa-user"></i> Temel Bilgiler
 				</div>
 
 				<div class="row g-3">
 					<div class="col-md-6">
 						<label class="form-label">Ad Soyad</label>
-						<input type="text" class="form-control" id="fullName" name="Passengers[@i].Passenger_Name_Surname" placeholder="Ad ve soyadınız" required>
+						<input type="text" class="form-control" id="fullName" name="" placeholder="Ad ve soyadınız" required>
 					</div>
 
 					<div class="col-md-6 ">
 						<label class="form-label">Cinsiyet</label>
-						<select class="form-select" id="gender" name="Passengers[@i].Gender" required>
+						<select class="form-select" id="gender" name="" required>
 							<option value="" selected>Cinsiyet seçiniz</option>
 							<option value="Erkek">Erkek</option>
 							<option value="Kadın">Kadın</option>
@@ -59,25 +57,25 @@
 
 					<div class="col-md-6">
 						<label class="form-label">Doğum Tarihi</label>
-						<input type="date" class="form-control" id="birthDate" name="Passengers[@i].Birth_Time" required>
+						<input type="date" class="form-control" id="birthDate" name="" required>
 					</div>
 
 					<div class="col-md-6">
 						<label for="nationality" class="form-label">Uyruk</label>
-						<input type="text" class="form-control" id="nationality" name="Passengers[@i].Nationality" placeholder="Uyruğunuz" required>
+						<input type="text" class="form-control" id="nationality" name="" placeholder="Uyruğunuz" required>
 					</div>
 				</div>
 			</div>
 
 			<div class="form-section">
 				<div class="section-title">
-					<i class="fas fa-id-card"></i> Kimlik Bilgileri
+					<i class="fas fa-id-card"></i>Yolcu @i.ToString() Kimlik Bilgileri
 				</div>
 
 				<div class="row g-3">
 					<div class="col-md-6">
 						<label class="form-label">TC Kimlik No / Pasaport No</label>
-						<input type="text" class="form-control" id="idNumber" name="Passengers[@i].TcNo_PasaportNo" placeholder="TC veya pasaport numaranız" required>
+						<input type="text" class="form-control" id="idNumber" name="" placeholder="TC veya pasaport numaranız" required>
 					</div>
 				</div>
 			</div>
@@ -90,67 +88,67 @@
 				<div class="row g-3">
 					<div class="col-md-6">
 						<label class="form-label">E-posta Adresi</label>
-						<input type="email" class="form-control" id="email" name="Passengers[@i].Email" placeholder="E-posta adresiniz" required>
+						<input type="email" class="form-control" id="email" name="" placeholder="E-posta adresiniz" required>
 					</div>
 
 					<div class="col-md-6">
 						<label class="form-label">Telefon Numarası</label>
 
-						<input type="tel" class="form-control" id="phone" name="Passengers[@i].Phone_Number" placeholder="+90 (5__) ___ __ __  şeklinde yazınız" required>
+						<input type="tel" class="form-control" id="phone" name="" placeholder="+90 (5__) ___ __ __  şeklinde yazınız" required>
 
 					</div>
 				</div>
 			</div>
 
+			<div class="form-section">
+				<div class="section-title">
+					<i class="fas fa-credit-card"></i> Ödeme Yöntemi
+				</div>
 
+				<div class="row g-3">
+					<div class="col-12">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="" id="creditCard" value="Kredi Kartı" checked>
+							<label class="form-check-label">
+								<i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i> Kredi Kartı
+							</label>
+						</div>
 
-			<input type="hidden" name="FlightId" value="@Model.Flight.FlightID">
-			<div class="cizgi"></div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="" id="bankTransfer" value="Havale / EFT">
+							<label class="form-check-label">
+								<i class="fas fa-university"></i> Havale / EFT
+							</label>
+						</div>
 
-		}
-		<div class="form-section">
-			<div class="section-title">
-				<i class="fas fa-credit-card"></i> Ödeme Yöntemi
-			</div>
-
-			<div class="row g-3">
-				<div class="col-12">
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="PaymentMethod" id="creditCard" value="Kredi Kartı" checked>
-						<label class="form-check-label">
-							<i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i> Kredi Kartı
-						</label>
-					</div>
-
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="PaymentMethod" id="bankTransfer" value="Havale / EFT">
-						<label class="form-check-label">
-							<i class="fas fa-university"></i> Havale / EFT
-						</label>
-					</div>
-
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="PaymentMethod" id="balance" value="Bakiye ile ödeme">
-						<label class="form-check-label">
-							<i class="fas fa-wallet"></i> Bakiye ile ödeme
-						</label>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="" id="balance" value="Bakiye ile ödeme">
+							<label class="form-check-label">
+								<i class="fas fa-wallet"></i> Bakiye ile ödeme
+							</label>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="form-section mt-4">
+
+			<input type="hidden" name="">
+			<div class="cizgi">
+			</div>
+
+		}		<div class="form-section mt-4">
 			<button type="submit" class="btn btn-primary btn-submit">
 				<i class="fas fa-check-circle me-2"></i> Rezervasyonu Tamamla
 			</button>
 		</div>
-	}
+	</form>
+
 
 </div>
 
 
 <style>
 
-	.cizgi {
+	.cizgi{
 		background-color: var(--medium-gray);
 		height: 3px;
 		width: 100%;
@@ -371,4 +369,5 @@
 		}
 	}
 </style>
+
 

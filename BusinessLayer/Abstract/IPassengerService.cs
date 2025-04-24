@@ -17,5 +17,7 @@ namespace BusinessLayer.Abstract
         List<Passenger> GetAllPassengers();
 
         Passenger GetPassengerByUserId(int id);
+
+        Passenger GetPassengerByUserIdAndTcNo(int userId, string tcOrPassport);
     }
 }

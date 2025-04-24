@@ -9,6 +9,7 @@ namespace DataAccessLayer.Abstract
 {
     public interface IUserDal:IGenericDal<User>
     {
-        
+
+
     }
 }

@@ -15,19 +15,54 @@ namespace FBS_FlyZone.Controllers
 
     public class FlightController : Controller
     {
-
-
-
         FlightManager fm = new FlightManager(new EfFlightRepository());
         UserManager um = new UserManager(new EfUserRepository());
         ReservationManager rm = new ReservationManager(new EfReservationRepository());
         PassengerManager pm = new PassengerManager(new EfPassengerRepository());
+
+        public void InitializeSeatsForAllFlights()
+        {
+            using var _context = new Context();
+
+            if (_context.Seats.Any()) return;
+
+            var flights = _context.Flights.ToList();
+
+            foreach (var flight in flights)
+            {
+                var seatExists = _context.Seats.Any(s => s.FlightID == flight.FlightID);
+
+                if (!seatExists)
+                {
+                    var seatLetters = new[] { "A", "B", "C", "D" };
+                    var seats = new List<Seat>();
+
+                    for (int row = 1; row <= 25; row++)
+                    {
+                        foreach (var letter in seatLetters)
+                        {
+                            seats.Add(new Seat
+                            {
+                                FlightID = flight.FlightID,
+                                SeatNumber = $"{row}{letter}",
+                                IsOccupied = false
+                            });
+                        }
+                    }
+
+                    _context.Seats.AddRange(seats);
+                }
+            }
+
+            _context.SaveChanges();
+        }
 
         // Ana uçuş sayfası
         [AllowAnonymous]
         public IActionResult Flight()
         {
             var values = fm.GetFlightListWithAirport();
+            InitializeSeatsForAllFlights();
 
             return View(values);
         }
@@ -74,20 +109,20 @@ namespace FBS_FlyZone.Controllers
                 decimal adultcount = model.AdultCount;
                 flight.TotalPrice = flight.Flight_Price * Convert.ToDecimal(childcount + adultcount);
 
-                var childCount = HttpContext.Session.GetInt32("ChildCount");
-                var adultCount = HttpContext.Session.GetInt32("AdultCount");
-                var totalPrice = Convert.ToDecimal(HttpContext.Session.GetString("TotalPrice"));
             }
+
+            TempData["AdultCount"] = model.AdultCount;
+            TempData["ChildCount"] = model.ChildCount;
 
             return View(flights);
         }
-        public IActionResult FlightDetails(int id)
-        {
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);  // Kullanıcının ID'sini almak için
+        public IActionResult FlightDetails(int id, FlightSearchViewModel modell)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId))
             {
-                return RedirectToAction("Login");  // Eğer kullanıcı girmemişse login sayfasına yönlendir
+                return RedirectToAction("Login");
             }
 
             using (var c = new Context())
@@ -95,41 +130,45 @@ namespace FBS_FlyZone.Controllers
                 var userValues = c.Users.FirstOrDefault(x => x.UserID.ToString() == userId);
                 if (userValues == null)
                 {
-                    return View("Error");  // Kullanıcı veritabanında bulunamadıysa hata sayfası
+                    return View("Error");
                 }
 
-                var availableSeats = c.Seats
-                        .Where(s => s.FlightID == id && !s.IsOccupied)
-                        .ToList();
-                var flight = fm.GetFlightById(id);  // Uçuş bilgilerini al
+
+                var flight = fm.GetFlightById(id);
                 if (flight == null)
                 {
-                    return View("Error");  // Uçuş bulunamazsa hata sayfası
+                    return View("Error");
                 }
 
-                // Session'dan verileri okuma
-                var childCount = HttpContext.Session.GetInt32("ChildCount") ?? 0;
-                var adultCount = HttpContext.Session.GetInt32("AdultCount") ?? 0;
-                var totalPrice = Convert.ToDecimal(HttpContext.Session.GetString("TotalPrice") ?? "0");
 
-                var reservationViewModel = new ReservationViewModel
+                var adultCount = (int)TempData["AdultCount"];
+                var childCount = (int)TempData["ChildCount"];
+                int totalPassengerCount = adultCount + childCount;
+
+                // Passenger listesi oluştur
+                var passengers = new List<Passenger>();
+                for (int i = 0; i < totalPassengerCount; i++)
                 {
-                    SeatNumber = "1",
-                    TotalPrice = totalPrice,
-                    AdultCount = (int)adultCount,
-                    ChildCount = (int)childCount,
-                    Flight = flight,
-                    User = userValues,
-                    Passenger = new Passenger()  // Yeni Passenger nesnesi oluştur
+                    passengers.Add(new Passenger());
+                }
+
+                var model = new PassengerFormViewModel
+                {
+                    AdultCount = adultCount,
+                    ChildCount = childCount,
+                    Passengers = passengers,
+                    FlightId = id,
+                    Flight = flight
                 };
 
-                return View(reservationViewModel);
+                return View(model); // Razor View'un adı "PassengerForm.cshtml" olacak
             }
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateReservation(ReservationViewModel model)
+        public IActionResult CreateReservation(PassengerFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -148,50 +187,55 @@ namespace FBS_FlyZone.Controllers
                 }
 
 
-                // Kullanıcının daha önce kaydedilmiş bir Passenger'ı var mı diye kontrol et
-                var existingPassenger = pm.GetPassengerByUserId(int.Parse(userId));
-
-                Passenger passenger;
-
-                if (existingPassenger != null)
+                // Her bir yolcu için ayrı ayrı işlem yapılacak
+                foreach (var p in model.Passengers)
                 {
-                    // Eğer yolcu zaten varsa, mevcut olanı kullan
-                    passenger = existingPassenger;
-                }
-                else
-                {
-                    // Yeni Passenger oluştur
-                    passenger = new Passenger
+                    Passenger passenger;
+
+                    // Kullanıcının daha önce aynı bilgilerle bir Passenger kaydı var mı?
+                    var existingPassenger = pm.GetPassengerByUserIdAndTcNo(int.Parse(userId), p.TcNo_PasaportNo);
+
+                    if (existingPassenger != null)
                     {
-                        Passenger_Name_Surname = model.Passenger.Passenger_Name_Surname,
-                        TcNo_PasaportNo = model.Passenger.TcNo_PasaportNo,
-                        Birth_Time = model.Passenger.Birth_Time,
-                        Gender = model.Passenger.Gender,
-                        Email = model.Passenger.Email,
-                        Phone_Number = model.Passenger.Phone_Number,
-                        Nationality = model.Passenger.Nationality,
-                        UserID = int.Parse(userId),  // Kullanıcının ID'sini al
+                        passenger = existingPassenger;
+                    }
+                    else
+                    {
+                        passenger = new Passenger
+                        {
+                            Passenger_Name_Surname = p.Passenger_Name_Surname,
+                            TcNo_PasaportNo = p.TcNo_PasaportNo,
+                            Birth_Time = p.Birth_Time,
+                            Gender = p.Gender,
+                            Email = p.Email,
+                            Phone_Number = p.Phone_Number,
+                            Nationality = p.Nationality,
+                            UserID = int.Parse(userId)
+                        };
+
+                        pm.AddPassenger(passenger);
+                    }
+
+                    var existingReservation = rm.GetReservationByPassengerAndFlight(passenger.PassengerID, model.FlightId);
+                    if (existingReservation != null)
+                    {
+                       Console.WriteLine("Bu yolcu için zaten bir rezervasyon var.");
+                    }
+
+                    var reservation = new Reservation
+                    {
+                        FlightID = model.FlightId,
+                        PassengerID = passenger.PassengerID,
+                        Reservation_Date = DateTime.Now,
+                        Reservation_Status = "Onay Bekliyor",
+                        Payment_Method = model.PaymentMethod,
+                        Seat_Number = "1", // Bu kısmı ileride dinamik koltuk seçimiyle güncelleyebilirsin
+                        UserID = int.Parse(userId)
                     };
-                    pm.AddPassenger(passenger);  // Yeni yolcuyu veritabanına ekle
+
+                    rm.AddReservation(reservation);
                 }
-
-
-
-                //Yeni Reservation oluştur
-                var reservation = new Reservation
-                {
-                    FlightID = model.Flight.FlightID,
-                    PassengerID = passenger.PassengerID,
-                    Reservation_Date = DateTime.Now,
-                    Reservation_Status = "Onay Bekliyor",
-                    Payment_Method = model.PaymentMethod,
-                    Seat_Number = "1",
-                    UserID = int.Parse(userId)
-                };
-
-                //rm.AddReservation(reservation); // Yeni rezervasyonu veritabanına ekle
-
-                return RedirectToAction("Index", "Payment"); // Başarıyla rezervasyon tamamlandı
+                return RedirectToAction("Index", "Payment"); // Rezervasyon işlemi tamamlandıktan sonra ödeme sayfasına yönlendir
             }
 
             return View(model);  // Eğer model geçerli değilse tekrar formu göster
