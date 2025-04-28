@@ -140,11 +140,11 @@
                                                 }
                                                 else
                                                 {
-                                                    <span class="badge bg-secondary">@item.Reservation_Status</span>
+                                                    <span style="background-color:burlywood;" class="my-badge">@item.Reservation_Status</span>
                                                 }
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-info">Detay</a>
+                                                <a href="#" style="background-color:cornflowerblue;" class="my-badge">Detay</a>
                                             </td>
                                         </tr>
                                     }
@@ -175,6 +175,17 @@
         </div>
     </div>
 </div>
+
+<style>
+    .my-badge{
+        width:auto;
+        height:auto;
+        padding:6px;
+        border-radius:4px;
+        color:white;
+    }
+</style>
+
 
 @section Scripts {
     <script>
