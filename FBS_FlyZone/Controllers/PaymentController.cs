@@ -34,7 +34,8 @@ namespace FBS_FlyZone.Controllers
             
             return RedirectToAction("PaymentSuccess"); //başarılı ödeme sayfasına yönlendirilir. Gerekirse burası değiştirilebilir(başarılı ödeme sayfası).
         }
-        
+
+        [AllowAnonymous]
         public IActionResult PaymentSuccess() //başarılı ödeme sayfasına yönlendirilir. Gerekirse burası değiştirilebilir.
         {
             return View();

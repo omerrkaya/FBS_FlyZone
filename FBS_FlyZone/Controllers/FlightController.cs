@@ -45,7 +45,9 @@ namespace FBS_FlyZone.Controllers
                             {
                                 FlightID = flight.FlightID,
                                 SeatNumber = $"{row}{letter}",
-                                IsOccupied = false
+                                IsOccupied = false,
+                                PassengerName = "a"
+
                             });
                         }
                     }
@@ -70,6 +72,7 @@ namespace FBS_FlyZone.Controllers
         [HttpGet]
         public IActionResult SearchedFlight()
         {
+            using var c = new Context();
 
             var values = fm.GetListAll();
 
@@ -177,6 +180,7 @@ namespace FBS_FlyZone.Controllers
                     Console.WriteLine(error.ErrorMessage);  // Ya da ViewBag’e bas
                 }
             }
+
             if (ModelState.IsValid)
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Kullanıcı yoksa hata döndür
@@ -193,7 +197,7 @@ namespace FBS_FlyZone.Controllers
                     Passenger passenger;
 
                     // Kullanıcının daha önce aynı bilgilerle bir Passenger kaydı var mı?
-                    var existingPassenger = pm.GetPassengerByUserIdAndTcNo(int.Parse(userId), p.TcNo_PasaportNo);
+                    var existingPassenger = pm.GetPassengerByUserIdAndTcNo(p.TcNo_PasaportNo);
 
                     if (existingPassenger != null)
                     {
@@ -235,7 +239,7 @@ namespace FBS_FlyZone.Controllers
 
                     rm.AddReservation(reservation);
                 }
-                return RedirectToAction("Index", "Payment"); // Rezervasyon işlemi tamamlandıktan sonra ödeme sayfasına yönlendir
+                return RedirectToAction("SelectSeat", "SeatSelection", new { flightId = model.FlightId }); // Rezervasyon işlemi tamamlandıktan sonra koltuk seçimi sayfasına yönlendir
             }
 
             return View(model);  // Eğer model geçerli değilse tekrar formu göster

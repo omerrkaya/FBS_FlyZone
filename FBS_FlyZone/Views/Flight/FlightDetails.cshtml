@@ -37,11 +37,20 @@
 	{
 		@for (int i = 0; i < Model.Passengers.Count; i++)
 		{
-			<div class="form-section">
-				<div class="section-title">
-					<i class="fas fa-user"></i> Yolcu @(i+1).ToString() Bilgiler
-				</div>
+			int sayi = i + 1;
 
+			<div class="form-section">
+				@if (Model.Passengers.Count == 1)
+				{
+					<div class="section-title">
+						<i class="fas fa-user"></i> Yolcu Bilgileri
+					</div>
+				}
+				else{
+					<div class="section-title">
+						<i class="fas fa-user"></i> Yolcu @sayi.ToString() Bilgiler
+					</div>
+				}
 				<div class="row g-3">
 					<div class="col-md-6">
 						<label class="form-label">Ad Soyad</label>

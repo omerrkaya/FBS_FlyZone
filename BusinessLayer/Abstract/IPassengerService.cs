@@ -18,6 +18,6 @@ namespace BusinessLayer.Abstract
 
         Passenger GetPassengerByUserId(int id);
 
-        Passenger GetPassengerByUserIdAndTcNo(int userId, string tcOrPassport);
+        Passenger GetPassengerByUserIdAndTcNo( string tcOrPassport);
     }
 }
