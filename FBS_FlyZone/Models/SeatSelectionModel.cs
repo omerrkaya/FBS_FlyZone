@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Concrete;
+using System.ComponentModel.DataAnnotations;
 
 namespace FBS_FlyZone.Models
 {
@@ -6,6 +7,7 @@ namespace FBS_FlyZone.Models
     {
         public int ReservationId { get; set; }
         public List<string> SelectedSeats { get; set; } = new List<string>();
+
         public int FlightId { get; set; }
         public string SeatNumber { get; set; }
         public bool IsOccupied { get; set; }
@@ -14,6 +16,5 @@ namespace FBS_FlyZone.Models
         public string PassengerName { get; set; }
         public int PassengerId { get; set; }
     }
-
 
 }

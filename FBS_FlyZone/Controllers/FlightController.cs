@@ -66,7 +66,7 @@ namespace FBS_FlyZone.Controllers
             var values = fm.GetFlightListWithAirport();
             InitializeSeatsForAllFlights();
 
-            return View(values);
+            return View("~/Views/Flight/Flight.cshtml", values);
         }
 
         [HttpGet]
@@ -143,9 +143,20 @@ namespace FBS_FlyZone.Controllers
                     return View("Error");
                 }
 
-
-                var adultCount = (int)TempData["AdultCount"];
-                var childCount = (int)TempData["ChildCount"];
+                // Fix for CS8605: Unboxing a possibly null value
+                int adultCount = 0;
+                int childCount = 0;
+                
+                if (TempData["AdultCount"] != null)
+                {
+                    adultCount = Convert.ToInt32(TempData["AdultCount"]);
+                }
+                
+                if (TempData["ChildCount"] != null)
+                {
+                    childCount = Convert.ToInt32(TempData["ChildCount"]);
+                }
+                
                 int totalPassengerCount = adultCount + childCount;
 
                 // Passenger listesi oluştur
