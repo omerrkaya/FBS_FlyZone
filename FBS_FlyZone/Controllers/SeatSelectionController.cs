@@ -7,6 +7,7 @@ using FBS_FlyZone.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace FBS_FlyZone.Controllers
 {
@@ -27,77 +28,133 @@ namespace FBS_FlyZone.Controllers
         {
             var c = new Context();
 
-            // Koltukları al
-            var seats = c.Seats
-                          .Where(x => x.FlightID == flightId)
-                          .Select(x => new SeatSelectionModel
-                          {
-                              SeatNumber = x.SeatNumber,
-                              IsOccupied = x.IsOccupied
-                          })
-                          .ToList();
+            // Kullanıcının ID'sini al
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId)) return RedirectToAction("Login", "Account");
 
-            // Dolu koltukları 'OccupiedSeats' listesine ekle
-            var occupiedSeats = seats.Where(x => x.IsOccupied).Select(x => x.SeatNumber).ToList();
+            // Kullanıcının bu uçuş için tüm rezervasyonlarını ve ilgili yolcu bilgilerini bul
+            var reservationsWithPassengers = c.Reservations
+                .Where(r => r.UserID == int.Parse(userId) && r.FlightID == flightId)
+                .Include(r => r.Passenger) // Yolcu bilgilerini de getir
+                .ToList();
 
-            // 'OccupiedSeats' listesini her bir SeatSelectionModel nesnesine atayın
-            foreach (var seat in seats)
+            // Uçuş için dolu koltukları bul
+            var occupiedSeats = c.Seats
+                .Where(s => s.FlightID == flightId && s.IsOccupied)
+                .Select(s => s.SeatNumber)
+                .ToList();
+
+            // View modeli oluştur
+            var viewModel = new List<SeatSelectionModel>();
+
+            // Her rezervasyon için model ekle
+            foreach (var reservation in reservationsWithPassengers)
             {
-                seat.OccupiedSeats = occupiedSeats;
+                viewModel.Add(new SeatSelectionModel
+                {
+                    ReservationId = reservation.ReservationID,
+                    FlightId = flightId,
+                    OccupiedSeats = occupiedSeats,
+                    PassengerName = reservation.Passenger.Passenger_Name_Surname,
+                    PassengerId = reservation.PassengerID
+                });
             }
 
-            // Flight ID'sini View'e gönder
-            ViewBag.FlightId = flightId;
-            return View(seats);
+            return View(viewModel);
         }
 
-        public IActionResult ConfirmSeatSelection(int flightId, string selectedSeats)
+
+        public IActionResult ConfirmSeatSelection(int flightId, string passengerSeats)
         {
-            if (flightId > 0 && !string.IsNullOrWhiteSpace(selectedSeats))
+            if (flightId > 0 && !string.IsNullOrWhiteSpace(passengerSeats))
             {
                 var c = new Context();
                 {
                     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     if (string.IsNullOrEmpty(userId)) return RedirectToAction("Login", "Account");
 
-                    var seats = selectedSeats.Split(',');
+                    // JSON verisini parse et
+                    var passengerSeatData = JsonConvert.DeserializeObject<List<PassengerSeatData>>(passengerSeats);
 
-                    foreach (var seatNumber in seats)
+                    // Transaction başlat
+                    using (var transaction = c.Database.BeginTransaction())
                     {
-                        // Reservation tablosundaki kayıt bulunur
-                        var reservation = c.Reservations
-                            .FirstOrDefault(r => r.UserID == int.Parse(userId) && r.FlightID == flightId && r.Seat_Number == "1");
-
-                        if (reservation != null)
+                        try
                         {
-                            reservation.Seat_Number = seatNumber;
-                            c.Reservations.Update(reservation);
+                            // Her bir yolcu ve koltuk için
+                            foreach (var data in passengerSeatData)
+                            {
+                                if (string.IsNullOrEmpty(data.SeatNumber))
+                                    continue;
+
+                                // Koltuğun durumunu kontrol et
+                                var seatEntity = c.Seats
+                                    .FirstOrDefault(s => s.FlightID == flightId && s.SeatNumber == data.SeatNumber);
+
+                                if (seatEntity == null)
+                                {
+                                    // Koltuk veritabanında yoksa ekle
+                                    seatEntity = new Seat
+                                    {
+                                        FlightID = flightId,
+                                        SeatNumber = data.SeatNumber,
+                                        IsOccupied = true
+                                    };
+                                    c.Seats.Add(seatEntity);
+                                }
+                                else if (seatEntity.IsOccupied)
+                                {
+                                    // Koltuk dolu
+                                    transaction.Rollback();
+                                    return RedirectToAction("SelectSeat", new { flightId, error = "SeatAlreadyTaken" });
+                                }
+                                else
+                                {
+                                    // Koltuğu dolu olarak işaretle
+                                    seatEntity.IsOccupied = true;
+                                    c.Seats.Update(seatEntity);
+                                }
+
+                                // Rezervasyonu bul ve güncelle
+                                var reservation = c.Reservations.Find(int.Parse(data.ReservationId));
+                                if (reservation != null)
+                                {
+                                    reservation.Seat_Number = data.SeatNumber;
+                                    c.Reservations.Update(reservation);
+                                }
+                                else
+                                {
+                                    transaction.Rollback();
+                                    return RedirectToAction("Error", new { message = "Rezervasyon bulunamadı!" });
+                                }
+                            }
+
+                            c.SaveChanges();
+                            transaction.Commit();
+                            return RedirectToAction("Index","Payment");
                         }
-
-                        // Seat tablosunda Seat kaydını güncelle
-                        var seatEntity = c.Seats
-                            .FirstOrDefault(s => s.FlightID == flightId && s.SeatNumber == seatNumber);
-
-                        if (seatEntity != null)
+                        catch (Exception ex)
                         {
-                            seatEntity.IsOccupied = true;
-                            c.Seats.Update(seatEntity);
+                            transaction.Rollback();
+                            return RedirectToAction("Error", new { message = ex.Message });
                         }
                     }
-                        
-                    c.SaveChanges();
                 }
-
-
-
-                return RedirectToAction("ReservationSuccess"); // Başarı sayfasına yönlendir
             }
             else
             {
-                return View();
+                return RedirectToAction("SelectSeat", new { flightId });
             }
-
         }
+
+        // Yardımcı sınıf
+        public class PassengerSeatData
+        {
+            public string PassengerId { get; set; }
+            public string ReservationId { get; set; }
+            public string SeatNumber { get; set; }
+        }
+
 
 
 
