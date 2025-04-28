@@ -7,8 +7,7 @@ using EntityLayer.Concrete;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface IPassengerDal: IGenericDal<Passenger>
+    public interface ISeatDal : IGenericDal<Seat>
     {
-        Passenger GetPassengerByUserIdAndTcNo(string tc);
     }
 }

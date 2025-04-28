@@ -43,9 +43,9 @@ namespace BusinessLayer.Concrete
             return _passengerDal.GetById(id);
         }
 
-        public Passenger GetPassengerByUserIdAndTcNo(int userId, string tcOrPassport)
+        public Passenger GetPassengerByUserIdAndTcNo( string tcOrPassport)
         {
-            return _passengerDal.GetPassengerByUserIdAndTcNo(userId,tcOrPassport); 
+            return _passengerDal.GetPassengerByUserIdAndTcNo(tcOrPassport); 
         }
 
         public void UpdatePassenger(Passenger passenger)
