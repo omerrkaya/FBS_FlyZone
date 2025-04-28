@@ -1,0 +1,180 @@
+@{
+    ViewData["Title"] = "Sistem Ayarları";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="mb-4">Sistem Ayarları</h2>
+            <p class="text-muted">FlyZone sistem ayarlarını bu sayfadan düzenleyebilirsiniz.</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Genel Ayarlar</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="siteTitle" class="form-label">Site Başlığı</label>
+                            <input type="text" class="form-control" id="siteTitle" value="@ViewBag.SiteTitle">
+                        </div>
+                        <div class="mb-3">
+                            <label for="siteDescription" class="form-label">Site Açıklaması</label>
+                            <textarea class="form-control" id="siteDescription" rows="3">@ViewBag.SiteDescription</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactEmail" class="form-label">İletişim E-posta</label>
+                            <input type="email" class="form-control" id="contactEmail" value="@ViewBag.ContactEmail">
+                        </div>
+                        <div class="mb-3">
+                            <label for="supportPhone" class="form-label">Destek Telefonu</label>
+                            <input type="text" class="form-control" id="supportPhone" value="@ViewBag.SupportPhone">
+                        </div>
+                        <button type="button" class="btn btn-primary" id="saveSettings">Değişiklikleri Kaydet</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Ayarlar Menüsü</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active">
+                            <i class="bi bi-gear me-2"></i> Genel Ayarlar
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-envelope me-2"></i> E-posta Ayarları
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-currency-exchange me-2"></i> Ödeme Ayarları
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-cloud-upload me-2"></i> Yedekleme
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Sistem Bilgisi</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>FlyZone Versiyon:</strong> 1.0.0</p>
+                    <p><strong>Son Güncelleme:</strong> @DateTime.Now.ToString("dd.MM.yyyy")</p>
+                    <p><strong>Server IP:</strong> 192.168.1.100</p>
+                    <p><strong>Database:</strong> MySQL 8.0.27</p>
+                    <hr>
+                    <div class="d-grid">
+                        <button class="btn btn-outline-danger">
+                            <i class="bi bi-arrow-repeat me-2"></i> Sistemi Yeniden Başlat
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Önbellek Yönetimi</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="cacheEnabled" checked>
+                            <label class="form-check-label" for="cacheEnabled">Önbellek Aktif</label>
+                        </div>
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="minifyHTML" checked>
+                            <label class="form-check-label" for="minifyHTML">HTML Sıkıştırma</label>
+                        </div>
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="minifyJS" checked>
+                            <label class="form-check-label" for="minifyJS">JavaScript Sıkıştırma</label>
+                        </div>
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="minifyCSS" checked>
+                            <label class="form-check-label" for="minifyCSS">CSS Sıkıştırma</label>
+                        </div>
+                        <button class="btn btn-warning mt-3">
+                            <i class="bi bi-trash3 me-2"></i> Önbelleği Temizle
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Günlük Kayıtları</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="loggingEnabled" checked>
+                            <label class="form-check-label" for="loggingEnabled">Günlük Kayıtları Aktif</label>
+                        </div>
+                        <div class="mt-3">
+                            <label for="logLevel" class="form-label">Günlük Seviyesi</label>
+                            <select class="form-select" id="logLevel">
+                                <option value="DEBUG">DEBUG</option>
+                                <option value="INFO" selected>INFO</option>
+                                <option value="WARNING">WARNING</option>
+                                <option value="ERROR">ERROR</option>
+                                <option value="CRITICAL">CRITICAL</option>
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <label for="logRetention" class="form-label">Kayıt Tutma Süresi (gün)</label>
+                            <input type="number" class="form-control" id="logRetention" value="30">
+                        </div>
+                        <div class="mt-3">
+                            <button class="btn btn-info">
+                                <i class="bi bi-file-earmark-text me-2"></i> Günlükleri İndir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Demo amaçlı - Ayarları kaydetme fonksiyonu
+            $('#saveSettings').click(function() {
+                // Normalde Ajax ile sunucuya gönderilir
+                
+                // Başarılı demo gösterimi
+                Swal.fire({
+                    title: 'Başarılı!',
+                    text: 'Ayarlar başarıyla kaydedildi.',
+                    icon: 'success',
+                    confirmButtonText: 'Tamam'
+                });
+            });
+            
+            // SweetAlert CDN
+            if (typeof Swal === 'undefined') {
+                var script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/sweetalert2@11';
+                document.head.appendChild(script);
+            }
+        });
+    </script>
+}

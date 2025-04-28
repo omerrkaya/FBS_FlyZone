@@ -16,6 +16,13 @@ namespace EntityLayer.Concrete
         
         [Required, StringLength(100)]
         public string Airlines_Name{ get; set; }
+        
+        // Add AirlineName as an alias property for Airlines_Name
+        [NotMapped]
+        public string AirlineName { 
+            get { return Airlines_Name; } 
+            set { Airlines_Name = value; } 
+        }
 
         
         [Required, StringLength(2)]
@@ -37,6 +44,5 @@ namespace EntityLayer.Concrete
 
         
         public ICollection<Flight> Flights { get; set; }
-
     }
 }
