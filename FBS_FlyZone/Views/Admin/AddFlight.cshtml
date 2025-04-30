@@ -1,4 +1,99 @@
+@* @model List<  EntityLayer.Concrete.Flight>
+
 @{
-    ViewData["Title"] = "Yeni Uçuş Ekle";
-    Layout = "~/Views/Shared/AdminLayout.cshtml";
+	ViewData["Title"] = "Yeni Uçuş Ekle";
+	Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+
+
+<div class="container-fluid">
+	<div class="row mb-4">
+		<div class="col-md-12">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a asp-action="Index">Dashboard</a></li>
+					<li class="breadcrumb-item"><a asp-action="Users">Kullanıcılar</a></li>
+					<li class="breadcrumb-item active">Yeni Kullanıcı</li>
+				</ol>
+			</nav>
+			<h2 class="mb-1">Yeni Kullanıcı Ekle</h2>
+			<p class="text-muted">Sisteme yeni bir kullanıcı kaydı oluşturun.</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-8">
+			<div class="card">
+				<div class="card-body">
+					<form asp-action="AddFlight" method="post">
+						<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+						<div class="mb-3">
+							<label asp-for="Flight_Code" class="form-label">Uçuş Kodu</label>
+							<input asp-for="Flight_Code" class="form-control" />
+							<span asp-validation-for="Flight_Code" class="text-danger"></span>
+						</div>
+
+						<div class="mb-3">
+							<label asp-for="Flight_DateTime" class="form-label">Uçuş Tarihi</label>
+							<input asp-for="Flight_DateTime" class="form-control" type="email" />
+							<span asp-validation-for="Flight_DateTime" class="text-danger"></span>
+						</div>
+
+						<div class="mb-3">
+							<label asp-for="Estimated_Time" class="form-label">Uçuş Süresi</label>
+							<input asp-for="Estimated_Time" class="form-control" type="password" />
+							<span asp-validation-for="Estimated_Time" class="text-danger"></span>
+						</div>
+
+						<div class="mb-3">
+							<label asp-for="DepartureAirport" class="form-label">Kalkış Yeri</label>
+							<select asp-for="DepartureAirport" class="form-select">
+								@foreach (var item in))
+								{
+									<option value="User">Kullanıcı</option>
+								}
+
+
+							</select>
+							<span asp-validation-for="" class="text-danger"></span>
+						</div>
+
+						<div class="d-flex justify-content-between">
+							<a asp-action="Flights" class="btn btn-secondary">İptal</a>
+							<button type="submit" class="btn btn-primary">Kullanıcı Ekle</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="card">
+				<div class="card-header">
+					<h5 class="mb-0">Yardım</h5>
+				</div>
+				<div class="card-body">
+					<h6>Şifre Gereksinimleri</h6>
+					<ul class="small text-muted">
+						<li>En az 6 karakter uzunluğunda olmalı</li>
+						<li>En fazla 24 karakter uzunluğunda olmalı</li>
+						<li>Büyük/küçük harf ve rakam içermesi önerilir</li>
+					</ul>
+
+					<h6 class="mt-4">Kullanıcı Rolleri</h6>
+					<ul class="small text-muted">
+						<li><strong>Admin:</strong> Tam yönetici yetkileri</li>
+						<li><strong>Kullanıcı:</strong> Standart kullanıcı yetkileri</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}  *@

@@ -139,32 +139,73 @@ namespace FBS_FlyZone.Controllers
         {
             var flights = _flightManager.GetFlightListWithAirport(); // Uçuşları listeleyip view'e gönderiyorum.
             return View(flights);
+            //zaten yapmış listelemeyi sen sayfayı ayarla daha sonra da verileri sayfaya basmaya bak tamam
         }
 
-
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult AddFlight()
         {
+            // Havalimanlarını ve havayollarını listeleyip dropdownlarda kullanmak üzere gönderiyoruz
+            var airports = _context.Airports.ToList();
+            var airlines = _context.Airlines.ToList();
+
+            ViewBag.Airports = new SelectList(airports, "AirportID", "Airport_Name");
+            ViewBag.Airlines = new SelectList(airlines, "AirlineID", "Airlines_Name");
+
             return View();
         }
 
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public IActionResult AddFlight(Flight flight)
+        //{
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(flight);
+        //    }
+
+        //    _flightManager.AddFlight(flight);
+
+        //    RedirectToAction("Flights");
+        //}
 
 
+        [HttpGet]
         [AllowAnonymous]
-        public IActionResult EditFlight()
+        public IActionResult EditFlight(int id)
         {
+            var flight = _flightManager.GetFlightById(id); // FlightManager'dan uçuşu alıyoruz
+            if (flight == null)
+            {
+                return NotFound(); // Eğer uçuş bulunamazsa 404 döndürüyoruz
+            }
 
-            return View();
+            // Airports ve Airlines verilerini doğru şekilde ekleyelim
+            ViewBag.Airports = new SelectList(_context.Airports.ToList(), "AirportID", "Airport_Name");
+            ViewBag.Airlines = new SelectList(_context.Airlines.ToList(), "AirlineID", "Airlines_Name");
+
+            return View(flight); // Bulunan uçuş verisini view'a gönderiyoruz
         }
 
 
-        // Uçuş Silme
+        //Uçuş silme işlemi
         [AllowAnonymous]
-        public IActionResult DeleteFlight()
+        public IActionResult DeleteFlight(int id)
         {
+            var flight = _context.Flights.Find(id);
+            if (flight == null)
+            {
+                return NotFound();
+            }
 
-            return View();
+            _context.Flights.Remove(flight);
+            _context.SaveChanges();
+            return RedirectToAction("Flights");
         }
+
+
 
         // Rezervasyon Yönetimi işlemlerini yapıyorum.
         [AllowAnonymous]
