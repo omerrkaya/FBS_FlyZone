@@ -4,6 +4,8 @@
 @{
 	ViewData["Title"] = "SelectSeat";
 	Layout = "~/Views/Shared/UserLayout.cshtml";
+
+	var yolcuSayisi = Model?.Count ?? 0;
 }
 
 <div class="reservation-container" style="margin-top:130px;">
@@ -13,36 +15,19 @@
 
 	<form action="ConfirmSeatSelection" method="post">
 		<div class="reservation-steps">
-
-			<div class="passenger-list">
-				<h3>Yolcular</h3>
-				<ul id="passengerList">
-					@foreach (var passenger in Model)
-					{
-						<li class="passenger-item" data-reservation-id="@passenger.ReservationId" data-passenger-id="@passenger.PassengerId"
-							data-current-seat="@passenger.SeatNumber">
-							<span class="passenger-name">@passenger.PassengerName</span>
-							<span class="selected-seat">Koltuk: @(string.IsNullOrEmpty(passenger.SeatNumber) ? "Seçilmedi" : passenger.SeatNumber)</span>
-						</li>
-					}
-				</ul>
-			</div>
 			<input type="hidden" name="previousSeats" id="previousSeatsInput" value="@string.Join(',', Model.Where(m => !string.IsNullOrEmpty(m.SeatNumber)).Select(m => m.SeatNumber))" />
-
 			<input type="hidden" name="flightId" value="@Model.FirstOrDefault()?.FlightId" />
 			<input type="hidden" name="ReservationId" />
 			<input type="hidden" name="selectedSeats" id="selectedSeatsInput" />
-			<!-- Eklenen input -->
 			<input type="hidden" name="reservationIds" id="reservationIdsInput" value="@string.Join(',', Model.Select(m => m.ReservationId))" />
 			<input type="hidden" name="passengerSeats" id="passengerSeatsInput" />
-			<!-- Önceki koltukları takip etmek için eklenen input -->
 			<input type="hidden" name="previousSeats" id="previousSeatsInput" value="@string.Join(',', Model.Where(m => !string.IsNullOrEmpty(m.SeatNumber)).Select(m => m.SeatNumber))" />
 
-			<div class="step active">
+			<div class="step ">
 				<div class="step-number">1</div>
 				<div class="step-title">Yolcu Bilgileri</div>
 			</div>
-			<div class="step">
+			<div class="step active">
 				<div class="step-number">2</div>
 				<div class="step-title">Koltuk Seçimi</div>
 			</div>
@@ -55,6 +40,20 @@
 				<div class="step-title">Onay</div>
 			</div>
 		</div>
+		<div class="passenger-list">
+			<h3>Yolcular</h3>
+			<ul id="passengerList">
+				@foreach (var passenger in Model)
+				{
+					<li class="passenger-item" data-reservation-id="@passenger.ReservationId" data-passenger-id="@passenger.PassengerId"
+						data-current-seat="@passenger.SeatNumber">
+						<span class="passenger-name">@passenger.PassengerName</span>
+						<span class="selected-seat">Koltuk: @(string.IsNullOrEmpty(passenger.SeatNumber) ? "Seçilmedi" : passenger.SeatNumber)</span>
+					</li>
+				}
+			</ul>
+		</div>
+
 		<div class="seat-selection-container">
 			<div class="airplane-cabin">
 				<div class="cabin-header">
@@ -78,10 +77,8 @@
 					<span>Dolu Koltuk</span>
 				</div>
 			</div>
+			<button type="submit" id="submitBtn" class="btn-submit" style=" margin-top:40px;">Seçimi Onayla</button>
 		</div>
-
-		<button type="submit" id="submitBtn" class="btn-submit">Seçimi Onayla</button>
-
 	</form>
 </div>
 
@@ -301,9 +298,7 @@
 
 	/* Mobil görünüm dışına çıkarılan CSS sınıfları */
 	.passenger-list {
-		margin-bottom: 2rem;
 		background: linear-gradient(to right, #19232D, #3d3d3d);
-		border-radius: 10px;
 		padding: 20px;
 		color: white;
 	}
@@ -339,28 +334,31 @@
 	}
 
 	@@media (max-width: 768px) {
-		.reservation-steps {
-			background: var(--gold-accent);
-			flex-direction: column;
-			gap: 15px;
-			padding: 1.5rem;
-		}
+		.reservation-steps
 
-		.step {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-			text-align: left;
-		}
+	{
+		background: var(--gold-accent);
+		flex-direction: column;
+		gap: 15px;
+		padding: 1.5rem;
+	}
 
-		.step-number {
-			margin-bottom: 0;
-		}
+	.step {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		text-align: left;
+	}
+
+	.step-number {
+		margin-bottom: 0;
+	}
+
 	}
 </style>
 
 <script>
-	document.addEventListener('DOMContentLoaded', function () {
+		document.addEventListener('DOMContentLoaded', function () {
 		console.log('DOM yüklendi, koltuklar oluşturuluyor...');
 
 		const seatsContainer = document.getElementById('seatsContainer');
@@ -381,6 +379,17 @@
 		let selectedSeats = {};  // Yolcu ID'sine göre seçilen koltuklar
 		let occupiedSeats = @Html.Raw(Json.Serialize(Model.FirstOrDefault()?.OccupiedSeats ?? new List<string>()));
 
+		// Yolcu sayısını kontrol et ve log'a yaz
+		const passengerItems = document.querySelectorAll('.passenger-item');
+		console.log('Toplam yolcu sayısı:', passengerItems.length);
+
+		// Her bir yolcunun bilgilerini konsola yazdır
+		passengerItems.forEach(item => {
+			const passengerId = item.getAttribute('data-passenger-id');
+			const passengerName = item.querySelector('.passenger-name').textContent;
+			console.log('Yolcu:', passengerName, 'ID:', passengerId);
+		});
+
 		// Mevcut koltuk seçimlerini yükle
 		loadExistingSelections();
 
@@ -398,6 +407,7 @@
 		}
 
 		const maxSeats = reservationIds.length;
+		console.log('Toplam rezervasyon sayısı:', maxSeats);
 
 		let currentPassengerId = null;
 
@@ -437,7 +447,6 @@
 		}
 
 		// Yolcu seçme işlemi
-		const passengerItems = document.querySelectorAll('.passenger-item');
 		passengerItems.forEach(item => {
 			item.addEventListener('click', function() {
 				// Seçili yolcuyu vurgula
@@ -457,7 +466,10 @@
 
 		// İlk yolcuyu otomatik seç
 		if (passengerItems.length > 0) {
+			console.log('İlk yolcu seçiliyor...');
 			passengerItems[0].click();
+		} else {
+			console.error('Yolcu listesi boş!');
 		}
 
 		// Koltukları sıfırlama ve doğru şekilde vurgulama fonksiyonu
@@ -471,14 +483,8 @@
 					seat.className = 'seat seat-available';
 				}
 			});
-		}
 
-		// Seçili koltuğu vurgulama fonksiyonu
-		function highlightSelectedSeat() {
-			// Önce tüm koltukları sıfırla
-			resetAllSeats();
-
-			// Her yolcunun seçtiği koltuğu vurgula
+			// Seçili koltukları tekrar vurgula
 			for (const passengerId in selectedSeats) {
 				const seatId = selectedSeats[passengerId];
 				if (seatId) {
@@ -488,6 +494,12 @@
 					}
 				}
 			}
+		}
+
+		// Seçili koltuğu vurgulama fonksiyonu
+		function highlightSelectedSeat() {
+			// Önce tüm koltukları sıfırla
+			resetAllSeats();
 		}
 
 		// Koltukları oluştur
@@ -502,7 +514,13 @@
 					const seatId = `${row}${seatLetters[i]}`;
 
 					// Eğer bu koltuk seçili koltuklar arasında ise, seat-selected sınıfını ekle
-					const isSelected = Object.values(selectedSeats).includes(seatId);
+					let isSelected = false;
+					for (const passengerId in selectedSeats) {
+						if (selectedSeats[passengerId] === seatId) {
+							isSelected = true;
+							break;
+						}
+					}
 
 					if (isSelected) {
 						seat.className = 'seat seat-selected';
@@ -516,9 +534,16 @@
 					seat.setAttribute('data-seatId', seatId);
 
 					seat.addEventListener('click', function () {
-						if (seat.classList.contains('seat-occupied') && !Object.values(selectedSeats).includes(seatId)) {
-							alert('Bu koltuk dolu!');
-							return;
+						// Koltuk dolu mu kontrol et
+						if (seat.classList.contains('seat-occupied')) {
+							// Eğer bu koltuk mevcut kullanıcının seçtiği bir koltuk değilse
+							const isOwnSelection = Object.entries(selectedSeats).some(([pid, sid]) =>
+								sid === seatId && pid === currentPassengerId);
+
+							if (!isOwnSelection) {
+								alert('Bu koltuk dolu!');
+								return;
+							}
 						}
 
 						if (!currentPassengerId) {
@@ -558,7 +583,7 @@
 						updatePassengerSeatsInput();
 						updatePreviousSeatsInput();
 
-						// Otomatik olarak bir sonraki yolcuya geç (isteğe bağlı)
+						// Otomatik olarak bir sonraki yolcuya geç
 						selectNextPassenger();
 					});
 
@@ -580,7 +605,7 @@
 			console.error('Koltuklar oluşturulurken hata oluştu:', error);
 		}
 
-		// Bir sonraki yolcuyu seçme fonksiyonu (isteğe bağlı)
+		// Bir sonraki yolcuyu seçme fonksiyonu
 		function selectNextPassenger() {
 			if (!currentPassengerId) return;
 
@@ -590,6 +615,31 @@
 			const nextItem = currentItem.nextElementSibling;
 			if (nextItem && nextItem.classList.contains('passenger-item')) {
 				nextItem.click();
+			} else {
+				// Tüm yolcular için koltuk seçildi mi kontrol et
+				checkAllPassengersSelected();
+			}
+		}
+
+		// Tüm yolcular için koltuk seçildi mi kontrol et
+		function checkAllPassengersSelected() {
+			let allSelected = true;
+			let unselectedPassengers = [];
+
+			passengerItems.forEach(item => {
+				const passengerId = item.getAttribute('data-passenger-id');
+				if (!selectedSeats[passengerId]) {
+					allSelected = false;
+					unselectedPassengers.push(item.querySelector('.passenger-name').textContent);
+				}
+			});
+
+			if (allSelected) {
+				console.log('Tüm yolcular için koltuk seçildi!');
+				document.getElementById('submitBtn').disabled = false;
+			} else {
+				console.log('Koltuk seçilmeyen yolcular:', unselectedPassengers.join(', '));
+				document.getElementById('submitBtn').disabled = true;
 			}
 		}
 
@@ -609,18 +659,10 @@
 				});
 			});
 
-				// Önceki koltukları input'a yazma fonksiyonu
-	function updatePreviousSeatsInput() {
-		const previousSeatsInput = document.getElementById('previousSeatsInput');
-		if (previousSeatsInput) {
-			// Modelden gelen orijinal koltukları kullan, değiştirme
-			// Bu şekilde, orijinal veritabanı değerleri korunur
-		}
-	}
-
 			const passengerSeatsInput = document.getElementById('passengerSeatsInput');
 			if (passengerSeatsInput) {
 				passengerSeatsInput.value = JSON.stringify(passengerSeatsData);
+				console.log('Yolcu koltuk verileri güncellendi:', passengerSeatsData);
 			} else {
 				console.error('passengerSeatsInput elementi bulunamadı!');
 			}
@@ -633,16 +675,30 @@
 
 		// Form submit öncesi kontrol
 		document.querySelector('form').addEventListener('submit', function(e) {
-			const selectedSeatCount = Object.keys(selectedSeats).length;
+			// Tüm yolcular için koltuk seçildi mi kontrol et
+			let allSelected = true;
+			let unselectedPassengers = [];
 
-			if (selectedSeatCount < passengerItems.length) {
+			passengerItems.forEach(item => {
+				const passengerId = item.getAttribute('data-passenger-id');
+				if (!selectedSeats[passengerId]) {
+					allSelected = false;
+					unselectedPassengers.push(item.querySelector('.passenger-name').textContent);
+				}
+			});
+
+			if (!allSelected) {
 				e.preventDefault();
-				alert('Lütfen tüm yolcular için koltuk seçin!');
+				alert('Lütfen tüm yolcular için koltuk seçin! Koltuk seçilmeyen yolcular: ' + unselectedPassengers.join(', '));
 			} else {
 				// Form gönderilmeden önce son kez input değerlerini güncelle
 				updatePassengerSeatsInput();
 				updatePreviousSeatsInput();
 			}
 		});
+
+		// Sayfa yüklendiğinde tüm yolcular için koltuk seçildi mi kontrol et
+		checkAllPassengersSelected();
 	});
-</script>
+
+	</script>

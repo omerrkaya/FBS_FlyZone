@@ -8,6 +8,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Globalization;
 
 namespace FBS_FlyZone.Controllers
 
@@ -206,6 +207,67 @@ namespace FBS_FlyZone.Controllers
         [AllowAnonymous]
         public IActionResult Reports()
         {
+
+  
+
+            ViewBag.MonthlyReservations = new int[] { 65, 59, 80, 81, 56, 55, 40, 45, 60, 49, 52, 50 };
+
+            // Havayollarına göre rezervasyon dağılımı
+            Dictionary<string, int> airlineStats = new Dictionary<string, int>();
+
+            // Fix: Use ToList() before grouping to move query execution to client side,
+            // and use Airlines_Name instead of AirlineName
+            var airlineReservations = _context.Reservations
+                .Join(_context.Flights, r => r.FlightID, f => f.FlightID, (r, f) => new { r, f })
+                .Join(_context.Airlines, rf => rf.f.AirlineID, a => a.AirlineID, (rf, a) => new { rf.r, rf.f, a })
+                .ToList() // Execute the query before grouping
+                .GroupBy(x => x.a.Airlines_Name) // Use the actual database field name
+                .Select(g => new { AirlineName = g.Key, Count = g.Count() })
+                .ToList();
+
+            foreach (var stat in airlineReservations)
+            {
+                airlineStats.Add(stat.AirlineName, stat.Count);
+            }
+            ViewBag.AirlineStats = airlineStats;
+
+            // Popüler rotalar
+            ViewBag.TopRoutes = _context.Flights
+                .Join(_context.Reservations, f => f.FlightID, r => r.FlightID, (f, r) => f)
+                .GroupBy(f => new { From = f.ArrivalAirport.Airport_Name, To = f.ArrivalAirport.AirportID })
+                .Select(g => new { Route = g.Key, Count = g.Count() })
+                .OrderByDescending(x => x.Count)
+                .Take(5)
+                .ToList();
+
+            // YENİ SORGU: En çok rezervasyon yapılan ayı hesaplama
+            var reservationsByMonth = _context.Reservations
+                .GroupBy(r => r.Reservation_Date.Month)
+                .Select(g => new { Month = g.Key, Count = g.Count() })
+                .OrderByDescending(x => x.Count)
+                .ToList();
+
+            // En çok rezervasyon yapılan ay
+            if (reservationsByMonth.Any())
+            {
+                int mostBookedMonth = reservationsByMonth.First().Month;
+                ViewBag.MostBookedMonth = mostBookedMonth;
+                ViewBag.MostBookedMonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mostBookedMonth);
+                ViewBag.MostBookedMonthCount = reservationsByMonth.First().Count;
+            }
+
+            // Tüm ayların rezervasyon sayıları (ay numarası, rezervasyon sayısı)
+            ViewBag.ReservationsByMonth = reservationsByMonth;
+
+            // Ay isimlerini de gönderelim
+            ViewBag.MonthNames = Enumerable.Range(1, 12)
+                .Select(i => new {
+                    MonthNumber = i,
+                    MonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)
+                })
+                .ToList();
+
+
             return View();
         }
 

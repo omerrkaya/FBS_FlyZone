@@ -114,8 +114,10 @@ namespace FBS_FlyZone.Controllers
 
             }
 
-            TempData["AdultCount"] = model.AdultCount;
-            TempData["ChildCount"] = model.ChildCount;
+
+            // Veriyi Session'a kaydet
+            HttpContext.Session.SetInt32("AdultCount", model.AdultCount);
+            HttpContext.Session.SetInt32("ChildCount", model.ChildCount);
 
             return View(flights);
         }
@@ -143,20 +145,12 @@ namespace FBS_FlyZone.Controllers
                     return View("Error");
                 }
 
-                // Fix for CS8605: Unboxing a possibly null value
-                int adultCount = 0;
-                int childCount = 0;
-                
-                if (TempData["AdultCount"] != null)
-                {
-                    adultCount = Convert.ToInt32(TempData["AdultCount"]);
-                }
-                
-                if (TempData["ChildCount"] != null)
-                {
-                    childCount = Convert.ToInt32(TempData["ChildCount"]);
-                }
-                
+
+                var adultCount = HttpContext.Session.GetInt32("AdultCount") ?? 0;
+
+                var childCount = HttpContext.Session.GetInt32("ChildCount") ?? 0;
+
+
                 int totalPassengerCount = adultCount + childCount;
 
                 // Passenger listesi oluştur
@@ -234,7 +228,7 @@ namespace FBS_FlyZone.Controllers
                     var existingReservation = rm.GetReservationByPassengerAndFlight(passenger.PassengerID, model.FlightId);
                     if (existingReservation != null)
                     {
-                       Console.WriteLine("Bu yolcu için zaten bir rezervasyon var.");
+                        Console.WriteLine("Bu yolcu için zaten bir rezervasyon var.");
                     }
 
                     var reservation = new Reservation

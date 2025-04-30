@@ -7,6 +7,7 @@ using FBS_FlyZone.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Mono.TextTemplating;
 using Newtonsoft.Json;
 
 namespace FBS_FlyZone.Controllers
@@ -32,11 +33,29 @@ namespace FBS_FlyZone.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId)) return RedirectToAction("Login", "Account");
 
-            // Kullanıcının bu uçuş için tüm rezervasyonlarını ve ilgili yolcu bilgilerini bul
-            var reservationsWithPassengers = c.Reservations
+
+
+            // Kullanıcının bu uçuş için rezervasyonlarını bul
+            var userReservations = c.Reservations
                 .Where(r => r.UserID == int.Parse(userId) && r.FlightID == flightId)
-                .Include(r => r.Passenger) // Yolcu bilgilerini de getir
                 .ToList();
+
+
+            // En son rezervasyon TARİHİNİ bul (sadece gün/ay/yıl)
+            var latestReservationDate = c.Reservations
+                .Where(r => r.UserID == int.Parse(userId) && r.FlightID == flightId)
+                .Max(r => r.Reservation_Date).Date; // Sadece tarih kısmını al, saat bilgisini at
+
+
+            // Bu TARİHTE yapılan tüm rezervasyonları getir (saat önemsiz)
+            var reservationsWithPassengers = c.Reservations
+                .Where(r => r.UserID == int.Parse(userId) &&
+                           r.FlightID == flightId &&
+                           r.Reservation_Date.Date == latestReservationDate)
+                .Include(r => r.Passenger)
+                .ToList();
+
+
 
             // Uçuş için dolu koltukları bul
             var occupiedSeats = c.Seats
@@ -44,24 +63,29 @@ namespace FBS_FlyZone.Controllers
                 .Select(s => s.SeatNumber)
                 .ToList();
 
+
             // View modeli oluştur
             var viewModel = new List<SeatSelectionModel>();
 
             // Her rezervasyon için model ekle
             foreach (var reservation in reservationsWithPassengers)
             {
+
                 viewModel.Add(new SeatSelectionModel
                 {
                     ReservationId = reservation.ReservationID,
                     FlightId = flightId,
                     OccupiedSeats = occupiedSeats,
                     PassengerName = reservation.Passenger.Passenger_Name_Surname,
-                    PassengerId = reservation.PassengerID
+                    PassengerId = reservation.PassengerID,
+                    SeatNumber = reservation.Seat_Number
                 });
             }
 
+
             return View(viewModel);
         }
+
 
 
         public IActionResult ConfirmSeatSelection(int flightId, string passengerSeats)
@@ -88,8 +112,7 @@ namespace FBS_FlyZone.Controllers
                                     continue;
 
                                 // Koltuğun durumunu kontrol et
-                                var seatEntity = c.Seats
-                                    .FirstOrDefault(s => s.FlightID == flightId && s.SeatNumber == data.SeatNumber);
+                                Seat? seatEntity = c.Seats.FirstOrDefault(s => s.FlightID == flightId && s.SeatNumber == data.SeatNumber);
 
                                 if (seatEntity == null)
                                 {
@@ -131,7 +154,7 @@ namespace FBS_FlyZone.Controllers
 
                             c.SaveChanges();
                             transaction.Commit();
-                            return RedirectToAction("Index","Payment");
+                            return RedirectToAction("Index", "Payment", new { flighttId = flightId });
                         }
                         catch (Exception ex)
                         {
@@ -143,8 +166,9 @@ namespace FBS_FlyZone.Controllers
             }
             else
             {
-                return RedirectToAction("SelectSeat", new { flightId });
+                return RedirectToAction("SelectSeat");
             }
+
         }
 
         // Yardımcı sınıf

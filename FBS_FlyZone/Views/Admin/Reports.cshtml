@@ -3,3 +3,489 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="mb-4">Raporlar</h2>
+            <p class="text-muted">FlyZone uçuþ rezervasyon sistemi istatistiklerini ve raporlarýný bu sayfadan inceleyebilirsiniz.</p>
+        </div>
+    </div>
+
+    <!-- Rapor Filtresi -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">Baþlangýç Tarihi</label>
+                    <input type="date" class="form-control" id="startDate">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Bitiþ Tarihi</label>
+                    <input type="date" class="form-control" id="endDate">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Rapor Türü</label>
+                    <select class="form-select" id="reportType">
+                        <option value="reservations" selected>Rezervasyonlar</option>
+                        <option value="revenue">Gelirler</option>
+                        <option value="users">Kullanýcýlar</option>
+                        <option value="flights">Uçuþlar</option>
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="button" class="btn btn-primary w-100" id="filterReport">
+                        <i class="bi bi-funnel me-1"></i> Filtrele
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Aylýk Rezervasyon Grafiði -->
+        <div class="col-md-8 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Aylýk Rezervasyon Ýstatistikleri</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-download"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">PNG olarak kaydet</a></li>
+                            <li><a class="dropdown-item" href="#">PDF olarak kaydet</a></li>
+                            <li><a class="dropdown-item" href="#">Excel'e aktar</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="monthlyReservationsChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Havayollarý Rezervasyon Daðýlýmý -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Havayollarýna Göre Rezervasyonlar</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-download"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">PNG olarak kaydet</a></li>
+                            <li><a class="dropdown-item" href="#">PDF olarak kaydet</a></li>
+                            <li><a class="dropdown-item" href="#">Excel'e aktar</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="airlineReservationsChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- En Popüler Rotalar -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">En Popüler Rotalar</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-download"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Excel'e aktar</a></li>
+                            <li><a class="dropdown-item" href="#">PDF olarak kaydet</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Kalkýþ</th>
+                                    <th>Varýþ</th>
+                                    <th>Rezervasyon Sayýsý</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.TopRoutes != null)
+                                {
+                                    @for (int i = 0; i < ViewBag.TopRoutes.Count; i++)
+                                    {
+                                        var route = ViewBag.TopRoutes[i];
+                                        <tr>
+                                            <td>@(i + 1)</td>
+                                            <td>@route.Route.From</td>
+                                            <td>@route.Route.To</td>
+                                            <td>@route.Count</td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="4" class="text-center">Veri bulunamadý</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aylýk Gelir Raporu -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Aylýk Gelir Raporu (TL)</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-download"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Excel'e aktar</a></li>
+                            <li><a class="dropdown-item" href="#">PDF olarak kaydet</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="monthlyRevenueChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Önemli Metrikler -->
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Önemli Performans Göstergeleri (KPI)</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="text-muted">Doluluk Oraný</h6>
+                                    <h2>82.7%</h2>
+                                    <div class="progress mt-2">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 82.7%" aria-valuenow="82.7" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small class="text-success d-block mt-2"><i class="bi bi-arrow-up"></i> 4.3% geçen aya göre</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="text-muted">Ýptal Oraný</h6>
+                                    <h2>3.2%</h2>
+                                    <div class="progress mt-2">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 3.2%" aria-valuenow="3.2" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small class="text-success d-block mt-2"><i class="bi bi-arrow-down"></i> 0.8% geçen aya göre</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="text-muted">Business Class Oraný</h6>
+                                    <h2>14.5%</h2>
+                                    <div class="progress mt-2">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 14.5%" aria-valuenow="14.5" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small class="text-success d-block mt-2"><i class="bi bi-arrow-up"></i> 2.1% geçen aya göre</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="text-muted">Ortalama Bilet Fiyatý</h6>
+                                    <h2>1,245 TL</h2>
+                                    <div class="progress mt-2">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small class="text-danger d-block mt-2"><i class="bi bi-arrow-down"></i> 120 TL geçen aya göre</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- En Çok Rezervasyon Yapýlan Ay Kartý -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">En Çok Rezervasyon Yapýlan Ay</h5>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-download"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Excel'e aktar</a></li>
+                        <li><a class="dropdown-item" href="#">PDF olarak kaydet</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                @if (ViewBag.MostBookedMonth != null)
+                {
+                    <div class="text-center">
+                        <h1 class="display-4 text-primary">@ViewBag.MostBookedMonthName</h1>
+                        <p class="lead">Toplam <strong>@ViewBag.MostBookedMonthCount</strong> rezervasyon</p>
+                       
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        Henüz rezervasyon verisi bulunmamaktadýr.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Controller'dan gelen verileri JavaScript deðiþkenlerine aktarma
+            var monthlyReservationsData = @Html.Raw(Json.Serialize(ViewBag.MonthlyReservations));
+
+            // Havayollarý istatistikleri için veri hazýrlama
+            var airlineLabels = [];
+            var airlineData = [];
+
+        @if (ViewBag.AirlineStats != null)
+        {
+            <text>
+                    var airlineStats = @Html.Raw(Json.Serialize(ViewBag.AirlineStats));
+                    for (var airline in airlineStats) {
+                        if (airlineStats.hasOwnProperty(airline)) {
+                            airlineLabels.push(airline);
+                            airlineData.push(airlineStats[airline]);
+                        }
+                    }
+            </text>
+        }
+
+            // Rastgele renkler oluþturma fonksiyonu
+            function generateColors(count) {
+                var colors = [];
+                var baseColors = ['#0d6efd', '#6f42c1', '#dc3545', '#fd7e14', '#0dcaf0', '#198754', '#ffc107'];
+
+                for (var i = 0; i < count; i++) {
+                    colors.push(baseColors[i % baseColors.length]);
+                }
+
+                return colors;
+            }
+
+            // Aylýk Rezervasyon Grafiði
+            var monthlyCtx = document.getElementById('monthlyReservationsChart').getContext('2d');
+            var monthlyChart = new Chart(monthlyCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Ocak', 'Þubat', 'Mart', 'Nisan', 'Mayýs', 'Haziran', 'Temmuz', 'Aðustos', 'Eylül', 'Ekim', 'Kasým', 'Aralýk'],
+                    datasets: [{
+                        label: 'Rezervasyon Sayýsý',
+                        data: monthlyReservationsData,
+                        borderColor: '#0d6efd',
+                        backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                borderDash: [2, 4]
+                            },
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Havayollarý Rezervasyon Daðýlýmý
+            var airlineCtx = document.getElementById('airlineReservationsChart').getContext('2d');
+            var airlineChart = new Chart(airlineCtx, {
+                type: 'pie',
+                data: {
+                    labels: airlineLabels,
+                    datasets: [{
+                        data: airlineData,
+                        backgroundColor: generateColors(airlineLabels.length),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // Aylýk Gelir Raporu (örnek veri - controller'dan gelmiyor)
+            var revenueCtx = document.getElementById('monthlyRevenueChart').getContext('2d');
+            var revenueChart = new Chart(revenueCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Ocak', 'Þubat', 'Mart', 'Nisan', 'Mayýs', 'Haziran'],
+                    datasets: [{
+                        label: 'Gelir (TL)',
+                        data: [1250000, 980000, 1450000, 1320000, 1600000, 1780000],
+                        backgroundColor: 'rgba(40, 167, 69, 0.7)',
+                        borderColor: 'rgb(40, 167, 69)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return new Intl.NumberFormat('tr-TR', {
+                                        style: 'currency',
+                                        currency: 'TRY',
+                                        maximumFractionDigits: 0
+                                    }).format(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Filtreleme iþlevi
+            $('#filterReport').click(function() {
+                var startDate = $('#startDate').val();
+                var endDate = $('#endDate').val();
+                var reportType = $('#reportType').val();
+
+                // Gerçek uygulamada Ajax ile sunucudan veriler alýnýr
+                // Demo amaçlý rastgele veriler oluþturuldu
+
+                if (reportType === 'reservations') {
+                    // Rezervasyon grafiðini güncelle
+                    monthlyChart.data.datasets[0].data = Array.from({length: 12}, () => Math.floor(Math.random() * 100) + 20);
+                    monthlyChart.update();
+                } else if (reportType === 'revenue') {
+                    // Gelir grafiðini güncelle
+                    revenueChart.data.datasets[0].data = Array.from({length: 6}, () => Math.floor(Math.random() * 1000000) + 500000);
+                    revenueChart.update();
+                }
+
+                // Filtre baþarýlý bildirimi
+                alert('Rapor filtrelendi: ' + startDate + ' - ' + endDate + ' (' + reportType + ')');
+            });
+        });
+
+                // Aylýk rezervasyon daðýlýmý grafiði
+        var reservationsByMonth = @Html.Raw(Json.Serialize(ViewBag.ReservationsByMonth));
+        var monthNames = @Html.Raw(Json.Serialize(ViewBag.MonthNames));
+
+        // Ay numaralarýný ay isimlerine dönüþtürme
+        var labels = [];
+        var data = [];
+        var monthNameMap = {};
+
+        // Ay numarasý -> ay ismi eþleþtirmesini oluþtur
+        monthNames.forEach(function(item) {
+            monthNameMap[item.MonthNumber] = item.MonthName;
+        });
+
+        // Verileri grafik için hazýrla
+        reservationsByMonth.forEach(function(item) {
+            labels.push(monthNameMap[item.Month]);
+            data.push(item.Count);
+        });
+
+        // Grafik oluþtur
+        var monthlyDistCtx = document.getElementById('monthlyDistributionChart').getContext('2d');
+        var monthlyDistChart = new Chart(monthlyDistCtx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Rezervasyon Sayýsý',
+                    data: data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + ' rezervasyon';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+}
