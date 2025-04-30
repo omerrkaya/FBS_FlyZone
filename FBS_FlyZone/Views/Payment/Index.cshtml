@@ -1,201 +1,185 @@
 @model FBS_FlyZone.Models.PaymentViewModel
 @{
-	ViewData["Title"] = "PaymentFailed";
-	Layout = "~/Views/Shared/UserLayout.cshtml";
+    ViewData["Title"] = "Ödeme";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
-
-
-<div style="margin-top: 50px;"></div> <!-- Ödeme sayfasının üstüne boşluk bırakır. Navbar ile arasında boşluk bırakır. -->
-
 <div class="reservation-container" style="margin-top:130px;">
-	<div class="reservation-header">
-		<h2><i class="fas fa-plane"></i> Ödeme</h2>
-	</div>
+    <div class="reservation-header">
+        <h2><i class="fas fa-plane"></i> Ödeme</h2>
+    </div>
 
-	<div class="reservation-steps">
-		<div class="step ">
-			<div class="step-number">1</div>
-			<div class="step-title">Yolcu Bilgileri</div>
-		</div>
-		<div class="step">
-			<div class="step-number">2</div>
-			<div class="step-title">Koltuk Seçimi</div>
-		</div>
-		<div class="step active">
-			<div class="step-number">3</div>
-			<div class="step-title">Ödeme</div>
-		</div>
-		<div class="step">
-			<div class="step-number">4</div>
-			<div class="step-title">Onay</div>
-		</div>
-	</div>
+    <div class="reservation-steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-title">Yolcu Bilgileri</div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-title">Koltuk Seçimi</div>
+        </div>
+        <div class="step active">
+            <div class="step-number">3</div>
+            <div class="step-title">Ödeme</div>
+        </div>
+        <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-title">Onay</div>
+        </div>
+    </div>
 
-	<div class="reservation-form " style="border-radius:0px">
-		<div class="form-section">
-			<div class="section-title">
-				<i class=""></i> Sipariş Özeti
-			</div>
-			<div class="card-body">
-				@if (true)
-				{
-@* 					var childCount =
-					var adultCount = 
-					var totalPrice = 
- *@
+    <div class="reservation-form " style="border-radius:0px">
+        <div class="form-section">
+            <div class="section-title">
+                <i class="fas fa-receipt"></i> Sipariş Özeti
+            </div>
+            <div class="card-body">
+                @if (Model != null && Model.Flight != null)
+                {
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Uçuş Bilgisi:</span>
+                        <span>@Model.Flight.DepartureAirport.AP_City - @Model.Flight.ArrivalAirport.AP_City</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Tarih:</span>
+                        <span>@Model.Flight.Flight_DateTime.ToString("dd.MM.yyyy HH:mm")</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Yolcu:</span>
+                        <span>@Model.AdultCount Yetişkin, @Model.ChildCount Çocuk</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Bilet Ücreti:</span>
+                        <span>@((Model.TotalPrice * 0.75m).ToString("N2")) ₺</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Vergiler:</span>
+                        <span>@((Model.TotalPrice * 0.18m).ToString("N2")) ₺</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Hizmet Bedeli:</span>
+                        <span>@((Model.TotalPrice * 0.07m).ToString("N2")) ₺</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <strong style="font-size: 1.3em; font-weight:1000; ">Toplam Tutar:</strong>
+                        <strong style="font-size: 1.3em; font-weight:1000; "> @Model.TotalPrice.ToString("N2") TRY</strong>
+                    </div>
+                }
+                else
+                {
+                    <p>Veriler bulunamadı.</p>
+                }
+            </div>
+        </div>
+    </div>
 
-					<div class="d-flex justify-content-between mb-3">
-						<span>Uçuş Bilgisi:</span>
-						<span>İstanbul - Antalya</span>
-					</div>
-					<div class="d-flex justify-content-between mb-3">
-						<span>Tarih:</span>
-						<span>15.08.2025</span>
-					</div>
-					<div class="d-flex justify-content-between mb-3">
-						<span>Yolcu:</span>
-						<span>1Yetişkin, 1Çocuk</span>
-					</div>
-					<hr>
-					<div class="d-flex justify-content-between mb-3">
-						<span>Bilet Ücreti:</span>
-						<span>1 ₺</span>
-					</div>
-					<div class="d-flex justify-content-between mb-3">
-						<span>Vergiler:</span>
-						<span>1 ₺</span>
-					</div>
-					<div class="d-flex justify-content-between mb-3">
-						<span>Hizmet Bedeli:</span>
-						<span>1 ₺</span>
-					</div>
-					<hr>
-					<div class="d-flex justify-content-between">
-						<strong style="font-size: 1.3em; font-weight:1000; ">Toplam Tutar:</strong>
-						<strong style="font-size: 1.3em; font-weight:1000; "> 1 TRY</strong>
-					</div>
-				}
-				else
-				{
-					<p>Veriler bulunamadı.</p>
-				}
-				
-			</div>
-		</div>
-	</div>
+    <div class="cizgi"></div>
+    <form asp-action="Index" method="post" class="reservation-form" style="border-radius:0px;">
+        <input type="hidden" asp-for="TotalPrice" value="@Model.TotalPrice" />
+        <input type="hidden" asp-for="AdultCount" value="@Model.AdultCount" />
+        <input type="hidden" asp-for="ChildCount" value="@Model.ChildCount" />
+		<input type="hidden" asp-for="Flight" value="@Model.Flight" />
 
-	<div class="cizgi"></div>
-	<form asp-action="Index" method="post" class="reservation-form" style="border-radius:0px;">
+        <div class="form-section">
+            <div class="section-title">
+                <i class="fas fa-credit-card"></i> Kart Bilgileri
+            </div>
 
-		<div class="form-section">
-			<div class="section-title">
-				<i class="fas fa-credit-card"></i> Kart Bilgileri
-			</div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Kart Üzerindeki Ad ve Soyad</label>
+                    <input type="text" class="form-control" id="CardHolderName" asp-for="CardHolderName" placeholder="Adınız ve Soyadınız" required>
+                    <span asp-validation-for="CardHolderName" class="text-danger"></span>
+                </div>
 
-			<div class="row g-3">
-				<div class="col-md-6">
-					<label class="form-label">Kart Üzerindeki Ad ve Soyad</label>
-					<input type="text" class="form-control" id="CardHolderName" asp-for="CardHolderName" placeholder="Adınız ve Soyadınız" required>
-					<span asp-validation-for="CardHolderName" class="text-danger"></span>
+                <div class="col-md-3">
+                    <label class="form-label">Son Kullanma Tarihi</label>
+                    <input type="text" class="form-control" id="ExpiryDate" asp-for="ExpiryDate" placeholder="MM/YY" required>
+                    <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+                </div>
 
-				</div>
+                <div class="col-md-6">
+                    <label for="nationality" class="form-label">Kart Numarası</label>
+                    <input type="text" maxlength="19" class="form-control" id="CardNumber" asp-for="CardNumber" placeholder="1234 5678 9012 3456" required>
+                    <span asp-validation-for="CardNumber" class="text-danger"></span>
+                </div>
 
+                <div class="col-md-2">
+                    <label class="form-label">CVV</label>
+                    <input type="text" class="form-control" id="cardDate" asp-for="CVV" placeholder="123" required>
+                    <span asp-validation-for="CVV" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
 
-				<div class="col-md-3">
-					<label class="form-label">Son Kullanma Tarihi</label>
-					<input type="text" class="form-control" id="ExpiryDate" asp-for="ExpiryDate" placeholder="MM/YY" required>
-					<span asp-validation-for="ExpiryDate" class="text-danger"></span>
+        <div class="form-section">
+            <div class="section-title">
+                <i class="fas fa-address-book"></i> Fatura Bilgileri
+            </div>
 
-				</div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Adres</label>
+                    <textarea class="form-control" id="address" asp-for="Address" placeholder="Fatura adresini giriniz" style="height:50px; min-height:50px;" required></textarea>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
 
-				<div class="col-md-6">
-					<label for="nationality" class="form-label">Kart Numarası</label>
-					<input type="text" maxlength="19" class="form-control" id="CardNumber" asp-for="CardNumber" placeholder="1234 5678 9012 3456" required>
-					<span asp-validation-for="CardNumber" class="text-danger"></span>
+                <div class="col-md-3">
+                    <label class="form-label">Şehir</label>
+                    <input type="text" class="form-control" id="city" asp-for="City" placeholder="Şehir" required>
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
 
-				</div>
+                <div class="col-md-6">
+                    <label class="form-label">E-posta Adresi</label>
+                    <input type="email" class="form-control" id="email" asp-for="Email" placeholder="E-posta adresiniz" required>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
 
-				<div class="col-md-2">
-					<label class="form-label">CVV</label>
-					<input type="text" class="form-control" id="cardDate" asp-for="CVV" placeholder="123" required>
-					<span asp-validation-for="CVV" class="text-danger"></span>
+                <div class="col-md-3">
+                    <label class="form-label">Posta Kodu</label>
+                    <input type="text" class="form-control" id="postalcode" asp-for="PostalCode" placeholder="Posta Kodunu giriniz" required>
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
 
-				</div>
-			</div>
-		</div>
+                <div class="form-check mb-4 mt-4" style="padding-left:40px;">
+                    <input class="form-check-input" type="checkbox" id="acceptTerms" required>
+                    <label class="form-check-label" for="acceptTerms">
+                        Ödeme koşullarını ve gizlilik politikasını kabul ediyorum
+                    </label>
+                </div>
+            </div>
+        </div>
 
+        <div class="form-section mt-4">
+            <button type="submit" class="btn btn-primary btn-submit">
+                <i class="fas fa-check-circle me-2"></i> Ödemeyi Tamamla
+            </button>
+        </div>
+    </form>
 
-		<div class="form-section">
-			<div class="section-title">
-				<i class="fas fa-address-book"></i> Fatura Bilgileri
-			</div>
-
-			<div class="row g-3">
-
-				<div class="col-md-6">
-					<label class="form-label">E-posta Adresi</label>
-					<textarea class="form-control" id="adress" name="Passenger.Email" placeholder="Fatura adresini giriniz" style="height:50px; min-height:50px;" required></textarea>
-				</div>
-				<div class="col-md-3">
-					<label class="form-label">Şehir</label>
-					<input type="text" class="form-control" id="city" name="City" placeholder="Şehir" required>
-				</div>
-
-
-				<div class="col-md-6">
-					<label class="form-label">E-posta Adresi</label>
-					<input type="email" class="form-control" id="email" name="Passenger.Email" placeholder="E-posta adresiniz" required>
-				</div>
-
-				<div class="col-md-3">
-					<label class="form-label">Posta Kodu</label>
-					<input type="text" class="form-control" id="postacode" name="PostaCode" placeholder="Posta Kodunu giriniz" required>
-				</div>
-
-				<div class="form-check mb-4 mt-4" style="padding-left:40px;">
-					<input class="form-check-input" type="checkbox" id="acceptTerms">
-					<label class="form-check-label" for="acceptTerms">
-						Ödeme koşullarını ve gizlilik politikasını kabul ediyorum
-					</label>
-				</div>
-
-			</div>
-		</div>
-
-
-		<input type="hidden" name="Flight.FlightID" value="">
-
-		<div class="form-section mt-4">
-			<button type="submit" class="btn btn-primary btn-submit">
-				<i class="fas fa-check-circle me-2"></i> Ödemeyi Tamamla
-			</button>
-		</div>
-	</form>
-
-	<div>
-		<div class="reservation-form">
-			<div class="form-section">
-				<i class="mb-0">Güvenli Ödeme</i>
-			</div>
-			<div class="card-body">
-				<p class="small" style="color:var(--gold-accent)">
-					Tüm kredi kartı bilgileriniz SSL sertifikası ile şifrelenerek korunmaktadır.
-					Bilgileriniz üçüncü partilerle paylaşılmaz.
-				</p>
-				<div class="text-center mt-3">
-					<i class="bi bi-shield-lock fs-1 text-success"></i>
-				</div>
-			</div>
-			<a href="#" class="btn btn-primary btn-submit" style="height:50px; padding:11px;">
-				<i class="fas fa-arrow-left"></i> Uçuş Seçimine Geri Dön
-			</a>
-		</div>
-
-	</div>
-
+    <div>
+        <div class="reservation-form">
+            <div class="form-section">
+                <i class="mb-0">Güvenli Ödeme</i>
+            </div>
+            <div class="card-body">
+                <p class="small" style="color:var(--gold-accent)">
+                    Tüm kredi kartı bilgileriniz SSL sertifikası ile şifrelenerek korunmaktadır.
+                    Bilgileriniz üçüncü partilerle paylaşılmaz.
+                </p>
+                <div class="text-center mt-3">
+                    <i class="bi bi-shield-lock fs-1 text-success"></i>
+                </div>
+            </div>
+            <a href="@Url.Action("Index", "Flight")" class="btn btn-primary btn-submit" style="height:50px; padding:11px;">
+                <i class="fas fa-arrow-left"></i> Uçuş Seçimine Geri Dön
+            </a>
+        </div>
+    </div>
 </div>
-
 
 
 <style>
@@ -425,37 +409,37 @@
 </style>
 
 @section Scripts {
-	@{
-		await Html.RenderPartialAsync("_ValidationScriptsPartial");
-	}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
-	<script>
-		// Kredi kartı numarası formatlama (4 hanede bir boşluk)
-		$(document).ready(function() {
-			$("#CardNumber").on("keyup", function() {
-				var value = $(this).val().replace(/\s+/g, "").replace(/[^0-9]/gi, ""); //4 hanede bir boşluk koyar.
-				var formattedValue = "";
+    <script>
+        // Kredi kartı numarası formatlama (4 hanede bir boşluk)
+        $(document).ready(function() {
+            $("#CardNumber").on("keyup", function() {
+                var value = $(this).val().replace(/\s+/g, "").replace(/[^0-9]/gi, ""); //4 hanede bir boşluk koyar.
+                var formattedValue = "";
 
-				for(var i = 0; i < value.length; i++) {
-					if(i > 0 && i % 4 === 0){
-						formattedValue += " ";
-					}
-					formattedValue += value[i];
-				}
+                for(var i = 0; i < value.length; i++) {
+                    if(i > 0 && i % 4 === 0){
+                        formattedValue += " ";
+                    }
+                    formattedValue += value[i];
+                }
 
-				$(this).val(formattedValue);
-			});
+                $(this).val(formattedValue);
+            });
 
-			// Son kullanma tarihi formatlama (MM/YY)
-			$("#ExpiryDate").on("keyup", function() {
-				var value = $(this).val().replace(/\s+/g, "").replace(/[^0-9]/gi, ""); //4 hanede bir boşluk koyar.
+            // Son kullanma tarihi formatlama (MM/YY)
+            $("#ExpiryDate").on("keyup", function() {
+                var value = $(this).val().replace(/\s+/g, "").replace(/[^0-9]/gi, ""); //4 hanede bir boşluk koyar.
 
-				if(value.length > 2) {
-					value = value.substring(0, 2) + "/" + value.substring(2, 4); //2 haneden sonra / koyar.
-				}
+                if(value.length > 2) {
+                    value = value.substring(0, 2) + "/" + value.substring(2, 4); //2 haneden sonra / koyar.
+                }
 
-				$(this).val(value);
-			});
-		});
-	</script>
-} 
+                $(this).val(value);
+            });
+        });
+    </script>
+}
