@@ -178,9 +178,9 @@
 									</div>
 
 									<select name="DepartureAirportId" class="book-select form--control custom-select">
-										@foreach (var item in Model)
+										@foreach (var item in Model.Select(m => m.DepartureAirport).GroupBy(a => a.AirportID).Select(g => g.First()))
 										{
-											<option value="@item.DepartureAirport.AirportID">@item.DepartureAirport.Airport_Name</option>
+											<option value="@item.AirportID">@item.Airport_Name</option>
 										}
 									</select>
 
@@ -195,9 +195,9 @@
 										<i class="icon-to-airplane"></i>
 									</div>
 									<select name="ArrivalAirportId" class="book-select form--control custom-select">
-										@foreach (var item in Model)
+										@foreach (var item in Model.Select(m => m.ArrivalAirport).GroupBy(a => a.AirportID).Select(g => g.First()))
 										{
-											<option value="@item.ArrivalAirport.AirportID">@item.ArrivalAirport.Airport_Name</option>
+											<option value="@item.AirportID">@item.Airport_Name</option>
 										}
 									</select>
 								</div>

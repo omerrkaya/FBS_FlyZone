@@ -2,6 +2,7 @@ using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace FBS_FlyZone.Models
 {
@@ -45,16 +46,19 @@ namespace FBS_FlyZone.Models
         [Required(ErrorMessage = "Adres zorunludur")]
         public string Address { get; set; }
 
-        // Rezervasyon ve ödeme bilgileri
-        public List<Reservation> Reservations { get; set; }
+        // Sadece ID'leri saklayalım
+        public int FlightID { get; set; }
+        public List<int> ReservationIDs { get; set; }
+
+        // Görüntüleme için gerekli nesneler (form post'ta kullanılmayacak)
         public Flight Flight { get; set; }
+        public List<Reservation> Reservations { get; set; }
+
         public decimal TotalPrice { get; set; }
         public int AdultCount { get; set; }
         public int ChildCount { get; set; }
 
-        public PaymentViewModel()
-        {
-            Reservations = new List<Reservation>();
-        }
+       
     }
+
 }
