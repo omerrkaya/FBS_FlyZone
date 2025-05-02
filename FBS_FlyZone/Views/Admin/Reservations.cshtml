@@ -105,9 +105,20 @@
 
 									<td>
 										<div class="btn-group">
-											<a href="#" class="btn btn-sm btn-info">
+											<a href="#"
+											   class="btn btn-sm btn-info"
+											   data-bs-toggle="modal"
+											   data-bs-target="#reservationDetailModal"
+											   data-id="@reservation.ReservationID"
+											   data-name="@reservation.Passenger?.Passenger_Name_Surname"
+											   data-flight="@reservation.Flight?.Flight_Code"
+											   data-date="@reservation.Reservation_Date.ToString("dd.MM.yyyy HH:mm")"
+											   data-seat="@reservation.Seat_Number"
+											   data-payment="@reservation.Payment_Status"
+											   data-status="@reservation.Reservation_Status">
 												<i class="bi bi-eye"></i>
 											</a>
+
 											<a href="#" class="btn btn-sm btn-warning">
 												<i class="bi bi-pencil"></i>
 											</a>
@@ -145,11 +156,38 @@
 		</div>
 	</div>
 </div>
+<!-- Rezervasyon Detay Modalı -->
+<div class="modal fade" id="reservationDetailModal" tabindex="-1" aria-labelledby="reservationDetailLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="reservationDetailLabel">Rezervasyon Detayı</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+			</div>
+			<div class="modal-body">
+				<p><strong>Yolcu Adı:</strong> <span id="detailName"></span></p>
+				<p><strong>Uçuş Kodu:</strong> <span id="detailFlight"></span></p>
+				<p><strong>Tarih:</strong> <span id="detailDate"></span></p>
+				<p><strong>Koltuk:</strong> <span id="detailSeat"></span></p>
+				<p><strong>Ödeme Durumu:</strong> <span id="detailPayment"></span></p>
+				<p><strong>Rezervasyon Durumu:</strong> <span id="detailStatus"></span></p>
+			</div>
+		</div>
+	</div>
+</div>
 
 @section Scripts {
 	<script>
 		$(document).ready(function () {
-			// JS kodları buraya
+			$('#reservationDetailModal').on('show.bs.modal', function (event) {
+				var button = $(event.relatedTarget); // tıklanan buton
+				$('#detailName').text(button.data('name') || 'Bilinmiyor');
+				$('#detailFlight').text(button.data('flight') || 'Bilinmiyor');
+				$('#detailDate').text(button.data('date') || 'Bilinmiyor');
+				$('#detailSeat').text(button.data('seat') || 'Bilinmiyor');
+				$('#detailPayment').text(button.data('payment') || 'Beklemede');
+				$('#detailStatus').text(button.data('status') || 'Bilinmiyor');
+			});
 		});
 	</script>
 }
