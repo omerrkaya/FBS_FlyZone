@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Globalization;
+using Microsoft.EntityFrameworkCore;
 
 namespace FBS_FlyZone.Controllers
 
@@ -206,14 +207,21 @@ namespace FBS_FlyZone.Controllers
         }
 
 
-
-        // Rezervasyon Yönetimi işlemlerini yapıyorum.
         [AllowAnonymous]
         public IActionResult Reservations()
         {
-            var reservations = _context.Reservations.ToList();
+            var reservations = _context.Reservations
+                .Include(r => r.Flight)       
+                .Include(r => r.Passenger)    
+                .ToList();
+
+          
+
             return View(reservations);
         }
+
+
+
 
         // Havayolları Yönetimi işlemlerini yapıyorum.
         [AllowAnonymous]
@@ -249,7 +257,7 @@ namespace FBS_FlyZone.Controllers
         public IActionResult Reports()
         {
 
-  
+
 
             ViewBag.MonthlyReservations = new int[] { 65, 59, 80, 81, 56, 55, 40, 45, 60, 49, 52, 50 };
 
