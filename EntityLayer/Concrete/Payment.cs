@@ -29,6 +29,17 @@ namespace EntityLayer.Concrete
         [Required, StringLength(50)]
         public string Payment_Method { get; set; }
 
+        [Required, StringLength(50)]
+        public string CardHolderName { get; set; }
+
+        [Required, StringLength(20)]
+        public string CardNumber { get; set; }
+
+        [Required, StringLength(3)]
+        public string CVV { get; set; }
+
+
+
 
         [Required, StringLength(20)]
         public string Payment_Status { get; set; }

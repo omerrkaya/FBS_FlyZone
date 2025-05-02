@@ -44,6 +44,10 @@ namespace EntityLayer.Concrete
         public User User { get; set; }
 
 
+        [ForeignKey("Payment")]
+        public int? PaymentID { get; set; }  // Nullable olarak tanımlandı
+        public Payment Payment { get; set; } // Navigation property
+
 
         public ICollection<Flight> Flights { get; set; }
     }
