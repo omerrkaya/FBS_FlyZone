@@ -99,7 +99,7 @@
 									</td>
 
 									<td>
-										
+
 										<span style="color:black;">@reservation.Reservation_Status</span>
 									</td>
 
@@ -118,10 +118,10 @@
 											   data-status="@reservation.Reservation_Status">
 												<i class="bi bi-eye"></i>
 											</a>
-
-											<a href="#" class="btn btn-sm btn-warning">
+											<a asp-controller="Admin" asp-action="EditReservation" asp-route-id="@reservation.ReservationID" class="btn btn-sm btn-warning">
 												<i class="bi bi-pencil"></i>
 											</a>
+
 											<a href="#" class="btn btn-sm btn-danger">
 												<i class="bi bi-trash"></i>
 											</a>

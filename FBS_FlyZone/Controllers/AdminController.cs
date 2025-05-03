@@ -211,13 +211,34 @@ namespace FBS_FlyZone.Controllers
         public IActionResult Reservations()
         {
             var reservations = _context.Reservations
-                .Include(r => r.Flight)       
-                .Include(r => r.Passenger)    
+                .Include(r => r.Flight)
+                .Include(r => r.Passenger)
                 .ToList();
 
-          
+
 
             return View(reservations);
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult EditReservation(int id)
+        {
+            var reservation = _context.Reservations.FirstOrDefault(x => x.ReservationID == id);
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Airlines = new SelectList(_context.Airlines.ToList(), "AirlineID", "Airlines_Name");
+            ViewBag.Airports = new SelectList(_context.Airports.ToList(), "AirportID", "Airport_Name");
+            ViewBag.Flights = new SelectList(_context.Flights.ToList(), "FlightID", "Flight_Code");
+            ViewBag.Passengers = new SelectList(_context.Passengers.ToList(), "PassengerID", "Passenger_Name_Surname");
+
+        
+
+            return View(reservation);
         }
 
 
@@ -310,7 +331,8 @@ namespace FBS_FlyZone.Controllers
 
             // Ay isimlerini de gönderelim
             ViewBag.MonthNames = Enumerable.Range(1, 12)
-                .Select(i => new {
+                .Select(i => new
+                {
                     MonthNumber = i,
                     MonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)
                 })
