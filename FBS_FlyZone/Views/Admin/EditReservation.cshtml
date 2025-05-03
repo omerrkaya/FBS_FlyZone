@@ -1,0 +1,148 @@
+﻿@model EntityLayer.Concrete.Reservation
+@{
+    ViewData["Title"] = "Rezervasyon Düzenle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Reservations">Rezervasyonlar</a></li>
+                    <li class="breadcrumb-item active">Rezervasyon Düzenle</li>
+                </ol>
+            </nav>
+            <h2 class="mb-1">Rezervasyon Düzenle</h2>
+            <p class="text-muted">Rezervasyon bilgilerini güncelleyin.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="EditReservation" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <input type="hidden" asp-for="ReservationID" />
+
+                        <div class="mb-3">
+                            <label asp-for="PassengerID" class="form-label">Yolcu</label>
+                            <select asp-for="PassengerID" class="form-select" asp-items="ViewBag.Passengers">
+                                <option value="">Seçiniz</option>
+                            </select>
+                            <span asp-validation-for="PassengerID" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="FlightID" class="form-label">Uçuş</label>
+                            <select asp-for="FlightID" class="form-select" asp-items="ViewBag.Flights">
+                                <option value="">Seçiniz</option>
+                            </select>
+                            <span asp-validation-for="FlightID" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Reservation_Date" class="form-label">Rezervasyon Tarihi</label>
+                            <input asp-for="Reservation_Date" type="datetime-local" class="form-control" />
+                            <span asp-validation-for="Reservation_Date" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Seat_Number" class="form-label">Koltuk Numarası</label>
+                            <input asp-for="Seat_Number" class="form-control" />
+                            <span asp-validation-for="Seat_Number" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Payment_Status" class="form-label">Ödeme Durumu</label>
+                            <select asp-for="Payment_Status" class="form-select">
+                                <option value="Ödendi">Ödendi</option>
+                                <option value="Beklemede">Beklemede</option>
+                                <option value="İptal">İptal</option>
+                            </select>
+                            <span asp-validation-for="Payment_Status" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Reservation_Status" class="form-label">Rezervasyon Durumu</label>
+                            <select asp-for="Reservation_Status" class="form-select">
+                                <option value="Onaylandı">Onaylandı</option>
+                                <option value="Beklemede">Beklemede</option>
+                                <option value="İptal Edildi">İptal Edildi</option>
+                            </select>
+                            <span asp-validation-for="Reservation_Status" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-secondary">İptal</a>
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Rezervasyon Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Rezervasyon Bilgilerini Göster -->
+                    <p><strong>Yolcu Adı:</strong> @Model.Passenger?.Passenger_Name_Surname</p>
+                    <p><strong>Uçuş Kodu:</strong> @Model.Flight?.Flight_Code</p>
+                    <p><strong>Rezervasyon Tarihi:</strong> @Model.Reservation_Date.ToString("dd.MM.yyyy HH:mm")</p>
+                    <p><strong>Koltuk Numarası:</strong> @Model.Seat_Number</p>
+                    <p><strong>Ödeme Durumu:</strong> @Model.Payment_Status</p>
+                    <p><strong>Rezervasyon Durumu:</strong> @Model.Reservation_Status</p>
+                    <hr>
+                    <p class="mb-0 text-muted small">
+                        Rezervasyon bilgilerini güncellemeden önce, tüm verilerin doğruluğunu kontrol edin.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">Tehlikeli Bölge</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted small">
+                        Rezervasyonu silmek için butona basın. Bu işlem geri alınamaz ve rezervasyon kalıcı olarak silinir.
+                    </p>
+                    <button type="button" class="btn btn-outline-danger w-100" data-bs-toggle="modal" data-bs-target="#deleteReservationModal">
+                        <i class="bi bi-trash me-1"></i> Rezervasyonu Sil
+                    </button>
+
+                    <!-- Silme Modal -->
+                    <div class="modal fade" id="deleteReservationModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Rezervasyonu Sil</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>@Model.ReservationID</strong> ID’li rezervasyonu silmek istediğinize emin misiniz?</p>
+                                    <p class="text-muted small">Bu işlem geri alınamaz ve rezervasyon kalıcı olarak silinecektir.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                                    <a asp-action="DeleteReservation" asp-route-id="@Model.ReservationID" class="btn btn-danger">Evet, Sil</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
