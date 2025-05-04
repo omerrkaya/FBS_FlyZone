@@ -62,9 +62,33 @@ namespace FBS_FlyZone.Controllers
 
         // Kullanıcı Yönetimi
         [AllowAnonymous]
-        public IActionResult Users()
+        public IActionResult Users(string searchName, string role, DateTime? registrationDate)
         {
-            var users = _context.Users.ToList();
+            var query = _context.Users.AsQueryable();
+            
+            // Filtreleme işlemleri
+            if (!string.IsNullOrEmpty(searchName))
+            {
+                query = query.Where(u => u.User_Name_Surname.Contains(searchName)); //isim ve soyisim arıyorum
+            }
+            
+            if (!string.IsNullOrEmpty(role)) // null veya boş değilse !string bu anlama gelir.
+            {
+                query = query.Where(u => u.UserRole == role); // Kullanıcı Rolü arıyorum
+            }
+            
+            if (registrationDate.HasValue) // kayıt tarihi null değilse = hasvalue bu anlama gelir.
+            {
+                query = query.Where(u => u.RegisterationDate.Date == registrationDate.Value.Date); //kullanıcı kayıt tarihi arıyorum
+            }
+            
+            var users = query.ToList();
+            
+            // Filtreleme değerlerini ViewBag'e ekleyelim ki form değerleri korunsun
+            ViewBag.SearchName = searchName;
+            ViewBag.Role = role;
+            ViewBag.RegistrationDate = registrationDate?.ToString("yyyy-MM-dd");
+            
             return View(users);
         }
 

@@ -20,22 +20,22 @@
     <!-- Filtreler -->
     <div class="card mb-4">
         <div class="card-body">
-            <form method="get"  class="row g-3">
+            <form method="get" class="row g-3">
                 <div class="col-md-4">
                     <label class="form-label">Kullanıcı Adı</label>
-                    <input type="text" name="searchName" class="form-control" placeholder="Kullanıcı adı ara...">
+                    <input type="text" name="searchName" class="form-control" placeholder="Kullanıcı adı ara..." value="@ViewBag.SearchName"> 
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Rol</label>
                     <select name="role" class="form-select">
                         <option value="">Tümü</option>
-                        <option value="Admin">Admin</option>
-                        <option value="User">Kullanıcı</option>
+                        <option value="Admin" selected="@(ViewBag.Role == "Admin")">Admin</option>
+                        <option value="User" selected="@(ViewBag.Role == "User")">Kullanıcı</option>
                     </select>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Kayıt Tarihi</label>
-                    <input type="date" name="registrationDate" class="form-control">
+                    <input type="date" name="registrationDate" class="form-control" value="@ViewBag.RegistrationDate">
                 </div>
                 <div class="col-md-2 d-flex align-items-end">
                     <button type="submit" class="btn btn-secondary w-100">
@@ -140,4 +140,4 @@
             </nav>
         </div>
     </div>
-</div> 
+</div>
