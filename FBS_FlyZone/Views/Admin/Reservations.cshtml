@@ -11,40 +11,158 @@
 			<p class="text-muted">Sistemdeki tüm rezervasyonları bu sayfadan yönetebilirsiniz.</p>
 		</div>
 	</div>
-	
+
 	<div class="card">
 		<div class="card-header d-flex justify-content-between align-items-center">
 			<h5 class="mb-0">Rezervasyonlar</h5>
 			<div>
-				<button type="button" class="btn btn-outline-secondary me-2">
+				<button type="button" class="btn btn-outline-secondary me-2" id="exportToExcel">
 					<i class="bi bi-file-earmark-excel me-1"></i> Excel'e Aktar
 				</button>
-				<button type="button" class="btn btn-outline-secondary me-2">
+				<button type="button" class="btn btn-outline-secondary me-2" id="printButton">
 					<i class="bi bi-printer me-1"></i> Yazdır
 				</button>
+
+
+
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+				<script>
+					// Excel'e aktar
+					document.getElementById('exportToExcel').addEventListener('click', function () {
+						var table = document.querySelector('table');
+						var wb = XLSX.utils.table_to_book(table, { sheet: "Rezervasyonlar" });
+						XLSX.writeFile(wb, 'rezervasyonlar.xlsx');
+					});
+
+										// Yazdır butonu
+					document.getElementById('printButton').addEventListener('click', function () {
+						window.print();
+					});
+
+				</script>
+
+				<style>
+					@@media print {
+						/* Sidebar ve navigasyon öğelerini gizle */
+						.sidebar, .non-print, nav, aside, [id*="sidebar"], [class*="sidebar"], [id*="menu"], [class*="menu"], [id*="nav"], [class*="nav"] {
+						display: none !important;
+					}
+
+					/* FlyZone Admin bölümünü gizle */
+					[id*="admin"], [class*="admin"] {
+						display: none !important;
+					}
+
+					/* Arama formunu gizle */
+					form[asp-controller="Admin"][asp-action="Reservations"],
+					form {
+						display: none !important;
+					}
+
+					/* Tüm butonları ve filtreleme öğelerini gizle */
+					.btn, button, #exportToExcel, #printButton,
+					.form-control, .form-select, .row.mb-4 {
+						display: none !important;
+					}
+
+					/* Tablodaki işlem butonlarını gizle */
+					.btn-group,
+					td:has(.btn-group),
+					td:has(.btn) {
+						display: none !important;
+					}
+
+					/* Excel'e Aktar ve Yazdır butonlarını içeren üst kısmı gizle */
+					.d-flex, .justify-content-between, .align-items-center {
+						display: none !important;
+					}
+
+					/* Ana içeriği tam genişlikte göster */
+					.card, .card-body, main, .content, .container {
+						width: 100% !important;
+						margin: 0 !important;
+						padding: 0 !important;
+						left: 0 !important;
+					}
+
+					/* Yazı stil ayarlamaları */
+					h1, h2, h3, h4 {
+						text-align: center;
+						font-weight: bold;
+					}
+
+					/* Tabloları temiz göster */
+					table {
+						width: 100% !important;
+						border-collapse: collapse !important;
+					}
+
+					th, td {
+						padding: 8px !important;
+						border: 1px solid #ddd !important;
+					}
+
+					/* Daha modern bir tablo stili */
+					tr:nth-child(even) {
+						background-color: #f2f2f2 !important;
+					}
+
+					th {
+						background-color: #f8f9fa !important;
+						color: black !important;
+						font-weight: bold !important;
+					}
+
+					/* Arka planı beyaz yap */
+					body {
+						background-color: white !important;
+						color: black !important;
+					}
+
+					}
+
+					th.islemler-basligi {
+						visibility: hidden !important;
+					}
+				</style>
+
 			</div>
 		</div>
+
+
 		<div class="card-body">
-			<div class="row mb-4">
-				<div class="col-md-6">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Rezervasyon ara..." aria-label="Rezervasyon ara">
-						<button class="btn btn-outline-secondary" type="button">
+			<form method="get" asp-controller="Admin" asp-action="Reservations">
+				<div class="row mb-4 align-items-end">
+					<div class="col-md-3">
+						<input type="date" name="reservationDate" class="form-control" value="@ViewBag.ReservationDate" placeholder="Tarih Seç">
+					</div>
+					<div class="col-md-2">
+						<input type="text" name="seatNumber" class="form-control" placeholder="Koltuk No" value="@ViewBag.SeatNumber">
+					</div>
+					<div class="col-md-3">
+						<select name="paymentStatus" class="form-select">
+							<option value="">Ödeme Durumu (Tümü)</option>
+							<option value="Ödendi" selected="@(ViewBag.PaymentStatus == "Ödendi")">Ödendi</option>
+							<option value="Ödenmedi" selected="@(ViewBag.PaymentStatus == "Ödenmedi")">Ödenmedi</option>
+						</select>
+					</div>
+					<div class="col-md-3">
+						<select name="reservationStatus" class="form-select">
+							<option value="">Rezervasyon Durumu (Tümü)</option>
+							<option value="Onaylandı" selected="@(ViewBag.ReservationStatus == "Onaylandı")">Onaylandı</option>
+							<option value="Beklemede" selected="@(ViewBag.ReservationStatus == "Beklemede")">Beklemede</option>
+							<option value="İptal Edildi" selected="@(ViewBag.ReservationStatus == "İptal Edildi")">İptal Edildi</option>
+						</select>
+					</div>
+					<div class="col-md-1 text-end">
+						<button type="submit" class="btn btn-primary w-100">
 							<i class="bi bi-search"></i>
 						</button>
 					</div>
 				</div>
-				<div class="col-md-6">
-					<div class="d-flex justify-content-md-end">
-						<select class="form-select w-auto">
-							<option selected>Tümü</option>
-							<option value="1">Onaylandı</option>
-							<option value="2">Beklemede</option>
-							<option value="3">İptal Edildi</option>
-						</select>
-					</div>
-				</div>
-			</div>
+			</form>
+
 
 			<div class="table-responsive">
 				<table class="table table-striped table-hover">
@@ -57,7 +175,7 @@
 							<th>Koltuk</th>
 							<th>Ödeme Durumu</th>
 							<th>Rezervasyon Durumu</th>
-							<th>İşlemler</th>
+							<th class="islemler-basligi non-print">İşlemler</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -95,7 +213,7 @@
 
 									<td>
 
-										<span style="color:black;">@(@reservation.Payment_Status ?? "Beklemede")</span>
+										<span style="color:black;">@(@reservation.Payment_Status)</span>
 									</td>
 
 									<td>
@@ -103,7 +221,7 @@
 										<span style="color:black;">@reservation.Reservation_Status</span>
 									</td>
 
-									<td>
+									<td class="non-print">
 										<div class="btn-group">
 											<a href="#"
 											   class="btn btn-sm btn-info"
