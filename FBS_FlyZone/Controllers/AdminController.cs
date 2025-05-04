@@ -7,6 +7,7 @@ using EntityLayer.Concrete;
 using System.Linq;
 using System;
 using System.Collections.Generic;
+
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
@@ -230,22 +231,47 @@ namespace FBS_FlyZone.Controllers
             return RedirectToAction("Flights");
         }
 
-
         [AllowAnonymous]
-        public IActionResult Reservations()
+        public IActionResult Reservations(DateTime? reservationDate, string seatNumber, string paymentStatus, string reservationStatus)
         {
-            var reservations = _context.Reservations
+            var query = _context.Reservations
                 .Include(r => r.Flight)
                 .Include(r => r.Passenger)
-                .ToList();
+                .AsQueryable();
 
+            // Sadece Reservation tablosuna ait filtreler
+            if (reservationDate.HasValue)
+            {
+                query = query.Where(r => r.Reservation_Date.Date == reservationDate.Value.Date);
+            }
 
+            if (!string.IsNullOrEmpty(seatNumber))
+            {
+                query = query.Where(r => r.Seat_Number.Contains(seatNumber));
+            }
+
+            if (!string.IsNullOrEmpty(paymentStatus))
+            {
+                query = query.Where(r => r.Payment_Status == paymentStatus);
+            }
+
+            if (!string.IsNullOrEmpty(reservationStatus))
+            {
+                query = query.Where(r => r.Reservation_Status == reservationStatus);
+            }
+
+            var reservations = query.ToList();
+
+            ViewBag.ReservationDate = reservationDate?.ToString("yyyy-MM-dd");
+            ViewBag.SeatNumber = seatNumber;
+            ViewBag.PaymentStatus = paymentStatus;
+            ViewBag.ReservationStatus = reservationStatus;
 
             return View(reservations);
         }
 
 
-        [HttpGet]
+    [HttpGet]
         [AllowAnonymous]
         public IActionResult EditReservation(int id)
         {
