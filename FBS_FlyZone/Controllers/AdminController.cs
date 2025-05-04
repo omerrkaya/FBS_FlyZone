@@ -158,14 +158,25 @@ namespace FBS_FlyZone.Controllers
             return RedirectToAction("Users");
         }
 
-        // Uçuş Yönetimi işlemlerini yapıyorum.
         [AllowAnonymous]
-        public IActionResult Flights()
+        public IActionResult Flights(int page = 1)
         {
-            var flights = _flightManager.GetFlightListWithAirport(); // Uçuşları listeleyip view'e gönderiyorum.
+            int pageSize = 75;
+            var allFlights = _flightManager.GetFlightListWithAirport();
+            int totalFlights = allFlights.Count();
+            int totalPages = (int)Math.Ceiling((double)totalFlights / pageSize);
+
+            var flights = allFlights
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
             return View(flights);
-            //zaten yapmış listelemeyi sen sayfayı ayarla daha sonra da verileri sayfaya basmaya bak tamam
         }
+
 
         [HttpGet]
         [AllowAnonymous]
@@ -232,14 +243,40 @@ namespace FBS_FlyZone.Controllers
 
 
         [AllowAnonymous]
-        public IActionResult Reservations()
+        public IActionResult Reservations(DateTime? reservationDate, string seatNumber, string paymentStatus, string reservationStatus)
         {
-            var reservations = _context.Reservations
+            var query = _context.Reservations
                 .Include(r => r.Flight)
                 .Include(r => r.Passenger)
-                .ToList();
+                .AsQueryable();
 
+            // Sadece Reservation tablosuna ait filtreler
+            if (reservationDate.HasValue)
+            {
+                query = query.Where(r => r.Reservation_Date.Date == reservationDate.Value.Date);
+            }
 
+            if (!string.IsNullOrEmpty(seatNumber))
+            {
+                query = query.Where(r => r.Seat_Number.Contains(seatNumber));
+            }
+
+            if (!string.IsNullOrEmpty(paymentStatus))
+            {
+                query = query.Where(r => r.Payment_Status == paymentStatus);
+            }
+
+            if (!string.IsNullOrEmpty(reservationStatus))
+            {
+                query = query.Where(r => r.Reservation_Status == reservationStatus);
+            }
+
+            var reservations = query.ToList();
+
+            ViewBag.ReservationDate = reservationDate?.ToString("yyyy-MM-dd");
+            ViewBag.SeatNumber = seatNumber;
+            ViewBag.PaymentStatus = paymentStatus;
+            ViewBag.ReservationStatus = reservationStatus;
 
             return View(reservations);
         }
