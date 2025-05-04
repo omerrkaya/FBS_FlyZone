@@ -278,10 +278,104 @@ namespace FBS_FlyZone.Controllers
 
         // Havaalanları Yönetimi işlemlerini yapıyorum.
         [AllowAnonymous]
-        public IActionResult Airports()
+        public IActionResult Airports(string searchName, string searchIATA, string searchCity, string searchCountry)
         {
-            var airports = _context.Airports.ToList();
+            var query = _context.Airports.AsQueryable();
+            
+            // Filtreleme işlemleri
+            if (!string.IsNullOrEmpty(searchName))
+            {
+                query = query.Where(a => a.Airport_Name.Contains(searchName));
+            }
+            
+            if (!string.IsNullOrEmpty(searchIATA))
+            {
+                query = query.Where(a => a.IATA_Code.Contains(searchIATA));
+            }
+            
+            if (!string.IsNullOrEmpty(searchCity))
+            {
+                query = query.Where(a => a.AP_City.Contains(searchCity));
+            }
+            
+            if (!string.IsNullOrEmpty(searchCountry))
+            {
+                query = query.Where(a => a.AP_Country.Contains(searchCountry));
+            }
+            
+            var airports = query.ToList();
+            
+            // Filtreleme değerlerini ViewBag'e ekleyelim ki form değerleri korunsun
+            ViewBag.SearchName = searchName;
+            ViewBag.SearchIATA = searchIATA;
+            ViewBag.SearchCity = searchCity;
+            ViewBag.SearchCountry = searchCountry;
+            
             return View(airports);
+        }
+        // get,post ile havaalanı ekleme işlemi yapılacak
+        // havaalanı silme işlemi yapılacak
+        // havaalanı düzenleme işlemi yapılacak
+
+        // aşağıya başla, ya bismillahhh
+        
+        // Havaalanı Ekleme - POST
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult AddAirport(Airport airport) // havaalanı ekleme
+        {
+            if (ModelState.IsValid) // model geçerli değilse
+            {
+                _context.Airports.Add(airport); // Havaalanını ekliyoruz
+                _context.SaveChanges(); // Değişiklikleri kaydediyoruz
+                return RedirectToAction("Airports"); // Havaalanları sayfasına yönlendiriyoruz
+            }
+            
+            return RedirectToAction("Airports");
+        }
+        
+        // Havaalanı Düzenleme - GET
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult EditAirport(int id) // Havaalanı düzenleme işlemi
+        {
+            var airport = _context.Airports.Find(id); // Havaalanını buluyoz
+            if (airport == null) // Eğer havaalanı bulunamazsa
+            {
+                return NotFound();  // 404 sayfasına yönlendiriyoz
+            }
+            
+            return View(airport); // Havaalanı düzenleme sayfasını gösteriyoruz
+        }
+        
+        // Havaalanı Düzenleme - POST ile yapılır bu şekilde düşündüm.
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult EditAirport(Airport airport)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Airports.Update(airport); // Update metodu ile güncelleniyo
+                _context.SaveChanges(); // Değişiklikleri kaydediyoz
+                return RedirectToAction("Airports"); // Havaalanları sayfasına yönlendiriyoz
+            }
+            
+            return View(airport); // Eğer model geçerli değilse, düzenleme sayfasını tekrar gösteriyoruz
+        }
+        
+        // Havaalanı Silme, 
+        [AllowAnonymous]
+        public IActionResult DeleteAirport(int id) // Havaalanı silme işlemi
+        {
+            var airport = _context.Airports.Find(id); // Havaalanını buluyoz
+            if (airport == null) // Eğer havaalanı bulunamazsa
+            {
+                return NotFound(); // 404 sayfasına yönlendiriyoz
+            }
+            
+            _context.Airports.Remove(airport); // Havaalanını siliyoz
+            _context.SaveChanges();
+            return RedirectToAction("Airports"); // Havaalanları sayfasına yönlendiriyoz
         }
 
         // Sistem Ayarları sayfası - Yeni eklendi

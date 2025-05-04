@@ -19,28 +19,28 @@
                     <h5 class="mb-0">Havaalanı Ekle</h5>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form method="post" asp-action="AddAirport" asp-controller="Admin">
                         <div class="mb-3">
-                            <label for="airportName" class="form-label">Havaalanı Adı</label>
-                            <input type="text" class="form-control" id="airportName" required>
+                            <label for="Airport_Name" class="form-label">Havaalanı Adı</label>
+                            <input type="text" class="form-control" id="Airport_Name" name="Airport_Name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="airportIATA" class="form-label">IATA Kodu</label>
-                            <input type="text" class="form-control" id="airportIATA" maxlength="3" required>
+                            <label for="IATA_Code" class="form-label">IATA Kodu</label>
+                            <input type="text" class="form-control" id="IATA_Code" name="IATA_Code" maxlength="3" required>
                             <div class="form-text">Örn: IST, SAW, ADB</div>
                         </div>
                         <div class="mb-3">
-                            <label for="airportICAO" class="form-label">ICAO Kodu</label>
-                            <input type="text" class="form-control" id="airportICAO" maxlength="4" required>
+                            <label for="ICAO_Code" class="form-label">ICAO Kodu</label>
+                            <input type="text" class="form-control" id="ICAO_Code" name="ICAO_Code" maxlength="4" required>
                             <div class="form-text">Örn: LTFM, LTFJ, LTBJ</div>
                         </div>
                         <div class="mb-3">
-                            <label for="airportCity" class="form-label">Şehir</label>
-                            <input type="text" class="form-control" id="airportCity" required>
+                            <label for="AP_City" class="form-label">Şehir</label>
+                            <input type="text" class="form-control" id="AP_City" name="AP_City" required>
                         </div>
                         <div class="mb-3">
-                            <label for="airportCountry" class="form-label">Ülke</label>
-                            <input type="text" class="form-control" id="airportCountry" required>
+                            <label for="AP_Country" class="form-label">Ülke</label>
+                            <input type="text" class="form-control" id="AP_Country" name="AP_Country" required>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Havaalanı Ekle</button>
                     </form>
@@ -50,14 +50,27 @@
 
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Havaalanları</h5>
-                    <div class="input-group" style="width: 300px;">
-                        <input type="text" class="form-control" placeholder="Havaalanı ara..." aria-label="Havaalanı ara">
-                        <button class="btn btn-outline-secondary" type="button">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </div>
+                <div class="card-header">
+                    <h5 class="mb-3">Havaalanları</h5>
+                    <form method="get" asp-action="Airports" asp-controller="Admin" class="row g-3">
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" placeholder="Havaalanı adı ara..." name="searchName" value="@ViewBag.SearchName">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="IATA kodu" name="searchIATA" value="@ViewBag.SearchIATA">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" placeholder="Şehir ara..." name="searchCity" value="@ViewBag.SearchCity">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" placeholder="Ülke ara..." name="searchCountry" value="@ViewBag.SearchCountry">
+                        </div>
+                        <div class="col-md-1">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -87,10 +100,18 @@
                                             <td>@airport.AP_Country</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="#" class="btn btn-sm btn-warning">
+                                                    <button type="button" class="btn btn-sm btn-warning" 
+                                                            data-bs-toggle="modal" 
+                                                            data-bs-target="#editAirportModal" 
+                                                            data-id="@airport.AirportID"
+                                                            data-name="@airport.Airport_Name"
+                                                            data-iata="@airport.IATA_Code"
+                                                            data-icao="@airport.ICAO_Code"
+                                                            data-city="@airport.AP_City"
+                                                            data-country="@airport.AP_Country">
                                                         <i class="bi bi-pencil"></i>
-                                                    </a>
-                                                    <a href="#" class="btn btn-sm btn-danger">
+                                                    </button>
+                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger delete-airport" data-id="@airport.AirportID">
                                                         <i class="bi bi-trash"></i>
                                                     </a>
                                                 </div>
@@ -108,20 +129,74 @@
                         </table>
                     </div>
                     
-                    <nav aria-label="Page navigation" class="mt-4">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Önceki</a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Sonraki</a>
-                            </li>
-                        </ul>
-                    </nav>
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        <div class="mt-3">
+                            <p class="text-muted">Toplam @Model.Count havaalanı bulundu.</p>
+                        </div>
+                    }
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Havaalanı Düzenleme Moddelii -->
+<div class="modal fade" id="editAirportModal" tabindex="-1" aria-labelledby="editAirportModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editAirportModalLabel">Havaalanı Düzenle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <form method="post" asp-action="EditAirport" asp-controller="Admin">
+                <div class="modal-body">
+                    <input type="hidden" id="edit-airport-id" name="AirportID">
+                    
+                    <div class="mb-3">
+                        <label for="edit-airport-name" class="form-label">Havaalanı Adı</label>
+                        <input type="text" class="form-control" id="edit-airport-name" name="Airport_Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-airport-iata" class="form-label">IATA Kodu</label>
+                        <input type="text" class="form-control" id="edit-airport-iata" name="IATA_Code" maxlength="3" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-airport-icao" class="form-label">ICAO Kodu</label>
+                        <input type="text" class="form-control" id="edit-airport-icao" name="ICAO_Code" maxlength="4" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-airport-city" class="form-label">Şehir</label>
+                        <input type="text" class="form-control" id="edit-airport-city" name="AP_City" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-airport-country" class="form-label">Ülke</label>
+                        <input type="text" class="form-control" id="edit-airport-country" name="AP_Country" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Silme Onay Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmModalLabel">Havaalanını Sil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bu havaalanını silmek istediğinize emin misiniz? Bu işlem geri alınamaz.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                <a href="#" id="confirmDeleteBtn" class="btn btn-danger">Evet, Sil</a>
             </div>
         </div>
     </div>
@@ -130,7 +205,41 @@
 @section Scripts {
     <script>
         $(document).ready(function() {
-            // Burada havaalanları ile ilgili JavaScript kodları yer alabilir
+            // Havaalanı düzenleme modalı için verileri dolduruyom
+            $('#editAirportModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+                var name = button.data('name');
+                var iata = button.data('iata');
+                var icao = button.data('icao');
+                var city = button.data('city');
+                var country = button.data('country');
+                
+                var modal = $(this);
+                modal.find('#edit-airport-id').val(id);
+                modal.find('#edit-airport-name').val(name);
+                modal.find('#edit-airport-iata').val(iata);
+                modal.find('#edit-airport-icao').val(icao);
+                modal.find('#edit-airport-city').val(city);
+                modal.find('#edit-airport-country').val(country);
+            });
+            
+            // Havaalanı silme onayı almam gerekiyo
+            $('.delete-airport').click(function() {
+                var airportId = $(this).data('id');
+                $('#confirmDeleteBtn').attr('href', '/Admin/DeleteAirport/' + airportId);
+                $('#deleteConfirmModal').modal('show');
+            });
+            
+            // Form gönderimi sırasında IATA ve ICAO kodlarını büyük harfe çeviryorum
+            $('form').submit(function() {
+                $('#IATA_Code, #edit-airport-iata').val(function(_, val) {
+                    return val.toUpperCase();
+                });
+                $('#ICAO_Code, #edit-airport-icao').val(function(_, val) {
+                    return val.toUpperCase();
+                });
+            });
         });
     </script>
-} 
+}
