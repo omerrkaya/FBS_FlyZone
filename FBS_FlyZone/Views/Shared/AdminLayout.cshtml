@@ -15,6 +15,58 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
+        .badges {
+            display: inline-block;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 4px;
+            background-color: #777;
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+            /* Badge Renk Varyasyonları */
+            .badges.primary {
+                background-color: #3498db;
+            }
+
+            .badges.admin{
+                background-color: #F0B38A;
+            }
+
+            .badges.user{
+                background-color: #A1EB2D;
+            }
+
+            .badges.success {
+                background-color: #2ecc71;
+            }
+
+            .badges.warning {
+                background-color: #f39c12;
+                color: #333;
+            }
+
+            .badges.danger {
+                background-color: #e74c3c;
+            }
+
+            .badges.info {
+                background-color: #00bcd4;
+            }
+
+            .badges.info:hover{
+                color:black;
+                text-decoration:double;
+                
+            }
+
         
         .sidebar {
             background-color: #212529;
