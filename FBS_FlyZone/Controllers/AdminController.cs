@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
+using FBS_FlyZone.Models;
 
 namespace FBS_FlyZone.Controllers
 
@@ -182,30 +183,36 @@ namespace FBS_FlyZone.Controllers
         [AllowAnonymous]
         public IActionResult AddFlight()
         {
-            // Havalimanlarını ve havayollarını listeleyip dropdownlarda kullanmak üzere gönderiyoruz
-            var airports = _context.Airports.ToList();
-            var airlines = _context.Airlines.ToList();
 
-            ViewBag.Airports = new SelectList(airports, "AirportID", "Airport_Name");
-            ViewBag.Airlines = new SelectList(airlines, "AirlineID", "Airlines_Name");
+            var results = _context.Flights
+                .Include(f => f.DepartureAirport)
+                .Include(f => f.ArrivalAirport)
+                .Include(f => f.Airline)
+                .Include(f => f.Aircraft)
+                .ToList();
 
-            return View();
+            var model = new AddFlightModel
+            {
+                Flights = results
+            };
+
+            return View(model);
         }
 
-        //[HttpPost]
-        //[AllowAnonymous]
-        //public IActionResult AddFlight(Flight flight)
-        //{
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult AddFlight(Flight flight)
+        {
 
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(flight);
-        //    }
+            if (!ModelState.IsValid)
+            {
+                return View(flight);
+            }
 
-        //    _flightManager.AddFlight(flight);
+            _flightManager.AddFlight(flight);
 
-        //    RedirectToAction("Flights");
-        //}
+            return RedirectToAction("Flights");
+        }
 
 
         [HttpGet]
@@ -350,11 +357,9 @@ namespace FBS_FlyZone.Controllers
             
             return View(airports);
         }
-        // get,post ile havaalanı ekleme işlemi yapılacak
-        // havaalanı silme işlemi yapılacak
-        // havaalanı düzenleme işlemi yapılacak
+      
 
-        // aşağıya başla, ya bismillahhh
+
         
         // Havaalanı Ekleme - POST
         [HttpPost]

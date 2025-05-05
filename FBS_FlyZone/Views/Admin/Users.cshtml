@@ -73,11 +73,11 @@
                                     <td>
                                         @if (user.UserRole == "Admin")
                                         {
-                                            <span class="badge bg-danger">Admin</span>
+                                            <span class="badges admin">Admin</span>
                                         }
                                         else
                                         {
-                                            <span class="badge bg-info">Kullanıcı</span>
+                                            <span class="badges user">Kullanıcı</span>
                                         }
                                     </td>
                                     <td>@user.RegisterationDate.ToString("dd.MM.yyyy")</td>
