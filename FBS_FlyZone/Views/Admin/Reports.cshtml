@@ -7,7 +7,7 @@
     <div class="row mb-4">
         <div class="col-12">
             <h2 class="mb-4">Raporlar</h2>
-            <p class="text-muted">FlyZone u�u� rezervasyon sistemi istatistiklerini ve raporlar�n� bu sayfadan inceleyebilirsiniz.</p>
+            <p class="text-muted">FlyZone uçuş rezervasyon sistemi istatistiklerini ve raporlarını bu sayfadan inceleyebilirsiniz.</p>
         </div>
     </div>
 
@@ -16,20 +16,20 @@
         <div class="card-body">
             <form class="row g-3">
                 <div class="col-md-3">
-                    <label class="form-label">Ba�lang�� Tarihi</label>
+                    <label class="form-label">Başlangıç Tarihi</label>
                     <input type="date" class="form-control" id="startDate">
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label">Biti� Tarihi</label>
+                    <label class="form-label">Bitiş Tarihi</label>
                     <input type="date" class="form-control" id="endDate">
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label">Rapor T�r�</label>
+                    <label class="form-label">Rapor Türü</label>
                     <select class="form-select" id="reportType">
                         <option value="reservations" selected>Rezervasyonlar</option>
                         <option value="revenue">Gelirler</option>
-                        <option value="users">Kullan�c�lar</option>
-                        <option value="flights">U�u�lar</option>
+                        <option value="users">Kullanıcılar</option>
+                        <option value="flights">Uçuşlar</option>
                     </select>
                 </div>
                 <div class="col-md-3 d-flex align-items-end">
@@ -42,11 +42,11 @@
     </div>
 
     <div class="row">
-        <!-- Ayl�k Rezervasyon Grafi�i -->
+        <!-- Ayl�k Rezervasyon Grafi�i -->
         <div class="col-md-8 mb-4">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Ayl�k Rezervasyon �statistikleri</h5>
+                    <h5 class="mb-0">Aylık Rezervasyon İstatistikleri</h5>
                     <div class="dropdown">
                         <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                             <i class="bi bi-download"></i>
@@ -64,11 +64,11 @@
             </div>
         </div>
 
-        <!-- Havayollar� Rezervasyon Da��l�m� -->
+        <!-- Havayollar� Rezervasyon Da��l�m� -->
         <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Havayollar�na G�re Rezervasyonlar</h5>
+                    <h5 class="mb-0">Havayollarına Göre Rezervasyonlar</h5>
                     <div class="dropdown">
                         <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                             <i class="bi bi-download"></i>
@@ -88,11 +88,11 @@
     </div>
 
     <div class="row">
-        <!-- En Pop�ler Rotalar -->
+        <!-- En Pop�ler Rotalar -->
         <div class="col-md-6 mb-4">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">En Pop�ler Rotalar</h5>
+                    <h5 class="mb-0">En Popüler Rotalar</h5>
                     <div class="dropdown">
                         <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                             <i class="bi bi-download"></i>
@@ -109,17 +109,18 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Kalk��</th>
-                                    <th>Var��</th>
-                                    <th>Rezervasyon Say�s�</th>
+                                    <th>Kalkış</th>
+                                    <th>Varış</th>
+                                    <th>Rezervasyon Sayısı</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (ViewBag.TopRoutes != null)
+                                @if (ViewBag.TopRoutes != null && ViewBag.TopRoutes is IEnumerable<dynamic>)
                                 {
-                                    @for (int i = 0; i < ViewBag.TopRoutes.Count; i++)
+                                    var routeList = ((IEnumerable<dynamic>)ViewBag.TopRoutes).ToList();
+                                    for (int i = 0; i < routeList.Count; i++)
                                     {
-                                        var route = ViewBag.TopRoutes[i];
+                                        var route = routeList[i];
                                         <tr>
                                             <td>@(i + 1)</td>
                                             <td>@route.Route.From</td>
@@ -131,7 +132,7 @@
                                 else
                                 {
                                     <tr>
-                                        <td colspan="4" class="text-center">Veri bulunamad�</td>
+                                        <td colspan="4" class="text-center">Veri bulunamadı</td>
                                     </tr>
                                 }
                             </tbody>
@@ -141,11 +142,11 @@
             </div>
         </div>
 
-        <!-- Ayl�k Gelir Raporu -->
+        <!-- Ayl�k Gelir Raporu -->
         <div class="col-md-6 mb-4">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Ayl�k Gelir Raporu (TL)</h5>
+                    <h5 class="mb-0">Aylık Gelir Raporu (TL)</h5>
                     <div class="dropdown">
                         <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                             <i class="bi bi-download"></i>
@@ -164,59 +165,59 @@
     </div>
 
     <div class="row">
-        <!-- �nemli Metrikler -->
+        <!-- �nemli Metrikler -->
         <div class="col-12 mb-4">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-0">�nemli Performans G�stergeleri (KPI)</h5>
+                    <h5 class="mb-0">Önemli Performans Göstergeleri (KPI)</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3 mb-3">
                             <div class="card">
                                 <div class="card-body">
-                                    <h6 class="text-muted">Doluluk Oran�</h6>
+                                    <h6 class="text-muted">Doluluk Oranı</h6>
                                     <h2>82.7%</h2>
                                     <div class="progress mt-2">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 82.7%" aria-valuenow="82.7" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <small class="text-success d-block mt-2"><i class="bi bi-arrow-up"></i> 4.3% ge�en aya g�re</small>
+                                    <small class="text-success d-block mt-2"><i class="bi bi-arrow-up"></i> 4.3% ge�en aya g�re</small>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <div class="card">
                                 <div class="card-body">
-                                    <h6 class="text-muted">�ptal Oran�</h6>
+                                    <h6 class="text-muted">İptal Oranı</h6>
                                     <h2>3.2%</h2>
                                     <div class="progress mt-2">
                                         <div class="progress-bar bg-danger" role="progressbar" style="width: 3.2%" aria-valuenow="3.2" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <small class="text-success d-block mt-2"><i class="bi bi-arrow-down"></i> 0.8% ge�en aya g�re</small>
+                                    <small class="text-success d-block mt-2"><i class="bi bi-arrow-down"></i> 0.8% ge�en aya g�re</small>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <div class="card">
                                 <div class="card-body">
-                                    <h6 class="text-muted">Business Class Oran�</h6>
+                                    <h6 class="text-muted">Business Class Oranı</h6>
                                     <h2>14.5%</h2>
                                     <div class="progress mt-2">
                                         <div class="progress-bar bg-primary" role="progressbar" style="width: 14.5%" aria-valuenow="14.5" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <small class="text-success d-block mt-2"><i class="bi bi-arrow-up"></i> 2.1% ge�en aya g�re</small>
+                                    <small class="text-success d-block mt-2"><i class="bi bi-arrow-up"></i> 2.1% geçen aya göre</small>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <div class="card">
                                 <div class="card-body">
-                                    <h6 class="text-muted">Ortalama Bilet Fiyat�</h6>
+                                    <h6 class="text-muted">Ortalama Bilet Fiyatı</h6>
                                     <h2>1,245 TL</h2>
                                     <div class="progress mt-2">
                                         <div class="progress-bar bg-warning" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <small class="text-danger d-block mt-2"><i class="bi bi-arrow-down"></i> 120 TL ge�en aya g�re</small>
+                                    <small class="text-danger d-block mt-2"><i class="bi bi-arrow-down"></i> 120 TL geçen aya göre</small>
                                 </div>
                             </div>
                         </div>
@@ -226,11 +227,386 @@
         </div>
     </div>
 
-    <!-- En �ok Rezervasyon Yap�lan Ay Kart� -->
+    <!-- Müşteri Memnuniyeti Metrikleri -->
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Müşteri Memnuniyeti Metrikleri</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-download"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Excel'e aktar</a></li>
+                            <li><a class="dropdown-item" href="#">PDF olarak kaydet</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <canvas id="customerSatisfactionChart" height="250"></canvas>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-6 mb-4">
+                                    <div class="card bg-light">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Ortalama Değerlendirme</h6>
+                                            <h2 class="text-success">4.7<small class="text-muted">/5</small></h2>
+                                            <small><i class="bi bi-star-fill text-warning"></i> 1,245 değerlendirme</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-4">
+                                    <div class="card bg-light">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Tavsiye Oranı</h6>
+                                            <h2 class="text-success">92%</h2>
+                                            <small><i class="bi bi-people-fill"></i> 982 müşteri</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-4">
+                                    <div class="card bg-light">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Destek Talep Oranı</h6>
+                                            <h2 class="text-primary">4.2%</h2>
+                                            <small class="text-success"><i class="bi bi-arrow-down"></i> %1.5 azalış</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-4">
+                                    <div class="card bg-light">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Çözüm Süresi</h6>
+                                            <h2 class="text-primary">1.8 <small>gün</small></h2>
+                                            <small class="text-success"><i class="bi bi-arrow-down"></i> %0.5 azalış</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rota Karşılaştırma Analizi -->
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Rota Karşılaştırma Analizi</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-download"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Excel'e aktar</a></li>
+                            <li><a class="dropdown-item" href="#">PDF olarak kaydet</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <select class="form-select" id="route1Selector">
+                                    <option selected>Rota 1 seçin...</option>
+                                    <option value="ist-ank">İstanbul - Ankara</option>
+                                    <option value="ist-izm">İstanbul - İzmir</option>
+                                    <option value="ist-ant">İstanbul - Antalya</option>
+                                    <option value="ank-izm">Ankara - İzmir</option>
+                                    <option value="ank-ant">Ankara - Antalya</option>
+                                </select>
+                                <span class="input-group-text">vs</span>
+                                <select class="form-select" id="route2Selector">
+                                    <option selected>Rota 2 seçin...</option>
+                                    <option value="ist-ank">İstanbul - Ankara</option>
+                                    <option value="ist-izm">İstanbul - İzmir</option>
+                                    <option value="ist-ant">İstanbul - Antalya</option>
+                                    <option value="ank-izm">Ankara - İzmir</option>
+                                    <option value="ank-ant">Ankara - Antalya</option>
+                                </select>
+                                <button class="btn btn-primary" id="compareRoutesBtn">Karşılaştır</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-select" id="comparisonMetric">
+                                <option value="all" selected>Tüm metrikler</option>
+                                <option value="revenue">Gelir</option>
+                                <option value="occupancy">Doluluk Oranı</option>
+                                <option value="satisfaction">Müşteri Memnuniyeti</option>
+                                <option value="cancellation">İptal Oranı</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="position: relative; height:400px;">
+                        <canvas id="routeComparisonChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gerçek Zamanlı Uçuş İzleme Paneli -->
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        Gerçek Zamanlı Uçuş İzleme
+                        <span class="badge bg-danger blink ms-2">CANLI</span>
+                    </h5>
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-outline-primary" id="refreshRealTimeData">
+                            <i class="bi bi-arrow-clockwise"></i> Yenile
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-download"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Excel'e aktar</a></li>
+                                <li><a class="dropdown-item" href="#">PDF olarak kaydet</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="flight-map-container" style="height: 400px; background-color: #eaeaea; position: relative; border-radius: 5px;">
+                                <div class="d-flex justify-content-center align-items-center h-100">
+                                    <div class="text-center">
+                                        <div class="spinner-border text-primary mb-3" role="status"></div>
+                                        <p class="mb-0">Uçuş Haritası Yükleniyor...</p>
+                                        <small class="text-muted">Gerçek uygulamada burada interaktif bir harita yer alacak</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="border-bottom pb-2 mb-3">Anlık Uçuş Durumları</h6>
+                            <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Uçuş</th>
+                                            <th>Güzergah</th>
+                                            <th>Durum</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="realTimeFlightList">
+                                        <tr>
+                                            <td>TK1923</td>
+                                            <td>İST-ANK</td>
+                                            <td><span class="badge bg-success">Zamanında</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>TK2145</td>
+                                            <td>İST-İZM</td>
+                                            <td><span class="badge bg-warning">30 dk Rötarlı</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>PC1453</td>
+                                            <td>SAW-AYT</td>
+                                            <td><span class="badge bg-info">Havada</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>TK1326</td>
+                                            <td>ANK-İZM</td>
+                                            <td><span class="badge bg-success">Zamanında</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>XQ1515</td>
+                                            <td>ADB-ESB</td>
+                                            <td><span class="badge bg-danger">İptal</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>PC2071</td>
+                                            <td>SAW-AYT</td>
+                                            <td><span class="badge bg-success">Zamanında</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>TK2590</td>
+                                            <td>İST-ANK</td>
+                                            <td><span class="badge bg-success">Zamanında</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <div>
+                                    <span class="badge bg-success me-1">15</span> Zamanında
+                                    <span class="badge bg-warning mx-1">3</span> Rötarlı
+                                    <span class="badge bg-danger ms-1">1</span> İptal
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">Tüm Uçuşlar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ödeme Yöntemi ve Finansal Analiz -->
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Ödeme Yöntemi Analizi</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-download"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Excel'e aktar</a></li>
+                            <li><a class="dropdown-item" href="#">PDF olarak kaydet</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">Tarih Aralığı</label>
+                                <select class="form-select form-select-sm" id="paymentPeriodFilter">
+                                    <option value="last30days" selected>Son 30 Gün</option>
+                                    <option value="last3months">Son 3 Ay</option>
+                                    <option value="last6months">Son 6 Ay</option>
+                                    <option value="lastyear">Son 1 Yıl</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="alert alert-info py-1 mt-4">
+                                <small><i class="bi bi-info-circle-fill"></i> <strong>Son 30 günde</strong> toplam <strong>3,482</strong> ödeme işlemi gerçekleşti.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <canvas id="paymentMethodChart" height="300"></canvas>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="table-responsive mt-3">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Ödeme Yöntemi</th>
+                                            <th>İşlem</th>
+                                            <th>Oran</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><i class="bi bi-credit-card text-primary"></i> Kredi Kartı</td>
+                                            <td>2,156</td>
+                                            <td>62%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="bi bi-bank text-success"></i> Banka Transferi</td>
+                                            <td>685</td>
+                                            <td>19.7%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="bi bi-paypal text-info"></i> Mobil Ödeme</td>
+                                            <td>423</td>
+                                            <td>12.1%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="bi bi-wallet2 text-warning"></i> Dijital Cüzdan</td>
+                                            <td>183</td>
+                                            <td>5.2%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="bi bi-currency-exchange text-secondary"></i> Diğer</td>
+                                            <td>35</td>
+                                            <td>1%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Finansal Performans Göstergeleri</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-download"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Excel'e aktar</a></li>
+                            <li><a class="dropdown-item" href="#">PDF olarak kaydet</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center p-3">
+                                    <h6 class="text-muted mb-2">Ortalama Rezervasyon Değeri</h6>
+                                    <h2 class="mb-0 text-success">₺1,450</h2>
+                                    <small class="text-success"><i class="bi bi-arrow-up"></i> %5.3 artış</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center p-3">
+                                    <h6 class="text-muted mb-2">Aylık Gelir</h6>
+                                    <h2 class="mb-0 text-success">₺5.3M</h2>
+                                    <small class="text-success"><i class="bi bi-arrow-up"></i> %12.7 artış</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center p-3">
+                                    <h6 class="text-muted mb-2">İşlem Başarı Oranı</h6>
+                                    <h2 class="mb-0 text-success">98.7%</h2>
+                                    <small class="text-success"><i class="bi bi-arrow-up"></i> %0.8 artış</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center p-3">
+                                    <h6 class="text-muted mb-2">İade Oranı</h6>
+                                    <h2 class="mb-0 text-danger">2.3%</h2>
+                                    <small class="text-success"><i class="bi bi-arrow-down"></i> %0.5 azalış</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h6 class="border-bottom pb-2">Aylık İşlem Hacmi Tahmini</h6>
+                            <canvas id="transactionVolumeChart" height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- En �ok Rezervasyon Yap�lan Ay Kart� -->
     <div class="col-md-6 mb-4">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">En �ok Rezervasyon Yap�lan Ay</h5>
+                <h5 class="mb-0">En �ok Rezervasyon Yap�lan Ay</h5>
                 <div class="dropdown">
                     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                         <i class="bi bi-download"></i>
@@ -253,7 +629,7 @@
                 else
                 {
                     <div class="alert alert-info">
-                        Hen�z rezervasyon verisi bulunmamaktad�r.
+                        Hen�z rezervasyon verisi bulunmamaktad�r.
                     </div>
                 }
             </div>
@@ -266,10 +642,10 @@
 @section Scripts {
     <script>
         $(document).ready(function() {
-            // Controller'dan gelen verileri JavaScript de�i�kenlerine aktarma
+            // Controller'dan gelen verileri JavaScript de�i�kenlerine aktarma
             var monthlyReservationsData = @Html.Raw(Json.Serialize(ViewBag.MonthlyReservations));
 
-            // Havayollar� istatistikleri i�in veri haz�rlama
+            // Havayollar� istatistikleri i�in veri haz�rlama
             var airlineLabels = [];
             var airlineData = [];
 
@@ -286,7 +662,7 @@
             </text>
         }
 
-            // Rastgele renkler olu�turma fonksiyonu
+            // Rastgele renkler olu�turma fonksiyonu
             function generateColors(count) {
                 var colors = [];
                 var baseColors = ['#0d6efd', '#6f42c1', '#dc3545', '#fd7e14', '#0dcaf0', '#198754', '#ffc107'];
@@ -298,14 +674,14 @@
                 return colors;
             }
 
-            // Ayl�k Rezervasyon Grafi�i
+            // Ayl�k Rezervasyon Grafi�i
             var monthlyCtx = document.getElementById('monthlyReservationsChart').getContext('2d');
             var monthlyChart = new Chart(monthlyCtx, {
                 type: 'line',
                 data: {
-                    labels: ['Ocak', '�ubat', 'Mart', 'Nisan', 'May�s', 'Haziran', 'Temmuz', 'A�ustos', 'Eyl�l', 'Ekim', 'Kas�m', 'Aral�k'],
+                    labels: ['Ocak', '�ubat', 'Mart', 'Nisan', 'May�s', 'Haziran', 'Temmuz', 'A�ustos', 'Eyl�l', 'Ekim', 'Kas�m', 'Aral�k'],
                     datasets: [{
-                        label: 'Rezervasyon Say�s�',
+                        label: 'Rezervasyon Say�s�',
                         data: monthlyReservationsData,
                         borderColor: '#0d6efd',
                         backgroundColor: 'rgba(13, 110, 253, 0.1)',
@@ -341,7 +717,7 @@
                 }
             });
 
-            // Havayollar� Rezervasyon Da��l�m�
+            // Havayollar� Rezervasyon Da��l�m�
             var airlineCtx = document.getElementById('airlineReservationsChart').getContext('2d');
             var airlineChart = new Chart(airlineCtx, {
                 type: 'pie',
@@ -364,12 +740,12 @@
                 }
             });
 
-            // Ayl�k Gelir Raporu (�rnek veri - controller'dan gelmiyor)
+            // Ayl�k Gelir Raporu (�rnek veri - controller'dan gelmiyor)
             var revenueCtx = document.getElementById('monthlyRevenueChart').getContext('2d');
             var revenueChart = new Chart(revenueCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Ocak', '�ubat', 'Mart', 'Nisan', 'May�s', 'Haziran'],
+                    labels: ['Ocak', '�ubat', 'Mart', 'Nisan', 'May�s', 'Haziran'],
                     datasets: [{
                         label: 'Gelir (TL)',
                         data: [1250000, 980000, 1450000, 1320000, 1600000, 1780000],
@@ -403,89 +779,293 @@
                 }
             });
 
-            // Filtreleme i�levi
+            // Filtreleme i�levi
             $('#filterReport').click(function() {
                 var startDate = $('#startDate').val();
                 var endDate = $('#endDate').val();
                 var reportType = $('#reportType').val();
 
-                // Ger�ek uygulamada Ajax ile sunucudan veriler al�n�r
-                // Demo ama�l� rastgele veriler olu�turuldu
+                // Ger�ek uygulamada Ajax ile sunucudan veriler al�n�r
+                // Demo ama�l� rastgele veriler olu�turuldu
 
                 if (reportType === 'reservations') {
-                    // Rezervasyon grafi�ini g�ncelle
+                    // Rezervasyon grafi�ini g�ncelle
                     monthlyChart.data.datasets[0].data = Array.from({length: 12}, () => Math.floor(Math.random() * 100) + 20);
                     monthlyChart.update();
                 } else if (reportType === 'revenue') {
-                    // Gelir grafi�ini g�ncelle
+                    // Gelir grafi�ini g�ncelle
                     revenueChart.data.datasets[0].data = Array.from({length: 6}, () => Math.floor(Math.random() * 1000000) + 500000);
                     revenueChart.update();
                 }
 
-                // Filtre ba�ar�l� bildirimi
+                // Filtre ba�ar�l� bildirimi
                 alert('Rapor filtrelendi: ' + startDate + ' - ' + endDate + ' (' + reportType + ')');
             });
-        });
 
-                // Ayl�k rezervasyon da��l�m� grafi�i
-        var reservationsByMonth = @Html.Raw(Json.Serialize(ViewBag.ReservationsByMonth));
-        var monthNames = @Html.Raw(Json.Serialize(ViewBag.MonthNames));
+            // Ayl�k rezervasyon da��l�m� grafi�i
+            var reservationsByMonth = @Html.Raw(Json.Serialize(ViewBag.ReservationsByMonth));
+            var monthNames = @Html.Raw(Json.Serialize(ViewBag.MonthNames));
 
-        // Ay numaralar�n� ay isimlerine d�n��t�rme
-        var labels = [];
-        var data = [];
-        var monthNameMap = {};
+            // Ay numaralar�n� ay isimlerine d�n��t�rme
+            var labels = [];
+            var data = [];
+            var monthNameMap = {};
 
-        // Ay numaras� -> ay ismi e�le�tirmesini olu�tur
-        monthNames.forEach(function(item) {
-            monthNameMap[item.MonthNumber] = item.MonthName;
-        });
+            // Ay numaras� -> ay ismi e�le�tirmesini olu�tur
+            monthNames.forEach(function(item) {
+                monthNameMap[item.MonthNumber] = item.MonthName;
+            });
 
-        // Verileri grafik i�in haz�rla
-        reservationsByMonth.forEach(function(item) {
-            labels.push(monthNameMap[item.Month]);
-            data.push(item.Count);
-        });
+            // Verileri grafik i�in haz�rla
+            reservationsByMonth.forEach(function(item) {
+                labels.push(monthNameMap[item.Month]);
+                data.push(item.Count);
+            });
 
-        // Grafik olu�tur
-        var monthlyDistCtx = document.getElementById('monthlyDistributionChart').getContext('2d');
-        var monthlyDistChart = new Chart(monthlyDistCtx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Rezervasyon Say�s�',
-                    data: data,
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    borderColor: 'rgb(54, 162, 235)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
+            // Müşteri Memnuniyeti Grafiği
+            var customerSatisfactionCtx = document.getElementById('customerSatisfactionChart').getContext('2d');
+            var customerSatisfactionChart = new Chart(customerSatisfactionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Çok Kötü', 'Kötü', 'Orta', 'İyi', 'Çok İyi'],
+                    datasets: [{
+                        label: 'Müşteri Değerlendirmeleri',
+                        data: [25, 78, 142, 450, 550],
+                        backgroundColor: [
+                            'rgba(220, 53, 69, 0.7)',   // Çok Kötü - Kırmızı
+                            'rgba(255, 193, 7, 0.7)',   // Kötü - Sarı
+                            'rgba(108, 117, 125, 0.7)', // Orta - Gri
+                            'rgba(13, 202, 240, 0.7)',  // İyi - Mavi
+                            'rgba(25, 135, 84, 0.7)'    // Çok İyi - Yeşil
+                        ],
+                        borderColor: [
+                            'rgb(220, 53, 69)',
+                            'rgb(255, 193, 7)',
+                            'rgb(108, 117, 125)',
+                            'rgb(13, 202, 240)',
+                            'rgb(25, 135, 84)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    let percentage = Math.round((context.raw / total) * 100);
+                                    return context.raw + ' değerlendirme (' + percentage + '%)';
+                                }
+                            }
+                        }
                     },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.parsed.y + ' rezervasyon';
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
                             }
                         }
                     }
+                }
+            });
+
+            // Grafik olu�tur
+            var monthlyDistCtx = document.getElementById('monthlyDistributionChart').getContext('2d');
+            var monthlyDistChart = new Chart(monthlyDistCtx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Rezervasyon Say�s�',
+                        data: data,
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgb(54, 162, 235)',
+                        borderWidth: 1
+                    }]
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            precision: 0
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + ' rezervasyon';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
 
+            // Rota Karşılaştırma Analizi
+            var routeComparisonCtx = document.getElementById('routeComparisonChart').getContext('2d');
+            var routeComparisonChart = new Chart(routeComparisonCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['İstanbul - Ankara', 'İstanbul - İzmir', 'İstanbul - Antalya', 'Ankara - İzmir', 'Ankara - Antalya'],
+                    datasets: [
+                        {
+                            label: 'Gelir',
+                            data: [1200000, 950000, 1100000, 870000, 920000],
+                            backgroundColor: 'rgba(40, 167, 69, 0.7)',
+                            borderColor: 'rgb(40, 167, 69)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Doluluk Oranı',
+                            data: [85, 78, 82, 75, 80],
+                            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                            borderColor: 'rgb(54, 162, 235)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Müşteri Memnuniyeti',
+                            data: [4.5, 4.2, 4.3, 4.1, 4.4],
+                            backgroundColor: 'rgba(255, 193, 7, 0.7)',
+                            borderColor: 'rgb(255, 193, 7)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'İptal Oranı',
+                            data: [3, 4, 2, 5, 3],
+                            backgroundColor: 'rgba(220, 53, 69, 0.7)',
+                            borderColor: 'rgb(220, 53, 69)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    }
+                }
+            });
+
+            $('#compareRoutesBtn').click(function() {
+                var route1 = $('#route1Selector').val();
+                var route2 = $('#route2Selector').val();
+                var metric = $('#comparisonMetric').val();
+
+                // Gerçek uygulamada Ajax ile sunucudan veriler alınır
+                // Demo amaçlı rastgele veriler oluşturuldu
+
+                alert('Rotalar karşılaştırıldı: ' + route1 + ' vs ' + route2 + ' (' + metric + ')');
+            });
+
+            // Ödeme Yöntemi Analizi
+            var paymentMethodCtx = document.getElementById('paymentMethodChart').getContext('2d');
+            var paymentMethodChart = new Chart(paymentMethodCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Kredi Kartı', 'Banka Transferi', 'Mobil Ödeme', 'Dijital Cüzdan', 'Diğer'],
+                    datasets: [{
+                        data: [62, 19.7, 12.1, 5.2, 1],
+                        backgroundColor: ['#0d6efd', '#198754', '#0dcaf0', '#ffc107', '#6c757d'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Aylık İşlem Hacmi Tahmini
+            var transactionVolumeCtx = document.getElementById('transactionVolumeChart').getContext('2d');
+            var transactionVolumeChart = new Chart(transactionVolumeCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran'],
+                    datasets: [{
+                        label: 'İşlem Hacmi (₺)',
+                        data: [4500000, 4700000, 5200000, 5300000, 5500000, 5800000],
+                        borderColor: '#0d6efd',
+                        backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return new Intl.NumberFormat('tr-TR', {
+                                        style: 'currency',
+                                        currency: 'TRY',
+                                        maximumFractionDigits: 0
+                                    }).format(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
     </script>
 }
