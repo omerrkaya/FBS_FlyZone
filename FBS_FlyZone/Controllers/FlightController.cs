@@ -237,6 +237,7 @@ namespace FBS_FlyZone.Controllers
                         PassengerID = passenger.PassengerID,
                         Reservation_Date = DateTime.Now,
                         Reservation_Status = "Onay Bekliyor",
+                        Payment_Status = "Ödenmedi",
                         Payment_Method = model.PaymentMethod,
                         Seat_Number = "1", // Bu kısmı ileride dinamik koltuk seçimiyle güncelleyebilirsin
                         UserID = int.Parse(userId)

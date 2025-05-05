@@ -1,4 +1,6 @@
-@* @model List<  EntityLayer.Concrete.Flight>
+@using EntityLayer.Concrete
+@model AddFlightModel
+
 
 @{
 	ViewData["Title"] = "Yeni Uçuş Ekle";
@@ -12,12 +14,12 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a asp-action="Index">Dashboard</a></li>
-					<li class="breadcrumb-item"><a asp-action="Users">Kullanıcılar</a></li>
-					<li class="breadcrumb-item active">Yeni Kullanıcı</li>
+					<li class="breadcrumb-item"><a asp-action="Users">Uçuşlar</a></li>
+					<li class="breadcrumb-item active">Yeni Uçuş</li>
 				</ol>
 			</nav>
-			<h2 class="mb-1">Yeni Kullanıcı Ekle</h2>
-			<p class="text-muted">Sisteme yeni bir kullanıcı kaydı oluşturun.</p>
+			<h2 class="mb-1">Yeni Uçuş Ekle</h2>
+			<p class="text-muted">Sisteme yeni bir uçuş kaydı oluşturun.</p>
 		</div>
 	</div>
 
@@ -47,16 +49,22 @@
 						</div>
 
 						<div class="mb-3">
-							<label asp-for="DepartureAirport" class="form-label">Kalkış Yeri</label>
-							<select asp-for="DepartureAirport" class="form-select">
-								@foreach (var item in))
+							<label asp-for="Departure_Airport" class="form-label">Kalkış Yeri</label>
+							<select asp-for="Departure_Airport" class="form-select">
+								@foreach (var item in Model.Flights.Select(x => x.DepartureAirport.Airport_Name).Distinct())
 								{
-									<option value="User">Kullanıcı</option>
+									<option value="">@item</option>
 								}
-
-
 							</select>
-							<span asp-validation-for="" class="text-danger"></span>
+						</div>
+						<div class="mb-3">
+							<label asp-for="Arrival_Airport" class="form-label">Kalkış Yeri</label>
+							<select asp-for="Arrival_Airport" class="form-select">
+								@foreach (var item in Model.Flights.Select(x => x.ArrivalAirport.Airport_Name).Distinct())
+								{
+									<option value="">@item</option>
+								}
+							</select>
 						</div>
 
 						<div class="d-flex justify-content-between">
@@ -96,4 +104,4 @@
 	@{
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");
 	}
-}  *@
+} 

@@ -12,7 +12,7 @@ namespace DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-4EO1E2H;" +
+            optionsBuilder.UseSqlServer("Server=DESKTOP-H3SQ8GC;" +
                 "Database=FBS_FlyzoneDb;" +
                 //"User Id = ......;" +
                 //"Password = ......;" +
