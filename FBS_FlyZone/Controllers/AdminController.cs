@@ -433,6 +433,107 @@ namespace FBS_FlyZone.Controllers
             return View();
         }
 
+        // Rota karşılaştırma API endpoint'i
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult CompareRoutes(string route1, string route2, string metric = "all")
+        {
+            // Rota parametrelerini ayrıştır
+            var route1Parts = route1?.Split('-');
+            var route2Parts = route2?.Split('-');
+
+            if (route1Parts?.Length != 2 || route2Parts?.Length != 2)
+            {
+                return Json(new { success = false, message = "Geçersiz rota formatı" });
+            }
+
+            // Rota verilerini al
+            var route1Data = GetRouteData(route1Parts[0], route1Parts[1]);
+            var route2Data = GetRouteData(route2Parts[0], route2Parts[1]);
+
+            // Karşılaştırma verilerini hazırla
+            var comparisonData = new
+            {
+                success = true,
+                labels = new[] { "Gelir (TL)", "Doluluk Oranı (%)", "Müşteri Memnuniyeti", "İptal Oranı (%)" },
+                datasets = new[]
+                {
+                    new
+                    {
+                        label = GetRouteLabel(route1Parts[0], route1Parts[1]),
+                        data = route1Data,
+                        backgroundColor = "rgba(54, 162, 235, 0.7)",
+                        borderColor = "rgb(54, 162, 235)",
+                        borderWidth = 1
+                    },
+                    new
+                    {
+                        label = GetRouteLabel(route2Parts[0], route2Parts[1]),
+                        data = route2Data,
+                        backgroundColor = "rgba(255, 99, 132, 0.7)",
+                        borderColor = "rgb(255, 99, 132)",
+                        borderWidth = 1
+                    }
+                }
+            };
+
+            return Json(comparisonData);
+        }
+
+        // Rota verilerini getiren yardımcı metod
+        private double[] GetRouteData(string from, string to)
+        {
+            // Gerçek uygulamada burada veritabanından ilgili rotaya ait gerçek verileri çekeceksiniz
+            // Şimdilik demo amaçlı rastgele veriler üretiyoruz
+            
+            // Metriklerin tutarlı olması için, belirli rota kombinasyonları için sabit değerler döndürelim
+            Random random = new Random();
+            
+            // Format: [Gelir, Doluluk Oranı, Müşteri Memnuniyeti, İptal Oranı]
+            switch ($"{from}-{to}")
+            {
+                case "ist-ank":
+                    return new double[] { 1200000, 85, 4.5, 3 };
+                case "ist-izm":
+                    return new double[] { 950000, 78, 4.2, 4 };
+                case "ist-ant":
+                    return new double[] { 1100000, 82, 4.3, 2 };
+                case "ank-izm":
+                    return new double[] { 870000, 75, 4.1, 5 };
+                case "ank-ant":
+                    return new double[] { 920000, 80, 4.4, 3 };
+                default:
+                    // Diğer rotalar için rastgele değerler
+                    return new double[] { 
+                        random.Next(800000, 1300000),  // Gelir: 800,000 - 1,300,000 TL arası
+                        random.Next(65, 90),           // Doluluk: %65-90 arası
+                        Math.Round(random.NextDouble() * (4.8 - 3.9) + 3.9, 1),  // Memnuniyet: 3.9-4.8 arası
+                        random.Next(1, 8)              // İptal: %1-8 arası
+                    };
+            }
+        }
+
+        // Rota etiketi için yardımcı metod
+        private string GetRouteLabel(string from, string to)
+        {
+            var airports = new Dictionary<string, string>
+            {
+                { "ist", "İstanbul" },
+                { "ank", "Ankara" },
+                { "izm", "İzmir" },
+                { "ant", "Antalya" },
+                { "adb", "İzmir" },
+                { "esb", "Ankara" },
+                { "saw", "İstanbul Sabiha Gökçen" },
+                { "ayt", "Antalya" }
+            };
+
+            string fromName = airports.ContainsKey(from.ToLower()) ? airports[from.ToLower()] : from.ToUpper();
+            string toName = airports.ContainsKey(to.ToLower()) ? airports[to.ToLower()] : to.ToUpper();
+            
+            return $"{fromName} - {toName}";
+        }
+
         // Raporlar sayfası - Yeni eklendi
         [AllowAnonymous]
         public IActionResult Reports()
