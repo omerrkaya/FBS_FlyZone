@@ -1,26 +1,40 @@
+@model List<TestViewModel>
+
 @{
-    ViewData["Title"] = "Admin Test";
-    Layout = "~/Views/Shared/AdminLayout.cshtml";
+	ViewData["Title"] = "Admin Test";
+	Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
+
 <div class="container py-5">
-    <div class="card">
-        <div class="card-header bg-success text-white">
-            <h3>Admin Controller Test Sayfası</h3>
-        </div>
-        <div class="card-body">
-            <p>Bu sayfa AdminController'ın doğru çalıştığını test etmek için oluşturulmuştur.</p>
-            <p>Eğer bu sayfayı görüyorsanız, Controller'ınız doğru bir şekilde çalışıyor demektir.</p>
-            
-            <div class="mt-4">
-                <h5>Admin Sayfaları:</h5>
-                <ul>
-                    <li><a href="/Admin/Index">Dashboard</a></li>
-                    <li><a href="/Admin/Users">Kullanıcılar</a></li>
-                    <li><a href="/Admin/Flights">Uçuşlar</a></li>
-                    <li><a href="/Admin/Reservations">Rezervasyonlar</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div> 
+	<div class="card">
+		<div class="card-header bg-success text-white">
+			<h3>Kadın verilerinin çekilmesi</h3>
+		</div>
+		
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Adı Soyadı</th>
+						<th>TC NO</th>
+						<th>Email</th>
+						<th>Doğum tarihi</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>@item.Name_Surname</td>
+							<td>@item.TcNo_PasaportNo</td>
+							<td>@item.Email</td>
+							<td>@item.Birth_Time</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+
+		
+		</div>
+	</div>

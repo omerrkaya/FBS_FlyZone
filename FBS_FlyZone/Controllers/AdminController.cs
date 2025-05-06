@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using FBS_FlyZone.Models;
 
 namespace FBS_FlyZone.Controllers
 
@@ -65,30 +67,30 @@ namespace FBS_FlyZone.Controllers
         public IActionResult Users(string searchName, string role, DateTime? registrationDate)
         {
             var query = _context.Users.AsQueryable();
-            
+
             // Filtreleme işlemleri
             if (!string.IsNullOrEmpty(searchName))
             {
                 query = query.Where(u => u.User_Name_Surname.Contains(searchName)); //isim ve soyisim arıyorum
             }
-            
+
             if (!string.IsNullOrEmpty(role)) // null veya boş değilse !string bu anlama gelir.
             {
                 query = query.Where(u => u.UserRole == role); // Kullanıcı Rolü arıyorum
             }
-            
+
             if (registrationDate.HasValue) // kayıt tarihi null değilse = hasvalue bu anlama gelir.
             {
                 query = query.Where(u => u.RegisterationDate.Date == registrationDate.Value.Date); //kullanıcı kayıt tarihi arıyorum
             }
-            
+
             var users = query.ToList();
-            
+
             // Filtreleme değerlerini ViewBag'e ekleyelim ki form değerleri korunsun
             ViewBag.SearchName = searchName;
             ViewBag.Role = role;
             ViewBag.RegistrationDate = registrationDate?.ToString("yyyy-MM-dd");
-            
+
             return View(users);
         }
 
@@ -297,7 +299,7 @@ namespace FBS_FlyZone.Controllers
             ViewBag.Flights = new SelectList(_context.Flights.ToList(), "FlightID", "Flight_Code");
             ViewBag.Passengers = new SelectList(_context.Passengers.ToList(), "PassengerID", "Passenger_Name_Surname");
 
-        
+
 
             return View(reservation);
         }
@@ -318,36 +320,36 @@ namespace FBS_FlyZone.Controllers
         public IActionResult Airports(string searchName, string searchIATA, string searchCity, string searchCountry)
         {
             var query = _context.Airports.AsQueryable();
-            
+
             // Filtreleme işlemleri
             if (!string.IsNullOrEmpty(searchName))
             {
                 query = query.Where(a => a.Airport_Name.Contains(searchName));
             }
-            
+
             if (!string.IsNullOrEmpty(searchIATA))
             {
                 query = query.Where(a => a.IATA_Code.Contains(searchIATA));
             }
-            
+
             if (!string.IsNullOrEmpty(searchCity))
             {
                 query = query.Where(a => a.AP_City.Contains(searchCity));
             }
-            
+
             if (!string.IsNullOrEmpty(searchCountry))
             {
                 query = query.Where(a => a.AP_Country.Contains(searchCountry));
             }
-            
+
             var airports = query.ToList();
-            
+
             // Filtreleme değerlerini ViewBag'e ekleyelim ki form değerleri korunsun
             ViewBag.SearchName = searchName;
             ViewBag.SearchIATA = searchIATA;
             ViewBag.SearchCity = searchCity;
             ViewBag.SearchCountry = searchCountry;
-            
+
             return View(airports);
         }
         // get,post ile havaalanı ekleme işlemi yapılacak
@@ -355,7 +357,7 @@ namespace FBS_FlyZone.Controllers
         // havaalanı düzenleme işlemi yapılacak
 
         // aşağıya başla, ya bismillahhh
-        
+
         // Havaalanı Ekleme - POST
         [HttpPost]
         [AllowAnonymous]
@@ -367,10 +369,10 @@ namespace FBS_FlyZone.Controllers
                 _context.SaveChanges(); // Değişiklikleri kaydediyoruz
                 return RedirectToAction("Airports"); // Havaalanları sayfasına yönlendiriyoruz
             }
-            
+
             return RedirectToAction("Airports");
         }
-        
+
         // Havaalanı Düzenleme - GET
         [HttpGet]
         [AllowAnonymous]
@@ -381,10 +383,10 @@ namespace FBS_FlyZone.Controllers
             {
                 return NotFound();  // 404 sayfasına yönlendiriyoz
             }
-            
+
             return View(airport); // Havaalanı düzenleme sayfasını gösteriyoruz
         }
-        
+
         // Havaalanı Düzenleme - POST ile yapılır bu şekilde düşündüm.
         [HttpPost]
         [AllowAnonymous]
@@ -396,10 +398,10 @@ namespace FBS_FlyZone.Controllers
                 _context.SaveChanges(); // Değişiklikleri kaydediyoz
                 return RedirectToAction("Airports"); // Havaalanları sayfasına yönlendiriyoz
             }
-            
+
             return View(airport); // Eğer model geçerli değilse, düzenleme sayfasını tekrar gösteriyoruz
         }
-        
+
         // Havaalanı Silme, 
         [AllowAnonymous]
         public IActionResult DeleteAirport(int id) // Havaalanı silme işlemi
@@ -409,7 +411,7 @@ namespace FBS_FlyZone.Controllers
             {
                 return NotFound(); // 404 sayfasına yönlendiriyoz
             }
-            
+
             _context.Airports.Remove(airport); // Havaalanını siliyoz
             _context.SaveChanges();
             return RedirectToAction("Airports"); // Havaalanları sayfasına yönlendiriyoz
@@ -500,8 +502,27 @@ namespace FBS_FlyZone.Controllers
         // Test sayfası - Sadece bağlantıyı test etmek için bir test sayfası oluşturdum. /Admin/Test sekmesine tıklayarak erişebilirsiniz.
         [AllowAnonymous]
         public IActionResult Test()
+
         {
-            return View();
+            var modelList = new List<TestViewModel>();
+            var passengers = _context.Passengers.Where(x => x.Gender == "kadın");
+            if (passengers == null)
+            {
+                return NotFound();
+            }
+            foreach (var item in passengers)
+            {
+                var model = new TestViewModel
+                {
+                    Name_Surname = item.Passenger_Name_Surname,
+                    TcNo_PasaportNo = item.TcNo_PasaportNo,
+                    Email = item.Email,
+                    Birth_Time = item.Birth_Time
+
+                };
+                modelList.Add(model);
+            }
+            return View(modelList);
         }
     }
 }
