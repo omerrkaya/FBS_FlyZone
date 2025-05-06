@@ -14,8 +14,6 @@ using FBS_FlyZone.Models;
 
 namespace FBS_FlyZone.Controllers
 
-// AdminController sınıfının içeriğini düzenliyorum. her Controller a AllowAnonymous eklemem gerekiyor test aşamasında, Güvenlik için AllowAnonymous kaldırılması gerekli. İlk başta Auth ile yapmak istedim ama hata mesajlarıyla karşılaştım. Düzenlenmesi gerekli.
-// Burada kullanıcıların erişebileceği sayfalarının kontrollerini yapıyorum.
 
 //ADMİN PANELİ ERİŞİM LİNKİ
 {
@@ -46,7 +44,11 @@ namespace FBS_FlyZone.Controllers
                 ViewBag.AirlineCount = _context.Airlines.Count();
 
                 // Son 5 rezervasyonu alıyorum.
-                var lastReservations = _context.Reservations.OrderByDescending(x => x.Reservation_Date).Take(5).ToList();
+                var lastReservations = _context.Reservations.OrderByDescending(x => x.Reservation_Date)
+                    .Take(5)
+                    .Include("Flight")
+                    .Include("Passenger")
+                    .ToList();
                 return View(lastReservations);
             }
             catch (Exception ex)
@@ -66,30 +68,30 @@ namespace FBS_FlyZone.Controllers
         public IActionResult Users(string searchName, string role, DateTime? registrationDate)
         {
             var query = _context.Users.AsQueryable();
-            
+
             // Filtreleme işlemleri
             if (!string.IsNullOrEmpty(searchName))
             {
                 query = query.Where(u => u.User_Name_Surname.Contains(searchName)); //isim ve soyisim arıyorum
             }
-            
+
             if (!string.IsNullOrEmpty(role)) // null veya boş değilse !string bu anlama gelir.
             {
                 query = query.Where(u => u.UserRole == role); // Kullanıcı Rolü arıyorum
             }
-            
+
             if (registrationDate.HasValue) // kayıt tarihi null değilse = hasvalue bu anlama gelir.
             {
                 query = query.Where(u => u.RegisterationDate.Date == registrationDate.Value.Date); //kullanıcı kayıt tarihi arıyorum
             }
-            
+
             var users = query.ToList();
-            
+
             // Filtreleme değerlerini ViewBag'e ekleyelim ki form değerleri korunsun
             ViewBag.SearchName = searchName;
             ViewBag.Role = role;
             ViewBag.RegistrationDate = registrationDate?.ToString("yyyy-MM-dd");
-            
+
             return View(users);
         }
 
@@ -304,7 +306,7 @@ namespace FBS_FlyZone.Controllers
             ViewBag.Flights = new SelectList(_context.Flights.ToList(), "FlightID", "Flight_Code");
             ViewBag.Passengers = new SelectList(_context.Passengers.ToList(), "PassengerID", "Passenger_Name_Surname");
 
-        
+
 
             return View(reservation);
         }
@@ -325,42 +327,42 @@ namespace FBS_FlyZone.Controllers
         public IActionResult Airports(string searchName, string searchIATA, string searchCity, string searchCountry)
         {
             var query = _context.Airports.AsQueryable();
-            
+
             // Filtreleme işlemleri
             if (!string.IsNullOrEmpty(searchName))
             {
                 query = query.Where(a => a.Airport_Name.Contains(searchName));
             }
-            
+
             if (!string.IsNullOrEmpty(searchIATA))
             {
                 query = query.Where(a => a.IATA_Code.Contains(searchIATA));
             }
-            
+
             if (!string.IsNullOrEmpty(searchCity))
             {
                 query = query.Where(a => a.AP_City.Contains(searchCity));
             }
-            
+
             if (!string.IsNullOrEmpty(searchCountry))
             {
                 query = query.Where(a => a.AP_Country.Contains(searchCountry));
             }
-            
+
             var airports = query.ToList();
-            
+
             // Filtreleme değerlerini ViewBag'e ekleyelim ki form değerleri korunsun
             ViewBag.SearchName = searchName;
             ViewBag.SearchIATA = searchIATA;
             ViewBag.SearchCity = searchCity;
             ViewBag.SearchCountry = searchCountry;
-            
+
             return View(airports);
         }
-      
 
 
-        
+
+
         // Havaalanı Ekleme - POST
         [HttpPost]
         [AllowAnonymous]
@@ -372,10 +374,10 @@ namespace FBS_FlyZone.Controllers
                 _context.SaveChanges(); // Değişiklikleri kaydediyoruz
                 return RedirectToAction("Airports"); // Havaalanları sayfasına yönlendiriyoruz
             }
-            
+
             return RedirectToAction("Airports");
         }
-        
+
         // Havaalanı Düzenleme - GET
         [HttpGet]
         [AllowAnonymous]
@@ -386,10 +388,10 @@ namespace FBS_FlyZone.Controllers
             {
                 return NotFound();  // 404 sayfasına yönlendiriyoz
             }
-            
+
             return View(airport); // Havaalanı düzenleme sayfasını gösteriyoruz
         }
-        
+
         // Havaalanı Düzenleme - POST ile yapılır bu şekilde düşündüm.
         [HttpPost]
         [AllowAnonymous]
@@ -401,10 +403,10 @@ namespace FBS_FlyZone.Controllers
                 _context.SaveChanges(); // Değişiklikleri kaydediyoz
                 return RedirectToAction("Airports"); // Havaalanları sayfasına yönlendiriyoz
             }
-            
+
             return View(airport); // Eğer model geçerli değilse, düzenleme sayfasını tekrar gösteriyoruz
         }
-        
+
         // Havaalanı Silme, 
         [AllowAnonymous]
         public IActionResult DeleteAirport(int id) // Havaalanı silme işlemi
@@ -414,7 +416,7 @@ namespace FBS_FlyZone.Controllers
             {
                 return NotFound(); // 404 sayfasına yönlendiriyoz
             }
-            
+
             _context.Airports.Remove(airport); // Havaalanını siliyoz
             _context.SaveChanges();
             return RedirectToAction("Airports"); // Havaalanları sayfasına yönlendiriyoz
@@ -432,6 +434,8 @@ namespace FBS_FlyZone.Controllers
 
             return View();
         }
+
+
 
         // Rota karşılaştırma API endpoint'i
         [HttpGet]
@@ -480,40 +484,48 @@ namespace FBS_FlyZone.Controllers
             return Json(comparisonData);
         }
 
-        // Rota verilerini getiren yardımcı metod
-        private double[] GetRouteData(string from, string to)
+        private double[] GetRouteData(string fromCode, string toCode)
         {
-            // Gerçek uygulamada burada veritabanından ilgili rotaya ait gerçek verileri çekeceksiniz
-            // Şimdilik demo amaçlı rastgele veriler üretiyoruz
-            
-            // Metriklerin tutarlı olması için, belirli rota kombinasyonları için sabit değerler döndürelim
-            Random random = new Random();
-            
-            // Format: [Gelir, Doluluk Oranı, Müşteri Memnuniyeti, İptal Oranı]
-            switch ($"{from}-{to}")
+            // 1. Rotalara uyan uçuşları getir
+            var flights = _context.Flights
+                .Include(f => f.DepartureAirport)
+                .Include(f => f.ArrivalAirport)
+                .Where(f => f.DepartureAirport.IATA_Code == fromCode && f.ArrivalAirport.IATA_Code == toCode)
+                .ToList();
+
+            if (!flights.Any())
+                return new double[] { 0, 0, 0, 0 };
+
+            var flightIds = flights.Select(f => f.FlightID).ToList();
+
+            var reservations = _context.Reservations
+                .Where(r => flightIds.Contains(r.FlightID) && r.Payment_Status == "Ödendi")
+                .ToList();
+
+            decimal totalRevenue = reservations.Sum(r => r.Flight.Flight_Price);
+
+            var avgOccupancy = flights.Average(f =>
             {
-                case "ist-ank":
-                    return new double[] { 1200000, 85, 4.5, 3 };
-                case "ist-izm":
-                    return new double[] { 950000, 78, 4.2, 4 };
-                case "ist-ant":
-                    return new double[] { 1100000, 82, 4.3, 2 };
-                case "ank-izm":
-                    return new double[] { 870000, 75, 4.1, 5 };
-                case "ank-ant":
-                    return new double[] { 920000, 80, 4.4, 3 };
-                default:
-                    // Diğer rotalar için rastgele değerler
-                    return new double[] { 
-                        random.Next(800000, 1300000),  // Gelir: 800,000 - 1,300,000 TL arası
-                        random.Next(65, 90),           // Doluluk: %65-90 arası
-                        Math.Round(random.NextDouble() * (4.8 - 3.9) + 3.9, 1),  // Memnuniyet: 3.9-4.8 arası
-                        random.Next(1, 8)              // İptal: %1-8 arası
-                    };
-            }
+                int reservedSeats = reservations.Count(r => r.FlightID == f.FlightID);
+                return (double)reservedSeats / 100 * 100; // kapasite = 100
+            });
+
+            // 6. İptal oranı (%)
+            double cancelRate = (double)reservations.Count(r => r.Reservation_Status == "Onay Bekliyor") / reservations.Count * 100;
+
+            // 7. Müşteri memnuniyeti pas — 0 döndürüyoruz
+            double dummyRating = 0;
+
+            // 8. Veriyi döndür
+            return new double[]
+            {
+        (double)totalRevenue,
+        Math.Round(avgOccupancy, 1),
+        dummyRating,
+        Math.Round(cancelRate, 1)
+            };
         }
 
-        // Rota etiketi için yardımcı metod
         private string GetRouteLabel(string from, string to)
         {
             var airports = new Dictionary<string, string>
@@ -530,7 +542,7 @@ namespace FBS_FlyZone.Controllers
 
             string fromName = airports.ContainsKey(from.ToLower()) ? airports[from.ToLower()] : from.ToUpper();
             string toName = airports.ContainsKey(to.ToLower()) ? airports[to.ToLower()] : to.ToUpper();
-            
+
             return $"{fromName} - {toName}";
         }
 
@@ -539,20 +551,36 @@ namespace FBS_FlyZone.Controllers
         public IActionResult Reports()
         {
 
+            var monthlyRevenue = new List<int> { 1250000, 980000, 1450000, 1320000, 1600000, 1780000 };
+            var months = new List<string> { "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran" };
+
+            ViewBag.MonthlyRevenue = monthlyRevenue;
+            ViewBag.Months = months;
+
+            var monthlyReservations = _context.Reservations
+                .GroupBy(r => r.Reservation_Date.Month)
+                .Select(g => new { Month = g.Key, Count = g.Count() })
+                .ToList();
+
+            int[] monthlyCounts = new int[12];
+
+            foreach (var item in monthlyReservations)
+            {
+                monthlyCounts[item.Month - 1] = item.Count;
+            }
+
+            ViewBag.MonthlyReservations = monthlyCounts;
 
 
-            ViewBag.MonthlyReservations = new int[] { 65, 59, 80, 81, 56, 55, 40, 45, 60, 49, 52, 50 };
 
             // Havayollarına göre rezervasyon dağılımı
             Dictionary<string, int> airlineStats = new Dictionary<string, int>();
 
-            // Fix: Use ToList() before grouping to move query execution to client side,
-            // and use Airlines_Name instead of AirlineName
             var airlineReservations = _context.Reservations
                 .Join(_context.Flights, r => r.FlightID, f => f.FlightID, (r, f) => new { r, f })
                 .Join(_context.Airlines, rf => rf.f.AirlineID, a => a.AirlineID, (rf, a) => new { rf.r, rf.f, a })
-                .ToList() // Execute the query before grouping
-                .GroupBy(x => x.a.Airlines_Name) // Use the actual database field name
+                .ToList()
+                .GroupBy(x => x.a.Airlines_Name)
                 .Select(g => new { AirlineName = g.Key, Count = g.Count() })
                 .ToList();
 
@@ -571,14 +599,13 @@ namespace FBS_FlyZone.Controllers
                 .Take(5)
                 .ToList();
 
-            // YENİ SORGU: En çok rezervasyon yapılan ayı hesaplama
+
             var reservationsByMonth = _context.Reservations
                 .GroupBy(r => r.Reservation_Date.Month)
                 .Select(g => new { Month = g.Key, Count = g.Count() })
                 .OrderByDescending(x => x.Count)
                 .ToList();
 
-            // En çok rezervasyon yapılan ay
             if (reservationsByMonth.Any())
             {
                 int mostBookedMonth = reservationsByMonth.First().Month;
@@ -587,10 +614,9 @@ namespace FBS_FlyZone.Controllers
                 ViewBag.MostBookedMonthCount = reservationsByMonth.First().Count;
             }
 
-            // Tüm ayların rezervasyon sayıları (ay numarası, rezervasyon sayısı)
             ViewBag.ReservationsByMonth = reservationsByMonth;
 
-            // Ay isimlerini de gönderelim
+
             ViewBag.MonthNames = Enumerable.Range(1, 12)
                 .Select(i => new
                 {

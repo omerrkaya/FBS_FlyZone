@@ -122,25 +122,19 @@
                                     {
                                         <tr>
                                             <td>@item.ReservationID</td>
-                                            <td>@item.PassengerID</td>
-                                            <td>@item.FlightID</td>
+                                            <td>@item.Passenger.Passenger_Name_Surname</td>
+                                            <td>@item.Flight.Flight_Code</td>
                                             <td>@item.Reservation_Date.ToString("dd.MM.yyyy")</td>
                                             <td>
-                                                @if (item.Reservation_Status == "Confirmed")
+                                                @if (item.Reservation_Status == "Onaylandı")
                                                 {
-                                                    <span class="badge bg-success">Onaylandı</span>
+                                                    <span class="badges success">Onaylandı</span>
                                                 }
-                                                else if (item.Reservation_Status == "Pending")
-                                                {
-                                                    <span class="badge bg-warning">Beklemede</span>
-                                                }
-                                                else if (item.Reservation_Status == "Cancelled")
-                                                {
-                                                    <span class="badge bg-danger">İptal</span>
-                                                }
+                                               
+                                          
                                                 else
                                                 {
-                                                    <span class="badges user">@item.Reservation_Status</span>
+                                                    <span class="badges danger">Onay Bekliyor</span>
                                                 }
                                             </td>
                                             <td>
