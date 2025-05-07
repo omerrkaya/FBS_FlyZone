@@ -1,0 +1,99 @@
+@model EntityLayer.Concrete.Airline
+@{
+    ViewData["Title"] = "Havayolu Düzenle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="mb-4">Havayolu Düzenle</h2>
+            <p class="text-muted">Havayolu şirketinin bilgilerini güncelleyebilirsiniz.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">@Model.Airlines_Name Havayolunu Düzenle</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="EditAirline" asp-controller="Admin" method="post">
+                        <input type="hidden" name="AirlineID" value="@Model.AirlineID" />
+                        
+                        <div class="mb-3">
+                            <label for="Airlines_Name" class="form-label">Havayolu Adı</label>
+                            <input type="text" class="form-control" id="Airlines_Name" name="Airlines_Name" value="@Model.Airlines_Name" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="AL_IATA_Code" class="form-label">IATA Kodu</label>
+                            <input type="text" class="form-control" id="AL_IATA_Code" name="AL_IATA_Code" value="@Model.AL_IATA_Code" maxlength="2" required>
+                            <div class="form-text">Örn: TK, PC, XQ</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="AL_ICAO_Code" class="form-label">ICAO Kodu</label>
+                            <input type="text" class="form-control" id="AL_ICAO_Code" name="AL_ICAO_Code" value="@Model.AL_ICAO_Code" maxlength="3" required>
+                            <div class="form-text">Örn: THY, PGT, SKG</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="Central_Country" class="form-label">Ülke</label>
+                            <input type="text" class="form-control" id="Central_Country" name="Central_Country" value="@Model.Central_Country" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="YearOfEstablishment" class="form-label">Kuruluş Yılı</label>
+                            <input type="number" class="form-control" id="YearOfEstablishment" name="YearOfEstablishment" value="@Model.YearOfEstablishment" min="1900" max="2099">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="Is_It_Active" class="form-label">Durum</label>
+                            <select class="form-select" id="Is_It_Active" name="Is_It_Active">
+                                @if (Model.Is_It_Active)
+                                {
+                                    <option value="true" selected>Aktif</option>
+                                    <option value="false">Pasif</option>
+                                }
+                                else
+                                {
+                                    <option value="true">Aktif</option>
+                                    <option value="false" selected>Pasif</option>
+                                }
+                            </select>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="@Url.Action("Airlines", "Admin")" class="btn btn-secondary">İptal</a>
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Form submit olduğunda validation için
+            $("form").submit(function(e) {
+                var airlineName = $("#Airlines_Name").val().trim();
+                var iataCode = $("#AL_IATA_Code").val().trim();
+                var icaoCode = $("#AL_ICAO_Code").val().trim();
+                var country = $("#Central_Country").val().trim();
+                
+                if (!airlineName || !iataCode || !icaoCode || !country) {
+                    e.preventDefault();
+                    alert("Lütfen tüm zorunlu alanları doldurun!");
+                    return false;
+                }
+                
+                return true;
+            });
+        });
+    </script>
+} 

@@ -374,6 +374,73 @@ namespace FBS_FlyZone.Controllers
             return View(airlines);
         }
 
+        // Havayolu Ekleme - GET
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AddAirline()
+        {
+            return View();
+        }
+
+        // Havayolu Ekleme - POST
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult AddAirline(Airline airline)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Airlines.Add(airline);
+                _context.SaveChanges();
+                return RedirectToAction("Airlines");
+            }
+
+            return View(airline);
+        }
+
+        // Havayolu Düzenleme - GET
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult EditAirline(int id)
+        {
+            var airline = _context.Airlines.Find(id);
+            if (airline == null)
+            {
+                return NotFound();
+            }
+
+            return View(airline);
+        }
+
+        // Havayolu Düzenleme - POST
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult EditAirline(Airline airline)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Airlines.Update(airline);
+                _context.SaveChanges();
+                return RedirectToAction("Airlines");
+            }
+
+            return View(airline);
+        }
+
+        // Havayolu Silme
+        [AllowAnonymous]
+        public IActionResult DeleteAirline(int id)
+        {
+            var airline = _context.Airlines.Find(id);
+            if (airline == null)
+            {
+                return NotFound();
+            }
+
+            _context.Airlines.Remove(airline);
+            _context.SaveChanges();
+            return RedirectToAction("Airlines");
+        }
+
         // Havaalanları Yönetimi işlemlerini yapıyorum.
         [AllowAnonymous]
         public IActionResult Airports(string searchName, string searchIATA, string searchCity, string searchCountry)
