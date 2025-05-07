@@ -183,16 +183,28 @@
 
 @section Scripts {
     <script>
-        // Grafik için örnek veriler
-        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function() {
             var ctx = document.getElementById('monthlyChart').getContext('2d');
+
+            // Server'dan gelen verileri almak
+            var reservationsByMonth = @Html.Raw(Json.Serialize(ViewBag.ReservationsByMonth));
+
+            // Grafik verilerini ayarlama
+            var labels = [];
+            var data = [];
+
+            for (var month = 1; month <= 12; month++) {
+                labels.push(new Date(0, month - 1).toLocaleString('tr-TR', { month: 'long' }));
+                data.push(reservationsByMonth[month] || 0); // Eğer veri yoksa 0 kullan
+            }
+
             var chart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran'],
+                    labels: labels,
                     datasets: [{
                         label: 'Rezervasyonlar',
-                        data: [65, 59, 80, 81, 56, 55],
+                        data: data,
                         borderColor: '#0d6efd',
                         backgroundColor: 'rgba(13, 110, 253, 0.1)',
                         tension: 0.4,

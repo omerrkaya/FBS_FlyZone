@@ -21,19 +21,35 @@
     <div class="card mb-4">
         <div class="card-body">
             <form method="get" class="row g-3">
-                <div class="col-md-4">
-                    <label class="form-label">Uçuş Numarası</label>
-                    <input type="text" name="flightNumber" class="form-control" placeholder="Uçuş numarası ara...">
+                <div class="col-md-2">
+                    <label class="form-label">Uçuş Kodu</label>
+                    <input type="text" name="flightcode" class="form-control" placeholder="Uçuş Kodu ara...">
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label">Kalkış Noktası</label>
-                    <input type="text" name="departure" class="form-control" placeholder="Şehir veya havalimanı">
+                    <label class="form-label">Kalkış</label>
+                    <select name="departure" class="form-select">
+                        <option value="">Havaalanları (Tümü)</option>
+                        @foreach (var item in Model.Select(m => m.DepartureAirport).GroupBy(a => a.AirportID).Select(g => g.First()))
+                        {
+                            <option value="@item.Airport_Name">@item.Airport_Name</option>
+                        }
+                    </select>
                 </div>
                 <div class="col-md-3">
+                    <label class="form-label">Varış</label>
+                    <select name="arrival" class="form-select">
+                        <option value="">Havaalanları (Tümü)</option>
+                        @foreach (var item in Model.Select(m => m.DepartureAirport).GroupBy(a => a.AirportID).Select(g => g.First()))
+                        {
+                            <option value="@item.Airport_Name">@item.Airport_Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
                     <label class="form-label">Tarih</label>
                     <input type="date" name="flightDate" class="form-control">
                 </div>
-                <div class="col-md-2 d-flex align-items-end">
+                <div class="col-md-1 d-flex align-items-end">
                     <button type="submit" class="btn btn-secondary w-100">
                         <i class="bi bi-search me-1"></i> Filtrele
                     </button>
@@ -49,10 +65,12 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th>Uçuş No</th>
+                            <th>Uçuş Kodu</th>
+                            <th>Havayolu</th>
                             <th>Kalkış</th>
                             <th>Varış</th>
                             <th>Tarih</th>
+                            <th>Fiyat</th>
                             <th>İşlemler</th>
                         </tr>
                     </thead>
@@ -63,9 +81,11 @@
                             {
                                 <tr>
                                     <td>@flight.Flight_Code</td>
+                                    <td>@flight.Airline.AL_ICAO_Code</td>
                                     <td>@flight.DepartureAirport?.Airport_Name</td>
                                     <td>@flight.ArrivalAirport?.Airport_Name</td>
                                     <td>@flight.Flight_DateTime.ToString("dd.MM.yyyy HH:mm")</td>
+                                    <td>@flight.Flight_Price.ToString("N2")</td>
 
                                     <td>
                                         <div class="btn-group">

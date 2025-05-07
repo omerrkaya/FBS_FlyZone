@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using FBS_FlyZone.Models;
+using System.Drawing.Printing;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Data;
 
 namespace FBS_FlyZone.Controllers
 
@@ -37,6 +40,23 @@ namespace FBS_FlyZone.Controllers
         {
             try
             {
+                var reservationsByMonth = _context.Reservations
+                .GroupBy(r => r.Reservation_Date.Month)
+                .Select(g => new { Month = g.Key, Count = g.Count() })
+                .OrderByDescending(x => x.Count)
+                .ToList();
+
+                if (reservationsByMonth.Any())
+                {
+                    int mostBookedMonth = reservationsByMonth.First().Month;
+                    ViewBag.MostBookedMonth = mostBookedMonth;
+                    ViewBag.MostBookedMonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mostBookedMonth);
+                    ViewBag.MostBookedMonthCount = reservationsByMonth.First().Count;
+                }
+
+                ViewBag.ReservationsByMonth = reservationsByMonth.ToDictionary(x=>x.Month, x=>x.Count);
+
+
                 // İstatistik verilerini hazırlıyorum.
                 ViewBag.UserCount = _context.Users.Count();
                 ViewBag.FlightCount = _context.Flights.Count();
@@ -63,9 +83,11 @@ namespace FBS_FlyZone.Controllers
             }
         }
 
+       
+
         // Kullanıcı Yönetimi
         [AllowAnonymous]
-        public IActionResult Users(string searchName, string role, DateTime? registrationDate)
+        public IActionResult Users(string searchName, string role, DateTime? registrationDate, int page = 1)
         {
             var query = _context.Users.AsQueryable();
 
@@ -85,12 +107,20 @@ namespace FBS_FlyZone.Controllers
                 query = query.Where(u => u.RegisterationDate.Date == registrationDate.Value.Date); //kullanıcı kayıt tarihi arıyorum
             }
 
-            var users = query.ToList();
+            int pageSize = 10;
+
+
+            var users = query.Skip((page - 1) * pageSize)
+           .Take(pageSize).ToList();
+
+            int totalPages = (int)Math.Ceiling((double)query.Count()/ pageSize);
 
             // Filtreleme değerlerini ViewBag'e ekleyelim ki form değerleri korunsun
             ViewBag.SearchName = searchName;
             ViewBag.Role = role;
             ViewBag.RegistrationDate = registrationDate?.ToString("yyyy-MM-dd");
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
 
             return View(users);
         }
@@ -161,15 +191,37 @@ namespace FBS_FlyZone.Controllers
             return RedirectToAction("Users");
         }
 
+        [HttpGet]
         [AllowAnonymous]
-        public IActionResult Flights(int page = 1)
+        public IActionResult Flights(string flightcode, string departure, string arrival, DateTime? flightDate, int page = 1)
         {
+            var query = _context.Flights.AsQueryable();
+            // Filtreleme işlemleri
+            if (!string.IsNullOrEmpty(flightcode))
+            {
+                query = query.Where(u => u.Flight_Code.Contains(flightcode)); //isim ve soyisim arıyorum
+            }
+
+            if (!string.IsNullOrEmpty(departure)) // null veya boş değilse !string bu anlama gelir.
+            {
+                query = query.Where(u => u.DepartureAirport.Airport_Name == departure); // Kullanıcı Rolü arıyorum
+            }
+
+            if (!string.IsNullOrEmpty(arrival)) // null veya boş değilse !string bu anlama gelir.
+            {
+                query = query.Where(u => u.ArrivalAirport.Airport_Name == arrival); // Kullanıcı Rolü arıyorum
+            }
+
+            if (flightDate.HasValue) // kayıt tarihi null değilse = hasvalue bu anlama gelir.
+            {
+                query = query.Where(u => u.Flight_DateTime.Date == flightDate.Value.Date); //kullanıcı kayıt tarihi arıyorum
+            }
+
             int pageSize = 75;
-            var allFlights = _flightManager.GetFlightListWithAirport();
-            int totalFlights = allFlights.Count();
+            int totalFlights = query.Count();
             int totalPages = (int)Math.Ceiling((double)totalFlights / pageSize);
 
-            var flights = allFlights
+            var flights = query.Include("DepartureAirport").Include("ArrivalAirport").Include("Airline").Include("Aircraft")
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
@@ -437,52 +489,7 @@ namespace FBS_FlyZone.Controllers
 
 
 
-        // Rota karşılaştırma API endpoint'i
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult CompareRoutes(string route1, string route2, string metric = "all")
-        {
-            // Rota parametrelerini ayrıştır
-            var route1Parts = route1?.Split('-');
-            var route2Parts = route2?.Split('-');
-
-            if (route1Parts?.Length != 2 || route2Parts?.Length != 2)
-            {
-                return Json(new { success = false, message = "Geçersiz rota formatı" });
-            }
-
-            // Rota verilerini al
-            var route1Data = GetRouteData(route1Parts[0], route1Parts[1]);
-            var route2Data = GetRouteData(route2Parts[0], route2Parts[1]);
-
-            // Karşılaştırma verilerini hazırla
-            var comparisonData = new
-            {
-                success = true,
-                labels = new[] { "Gelir (TL)", "Doluluk Oranı (%)", "Müşteri Memnuniyeti", "İptal Oranı (%)" },
-                datasets = new[]
-                {
-                    new
-                    {
-                        label = GetRouteLabel(route1Parts[0], route1Parts[1]),
-                        data = route1Data,
-                        backgroundColor = "rgba(54, 162, 235, 0.7)",
-                        borderColor = "rgb(54, 162, 235)",
-                        borderWidth = 1
-                    },
-                    new
-                    {
-                        label = GetRouteLabel(route2Parts[0], route2Parts[1]),
-                        data = route2Data,
-                        backgroundColor = "rgba(255, 99, 132, 0.7)",
-                        borderColor = "rgb(255, 99, 132)",
-                        borderWidth = 1
-                    }
-                }
-            };
-
-            return Json(comparisonData);
-        }
+        
 
         private double[] GetRouteData(string fromCode, string toCode)
         {
