@@ -94,6 +94,12 @@ namespace FBS_FlyZone.Controllers
                 return RedirectToAction("Login");
             }
 
+            if (model.DepartureDate < DateTime.Now)
+            {
+                var values = fm.GetFlightListWithAirport();
+                return View("Flight",values);
+            }
+
 
 
             var userId = User.FindFirstValue("UserId");

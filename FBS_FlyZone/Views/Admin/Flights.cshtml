@@ -29,7 +29,7 @@
                     <label class="form-label">Kalkış</label>
                     <select name="departure" class="form-select">
                         <option value="">Havaalanları (Tümü)</option>
-                        @foreach (var item in Model.Select(m => m.DepartureAirport).GroupBy(a => a.AirportID).Select(g => g.First()))
+                        @foreach (var item in Model.Select(m => m.DepartureAirport).Distinct())
                         {
                             <option value="@item.Airport_Name">@item.Airport_Name</option>
                         }
@@ -39,7 +39,7 @@
                     <label class="form-label">Varış</label>
                     <select name="arrival" class="form-select">
                         <option value="">Havaalanları (Tümü)</option>
-                        @foreach (var item in Model.Select(m => m.DepartureAirport).GroupBy(a => a.AirportID).Select(g => g.First()))
+                        @foreach (var item in Model.Select(m => m.ArrivalAirport).Distinct())
                         {
                             <option value="@item.Airport_Name">@item.Airport_Name</option>
                         }

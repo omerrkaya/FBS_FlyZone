@@ -87,7 +87,7 @@
 								<i class="icon-from-airplane"></i>
 							</div>
 							<select name="DepartureAirportId" class="book-select form--control custom-select">
-								@foreach (var item in Model.Select(m => m.DepartureAirport).GroupBy(a => a.AirportID).Select(g => g.First()))
+								@foreach (var item in Model.Select(m => m.DepartureAirport).Distinct())
 								{
 									<option value="@item.AirportID">@item.Airport_Name</option>
 								}
@@ -101,7 +101,7 @@
 								<i class="icon-to-airplane"></i>
 							</div>
 							<select name="ArrivalAirportId" class="book-select form--control custom-select">
-								@foreach (var item in Model.Select(m => m.ArrivalAirport).GroupBy(a => a.AirportID).Select(g => g.First()))
+								@foreach (var item in Model.Select(m => m.ArrivalAirport).Distinct())
 								{
 									<option value="@item.AirportID">@item.Airport_Name</option>
 								}
@@ -120,7 +120,7 @@
 
 				<div class="row justify-content-center mb-20-none">
 					<!-- Yetişkin ve Çocuk Sayısı kısımları yanyana -->
-					<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 form-group">
 						<label>Yetişkin Sayısı</label>
 						<div class="book-quantity">
 							<div class="book-plus-minus">
@@ -130,7 +130,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 form-group">
 						<label>Çocuk Sayısı</label>
 						<div class="book-quantity">
 							<div class="book-plus-minus">
@@ -184,20 +184,29 @@
 		cursor: pointer;
 	}
 
+	.book-select{
+		min-width:auto;
+		max-width:100%;
+		width:315px;
+		padding-right:10px;
+	}
+
 
 	.bilgilendirme-kutusu {
 		border: 1px solid #ccc;
 		color: white;
-		background-color: #19232d;
+		background-color: black;
+		background: rgba(0,0,0,0.5);
 		padding: 20px;
 		margin: 20px auto;
 		margin-bottom: 40px;
-		max-width: 1200px;
+		max-width: 1100px;
 		font-family: Arial, sans-serif;
 		border-left: 5px solid #dbba86;
 	}
 
 		.bilgilendirme-kutusu h4 {
+
 			color: #dbba86;
 			margin-top: 0;
 		}
@@ -218,61 +227,24 @@
 		background: url('data:image/svg+xml;base64,...') no-repeat right 10px center; /* Simgeyi özelleştir */
 		padding-right: 30px; /* Simge için boşluk bırak */
 		min-width: 200px;
-		max-width: 315px;
+		max-width: 355px;
 		box-sizing: border-box;
 	}
 
-	.passenger-details-overlay {
-		position: absolute;
-		top: 100%;
-		left: 0;
-		background-color: rgba(30, 30, 30, 0.95);
-		padding: 1rem;
-		border-radius: 10px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-		z-index: 9999;
-		border: 2px solid #dbba86;
-		width: 100%;
-		display: none;
-		max-height: 400px;
-		overflow-y: auto;
-		transition: opacity 0.3s ease;
-	}
-
+	
 
 
 	.book-form-section {
 		position: relative;
 	}
 
-	.passenger-selector-group {
-		position: relative;
-		z-index: 1000;
-	}
+	
 
 	.book-form-section.expanded .passenger-details-overlay {
 		display: block;
 	}
 
-	.passenger-details-overlay label {
-		display: block;
-		margin-bottom: 8px;
-		font-weight: 500;
-		color: #fff;
-	}
-
-	.class-selection {
-		display: flex;
-		gap: 25px;
-		margin-bottom: 15px;
-	}
-
-		.class-selection label {
-			display: flex;
-			align-items: center;
-			gap: 8px;
-			font-size: 16px;
-		}
+	
 
 	.qty-buttons {
 		display: flex;
@@ -302,59 +274,6 @@
 			cursor: pointer;
 		}
 
-	.passenger-type {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: 10px;
-	}
-
-		.passenger-type label {
-			font-size: 16px;
-		}
-
-	.flight-type-selector {
-		display: flex;
-		justify-content: center;
-		gap: 40px;
-		margin: 20px 0 40px;
-		flex-wrap: nowrap;
-	}
-
-		.flight-type-selector label {
-			color: #fff;
-			font-size: 18px;
-			display: flex;
-			align-items: center;
-			gap: 10px;
-			white-space: nowrap;
-		}
-
-		.flight-type-selector input[type="radio"] {
-			accent-color: red;
-			transform: scale(1.3);
-			margin: 0;
-		}
-
-	.book-form-area {
-		overflow: visible;
-		position: relative;
-		z-index: 1;
-	}
-
-	#mainFlightForm {
-		display: flex;
-		flex-wrap: nowrap;
-		justify-content: space-between;
-		align-items: flex-end;
-		gap: 12px;
-	}
-
-		#mainFlightForm .form-group {
-			min-width: 200px;
-			max-width: 400px;
-			flex: 0 0 auto;
-		}
 
 	.cccda {
 		min-height: 450px;
@@ -364,7 +283,7 @@
 
 	/* Genel Ayarlar */
 	.container {
-		max-width: 1000px;
+		max-width: 1400px;
 		margin: auto;
 	}
 
@@ -390,8 +309,9 @@
 		z-index: 2;
 		background: rgba(255, 255, 255, 0.9);
 		padding: 20px;
+		padding-top:40px;
 		border-radius: 12px;
-		text-align: center;
+		@* text-align: center; *@
 		background-color: black;
 		background: rgba(0,0,0,0.5);
 	}
@@ -402,88 +322,10 @@
 		margin-bottom: 20px;
 	}
 
-	.form-container {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 10px;
-		justify-content: center;
-	}
-
-	.form-control {
-		flex: 1 1 180px;
-		padding: 8px;
-		border-radius: 8px;
-		border: 1px solid #ccc;
-	}
-
 	.btn-small {
 		padding: 8px 12px;
 		font-size: 14px;
 	}
-
-	.feature-item {
-		background: #fff;
-		border-radius: 12px;
-		border: 1px solid #ddd;
-		box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
-		padding: 20px;
-		margin: 20px;
-		text-align: center;
-		transition: all 0.3s ease;
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		min-height: 350px;
-	}
-
-		.feature-item:hover {
-			box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
-		}
-
-	.feature-icon img {
-		width: 100%;
-		height: 160px;
-		object-fit: cover;
-		border-radius: 10px;
-		margin-bottom: 50px;
-	}
-
-	.feature-content .title {
-		font-size: 20px;
-		font-weight: 600;
-		color: #222;
-		margin-bottom: 10px;
-		padding-top: 30px;
-	}
-
-	.feature-content p {
-		font-size: 15px;
-		color: #555;
-		flex-grow: 1;
-	}
-
-	.feature-item .price {
-		font-size: 16px;
-		font-weight: bold;
-		color: #d0021b;
-	}
-
-	.feature-btn a {
-		display: inline-block;
-		margin-top: 20px;
-		background-color: #e60023;
-		color: white;
-		padding: 10px 22px;
-		border-radius: 6px;
-		font-size: 15px;
-		text-decoration: none;
-		transition: background-color 0.3s;
-	}
-
-		.feature-btn a:hover {
-			background-color: #c4001a;
-		}
 
 </style>
 
