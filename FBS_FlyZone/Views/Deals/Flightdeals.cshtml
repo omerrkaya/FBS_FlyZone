@@ -1,4 +1,5 @@
-﻿
+﻿@using EntityLayer.Concrete
+@model List<Flight>
 @{
     ViewData["Title"] = "Flightdeals";
     Layout = "~/Views/Shared/UserLayout.cshtml";
@@ -7,8 +8,10 @@
 	<div class="overlay"></div>
 	<div class="container">
 		<div class="search-box">
-			<form class="book-form">
-				<div class="row justify-content-center mb-20-none">
+			@using (Html.BeginForm("SearchedFlight", "Flight", FormMethod.Post, new { @class = "book-form" }))
+			{
+				@Html.AntiForgeryToken()
+				<div class="row justify-content-center mb-20-none" style="margin-bottom:5px;padding-top:20px">
 					<!-- Nereden ve Nereye kısımları yanyana -->
 					<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
 						<div class="book-select">
@@ -16,9 +19,11 @@
 							<div class="book-form-icon">
 								<i class="icon-from-airplane"></i>
 							</div>
-							<select class="book-select form--control">
-								<option value="dhaka" selected>Dhaka</option>
-								<option value="london">London</option>
+							<select name="DepartureAirportId" class="book-select form--control custom-select">
+								@foreach (var item in Model.Select(m => m.DepartureAirport).GroupBy(a => a.AirportID).Select(g => g.First()))
+								{
+									<option value="@item.AirportID">@item.Airport_Name</option>
+								}
 							</select>
 						</div>
 					</div>
@@ -28,25 +33,24 @@
 							<div class="book-form-icon">
 								<i class="icon-to-airplane"></i>
 							</div>
-							<select class="book-select form--control">
-								<option value="london" selected>London</option>
-								<option value="dhaka">Dhaka</option>
+							<select name="ArrivalAirportId" class="book-select form--control custom-select">
+								@foreach (var item in Model.Select(m => m.ArrivalAirport).GroupBy(a => a.AirportID).Select(g => g.First()))
+								{
+									<option value="@item.AirportID">@item.Airport_Name</option>
+								}
 							</select>
 						</div>
 					</div>
-				</div>
-
-				<div class="row justify-content-center mb-20-none">
 					<!-- Gidiş ve Dönüş Tarihi kısımları yanyana -->
 					<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
 						<label>Gidiş Tarihi</label>
-						<input type="date" class="book-select form--control" value="2025-04-11">
-					</div>
-					<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
-						<label>Dönüş Tarihi</label>
-						<input type="date" class="book-select form--control" value="2025-04-11">
+						<input type="date" class="book-select form--control" name="DepartureDate">
 					</div>
 				</div>
+
+
+
+
 
 				<div class="row justify-content-center mb-20-none">
 					<!-- Yetişkin ve Çocuk Sayısı kısımları yanyana -->
@@ -55,7 +59,7 @@
 						<div class="book-quantity">
 							<div class="book-plus-minus">
 								<div class="dec qtybutton">-</div>
-								<input class="book-plus-minus-box qty" type="text" name="qty" value="1" readonly>
+								<input class="book-plus-minus-box qty" type="text" name="AdultCount" value="1" readonly>
 								<div class="inc qtybutton">+</div>
 							</div>
 						</div>
@@ -65,22 +69,21 @@
 						<div class="book-quantity">
 							<div class="book-plus-minus">
 								<div class="dec qtybutton">-</div>
-								<input class="book-plus-minus-box qty" type="text" name="qty" value="0" readonly>
+								<input class="book-plus-minus-box qty" type="text" name="ChildCount" value="0" readonly>
 								<div class="inc qtybutton">+</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				<div class="row justify-content-center  align-items-center" id="mainFlightForm">
 
-				<div class="row justify-content-center mb-20-none">
-					<!-- Bilet Ara butonu ortalı -->
 					<div class="col-xl-12 form-group text-center">
 						<button type="submit" class="btn--base ml-auto mr-auto mt-30">
-							<i class="icon-btn-icon"></i> Bilet Ara
+							<i class="icon-btn-icon"></i> Uçuş Ara
 						</button>
 					</div>
 				</div>
-			</form>
+			}
 		</div>
 	</div>
 </section>

@@ -43,7 +43,7 @@
 						<a href="@Url.Action("Flight", "Flight")" class="btn--base">
 							<i class="fas fa-chevron-right mr-2"></i> Uçuşunuzu Planlayın
 						</a>
-						<a href="@Url.Action("ContactUs", "Flight")" class="btn--base active">
+						<a href="@Url.Action("ContactUs", "Help")" class="btn--base active">
 							Teklif İsteyin <i class="icon-Group-2361 ml-2"></i>
 						</a>
 					</div>
@@ -70,259 +70,128 @@
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	End Scroll-To-Top
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	Start Call-widget
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-<div class="call-widget-wrapper">
-	<button type="button" class="call-widget-btn">
-		<span class="num">
-			<i class="icon-call-icon"></i> +90 (212) 123
-			4567
-		</span> <span class="arrow"></span>
-	</button>
-	<div class="call-widget-form-area">
-		<form class="book-form">
-			<div class="row justify-content-center mb-20-none">
-				<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
-					<div class="book-select">
-						<label>Nereden</label>
-						<div class="book-form-icon">
-							<i class="icon-from-airplane"></i>
-						</div>
-						<select class="book-select form--control">
-							<option value="istanbul" selected>İstanbul</option>
-							<option value="ankara">Ankara</option>
-							<option value="izmir">İzmir</option>
-							<option value="antalya">Antalya</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
-					<div class="book-select">
-						<label>Nereye</label>
-						<div class="book-form-icon">
-							<i class="icon-to-airplane"></i>
-						</div>
-						<select class="book-select form--control">
-							<option value="london" selected>Londra</option>
-							<option value="paris">Paris</option>
-							<option value="newyork">New York</option>
-							<option value="tokyo">Tokyo</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
-					<div class="book-select">
-						<label>Tarih</label>
-						<div class="book-form-icon">
-							<i class="icon-schedule-icon"></i>
-						</div>
-						<select class="book-select form--control">
-							<option value="25/12/2023" selected>25/12/2023</option>
-							<option value="30/12/2023">30/12/2023</option>
-							<option value="05/01/2024">05/01/2024</option>
-							<option value="10/01/2024">10/01/2024</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 form-group">
-					<label>Yolcu</label>
-					<div class="book-quantity">
-						<div class="book-plus-minus">
-							<div class="dec qtybutton">-</div>
-							<input class="book-plus-minus-box qty" type="text" name="qty" value="1" readonly>
-							<div class="inc qtybutton">+</div>
+
+<section class="banner-sectionn">
+	<div class="overlay"></div>
+	<div class="container">
+		<div class="search-box">
+			@using (Html.BeginForm("SearchedFlight", "Flight", FormMethod.Post, new { @class = "book-form" }))
+			{
+				@Html.AntiForgeryToken()
+				<div class="row justify-content-center mb-20-none" style="margin-bottom:5px;padding-top:20px">
+					<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+						<div class="book-select">
+							<label>Nereden</label>
+							<div class="book-form-icon">
+								<i class="icon-from-airplane"></i>
+							</div>
+							<select name="DepartureAirportId" class="book-select form--control custom-select">
+								@foreach (var item in Model.Select(m => m.DepartureAirport).GroupBy(a => a.AirportID).Select(g => g.First()))
+								{
+									<option value="@item.AirportID">@item.Airport_Name</option>
+								}
+							</select>
 						</div>
 					</div>
-				</div>
-				<div class="col-xl-12 form-group">
-					<button type="submit" class="btn--base w-100 mt-10">
-						<i class="icon-btn-icon"></i> Şimdi
-						Rezervasyon Yap
-					</button>
-				</div>
-			</div>
-		</form>
-	</div>
-</div>
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	End Call-widget
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<section class="book-form-section ptb-60" style="border-radius:15px">
-	<div class="container cccda">
-		<div class="book-form-area bg-overlay-black bg_img" data-background="~/flynext/assets/images/bg/bg-3.png">
-			<div class="row justify-content-center" style="border-radius: 25px">
-				<div class="col-xl-12 text-center">
-					<div class="section-header white">
-						<h2 class="section-title">EN UYGUN UÇUŞU ARA</h2>
-					</div>
-
-					<!-- Uçuş Türü Seçimi -->
-					<div class="flight-type-selector">
-						<label><input type="radio" name="flightType" value="oneway" checked> Tek Yön</label>
-						<label><input type="radio" name="flightType" value="round"> Gidiş - Dönüş</label>
-					</div>
-
-					@using (Html.BeginForm("SearchedFlight", "Flight", FormMethod.Post, new { @class = "book-form" }))
-					{
-						@Html.AntiForgeryToken()
-						<!-- Standart Form -->
-						<div class="row justify-content-center  align-items-center" id="mainFlightForm">
-							<!-- Nereden -->
-							<div class="col-xl-auto form-group">
-								<div class="book-select">
-									<label>Nereden</label>
-									<div class="book-form-icon">
-										<i class="icon-from-airplane"></i>
-									</div>
-
-									<select name="DepartureAirportId" class="book-select form--control custom-select">
-										@foreach (var item in Model.Select(m => m.DepartureAirport).GroupBy(a => a.AirportID).Select(g => g.First()))
-										{
-											<option value="@item.AirportID">@item.Airport_Name</option>
-										}
-									</select>
-
-								</div>
+					<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+						<div class="book-select">
+							<label>Nereye</label>
+							<div class="book-form-icon">
+								<i class="icon-to-airplane"></i>
 							</div>
-
-							<!-- Nereye -->
-							<div class="col-xl-auto form-group">
-								<div class="book-select">
-									<label>Nereye</label>
-									<div class="book-form-icon">
-										<i class="icon-to-airplane"></i>
-									</div>
-									<select name="ArrivalAirportId" class="book-select form--control custom-select">
-										@foreach (var item in Model.Select(m => m.ArrivalAirport).GroupBy(a => a.AirportID).Select(g => g.First()))
-										{
-											<option value="@item.AirportID">@item.Airport_Name</option>
-										}
-									</select>
-								</div>
-							</div>
-
-							<!-- Gidiş Tarihi -->
-							<div class="col-xl-auto form-group" id="departureDateGroup">
-								<div class="book-select">
-									<label>Gidiş Tarihi</label>
-									<div class="book-form-icon">
-										<i class="icon-schedule-icon"></i>
-									</div>
-									<input type="date" class="form--control" name="DepartureDate" />
-								</div>
-							</div>
-
-							<!-- Dönüş Tarihi -->
-							<div class="col-xl-auto form-group" id="returnDateGroup" style="display: none;">
-								<div class="book-select">
-									<label>Dönüş Tarihi</label>
-									<div class="book-form-icon">
-										<i class="icon-schedule-icon"></i>
-									</div>
-									<input type="date" class="form--control" name="ReturnDate" />
-								</div>
-							</div>
-
-							<!-- Yolcu Sayısı -->
-							<div class="col-xl-auto form-group position-relative passenger-selector-group" style="min-width: 250px;">
-
-								<label>Yolcular</label>
-								<div class="book-quantity">
-									<div class="book-plus-minus" id="passengerToggle">
-										<input class="book-plus-minus-box qty" id="passengerSummary" type="text" value="1 Yolcu, Ekonomi" readonly >
-									</div>
-								</div>
-
-								<!-- Açılır alan -->
-								<div id="passengerDetails" class="passenger-details-overlay" style="display: none;">
-									<div class="class-selection mb-3">
-										<label><input type="radio" name="FlightClass" value="Ekonomi" checked> Ekonomi</label>
-										<label><input type="radio" name="FlightClass" value="Business"> Business</label>
-									</div>
-
-									<!-- Yolcu Türleri -->
-									<div class="passenger-type">
-										<label>Yetişkin</label>
-										<div class="qty-buttons">
-											<button type="button" onclick="changePassengerCount('adult', -1)">-</button>
-											<input type="text" id="adultCount" value="1" onchange="manualChange('adult')" oninput="updatePassengerSummary()" name="AdultCount" />
-											<button type="button" onclick="changePassengerCount('adult', 1)">+</button>
-										</div>
-									</div>
-									<div class="passenger-type">
-										<label>Çocuk</label>
-										<div class="qty-buttons">
-											<button type="button" onclick="changePassengerCount('child', -1)">-</button>
-											<input type="text" id="childCount" value="0" onchange="manualChange('child')" oninput="updatePassengerSummary()" name="ChildCount" />
-											<button type="button" onclick="changePassengerCount('child', 1)">+</button>
-										</div>
-									</div>
-@* 									<div class="passenger-type">
-										<label>Bebek</label>
-										<div class="qty-buttons">
-											<button type="button" onclick="changePassengerCount('infant', -1)">-</button>
-											<input type="text" id="infantCount" value="0" onchange="manualChange('infant')" oninput="updatePassengerSummary()" />
-											<button type="button" onclick="changePassengerCount('infant', 1)">+</button>
-										</div>
-									</div>
-									<div class="passenger-type">
-										<label>Öğrenci</label>
-										<div class="qty-buttons">
-											<button type="button" onclick="changePassengerCount('student', -1)">-</button>
-											<input type="text" id="studentCount" value="0" onchange="manualChange('student')" oninput="updatePassengerSummary()" />
-											<button type="button" onclick="changePassengerCount('student', 1)">+</button>
-										</div>
-									</div> *@
-								</div>
-							</div>
-
+							<select name="ArrivalAirportId" class="book-select form--control custom-select">
+								@foreach (var item in Model.Select(m => m.ArrivalAirport).GroupBy(a => a.AirportID).Select(g => g.First()))
+								{
+									<option value="@item.AirportID">@item.Airport_Name</option>
+								}
+							</select>
 						</div>
-						<div class="row justify-content-center  align-items-center" id="mainFlightForm">
+					</div>
+					<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+						<label>Gidiş Tarihi</label>
+						<input type="date" class="book-select form--control" name="DepartureDate" >
+					</div>
+				</div>
 
-							<div class="col-xl-12 form-group text-center">
-								<button type="submit" class="btn--base ml-auto mr-auto mt-30">
-									<i class="icon-btn-icon"></i> Uçuş Ara
-								</button>
+
+
+
+
+				<div class="row justify-content-center mb-20-none">
+					<!-- Yetişkin ve Çocuk Sayısı kısımları yanyana -->
+					<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+						<label>Yetişkin Sayısı</label>
+						<div class="book-quantity">
+							<div class="book-plus-minus">
+								<div class="dec qtybutton">-</div>
+								<input class="book-plus-minus-box qty" type="text" name="AdultCount" value="1" readonly>
+								<div class="inc qtybutton">+</div>
 							</div>
 						</div>
-					}
+					</div>
+					<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 form-group">
+						<label>Çocuk Sayısı</label>
+						<div class="book-quantity">
+							<div class="book-plus-minus">
+								<div class="dec qtybutton">-</div>
+								<input class="book-plus-minus-box qty" type="text" name="ChildCount" value="0" readonly>
+								<div class="inc qtybutton">+</div>
+							</div>
+						</div>
+					</div>
 				</div>
+				<div class="row justify-content-center  align-items-center" id="mainFlightForm">
+
+					<div class="col-xl-12 form-group text-center">
+						<button type="submit" class="btn--base ml-auto mr-auto mt-30">
+							<i class="icon-btn-icon"></i> Uçuş Ara
+						</button>
+					</div>
+				</div>
+			}
+			<div class="bilgilendirme-kutusu">
+				<h4>Değerli Yolcularımız,</h4>
+				<p>
+					İstanbul'da yaşanan hava muhalefeti nedeniyle, 19-20-21-22-23 Mayıs 2025 tarihli,
+					İstanbul Havalimanı (IST) kalkış ve varışlı bazı uçuşlarımız iptal edilmiştir.
+					Uçuşlarınızla ilgili güncel bilgiye <a href="@Url.Action("FlightStatus", "BuyAndManageTicket")" style="color:#dbba86;">
+						<strong>
+
+							uçuş durumu
+
+						</strong>
+					</a> sayfamız üzerinden,
+					uçuş numaranızı, kalkış ve varış yeri bilgisini girerek ulaşabilir, iade veya değişiklik
+					haklarınızı yine aynı sayfadan öğrenebilirsiniz.
+				</p>
+				<p>Anlayışınız için teşekkür ederiz.</p>
+				<p class="son-guncelleme">Son güncelleme: 07.05.2025 11:30 (GMT +3)</p>
 			</div>
 		</div>
+
 	</div>
 
 </section>
 
 
-<div class="bilgilendirme-kutusu">
-	<h4>Değerli Yolcularımız,</h4>
-	<p>
-		İstanbul'da yaşanan hava muhalefeti nedeniyle, 19-20-21-22-23 Şubat 2025 tarihli,
-		İstanbul Havalimanı (IST) kalkış ve varışlı bazı uçuşlarımız iptal edilmiştir.
-		Uçuşlarınızla ilgili güncel bilgiye <a href="@Url.Action("FlightStatus", "BuyAndManageTicket")" style="color:#dbba86;">
-			<strong>
 
-				uçuş durumu
-
-			</strong>
-		</a> sayfamız üzerinden,
-		uçuş numaranızı, kalkış ve varış yeri bilgisini girerek ulaşabilir, iade veya değişiklik
-		haklarınızı yine aynı sayfadan öğrenebilirsiniz.
-	</p>
-	<p>Anlayışınız için teşekkür ederiz.</p>
-	<p class="son-guncelleme">Son güncelleme: 22.02.2025 11:30 (GMT +3)</p>
-</div>
 
 <style>
+
+	input[type="date"]::-webkit-calendar-picker-indicator {
+		filter: invert(34%) sepia(92%) saturate(2365%) hue-rotate(185deg);
+		cursor: pointer;
+	}
+
+
 	.bilgilendirme-kutusu {
 		border: 1px solid #ccc;
 		color: white;
 		background-color: #19232d;
 		padding: 20px;
 		margin: 20px auto;
-		margin-bottom: 70px;
+		margin-bottom: 40px;
 		max-width: 1200px;
 		font-family: Arial, sans-serif;
 		border-left: 5px solid #dbba86;
@@ -493,11 +362,130 @@
 		border-radius: 50px;
 	}
 
+	/* Genel Ayarlar */
+	.container {
+		max-width: 1000px;
+		margin: auto;
+	}
+
+	.banner-sectionn {
+		background-image: url('@Url.Content("~/flynext/assets/images/ucuss.jpg")');
+		background-size: cover;
+		background-position: bottom;
+		position: relative;
+		padding: 100px 0;
+	}
+
+	.overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.6);
+	}
+
+	.search-box {
+		position: relative;
+		z-index: 2;
+		background: rgba(255, 255, 255, 0.9);
+		padding: 20px;
+		border-radius: 12px;
+		text-align: center;
+		background-color: black;
+		background: rgba(0,0,0,0.5);
+	}
+
+	.title {
+		color: #d0021b;
+		font-weight: bold;
+		margin-bottom: 20px;
+	}
+
+	.form-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: center;
+	}
+
+	.form-control {
+		flex: 1 1 180px;
+		padding: 8px;
+		border-radius: 8px;
+		border: 1px solid #ccc;
+	}
+
+	.btn-small {
+		padding: 8px 12px;
+		font-size: 14px;
+	}
+
+	.feature-item {
+		background: #fff;
+		border-radius: 12px;
+		border: 1px solid #ddd;
+		box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+		padding: 20px;
+		margin: 20px;
+		text-align: center;
+		transition: all 0.3s ease;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		min-height: 350px;
+	}
+
+		.feature-item:hover {
+			box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+		}
+
+	.feature-icon img {
+		width: 100%;
+		height: 160px;
+		object-fit: cover;
+		border-radius: 10px;
+		margin-bottom: 50px;
+	}
+
+	.feature-content .title {
+		font-size: 20px;
+		font-weight: 600;
+		color: #222;
+		margin-bottom: 10px;
+		padding-top: 30px;
+	}
+
+	.feature-content p {
+		font-size: 15px;
+		color: #555;
+		flex-grow: 1;
+	}
+
+	.feature-item .price {
+		font-size: 16px;
+		font-weight: bold;
+		color: #d0021b;
+	}
+
+	.feature-btn a {
+		display: inline-block;
+		margin-top: 20px;
+		background-color: #e60023;
+		color: white;
+		padding: 10px 22px;
+		border-radius: 6px;
+		font-size: 15px;
+		text-decoration: none;
+		transition: background-color 0.3s;
+	}
+
+		.feature-btn a:hover {
+			background-color: #c4001a;
+		}
+
 </style>
-
-
-
-
 
 
 <script>

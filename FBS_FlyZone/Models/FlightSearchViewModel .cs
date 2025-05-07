@@ -18,8 +18,6 @@ public class FlightSearchViewModel
 
     public DateTime? ReturnDate { get; set; } // opsiyonel, sadece gidiş-dönüş seçildiyse gelir
 
-    [Required(ErrorMessage = "Sınıf seçimi zorunludur"), ]
-    public string? FlightClass { get; set; }
 
     [Range(1, 9, ErrorMessage = "Yetişkin sayısı en fazla 9 olabilir")]
     public int AdultCount { get; set; }
