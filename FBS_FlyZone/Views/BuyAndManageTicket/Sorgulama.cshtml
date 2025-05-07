@@ -1,0 +1,132 @@
+﻿@using EntityLayer.Concrete
+@model List<Reservation>
+
+@{
+    ViewData["Title"] = "Sorgulama";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<style>
+    body {
+    background-color: #19232D;
+    color: #f5f5f5;
+    font-family: Arial, Helvetica, sans-serif ;
+    }
+
+    h2, h5 {
+    color: #ffffff;
+    font-weight: bold;
+    }
+
+    .ticket-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 6px solid #dcbb87;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    margin-bottom: 30px;
+    position: relative;
+    color: #f1f1f1;
+    transition: transform 0.2s;
+    }
+
+    .ticket-card:hover {
+    transform: scale(1.02);
+    }
+
+    .ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed #444;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    }
+
+    .ticket-section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    }
+
+    .ticket-section div {
+    margin-bottom: 10px;
+    flex: 0 0 48%;
+    }
+
+    .ticket-footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #ccc;
+    }
+
+    .qr-placeholder {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    font-size: 1.5rem;
+    color: #888;
+    }
+
+    .badge.bg-primary {
+    background-color: #dcbb87 !important;
+    color: #19232D;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 10px;
+    }
+
+    .alert-warning, .alert-info {
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid #dcbb87;
+    color: #f1f1f1;
+    }
+</style>
+
+<div class="container" style="margin-top: 130px;">
+    <h2 class="text-center mb-5">Biletiniz</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        foreach (var ticket in Model)
+        {
+            var arrival = ticket.Flight.Flight_DateTime.Add(ticket.Flight.Estimated_Time);
+            <div class="ticket-card">
+                <div class="ticket-header">
+                    <div>
+                        <h5 class="mb-1">@ticket.FlightID- @ticket.Flight.Airline.Airlines_Name</h5>
+                        <small>Bilet No: @ticket.ReservationID</small>
+                    </div>
+                    <div>
+                        <span class="badge bg-primary">Koltuk: @ticket.Seat_Number</span>
+                    </div>
+                </div>
+
+                <div class="ticket-section">
+                    <div><strong>Yolcu:</strong> @ticket.Passenger.Passenger_Name_Surname</div>
+                    <div><strong>Kalkış:</strong> @ticket.Flight.Flight_DateTime (@ticket.Flight.Flight_DateTime.ToString("dd MMM yyyy HH:mm"))</div>
+                    <div><strong>Varış:</strong>@arrival (@arrival.ToString("dd MMM yyyy HH:mm")) </div>
+                </div>
+
+                <div class="qr-placeholder">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+            </div>
+        }
+        <div class="alert alert-warning text-center mt-5">
+            <strong>Sayın Yolcularımız :</strong> Herhangi bir aksaklık yaşamamak için lütfen <strong>uçuş saatinizden en az 1 saat önce</strong> havaalanında bulununuz.
+            <br />
+            Güvenlik kontrolleri, bagaj teslimi ve biniş işlemleri zaman alabileceğinden, erken gelmeniz sorunsuz bir seyahat deneyimi için önemlidir.
+            <br />
+            Ayrıca, kimlik veya pasaport gibi gerekli belgeleri yanınızda bulundurmayı unutmayınız.
+        </div>
+
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            Henüz kayıtlı bir biletiniz bulunmamaktadır.
+        </div>
+    }
+</div>

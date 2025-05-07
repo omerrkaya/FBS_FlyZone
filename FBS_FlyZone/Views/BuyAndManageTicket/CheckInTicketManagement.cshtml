@@ -18,10 +18,10 @@
 <div class="form-container mt-4">
     <div class="form-header">Bilet Yönetimi / Check-in</div>
 
-    <form method="post" action="/Rezervasyon/Sorgula">
+    <form method="post" asp-controller="BuyAndManageTicket" asp-action="Sorgulama">
         <div class="d-flex justify-content-center gap-3 flex-wrap">
-            <input type="text" name="pnrKodu" class="form-control input-custom" placeholder="Bilet ya da Rezervasyon Kodu (PNR)">
-            <input type="text" name="soyadi" class="form-control input-custom" placeholder="Yolcunun Soyadı">
+            <input type="text" name="flightCode" class="form-control input-custom" placeholder="Uçuş Kodu">
+            <input type="text" name="TC_No" class="form-control input-custom" placeholder="Yolcunun TC. Kimlik Numarası">
         </div>
 
         <div class="d-flex justify-content-center mt-3">
