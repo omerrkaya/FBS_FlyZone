@@ -13,52 +13,13 @@
     </div>
 
     <div class="row mb-4">
-        <div class="col-md-4 mb-4">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0">Havayolu Ekle</h5>
-                </div>
-                <div class="card-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="airlineName" class="form-label">Havayolu Adı</label>
-                            <input type="text" class="form-control" id="airlineName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="airlineCode" class="form-label">IATA Kodu</label>
-                            <input type="text" class="form-control" id="airlineCode" maxlength="2" required>
-                            <div class="form-text">Örn: TK, PC, XQ</div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="airlineICAO" class="form-label">ICAO Kodu</label>
-                            <input type="text" class="form-control" id="airlineICAO" maxlength="3" required>
-                            <div class="form-text">Örn: THY, PGT, SKG</div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="airlineCountry" class="form-label">Ülke</label>
-                            <input type="text" class="form-control" id="airlineCountry" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="airlineYear" class="form-label">Kuruluş Yılı</label>
-                            <input type="number" class="form-control" id="airlineYear" min="1900" max="2099">
-                        </div>
-                        <div class="mb-3">
-                            <label for="airlineStatus" class="form-label">Durum</label>
-                            <select class="form-select" id="airlineStatus">
-                                <option value="1" selected>Aktif</option>
-                                <option value="0">Pasif</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Havayolu Ekle</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Havayolu Şirketleri</h5>
+                    <a href="@Url.Action("AddAirline", "Admin")" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Yeni Havayolu Ekle
+                    </a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -99,10 +60,10 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="#" class="btn btn-sm btn-warning">
+                                                    <a href="@Url.Action("EditAirline", "Admin", new { id = airline.AirlineID })" class="btn btn-sm btn-warning">
                                                         <i class="bi bi-pencil"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-sm btn-danger">
+                                                    <a href="@Url.Action("DeleteAirline", "Admin", new { id = airline.AirlineID })" class="btn btn-sm btn-danger" onclick="return confirm('Bu havayolu şirketini silmek istediğinize emin misiniz?')">
                                                         <i class="bi bi-trash"></i>
                                                     </a>
                                                 </div>
@@ -128,7 +89,14 @@
 @section Scripts {
     <script>
         $(document).ready(function() {
-            // Burada havayolları ile ilgili JavaScript kodları yer alabilir
+            // DataTable eklentisi ile tabloyu gelişmiş hale getir
+            $('table').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Turkish.json"
+                },
+                "responsive": true,
+                "order": [[0, "desc"]]
+            });
         });
     </script>
 } 
