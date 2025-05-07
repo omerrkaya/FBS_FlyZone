@@ -221,7 +221,7 @@ namespace FBS_FlyZone.Controllers
                     }
 
                     ModelState.AddModelError("", $"Bir hata oluştu: {ex.Message}");
-                    return View(model);
+                    return RedirectToAction("PaymentSuccess",model);
                 }
             }
         }

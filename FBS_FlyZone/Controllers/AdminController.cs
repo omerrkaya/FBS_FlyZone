@@ -26,11 +26,13 @@ namespace FBS_FlyZone.Controllers
         private readonly UserManager _userManager;
         private readonly Context _context;
         private readonly FlightManager _flightManager;
+        private readonly ReservationManager _reservationManager;
 
         public AdminController()
         {
             _flightManager = new FlightManager(new EfFlightRepository());
             _userManager = new UserManager(new EfUserRepository());
+            _reservationManager = new ReservationManager(new EfReservationRepository());
             _context = new Context();
         }
 
@@ -54,7 +56,7 @@ namespace FBS_FlyZone.Controllers
                     ViewBag.MostBookedMonthCount = reservationsByMonth.First().Count;
                 }
 
-                ViewBag.ReservationsByMonth = reservationsByMonth.ToDictionary(x=>x.Month, x=>x.Count);
+                ViewBag.ReservationsByMonth = reservationsByMonth.ToDictionary(x => x.Month, x => x.Count);
 
 
                 // İstatistik verilerini hazırlıyorum.
@@ -83,7 +85,7 @@ namespace FBS_FlyZone.Controllers
             }
         }
 
-       
+
 
         // Kullanıcı Yönetimi
         [AllowAnonymous]
@@ -113,7 +115,7 @@ namespace FBS_FlyZone.Controllers
             var users = query.Skip((page - 1) * pageSize)
            .Take(pageSize).ToList();
 
-            int totalPages = (int)Math.Ceiling((double)query.Count()/ pageSize);
+            int totalPages = (int)Math.Ceiling((double)query.Count() / pageSize);
 
             // Filtreleme değerlerini ViewBag'e ekleyelim ki form değerleri korunsun
             ViewBag.SearchName = searchName;
@@ -556,7 +558,7 @@ namespace FBS_FlyZone.Controllers
 
 
 
-        
+
 
         private double[] GetRouteData(string fromCode, string toCode)
         {
@@ -600,35 +602,38 @@ namespace FBS_FlyZone.Controllers
             };
         }
 
-        private string GetRouteLabel(string from, string to)
+        private string GetRouteLabel(string fromCode, string toCode)
         {
-            var airports = new Dictionary<string, string>
-            {
-                { "ist", "İstanbul" },
-                { "ank", "Ankara" },
-                { "izm", "İzmir" },
-                { "ant", "Antalya" },
-                { "adb", "İzmir" },
-                { "esb", "Ankara" },
-                { "saw", "İstanbul Sabiha Gökçen" },
-                { "ayt", "Antalya" }
-            };
+            var airportNames = _context.Airports
+                .Where(a => a.IATA_Code.ToLower() == fromCode.ToLower() || a.IATA_Code.ToLower() == toCode.ToLower())
+                .ToDictionary(a => a.IATA_Code.ToLower(), a => a.Airport_Name);
 
-            string fromName = airports.ContainsKey(from.ToLower()) ? airports[from.ToLower()] : from.ToUpper();
-            string toName = airports.ContainsKey(to.ToLower()) ? airports[to.ToLower()] : to.ToUpper();
+            string fromName = airportNames.ContainsKey(fromCode.ToLower())
+                ? airportNames[fromCode.ToLower()]
+                : fromCode.ToUpper();
+
+            string toName = airportNames.ContainsKey(toCode.ToLower())
+                ? airportNames[toCode.ToLower()]
+                : toCode.ToUpper();
 
             return $"{fromName} - {toName}";
         }
+
 
         // Raporlar sayfası - Yeni eklendi
         [AllowAnonymous]
         public IActionResult Reports()
         {
 
-            var monthlyRevenue = new List<int> { 1250000, 980000, 1450000, 1320000, 1600000, 1780000 };
-            var months = new List<string> { "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran" };
+            var revenue2025 = _reservationManager.GetMonthlyRevenueFromPayments(2025);
 
-            ViewBag.MonthlyRevenue = monthlyRevenue;
+            ViewBag.MonthlyRevenue = revenue2025;
+
+            var months = new[]
+                    {
+                        "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
+                        "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"
+                     };
             ViewBag.Months = months;
 
             var monthlyReservations = _context.Reservations
@@ -644,6 +649,21 @@ namespace FBS_FlyZone.Controllers
             }
 
             ViewBag.MonthlyReservations = monthlyCounts;
+
+
+            var avgPrice = _context.Flights.Average(x => x.Flight_Price);
+
+            decimal avg = avgPrice;
+
+            var seats = _context.Seats.ToList();
+
+            var IsOccupiedSeats = seats.Where(x => x.IsOccupied).Count();
+
+
+            decimal occupiedSeatsPercentage = (decimal)IsOccupiedSeats / seats.Count * 100;
+            ViewBag.IsOccuipedSeats = occupiedSeatsPercentage; // Doğrudan float olarak atıyoruz
+
+
 
 
 
@@ -667,7 +687,7 @@ namespace FBS_FlyZone.Controllers
             // Popüler rotalar
             ViewBag.TopRoutes = _context.Flights
                 .Join(_context.Reservations, f => f.FlightID, r => r.FlightID, (f, r) => f)
-                .GroupBy(f => new { From = f.ArrivalAirport.Airport_Name, To = f.ArrivalAirport.AirportID })
+                .GroupBy(f => new { From = f.DepartureAirport.Airport_Name, To = f.ArrivalAirport.Airport_Name })
                 .Select(g => new { Route = g.Key, Count = g.Count() })
                 .OrderByDescending(x => x.Count)
                 .Take(5)
@@ -691,16 +711,14 @@ namespace FBS_FlyZone.Controllers
             ViewBag.ReservationsByMonth = reservationsByMonth;
 
 
-            ViewBag.MonthNames = Enumerable.Range(1, 12)
-                .Select(i => new
-                {
-                    MonthNumber = i,
-                    MonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)
-                })
-                .ToList();
+          
 
-
-            return View();
+            var model = new AdminReportsModel
+            {
+                yuzdelikDoluluk = occupiedSeatsPercentage,
+                yuzdelikAvg = avg
+            };
+            return View(model);
         }
 
         // Test sayfası - Sadece bağlantıyı test etmek için bir test sayfası oluşturdum. /Admin/Test sekmesine tıklayarak erişebilirsiniz.
@@ -710,4 +728,6 @@ namespace FBS_FlyZone.Controllers
             return View();
         }
     }
+
+
 }
