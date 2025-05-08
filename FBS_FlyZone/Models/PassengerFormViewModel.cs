@@ -9,7 +9,7 @@ namespace FBS_FlyZone.Models
     {
         public int AdultCount { get; set; }
         public int ChildCount { get; set; }
-        public List<Passenger> Passengers { get; set; } = new List<Passenger>(); // Initialize to empty list
+        public List<Passenger> Passengers { get; set; } = new List<Passenger>();
 
 
         [Required(ErrorMessage = "Uçuş seçilmedi.")]
@@ -21,5 +21,8 @@ namespace FBS_FlyZone.Models
         [Required(ErrorMessage = "Ödeme yöntemi seçilmedi.")]
         public string PaymentMethod { get; set; } = string.Empty; // Initialize with empty string
 
+
+
     }
+
 }

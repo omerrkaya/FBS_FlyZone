@@ -20,51 +20,14 @@ namespace FBS_FlyZone.Controllers
         ReservationManager rm = new ReservationManager(new EfReservationRepository());
         PassengerManager pm = new PassengerManager(new EfPassengerRepository());
 
-        public void InitializeSeatsForAllFlights()
-        {
-            using var _context = new Context();
-
-            if (_context.Seats.Any()) return;
-
-            var flights = _context.Flights.ToList();
-
-            foreach (var flight in flights)
-            {
-                var seatExists = _context.Seats.Any(s => s.FlightID == flight.FlightID);
-
-                if (!seatExists)
-                {
-                    var seatLetters = new[] { "A", "B", "C", "D" };
-                    var seats = new List<Seat>();
-
-                    for (int row = 1; row <= 25; row++)
-                    {
-                        foreach (var letter in seatLetters)
-                        {
-                            seats.Add(new Seat
-                            {
-                                FlightID = flight.FlightID,
-                                SeatNumber = $"{row}{letter}",
-                                IsOccupied = false,
-                                PassengerName = "a"
-
-                            });
-                        }
-                    }
-
-                    _context.Seats.AddRange(seats);
-                }
-            }
-
-            _context.SaveChanges();
-        }
+    
 
         // Ana uçuş sayfası
         [AllowAnonymous]
         public IActionResult Flight()
         {
             var values = fm.GetFlightListWithAirport();
-            InitializeSeatsForAllFlights();
+           
 
             return View("~/Views/Flight/Flight.cshtml", values);
         }
@@ -254,7 +217,7 @@ namespace FBS_FlyZone.Controllers
                 return RedirectToAction("SelectSeat", "SeatSelection", new { flightId = model.FlightId }); // Rezervasyon işlemi tamamlandıktan sonra koltuk seçimi sayfasına yönlendir
             }
 
-            return View(model);  // Eğer model geçerli değilse tekrar formu göster
+            return RedirectToAction("FlightDetails", new {  id = model.FlightId });  // Eğer model geçerli değilse tekrar formu göster
         }
 
 
