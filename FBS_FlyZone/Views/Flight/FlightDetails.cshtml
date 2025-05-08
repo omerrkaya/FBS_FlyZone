@@ -68,12 +68,15 @@
 
 					<div class="col-md-6">
 						<label class="form-label">Doğum Tarihi</label>
-						<input type="date" class="form-control" id="birthDate" name="Passengers[@i].Birth_Time" required>
+						<input type="date" class="form-control" id="birthDate" asp-for="Passengers[@i].Birth_Time" required>
+						<span asp-validation-for="Passengers[@i].Birth_Time" class="text-danger"></span>
+
 					</div>
 
 					<div class="col-md-6">
 						<label for="nationality" class="form-label">Uyruk</label>
-						<input type="text" class="form-control" id="nationality" name="Passengers[@i].Nationality" placeholder="Uyruğunuz" required>
+						<input type="text" class="form-control" id="nationality" asp-for="Passengers[@i].Nationality" placeholder="Uyruğunuz" required>
+
 					</div>
 				</div>
 			</div>
@@ -86,7 +89,9 @@
 				<div class="row g-3">
 					<div class="col-md-6">
 						<label class="form-label">TC Kimlik No / Pasaport No</label>
-						<input type="text" class="form-control" id="idNumber" name="Passengers[@i].TcNo_PasaportNo" placeholder="TC veya pasaport numaranız" required>
+						<input type="text" class="form-control" id="idNumber" asp-for="Passengers[@i].TcNo_PasaportNo" placeholder="TC veya pasaport numaranız" required>
+						<span asp-validation-for="Passengers[@i].TcNo_PasaportNo" class="text-danger"></span>
+
 					</div>
 				</div>
 			</div>
@@ -99,13 +104,16 @@
 				<div class="row g-3">
 					<div class="col-md-6">
 						<label class="form-label">E-posta Adresi</label>
-						<input type="email" class="form-control" id="email" name="Passengers[@i].Email" placeholder="E-posta adresiniz" required>
+						<input type="email" class="form-control" id="email" asp-for="Passengers[@i].Email" placeholder="E-posta adresiniz" required>
+						<span asp-validation-for="Passengers[@i].Email" class="text-danger"></span>
 					</div>
 
 					<div class="col-md-6">
 						<label class="form-label">Telefon Numarası</label>
 
 						<input type="tel" class="form-control" id="phone" name="Passengers[@i].Phone_Number" placeholder="+90 (5__) ___ __ __  şeklinde yazınız" required>
+						<span asp-validation-for="Passengers[@i].Phone_Number" class="text-danger"></span>
+
 
 					</div>
 				</div>
@@ -381,3 +389,8 @@
 	}
 </style>
 
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+}

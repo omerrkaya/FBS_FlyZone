@@ -22,11 +22,46 @@ namespace FBS_FlyZone.Controllers
         {
             return View();
         }
+        public void InitializeSeatsForFlight(int flightId)
+        {
+            using var _context = new Context();
+
+            // İlgili uçuş var mı kontrol et
+            var flight = _context.Flights.FirstOrDefault(f => f.FlightID == flightId);
+            if (flight == null) return;
+
+            // Zaten koltuklar oluşturulmuş mu kontrol et
+            var seatExists = _context.Seats.Any(s => s.FlightID == flightId);
+            if (seatExists) return;
+
+            var seatLetters = new[] { "A", "B", "C", "D" };
+            var seats = new List<Seat>();
+
+            for (int row = 1; row <= 25; row++)
+            {
+                foreach (var letter in seatLetters)
+                {
+                    seats.Add(new Seat
+                    {
+                        FlightID = flightId,
+                        SeatNumber = $"{row}{letter}",
+                        IsOccupied = false,
+                        PassengerName = null // veya "" şeklinde boş string de olabilir
+                    });
+                }
+            }
+
+            _context.Seats.AddRange(seats);
+            _context.SaveChanges();
+        }
+
 
 
 
         public IActionResult SelectSeat(int flightId)
         {
+            InitializeSeatsForFlight(flightId); 
+
             var c = new Context();
 
             // Kullanıcının ID'sini al

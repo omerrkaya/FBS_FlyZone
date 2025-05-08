@@ -18,21 +18,24 @@ namespace EntityLayer.Concrete
         [StringLength(100)]
         public string Passenger_Name_Surname { get; set; }
 
-
-        [Required]
+        [Required(ErrorMessage = "TC No 11 karakter olmalı ve sadece sayı girilmeli")]
+        [RegularExpression(@"^\d{11}$", ErrorMessage = "TC No 11 haneli sayı olmalıdır.")]
         [StringLength(11)]
         public string TcNo_PasaportNo { get; set; }
 
-
+        [Required(ErrorMessage = "Doğum tarihi zorunludur.")]
+        [DataType(DataType.Date)]
+        [CustomValidation(typeof(Passenger),nameof(ValidateBirthDate))]
         public DateTime Birth_Time { get; set; }
 
 
-        [Required]
+        [EmailAddress(ErrorMessage = "Geçerli bir e-posta adresi giriniz.")]
+        [Required(ErrorMessage = "E-posta alanı zorunludur.")]
         [StringLength(50)]
         public string Email { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Telefon numarası zorunludur.")]
         [StringLength(25)]
         public string Phone_Number { get; set; }
 
@@ -48,5 +51,14 @@ namespace EntityLayer.Concrete
         [ForeignKey("UserID")]
         public User User { get; set; }
 
+
+        public static ValidationResult ValidateBirthDate(DateTime birthDate, ValidationContext context)
+        {
+            if (birthDate > DateTime.Now)
+            {
+                return new ValidationResult("Doğum tarihi gelecekte olamaz.", new[] { context.MemberName });
+            }
+            return ValidationResult.Success;
+        }
     }
 }
